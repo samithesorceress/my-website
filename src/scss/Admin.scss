@@ -60,3 +60,18 @@
 	height: auto;
 	display: block;
 }
+
+.fields {
+	.field {
+		display: flex;
+		justify-content: space-between;
+		height: 8em;
+		width: 100%;
+		label {
+			width: calc(50% - .5em)!important;
+			span {
+				font-weight: normal;
+			}
+		}
+	}
+}

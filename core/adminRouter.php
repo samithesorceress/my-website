@@ -19,6 +19,10 @@ switch($subdirectories[0]) {
 		$document_title = "New";
 		require_once($php_root . "views/new.php");
 		break;
+	case "edit-about":
+		$document_title = "Edit About";
+		require_once($php_root . "views/edit-about.php");
+		break;
 	default:
 		$document_title = "404 - Not Found";
 		require_once($php_root . "views/404.php");

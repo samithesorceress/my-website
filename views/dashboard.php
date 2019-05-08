@@ -76,8 +76,38 @@ require_once($php_root . "components/admin/header.php");
                 <img class="icon" src="<?php echo $htp_root; ?>src/icons/text.svg">
                 <span>About</span>
 			</h2>
+			<?php
+			$about_api = "listAbout?rows=5&order_by=id&order_dir=DESC";
+			$about_results = xhrFetch($about_api);
+			$profile_photo = false;
+			$bio = false;
+			$links = false;
+			if (valExists("success", $about_results) && $about_results["success"] == true) {
+				$profile_photo = $about_results["data"]["profile"];
+				$bio = $about_results["data"]["bio"];
+				$links = $about_results["data"]["links"];
+				if ($links) {
+					$links = json_decode($links, true);
+				}
+			}
+			
+			echo "<div class='profile_photo'>";
+				if ($profile_photo) {
+					//get photo
+				}
+			echo"</div>";
+			echo "<p><strong>Bio: </strong>" . $bio . "</p>";
+			echo "<p><strong>Links: </strong></p>";
+			if ($links) {
+				echo "<ul>";
+				foreach($links as $link) {
+					echo "<li><a href='" . $link["url"] . "'>" . $link["title"] . "</a></li>";
+				}
+				echo "</ul>";
+			}
+			?>
 			<div class="ctas">
-                <button class="btn cta"><img class="icon" src="<?php echo $htp_root; ?>src/icons/eye.svg"><a href="<?php echo $htp_root; ?>edit-about">Edit</a></button>
+                <button class="btn cta"><img class="icon" src="<?php echo $htp_root; ?>src/icons/edit.svg"><a href="<?php echo $htp_root; ?>edit-about">Edit</a></button>
             </div>
         </section>
         <section class="card">

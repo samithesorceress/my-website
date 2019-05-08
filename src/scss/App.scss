@@ -188,7 +188,8 @@ form {
     }
     label {
         display: block;
-        padding: 0.375em 0;
+		padding: 0.375em 0;
+		font-weight: bold;
     }
     input:not([type="submit"]) {
         border: 0;
@@ -241,4 +242,20 @@ form {
 	top: 0;
 	width: 100vw;
 	z-index: 3;
+}
+
+.profile_photo {
+	background: $slate;
+	border-radius: 2em;
+	display: block;
+	height: 4em;
+	overflow: hidden;
+	position: relative;
+	width: 4em;
+	img {
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
 }

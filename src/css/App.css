@@ -141,7 +141,8 @@ form .two_columns {
     width: 100%; }
   .field label {
     display: block;
-    padding: 0.375em 0; }
+    padding: 0.375em 0;
+    font-weight: bold; }
   .field input:not([type="submit"]) {
     border: 0;
     border-radius: .5em;
@@ -178,3 +179,17 @@ form .two_columns {
   top: 0;
   width: 100vw;
   z-index: 3; }
+
+.profile_photo {
+  background: #252525;
+  border-radius: 2em;
+  display: block;
+  height: 4em;
+  overflow: hidden;
+  position: relative;
+  width: 4em; }
+  .profile_photo img {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%; }

@@ -48,3 +48,13 @@
   max-width: 100%;
   height: auto;
   display: block; }
+
+.fields .field {
+  display: flex;
+  justify-content: space-between;
+  height: 8em;
+  width: 100%; }
+  .fields .field label {
+    width: calc(50% - .5em) !important; }
+    .fields .field label span {
+      font-weight: normal; }
