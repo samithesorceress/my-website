@@ -1,0 +1,244 @@
+@import "./vars/colors";
+
+#app_header {
+    border-bottom: 1px solid $shadow;
+    > * {
+        opacity: 1;
+    }
+    nav {
+        padding: 1em;
+        ul {
+            display: flex;
+            li {
+                flex-grow: 0;
+                flex-shrink: 0;
+                height: 32px;
+                &:first-child {
+                    flex-grow: 1;
+                }
+            }
+        }
+    }
+    #app_title {
+        color: $slate;
+        font-size: 1.25em;
+        line-height: 1.6em;
+    }
+    .btn {
+        font-size: 16px;
+    }
+}
+
+
+#slideshow {
+    background: $offwhite;
+    height: calc(100vh - 152px);
+    position: relative;
+    .slide_arrow {
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        font-size: 1.25em;
+        position: absolute;
+        top: calc(50% - .5em);
+    }
+    #prev_slide_btn {
+        left: .5em;
+    }
+    #next_slide_btn {
+        right: .5em;
+    }
+}
+
+
+.card {
+    background: $white;
+    border: 1px solid $shadow;
+    border-radius: .5em;
+    padding: 1em 1em 0 1em;
+    * + & {
+        margin-top: 1em;
+    }
+    input {
+        &:not([type="submit"]),
+        &:not([type="checkbox"]),
+        &:not([type="radio"]) { 
+            background: $offwhite;
+        }
+    }
+    .ctas {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.cta, input[type="submit"] {
+    background: $teal;
+    &[type="submit"] {
+        background: $pink;
+    }
+    border: 0;
+    color: $white;
+    cursor: pointer;
+    font-size: 1.25em;
+    border-radius: 1.6em;
+    margin: 0 .8em .8em 0;
+    min-height: 3.2em;
+    outline: 0;
+    padding: .8em;
+    text-align: center;
+    transition-property: none;
+    width: auto;
+    &:hover, &:focus, &:active {
+        background: $active_teal;
+    }
+    > * {
+        color: inherit;
+        font-size: inherit;
+        line-height: 1.6em;
+    }
+    .icon {
+        filter: invert(1);
+        height: 1.5em;
+        margin: 0.25em .5em 0.25em 0.25em;
+        width: 1.5em;
+    }
+}
+
+.carousel {
+    background: $offwhite;
+    border-radius: .5em;
+    display: flex;
+    margin-bottom: 1em;
+	min-height: 8em;
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding: 1em;
+}
+.media_container {
+    background: $white;
+    border-radius: .5em;
+    align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+	flex-grow: 0;
+	flex-shrink: 0;
+    height: 6em;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    width: 6em;
+    * {
+        pointer-events: none;
+    }
+    & + & {
+        margin-left: 1em;
+    }
+    &:hover, &:focus, &:active {
+        filter: brightness(1.1);
+        opacity: 0.8;
+    }
+    img, video {
+        //position: absolute;
+        height: 100%;
+        width: auto;
+        &.shape_tall {
+            height: auto;
+            width: 100%;
+        }
+    }
+}
+
+
+form {
+    > * {
+        opacity: 1;
+    }
+    .two_columns {
+        display: flex;
+        flex-wrap: wrap;
+        .field {
+            width: 50%;
+            margin-top: 0;
+            padding: 1em;
+        }
+    }
+}
+.field {
+    width: 100%;
+    * + & {
+        margin-top: 1em;
+    }
+    &.checkbox_field {
+        display: flex;
+        label {
+            flex-grow: 1;
+            flex-shrink: 0;
+        }
+        input {
+            color: $slate;
+            flex-grow: 0;
+            flex-shrink: 0;
+        }
+    }
+    &:not(.checkbox_field) {
+        * {
+            font-family: "Quicksand", sans-serif;
+            width: 100%;
+        }
+    }
+    label {
+        display: block;
+        padding: 0.375em 0;
+    }
+    input:not([type="submit"]) {
+        border: 0;
+        border-radius: .5em;
+        outline: 0;
+        padding: 1em;
+        &[type="text"],
+        &[type="email"],
+        &[type="date"],
+        &[type="password"] {
+            min-height: 4em;
+        }
+        &[type="checkbox"] {
+            height: 1em;
+            margin: .5em .5em .5em 0;
+            width: 1em;
+        }
+        &[type="file"],
+        &[type="files"] {
+            font-family: "Quicksand", sans-serif;
+        }
+    }
+    textarea {
+        border: 0;
+        border-radius: .5em;
+        min-height: 8em;
+        outline: 0;
+        padding: 1em;
+    }
+    
+}
+
+#footer {
+    background: $slate;
+    color: $white;
+    a {
+        color: $white;
+    }
+    li {
+        padding: 0.375em 0;
+    }
+}
+
+
+.dismiss_zone {
+	background: rgba(0,0,50,.2);
+	height: 100vh;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	z-index: 3;
+}

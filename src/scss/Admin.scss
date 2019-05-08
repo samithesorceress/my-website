@@ -1,0 +1,62 @@
+@import "./vars/colors";
+
+.media_browser {
+	border: 1px solid $shadow;
+	border-radius: .5em 0 .5em .5em!important;
+	box-shadow: 0 1em 5em;
+    height: 20em;
+    left: calc(50% - 15em);
+    padding: 0!important;
+    position: absolute;
+	width: 30em;
+	z-index: 4;
+    footer {
+		background: $white;
+		border-radius: 0 0 .5em .5em;
+		border-top: 1px solid $shadow;
+        display: flex;
+        justify-content: space-between;
+        height: 4em;
+        padding: 1em;
+        .field {
+            display: flex;
+            justify-content: flex-start;
+            margin: 0;
+            input {
+                background: none;
+                padding: 0;
+            }
+        }
+        .cta {
+            padding: 0.125em 1em;
+            min-height: 1em;
+            line-height: 2em;
+            max-height: 1.6em;
+            margin: 0;
+        }
+    }
+}
+
+.media_library {
+    background: $offwhite;
+    border-radius: .5em 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    //margin-bottom: 1em;
+    height: 16em;
+	overflow-y: scroll;
+	overflow-x: hidden;
+    padding: 1em;
+    .field {
+        width: 100%;
+        input, textarea {
+            background: $white!important;
+        }
+    }
+}
+
+.preview_new_img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}

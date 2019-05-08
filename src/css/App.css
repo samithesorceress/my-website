@@ -1,0 +1,180 @@
+#app_header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+  #app_header > * {
+    opacity: 1; }
+  #app_header nav {
+    padding: 1em; }
+    #app_header nav ul {
+      display: flex; }
+      #app_header nav ul li {
+        flex-grow: 0;
+        flex-shrink: 0;
+        height: 32px; }
+        #app_header nav ul li:first-child {
+          flex-grow: 1; }
+  #app_header #app_title {
+    color: #252525;
+    font-size: 1.25em;
+    line-height: 1.6em; }
+  #app_header .btn {
+    font-size: 16px; }
+
+#slideshow {
+  background: #f1f1f3;
+  height: calc(100vh - 152px);
+  position: relative; }
+  #slideshow .slide_arrow {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    font-size: 1.25em;
+    position: absolute;
+    top: calc(50% - .5em); }
+  #slideshow #prev_slide_btn {
+    left: .5em; }
+  #slideshow #next_slide_btn {
+    right: .5em; }
+
+.card {
+  background: #FFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .5em;
+  padding: 1em 1em 0 1em; }
+  * + .card {
+    margin-top: 1em; }
+  .card input:not([type="submit"]), .card input:not([type="checkbox"]), .card input:not([type="radio"]) {
+    background: #f1f1f3; }
+  .card .ctas {
+    display: flex;
+    flex-wrap: wrap; }
+
+.cta, input[type="submit"] {
+  background: #00CCFF;
+  border: 0;
+  color: #FFF;
+  cursor: pointer;
+  font-size: 1.25em;
+  border-radius: 1.6em;
+  margin: 0 .8em .8em 0;
+  min-height: 3.2em;
+  outline: 0;
+  padding: .8em;
+  text-align: center;
+  transition-property: none;
+  width: auto; }
+  .cta[type="submit"], input[type="submit"][type="submit"] {
+    background: #ff0090; }
+  .cta:hover, .cta:focus, .cta:active, input[type="submit"]:hover, input[type="submit"]:focus, input[type="submit"]:active {
+    background: #00E1FF; }
+  .cta > *, input[type="submit"] > * {
+    color: inherit;
+    font-size: inherit;
+    line-height: 1.6em; }
+  .cta .icon, input[type="submit"] .icon {
+    filter: invert(1);
+    height: 1.5em;
+    margin: 0.25em .5em 0.25em 0.25em;
+    width: 1.5em; }
+
+.carousel {
+  background: #f1f1f3;
+  border-radius: .5em;
+  display: flex;
+  margin-bottom: 1em;
+  min-height: 8em;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1em; }
+
+.media_container {
+  background: #FFF;
+  border-radius: .5em;
+  align-items: center;
+  cursor: pointer;
+  display: inline-flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  height: 6em;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  width: 6em; }
+  .media_container * {
+    pointer-events: none; }
+  .media_container + .media_container {
+    margin-left: 1em; }
+  .media_container:hover, .media_container:focus, .media_container:active {
+    filter: brightness(1.1);
+    opacity: 0.8; }
+  .media_container img, .media_container video {
+    height: 100%;
+    width: auto; }
+    .media_container img.shape_tall, .media_container video.shape_tall {
+      height: auto;
+      width: 100%; }
+
+form > * {
+  opacity: 1; }
+
+form .two_columns {
+  display: flex;
+  flex-wrap: wrap; }
+  form .two_columns .field {
+    width: 50%;
+    margin-top: 0;
+    padding: 1em; }
+
+.field {
+  width: 100%; }
+  * + .field {
+    margin-top: 1em; }
+  .field.checkbox_field {
+    display: flex; }
+    .field.checkbox_field label {
+      flex-grow: 1;
+      flex-shrink: 0; }
+    .field.checkbox_field input {
+      color: #252525;
+      flex-grow: 0;
+      flex-shrink: 0; }
+  .field:not(.checkbox_field) * {
+    font-family: "Quicksand", sans-serif;
+    width: 100%; }
+  .field label {
+    display: block;
+    padding: 0.375em 0; }
+  .field input:not([type="submit"]) {
+    border: 0;
+    border-radius: .5em;
+    outline: 0;
+    padding: 1em; }
+    .field input:not([type="submit"])[type="text"], .field input:not([type="submit"])[type="email"], .field input:not([type="submit"])[type="date"], .field input:not([type="submit"])[type="password"] {
+      min-height: 4em; }
+    .field input:not([type="submit"])[type="checkbox"] {
+      height: 1em;
+      margin: .5em .5em .5em 0;
+      width: 1em; }
+    .field input:not([type="submit"])[type="file"], .field input:not([type="submit"])[type="files"] {
+      font-family: "Quicksand", sans-serif; }
+  .field textarea {
+    border: 0;
+    border-radius: .5em;
+    min-height: 8em;
+    outline: 0;
+    padding: 1em; }
+
+#footer {
+  background: #252525;
+  color: #FFF; }
+  #footer a {
+    color: #FFF; }
+  #footer li {
+    padding: 0.375em 0; }
+
+.dismiss_zone {
+  background: rgba(0, 0, 50, 0.2);
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 3; }
