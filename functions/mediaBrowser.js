@@ -33,14 +33,14 @@ function populateMediaBrowser(res, args) {
     var key = args.id,
         attempt = args.attempt,
         browser = document.getElementById("media_browser_" + key),
-		media_library = util.getChildbyClassname(browser, "media_library")[0];
+		media_library = util.getChildrenbyClassname(browser, "media_library")[0];
     console.log(res);
 
     if (res.success == true) {
         for(var i = 0; i < res.data.length; i += 1) {
             var media_data = res.data[i],
-                container = document.createElement("li");
-            
+                container = document.createElement("li"),
+				media_item = "";
                 container.id = "container_" + media_data.id;
                 container.className = "media_container";
                 container.dataset.key = key;
@@ -49,11 +49,18 @@ function populateMediaBrowser(res, args) {
                 }
                 switch (media_data.type) {
                     case "video":
-                        container.innerHTML += "<video src='" + htp_root + "uploads/" + media_data.src + "'/>";
+                        media_item = "<video src='" + htp_root + "uploads/" + media_data.src + "'/>";
                     break;
-                    default:
-                        container.innerHTML += "<img src='" + htp_root + "uploads/" + media_data.src + "." + media_data.ext + "' alt='" + media_data.alt + "' title='" + media_data.title + "'/>";
-                }
+					default:
+						media_item = "<img src='" + htp_root + "uploads/" + media_data.src + "." + media_data.ext + "' alt='" + media_data.alt + "' title='" + media_data.title + "' data-shape='"
+							if (media_data.ratio > 1) {
+								media_item += "wide";
+							} else {
+								media_item += "tall";
+							}
+						media_item += "'/>";		
+				}
+				container.innerHTML += media_item;
                 container.addEventListener("click", chooseMedia);
                 media_library.appendChild(container);
                 
@@ -76,8 +83,8 @@ function chooseMedia(e, id) {
     var media_item = trg.childNodes[0];
     var field = document.getElementById("media_target_" + key);
     var field_children = field.childNodes;
-    var media_container = util.getChildbyClassname(field, "media_container")[0];
-    var cta = util.getChildbyClassname(field, "cta")[0];
+    var media_container = util.ren(field, "media_container")[0];
+    var cta = util.ren(field, "cta")[0];
 	var browser = document.getElementById("media_browser_" + key);
 	var dismiss_zone = document.getElementById("dismiss_zone_" + key);
 
@@ -117,8 +124,8 @@ function processNewMedia(res, key) {
 	console.log(res);
 
 	var browser = document.getElementById("media_browser_" + key),
-		library = util.getChildbyClassname(browser, "media_library")[0],
-		footer = util.getChildbyClassname(browser, "actions_footer")[0],
+		library = util.ren(browser, "media_library")[0],
+		footer = util.ren(browser, "actions_footer")[0],
 		closeBtn = document.createElement("button");
 		saveBtn = document.createElement("button");
 	closeBtn.id = "exit_new_media_" + key;
@@ -160,8 +167,8 @@ function saveMediaDetails(e) {
 	var key = trg.dataset.key;
 	var src = trg.dataset.src
 	var browser = document.getElementById("media_browser_" + key);
-	var library = util.getChildbyClassname(browser, "media_library")[0];
-	var footer = util.getChildbyClassname(browser, "actions_footer")[0];
+	var library = util.ren(browser, "media_library")[0];
+	var footer = util.ren(browser, "actions_footer")[0];
 	var titleField = document.getElementById("new_media_title_" + key);
 	var altField = document.getElementById("new_media_alt_" + key);
 
@@ -179,8 +186,8 @@ function finishNewMedia(res, args) {
 		var key = args;
 		var field = document.getElementById("media_target_" + key);
 		var field_children = field.childNodes;
-		var media_container = util.getChildbyClassname(field, "media_container")[0];
-		var cta = util.getChildbyClassname(field, "cta")[0];
+		var media_container = util.ren(field, "media_container")[0];
+		var cta = util.ren(field, "cta")[0];
 		var browser = document.getElementById("media_browser_" + key);
 		var dismiss_zone = document.getElementById("dismiss_zone_" + key);
 

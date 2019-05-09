@@ -8,7 +8,7 @@
   position: absolute;
   width: 30em;
   z-index: 4; }
-  .media_browser footer {
+  .media_browser .actions_footer {
     background: #FFF;
     border-radius: 0 0 .5em .5em;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -16,14 +16,15 @@
     justify-content: space-between;
     height: 4em;
     padding: 1em; }
-    .media_browser footer .field {
+    .media_browser .actions_footer .field {
       display: flex;
       justify-content: flex-start;
-      margin: 0; }
-      .media_browser footer .field input {
+      margin: 0 !important; }
+      .media_browser .actions_footer .field input {
         background: none;
+        border: 0 !important;
         padding: 0; }
-    .media_browser footer .cta {
+    .media_browser .actions_footer .cta {
       padding: 0.125em 1em;
       min-height: 1em;
       line-height: 2em;
@@ -53,8 +54,25 @@
   display: flex;
   justify-content: space-between;
   height: 8em;
+  margin-bottom: 0 !important;
   width: 100%; }
-  .fields .field label {
-    width: calc(50% - .5em) !important; }
-    .fields .field label span {
+  .fields .field div {
+    width: calc(50% - 5em); }
+    .fields .field div:first-child, .fields .field div:last-child {
+      width: calc(50% - .5em); }
+    .fields .field div label {
       font-weight: normal; }
+  .fields .field button {
+    cursor: pointer;
+    flex-grow: 0;
+    height: 4em;
+    margin: 2em 0;
+    padding: 1em;
+    width: 4em; }
+
+.fields ul:last-child {
+  margin-bottom: 1em; }
+
+.field .media_container {
+  max-width: 16em;
+  margin-bottom: 1em; }

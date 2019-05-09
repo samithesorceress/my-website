@@ -58,13 +58,30 @@
     * + & {
         margin-top: 1em;
     }
-    input {
+    input, textarea {
         &:not([type="submit"]),
         &:not([type="checkbox"]),
         &:not([type="radio"]) { 
-            background: $offwhite;
-        }
-    }
+			background: $offwhite;
+			border: 1px solid $shadow!important;
+		}
+	}
+	h2, h3 {
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	.field {
+		&:first-child {
+			margin-top: 0;
+		}
+		&:last-child {
+			margin-bottom: 1em;
+		}
+	}
+	> ul {
+		margin-bottom: 1em;
+	}
     .ctas {
         display: flex;
         flex-wrap: wrap;
@@ -79,43 +96,46 @@
     border: 0;
     color: $white;
     cursor: pointer;
-    font-size: 1.25em;
-    border-radius: 1.6em;
-    margin: 0 .8em .8em 0;
-    min-height: 3.2em;
+	border-radius: 2em;
+	font-size: 16px;
+    margin: 0 1em 1em 0;
+    min-height: 4em;
     outline: 0;
-    padding: .8em;
+    padding: 1em;
     text-align: center;
     transition-property: none;
     width: auto;
     &:hover, &:focus, &:active {
-        background: $active_teal;
-    }
-    > * {
-        color: inherit;
-        font-size: inherit;
-        line-height: 1.6em;
-    }
+		background: $active_teal;
+		&[type="submit"] {
+			background: $active_pink;
+		}
+	}
     .icon {
         filter: invert(1);
         height: 1.5em;
-        margin: 0.25em .5em 0.25em 0.25em;
-        width: 1.5em;
-    }
+        margin: .25em .5em .25em 0;
+        width: auto;
+	}
+	span {
+		height: 2em;
+		line-height: 2em;
+	}
 }
 
 .carousel {
-    background: $offwhite;
-    border-radius: .5em;
-    display: flex;
-    margin-bottom: 1em;
+	background: $offwhite;
+	border-radius: .5em;
+	display: flex;
+	margin-bottom: 1em;
 	min-height: 8em;
 	overflow-x: auto;
 	overflow-y: hidden;
 	padding: 1em;
 }
 .media_container {
-    background: $white;
+	background: $white;
+	border: 0;
     border-radius: .5em;
     align-items: center;
     cursor: pointer;
@@ -130,21 +150,22 @@
     * {
         pointer-events: none;
     }
-    & + & {
-        margin-left: 1em;
+    &:not(:last-child) {
+        margin-right: 1em;
     }
     &:hover, &:focus, &:active {
         filter: brightness(1.1);
         opacity: 0.8;
     }
     img, video {
-        //position: absolute;
-        height: 100%;
-        width: auto;
-        &.shape_tall {
-            height: auto;
-            width: 100%;
-        }
+        &[data-shape="wide"] {
+			height: 100%;
+			width: auto;
+		}
+		&[data-shape="tall"] {
+			height: auto;
+			width: 100%;
+		}
     }
 }
 
@@ -245,17 +266,23 @@ form {
 }
 
 .profile_photo {
+	align-items: center;
 	background: $slate;
 	border-radius: 2em;
-	display: block;
+	display: flex;
 	height: 4em;
+	justify-content: center;
 	overflow: hidden;
 	position: relative;
 	width: 4em;
 	img {
-		left: 0;
-		position: absolute;
-		top: 0;
-		width: 100%;
+		&[data-shape="wide"] {
+			height: 100%;
+			width: auto;
+		}
+		&[data-shape="tall"] {
+			height: auto;
+			width: 100%;
+		}
 	}
 }

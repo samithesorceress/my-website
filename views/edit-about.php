@@ -1,25 +1,36 @@
 <?php
 $errors = [];
 // is attempting save
-if (empty($_FILES) === false || empty($_REQUEST) === false) {
-	if (empty($_REQUEST["img"]) === false) {
-		if (empty($_REQUEST["text"]) === false) {
-			if (empty($_REQUEST["url"]) === false) {
-				$attempt_url = "newSlide?img=" . $_REQUEST["img"] . "&text=" . urlencode($_REQUEST["text"]) . "&url=" . urlencode($_REQUEST["url"]) . "&public=" . $_REQUEST["public"];
-				$attempt = xhrFetch($attempt_url);
-				if (valExists("success", $attempt)) {
-					header("Location: http://127.0.0.1/sami-the-sorceress");
-				} else {
-					$errors[] = $attempt["message"];
-				}
-			} else {
-				$errors[] = "Missing url.";
+if (empty($_REQUEST) === false) {
+	// save profile and bio - those are easy
+	$attempt_url = "updateAbout?profile=" . $_REQUEST["profile"] . "&bio=" . urlencode($_REQUEST["bio"]);
+	
+	// then prepare json object of all the links
+	$urls = [];
+	$titles = [];
+	$links_object = "[";
+	foreach($_REQUEST as $key => $val) {
+		if (strpos($key, "link") !== false) {
+			if (strpos($key, "url") !== false) {
+				$urls[] = $val;
+			} elseif (strpos($key, "title") !== false) {
+				$titles[] = $val;
 			}
-		} else {
-			$errors[] = "Missing text.";
 		}
+	}
+	for ($i = 0; $i < count($urls); $i += 1) {
+		$links_object .= "{\"url\": \"" . urlencode($urls[$i]) . "\", \"title\": \"" . $titles[$i] . "\"},";
+	}
+	$links_object = rtrim($links_object, ",");
+	$links_object .= "]";
+	$links_object = urlencode($links_object);
+	$attempt_url .= "&links=" . $links_object;
+	$attempt = xhrFetch($attempt_url);
+	if (valExists("success", $attempt)) {
+		header("Location: http://127.0.0.1/sami-the-sorceress");
+		die();
 	} else {
-		$errors[] = "Please choose an image.";
+		$errors[] = $attempt["message"];
 	}
 }
 
@@ -36,8 +47,13 @@ if (empty($_FILES) === false || empty($_REQUEST) === false) {
 
 
 //BEGIN OUTPUT
-
 require_once($php_root . "components/admin/header.php");
+$about_api = "listAbout";
+$about_res = xhrFetch($about_api);
+$about_data = false;
+if (valExists("success", $about_res)) {
+	$about_data = $about_res["data"];
+}
 ?>
 <main>
     <h1 class="title">Edit About</h1>
@@ -54,15 +70,40 @@ require_once($php_root . "components/admin/header.php");
         <form enctype="multipart/form-data" action="<?php echo $htp_root . $current_path; ?>" method="POST">
 		<?php 
 			echo "<div class='card'>";
-			echo newFormField("profile", "Profile Photo", "media_browser", 1);
+			$profile_photo = false;
+			if (valExists("profile", $about_data)) {
+				$profile_photo = $about_data["profile"];
+			}
+			echo newFormField("profile", "Profile Photo", "media_browser", 1, $profile_photo);
+			
 			echo "</div><div class='card'>";
-			echo newFormField("bio", "Bio", "textarea");
+			
+			$bio_text = false;
+			if (valExists("bio", $about_data)) {
+				$bio_text = $about_data["bio"];
+			}
+			echo newFormField("bio", "Bio", "textarea", $bio_text);
 			echo "</div>";
+
+			$links = false;
+			if (valExists("links", $about_data)) {
+				$links = $about_data["links"];
+			}
 			echo "<div class='fields card' id='infinite_link_fields'>";
-				echo "<h3>Links</h3><ul>";
-				echo "<li class='field'><label for='link_1_url'><span>Url</span><input id='link_1_url' name='link_1_url' type='text'/></label><label><span>Title</span><input id='link_1_title' name='link_1_title' type='text'></li>";
-				echo "</ul>";
-			echo "<button class='cta btn'>Add</button></div>";
+			echo "<h3>Links</h3><ul class='links_list'>";
+			if ($links) {
+				$links = json_decode($links, true);
+				for($i = 0; $i < count($links); $i += 1) {
+					$link = $links[$i];
+					$num = $i - 1;
+					echo "<li class='field'><div><label for='link_" . $num ."_url'>Url</label><input id='link_" . $num . "_url' name='link_" . $num . "_url' type='text' value='" . urldecode($link["url"]) . "'/></div><div><label for='link_" . $num . "_title'>Title</label><input id='link_" . $num . "_title' name='link_" . $num . "_title' type='text' value='" . $link["title"] . "'/></div><button class='btn' type='button' onClick='removeLink()'><img src='" . $htp_root . "src/icons/delete.svg'/></button></li>";
+				}
+			} else {
+				echo "<li class='field'><div><label for='link_1_url'>Url</label><input id='link_1_url' name='link_1_url' type='text'/></div><div><label for='link_1_title'>Title</label><input id='link_1_title' name='link_1_title' type='text'></div><button class='btn' type='button' onClick='removeLink()'><img src='" . $htp_root . "src/icons/delete.svg' /></button></li>";
+			}
+			echo "</ul>";
+			echo "<button class='cta btn' type='button' onClick='addNewLink()'><img class='icon' src='" . $htp_root . "src/icons/add.svg'><span>Add Link</span></button></div>";
+			echo "<script src='" . $htp_root . "functions/infiniteLinks.js'></script>";
 			echo newFormField("save", "Save", "submit", "Save");
         ?>
         </form>

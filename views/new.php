@@ -110,6 +110,7 @@ if (empty($_FILES) === false || empty($_REQUEST) === false) {
 						$attempt = xhrFetch($attempt_url);
 						if (valExists("success", $attempt)) {
 							header("Location: http://127.0.0.1/sami-the-sorceress");
+							die();
 						} else {
 							$errors[] = $attempt["message"];
 						}

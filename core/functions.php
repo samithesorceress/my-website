@@ -1,4 +1,5 @@
 <?php
+
 function ucSmart($string){//smart ucwords function
   return preg_replace_callback("/\b(A|An|The|And|Of|But|Or|For|Nor|With|On|At|To|From|By)\b/i",function($matches){//add words here to avoid capitalization
     return strtolower($matches[1]);
@@ -59,9 +60,9 @@ function jsLogs($data) {
 
     $html = "<script>console.log('PHP: ".$coll."');</script>";
 
-    echo($html);
+    //echo($html);
 }
-function newFormField($id, $name, $type = "text", $val = false) {
+function newFormField($id, $name, $type = "text", $val = false, $val2 = false) {
 	$html = "<div class='field";
 	$input = "";
 	switch($type) {
@@ -112,8 +113,29 @@ function newFormField($id, $name, $type = "text", $val = false) {
 		case "media_browser":
 		case "photo_browser":
 		case "video_browser":
-			$input = "'><label for='" . $id . "'>" . $name . "</label><div class='media_container' style='height:auto'><p>No Media Selected</p></div><input id='" . $id . "' name='" . $id . "' type='hidden' /><button id='" . $id . "_browser' type='button' class='btn cta media_browser_btn";
-				if ($val !== 1) {
+			$num = $val;
+			$val = $val2;
+			$media_data = false;
+			if ($val) {
+				$media_api = "listMedia?id=" . $val;
+				$media_res = xhrFetch($media_api);
+				$media_data = false;
+				if (valExists("success", $media_res)) {
+					$media_data = $media_res["data"];
+				}
+			}
+			$input = "'><label for='" . $id . "'>" . $name . "</label><div class='media_container' style='height:auto'>";
+			if ($media_data) {
+				$input .= "<img src='http://127.0.0.1/sami-the-sorceress/uploads/" . $media_data["src"] . "." . $media_data["ext"] . "' alt='" . $media_data["alt"] . "' title='" . $media_data["title"] . "'/>";
+			} else {
+				$input .= "<p>No Media Selected</p>";
+			}
+			$input .= "</div><input id='" . $id . "' name='" . $id . "' type='hidden'";
+			if ($val) {
+				$input .= " value='" . $val . "'";
+			}
+			$input .= "/><button id='" . $id . "_browser' type='button' class='btn cta media_browser_btn";
+				if ($num !== 1) {
 					$input .= " multi";
 				}
 				if ($type == "photo_browser") {
@@ -121,7 +143,13 @@ function newFormField($id, $name, $type = "text", $val = false) {
 				} elseif ($type == "video_browser") {
 					$input .= " videos_only";
 				}
-			$input .= "' onClick='openMediaBrowser()'><span>Browse</span></button>";
+			$input .= "' onClick='openMediaBrowser()'><span>";
+			if ($val) {
+				$input .= "Replace";
+			} else {
+				$input .= "Browse";
+			}
+			$input .= "</span></button>";
 			break;
 		case "submit":
 			$input = "'><input id='" . $id . "' name='" . $id . "' type='" . $type . "'";

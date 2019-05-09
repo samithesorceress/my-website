@@ -62,13 +62,6 @@ h2 {
   width: 2em; }
   .btn *:not(a) {
     pointer-events: none; }
-  .btn a {
-    display: block;
-    height: 100%;
-    width: 100%; }
-  .btn .icon {
-    height: 1.5em;
-    width: 1.5em; }
 
 #notification_bar {
   background: #ff0090;

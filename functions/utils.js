@@ -119,7 +119,7 @@ var util = {
 			}
 		}
 	},
-	getChildbyClassname: function (parent, classname) {
+	getChildrenbyClassname: function (parent, classname) {
 		var validParent = false,
 			children = [];
 		if (util.isElem(parent)) {

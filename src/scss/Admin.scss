@@ -10,7 +10,7 @@
     position: absolute;
 	width: 30em;
 	z-index: 4;
-    footer {
+    .actions_footer {
 		background: $white;
 		border-radius: 0 0 .5em .5em;
 		border-top: 1px solid $shadow;
@@ -21,9 +21,10 @@
         .field {
             display: flex;
             justify-content: flex-start;
-            margin: 0;
+            margin: 0!important;
             input {
-                background: none;
+				background: none;
+				border: 0!important;
                 padding: 0;
             }
         }
@@ -66,12 +67,35 @@
 		display: flex;
 		justify-content: space-between;
 		height: 8em;
+		margin-bottom: 0!important;
 		width: 100%;
-		label {
-			width: calc(50% - .5em)!important;
-			span {
+		div {
+			width: calc(50% - 5em);
+			&:first-child,
+			&:last-child {
+				width: calc(50% - .5em);
+			}
+			label {
 				font-weight: normal;
 			}
 		}
+		button {
+			cursor: pointer;
+			flex-grow: 0;
+			height: 4em;
+			margin: 2em 0;
+			padding: 1em;
+			width: 4em;
+		}
+	}
+	ul:last-child {
+		margin-bottom: 1em;
+	}
+}
+
+.field {
+	.media_container {
+		max-width: 16em;
+		margin-bottom: 1em;
 	}
 }

@@ -10,4 +10,5 @@ RewriteCond %{REQUEST_URI} !.*\.css$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.gif$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.js$ [NC]
 RewriteCond %{REQUEST_URI} !.*\.php$ [NC]
+RewriteCond %{REQUEST_URI} !.*\.webmanifest$ [NC]
 RewriteRule .* /sami-the-sorceress/index.php
