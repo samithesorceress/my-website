@@ -128,10 +128,22 @@
 	border-radius: .5em;
 	display: flex;
 	margin-bottom: 1em;
-	min-height: 8em;
+	min-height: 6em;
 	overflow-x: auto;
 	overflow-y: hidden;
 	padding: 1em;
+	li {
+		height: 6em;
+		list-style: none;
+		&:not(:last-child) {
+			margin-right: 1em;
+		}
+		a {
+			height: 100%;
+			display: block;
+			width: 100%;
+		}
+	}
 }
 .media_container {
 	background: $white;
@@ -146,7 +158,20 @@
     justify-content: center;
     overflow: hidden;
     position: relative;
-    width: 6em;
+	width: 6em;
+	&.slide_container {
+		width: 13em;
+		p {
+			background: $white;
+			color: $teal;
+			min-height: 1em;
+			text-align: center;
+			top: 1em;
+			padding: .5em;
+			position: absolute;
+			
+		}
+	}
     * {
         pointer-events: none;
     }

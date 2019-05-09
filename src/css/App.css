@@ -90,10 +90,19 @@
   border-radius: .5em;
   display: flex;
   margin-bottom: 1em;
-  min-height: 8em;
+  min-height: 6em;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 1em; }
+  .carousel li {
+    height: 6em;
+    list-style: none; }
+    .carousel li:not(:last-child) {
+      margin-right: 1em; }
+    .carousel li a {
+      height: 100%;
+      display: block;
+      width: 100%; }
 
 .media_container {
   background: #FFF;
@@ -109,6 +118,16 @@
   overflow: hidden;
   position: relative;
   width: 6em; }
+  .media_container.slide_container {
+    width: 13em; }
+    .media_container.slide_container p {
+      background: #FFF;
+      color: #00CCFF;
+      min-height: 1em;
+      text-align: center;
+      top: 1em;
+      padding: .5em;
+      position: absolute; }
   .media_container * {
     pointer-events: none; }
   .media_container:not(:last-child) {
