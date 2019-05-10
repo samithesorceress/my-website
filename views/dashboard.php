@@ -134,7 +134,7 @@ require_once($php_root . "components/admin/header.php");
 					if ($slides_items) {
 						foreach ($slides_items as $slide_item) {
 							echo "<li><a href='" . $htp_root . "edit/slide/" . $slide_item["id"] . "'>";
-								echo "<div class='media_container slide_container'><p>" . $slide_item["text"] .  "</p>";
+								echo "<div class='media_container wide_container'><p>" . $slide_item["text"] .  "</p>";
 									if ($slide_item["img"]) {
 										$slide_img = false;
 										$slide_img_api = "listMedia?id=" . $slide_item["img"];
@@ -166,10 +166,10 @@ require_once($php_root . "components/admin/header.php");
 							echo "</a></li>";
 						}
 					} else {
-						echo "No Results";
+						echo "<p>No Results</p>";
 					}
 				} else {
-					echo "No Results";
+					echo "<p>No Results</p>";
 				}
 			?>
 			</div>
@@ -193,7 +193,44 @@ require_once($php_root . "components/admin/header.php");
 				<img class="icon" src="<?php echo $htp_root; ?>src/icons/movie.svg">
 				<span>Videos</span>
 			</h2>
-			<div class="carousel">No Results</div>
+			<div class="carousel">
+			<?php
+				$videos_api = "listVideos?rows=5&order_by=id&order_dir=DESC";
+				$videos_res = xhrFetch($videos_api);
+				if (valExists("success", $videos_res)) {
+					$videos = $videos_res["data"];
+					if ($videos) {
+						foreach ($videos as $video) {
+							echo "<li><a href='" . $htp_root . "edit/slide/" . $video["id"] . "'>";
+								echo "<div class='media_container wide_container'><p>" . $video["title"] .  "</p>";
+									if ($video["cover"]) {
+										$video_cover = false;
+										$video_cover_api = "listMedia?id=" . $video["cover"];
+										$video_cover_res = xhrFetch($video_cover_api);
+										if (valExists("success", $video_cover_res)) {
+											$video_cover = $video_cover_res["data"];
+										}
+										if ($video_cover) {
+											echo "<img src='" . $htp_root . "uploads/" . $video_cover["src"] . "." . $video_cover["ext"] . "' data-shape='";
+											if ($video_cover["ratio"] > 2.16) {
+												echo "wide";
+											} else {
+												echo "tall";
+											}
+											echo "'/>";
+										}
+									}
+								echo"</div>";
+							echo "</a></li>";
+						}
+					} else {
+						echo "<p>No Results</p>";
+					}
+				} else {
+					echo "<p>No Results</p>";
+				}
+			?>
+			</div>
 			<div class="ctas">
 				<a href="<?php echo $htp_root; ?>video-manager">
 					<button class="btn cta">

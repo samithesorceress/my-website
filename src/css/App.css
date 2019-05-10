@@ -118,9 +118,9 @@
   overflow: hidden;
   position: relative;
   width: 6em; }
-  .media_container.slide_container {
+  .media_container.wide_container {
     width: 13em; }
-    .media_container.slide_container p {
+    .media_container.wide_container p {
       background: #FFF;
       color: #00CCFF;
       min-height: 1em;
