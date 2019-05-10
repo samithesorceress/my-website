@@ -124,7 +124,7 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false) {
 					$media_data = $media_res["data"];
 				}
 			}
-			$input = "'><label for='" . $id . "'>" . $name . "</label><div class='media_container' style='height:auto'>";
+			$input = "'><label for='" . $id . "'>" . $name . "</label><div class='media_container'>";
 			if ($media_data) {
 				$input .= "<img src='http://127.0.0.1/sami-the-sorceress/uploads/" . $media_data["src"] . "." . $media_data["ext"] . "' alt='" . $media_data["alt"] . "' title='" . $media_data["title"] . "'/>";
 			} else {
@@ -165,4 +165,37 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false) {
 	$html .= $input;
 	$html .= "</div>";
 	return $html;
+}
+
+function getValues($input) {
+	$data = [];
+	foreach ($input as $key => $value) {
+		if ($key !== "file") {
+			// Then sanitize them
+			$data[$key] = addslashes($value);
+		}
+	}
+	return $data;
+}
+
+function checkRequired($required, $input) {
+	$res = [
+		"success" => false,
+		"missing" => []
+	];
+
+	if ($required !== false && $input !== false) {
+		if (is_array($required) && is_array($input)) {
+			foreach ($required as $req) {
+				if (!valExists($req, $input)) {
+					$res["missing"][] = $req;
+				}
+			}
+			if (count($res["missing"]) < 1) {
+				$res["success"] = true;
+			}
+		}
+	}
+
+	return $res;
 }

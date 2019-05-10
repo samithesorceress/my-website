@@ -1,8 +1,37 @@
 <?php
 $errors = [];
 // is attempting save
-if (empty($_REQUEST) === false) {
 
+
+
+if (empty($_REQUEST) === false) {
+	$data = getValues($_REQUEST);
+	$required = [
+		"cover",
+		"preview",
+		"title",
+		"description",
+		"tags",
+		"price",
+		"publish_date"
+	];
+	$validation = checkRequired($required, $data);
+	if (valExists("success", $validation)) {
+		$video_api = "newVideo?cover=" . $data["cover"] . "&preview=" . $data["preview"] . "&title=" . $data["title"] . "&description=" . $data["description"] . "&tags=" . $data["tags"] . "&price=" . $data["price"] . "&publish_date=" . $data["publish_date"] . "&public=" . $data["public"];
+		$video_res = false;
+		$video_req = xhrFetch($video_api);
+		if (valExists("success", $video_req)) {
+			header("Location: http://127.0.0.1/sami-the-sorceress/view-all/videos");
+			die();
+		} else {
+			$errors[] = "Server error.. " . $video_api;
+		}
+
+	} else {
+		foreach($validation["missing"] as $missing) {
+			$errors[] = "Missing: " . $missing;
+		}
+	}
 }
 
 
@@ -29,11 +58,11 @@ require_once($php_root . "components/admin/header.php");
 			<?php
 			echo "<div class='card'>";
 				echo newFormField("cover", "Cover", "media_browser", 1);
-				echo newFormField("preview", "Preview View", "media_browser", 1);
+				echo newFormField("preview", "Preview Video", "media_browser", 1);
 			echo "</div>";
 			echo "<div class='card'>";
 				echo newFormField("title", "Title");
-				echo newFormField("desc", "Description", "textarea");
+				echo newFormField("description", "Description", "textarea");
 				echo newFormField("tags", "Tags", "textarea");
 				echo newFormField("price", "Price");
 			echo "</div>";
@@ -42,7 +71,7 @@ require_once($php_root . "components/admin/header.php");
 				// todo: infinite link fields
 			echo "</div>";
 			echo "<div class='card'>";
-				echo newFormField("date", "Release Date", "date");
+				echo newFormField("publish_date", "Publish Date", "date");
 				echo newFormField("public", "Public", "checkbox");
 			echo "</div>";
 			echo newFormField("save", "Save", "submit", "Save");

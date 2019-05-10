@@ -8,7 +8,7 @@ if (empty($_REQUEST) === false) {
 				$attempt_url = "newSlide?img=" . $_REQUEST["img"] . "&text=" . urlencode($_REQUEST["text"]) . "&url=" . urlencode($_REQUEST["url"]) . "&public=" . $_REQUEST["public"];
 				$attempt = xhrFetch($attempt_url);
 				if (valExists("success", $attempt)) {
-					header("Location: http://127.0.0.1/sami-the-sorceress");
+					header("Location: http://127.0.0.1/sami-the-sorceress/view-all/slides");
 					die();
 				} else {
 					$errors[] = $attempt["message"];

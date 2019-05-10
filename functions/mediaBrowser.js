@@ -83,8 +83,8 @@ function chooseMedia(e, id) {
 	var media_item = trg.childNodes[0];
 	var field = document.getElementById("media_target_" + key);
 	var field_children = field.childNodes;
-	var media_container = util.ren(field, "media_container")[0];
-	var cta = util.ren(field, "cta")[0];
+	var media_container = util.getChildrenbyClassname(field, "media_container")[0];
+	var cta = util.getChildrenbyClassname(field, "cta")[0];
 	var browser = document.getElementById("media_browser_" + key);
 	var dismiss_zone = document.getElementById("dismiss_zone_" + key);
 

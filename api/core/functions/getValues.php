@@ -5,4 +5,5 @@ foreach ($_REQUEST as $key => $value) {
 			// Then sanitize them
 			$data[$key] = addslashes($value);
 		}
-    }
+		
+	}
