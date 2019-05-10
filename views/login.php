@@ -35,8 +35,8 @@ if (empty($_REQUEST) === false) {
 		setcookie("user_token", $returnedToken, time() + (86400 * 30), "/");
         
         // And finally route to the next page
-        //header("Location: " . $htp_root);
-        require_once($php_root . "core/adminRouter.php");
+        header("Location: " . $htp_root . "admin");
+        
 	} else {
 		$login_msg = "Incorrect email or password.";
 		jsLogs("Incorrect email or password.");

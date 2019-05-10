@@ -167,8 +167,9 @@ form .two_columns {
       flex-grow: 0;
       flex-shrink: 0; }
   .field:not(.checkbox_field) * {
-    font-family: "Quicksand", sans-serif;
-    width: 100%; }
+    font-family: "Quicksand", sans-serif; }
+    .field:not(.checkbox_field) *:not(.media_container) {
+      width: 100%; }
   .field label {
     display: block;
     padding: 0.375em 0;

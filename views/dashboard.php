@@ -56,7 +56,7 @@ require_once($php_root . "components/admin/header.php");
 			echo "</p>"
 			?>
 			<div class="ctas">
-				<a href="<?php echo $htp_root; ?>edit-about">
+				<a href="<?php echo $admin_root; ?>edit-about">
 					<button class="btn cta">
 						<img class="icon" src="<?php echo $htp_root; ?>src/icons/edit.svg">
 						<span>Edit</span>
@@ -77,7 +77,7 @@ require_once($php_root . "components/admin/header.php");
 					$media_items = $media_results["data"];
 					if ($media_items) {
 						foreach ($media_items as $media_item) {
-							echo "<li><a href='" . $htp_root . "edit/media/" . $media_item["id"] . "'>";
+							echo "<li><a href='" . $admin_root . "edit/media/" . $media_item["id"] . "'>";
 								echo "<div class='media_container'>";
 									switch ($media_item["type"]) {
 										case "image": {
@@ -106,13 +106,13 @@ require_once($php_root . "components/admin/header.php");
 			?>
 			</ul>
 			<div class="ctas">
-				<a href="<?php echo $htp_root; ?>media-manager">
+				<a href="<?php echo $admin_root; ?>view-all/media">
 					<button class="btn cta">
 						<img class="icon" src="<?php echo $htp_root; ?>src/icons/eye.svg">
 						<span>View All</span>
 					</button>
 				</a>
-				<a href="<?php echo $htp_root; ?>new/media">
+				<a href="<?php echo $admin_root; ?>new/media">
 					<button class="btn cta">
 						<img class="icon" src="<?php echo $htp_root; ?>src/icons/upload.svg">
 						<span>Upload More</span>
@@ -133,7 +133,7 @@ require_once($php_root . "components/admin/header.php");
 					$slides_items = $slides_results["data"];
 					if ($slides_items) {
 						foreach ($slides_items as $slide_item) {
-							echo "<li><a href='" . $htp_root . "edit/slide/" . $slide_item["id"] . "'>";
+							echo "<li><a href='" . $admin_root . "edit/slide/" . $slide_item["id"] . "'>";
 								echo "<div class='media_container wide_container'><p>" . $slide_item["text"] .  "</p>";
 									if ($slide_item["img"]) {
 										$slide_img = false;
@@ -174,13 +174,13 @@ require_once($php_root . "components/admin/header.php");
 			?>
 			</div>
 			<div class="ctas">
-				<a href="<?php echo $htp_root; ?>slides-manager">
+				<a href="<?php echo $admin_root; ?>view-all/slides">
 					<button class="btn cta">
 						<img class="icon" src="<?php echo $htp_root; ?>src/icons/eye.svg">
 						<span>View All</span>
 					</button>
 				</a>
-				<a href="<?php echo $htp_root; ?>new/slide">
+				<a href="<?php echo $admin_root; ?>new/slide">
 					<button class="btn cta">
 						<img class="icon" src="<?php echo $htp_root; ?>src/icons/upload.svg">
 						<span>New Slide</span>
@@ -201,7 +201,7 @@ require_once($php_root . "components/admin/header.php");
 					$videos = $videos_res["data"];
 					if ($videos) {
 						foreach ($videos as $video) {
-							echo "<li><a href='" . $htp_root . "edit/slide/" . $video["id"] . "'>";
+							echo "<li><a href='" . $admin_root . "edit/video/" . $video["id"] . "'>";
 								echo "<div class='media_container wide_container'><p>" . $video["title"] .  "</p>";
 									if ($video["cover"]) {
 										$video_cover = false;
@@ -232,13 +232,13 @@ require_once($php_root . "components/admin/header.php");
 			?>
 			</div>
 			<div class="ctas">
-				<a href="<?php echo $htp_root; ?>video-manager">
+				<a href="<?php echo $admin_root; ?>view-all/videos">
 					<button class="btn cta">
 						<img class="icon" src="<?php echo $htp_root; ?>src/icons/eye.svg">
 						<span>View All</span>
 					</button>
 				</a>
-				<a href="<?php echo $htp_root; ?>new/video">
+				<a href="<?php echo $admin_root; ?>new/video">
 					<button class="btn cta">
 						<img class="icon" src="<?php echo $htp_root; ?>src/icons/upload.svg">
 						<span>New Video</span>
@@ -253,13 +253,13 @@ require_once($php_root . "components/admin/header.php");
 			</h2>
 			<div class="carousel">No Results</div>
 			<div class="ctas">
-				<a href="<?php echo $htp_root; ?>photoset-manager">
+				<a href="<?php echo $admin_root; ?>view-all/photosets">
 					<button class="btn cta">
 						<img class="icon" src="<?php echo $htp_root; ?>src/icons/eye.svg">
 						<span>View All</span>
 					</button>
 				</a>
-				<a href="<?php echo $htp_root; ?>new/photoset">
+				<a href="<?php echo $admin_root; ?>new/photoset">
 					<button class="btn cta">
 						<img class="icon" src="<?php echo $htp_root; ?>src/icons/upload.svg">
 						<span>New Photoset</span>
@@ -274,13 +274,13 @@ require_once($php_root . "components/admin/header.php");
 			</h2>
 			<div class="carousel">No Results</div>
 			<div class="ctas">
-				<a href="<?php echo $htp_root; ?>store-manager">
+				<a href="<?php echo $admin_root; ?>view-all/store-items">
 					<button class="btn cta">
 						<img class="icon" src="<?php echo $htp_root; ?>src/icons/eye.svg">
 						<span>View All</span>
 					</button>
 				</a>
-				<a href="<?php echo $htp_root; ?>new/store-item">
+				<a href="<?php echo $admin_root; ?>new/store-item">
 					<button class="btn cta">
 						<img class="icon" src="<?php echo $htp_root; ?>src/icons/upload.svg">
 						<span>New Store Item</span>

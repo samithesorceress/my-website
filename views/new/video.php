@@ -1,11 +1,11 @@
 <?php
 $errors = [];
+
 // is attempting save
-
-
-
 if (empty($_REQUEST) === false) {
 	$data = getValues($_REQUEST);
+	
+	//check required values
 	$required = [
 		"cover",
 		"preview",
@@ -17,17 +17,38 @@ if (empty($_REQUEST) === false) {
 	];
 	$validation = checkRequired($required, $data);
 	if (valExists("success", $validation)) {
-		$video_api = "newVideo?cover=" . $data["cover"] . "&preview=" . $data["preview"] . "&title=" . $data["title"] . "&description=" . $data["description"] . "&tags=" . $data["tags"] . "&price=" . $data["price"] . "&publish_date=" . $data["publish_date"] . "&public=" . $data["public"];
+		
+		//prepare api request
+		$video_api_endpoint = "newVideo";
+		$video_api_params = [
+			"cover" => $data["cover"],
+			"preview" => $data["preview"],
+			"title" => $data["title"],
+			"description" => $data["description"],
+			"tags" => $data["tags"],
+			"price" => $data["price"],
+			"publish_date" => $data["publish_date"]
+		];
+
+		//check for non-required and add them if they exist
+		if (valExists("public", $data)) {
+			$video_api_params["public"] = 1;
+		} else {
+			$video_api_params["public"] = 0;
+		}
 		$video_res = false;
-		$video_req = xhrFetch($video_api);
+		$video_req = xhrFetch($video_api_endpoint, $video_api_params);
+
+		//result
 		if (valExists("success", $video_req)) {
-			header("Location: http://127.0.0.1/sami-the-sorceress/view-all/videos");
+			header("Location: " . $admin_root . "view-all/videos");
 			die();
 		} else {
-			$errors[] = "Server error.. " . $video_api;
+			$errors[] = "Server error.. " . $video_req["message"];
 		}
-
 	} else {
+
+		//missing some values..
 		foreach($validation["missing"] as $missing) {
 			$errors[] = "Missing: " . $missing;
 		}

@@ -42,7 +42,7 @@
 		<nav>
 			<ul>
 				<li>
-					<a id="app_title" class="title" href="<?php echo $htp_root; ?>">Admin Zone</a>
+					<a id="app_title" class="title" href="<?php echo $htp_root; ?>admin">Admin Zone</a>
 				</li>
 				<li>
 					<button id="search_btn" class="btn">

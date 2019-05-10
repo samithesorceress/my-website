@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 // Init variables
 $php_root = $_SERVER['DOCUMENT_ROOT'] . "/sami-the-sorceress/";
 $htp_root = "http://127.0.0.1/sami-the-sorceress/";
+$admin_root = $htp_root . "admin/";
 
 // Defaults
 $document_title = "Sami the Sorceress";

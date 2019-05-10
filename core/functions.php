@@ -14,12 +14,29 @@ function valExists($key, $arr) {
 	}
 	return false;
 }
-function xhrFetch($url, $params = false) {
-	if (strpos($url, 'http') !== 0) {
-		$xhr_url = "http://127.0.0.1/sami-the-sorceress/api/" . $url;
+function formatParams($params){
+	$obj = false;
+	if (is_array($params)) {
+		$obj = "?";
+		foreach($params as $key => $val) {
+			$obj .= $key . "=" . urlencode($val) . "&";
+		}
+		$obj = rtrim($obj, "&");
+	}
+	return $obj;
+}
+function xhrFetch($endpoint, $params = false) {
+	if (strpos($endpoint, 'http') !== 0) {
+		$xhr_url = "http://127.0.0.1/sami-the-sorceress/api/" . $endpoint;
 
 	} else {
-		$xhr_url = $url;
+		$xhr_url = $endpoint;
+	}
+	if ($params) {
+		$params = formatParams($params);
+		if ($params) {
+			$xhr_url .= $params;
+		}
 	}
 	jsLogs("xhrFetching: " . $xhr_url);
 	$xhr_res = "";
