@@ -36,40 +36,57 @@ function checkRequired($required, $input) {
 	return $res;
 }
 
-function prepareSQL($action, $table, $params, $where) {
+function prepareSQL($action, $table, $params = false, $where = false) {
 	$sql = false;
-	if ($action && $table && ($params || $where)) {
-		$sql = " `" . $table . "` ";
+	if ($action && $table) {
+		$table = " `" . $table . "` ";
 		$action = strtoupper($action);
 		switch($action) {
-			case SELECT:
-				$sql = "SELECT * FROM" . $sql . "WHERE ";
-				foreach($params as $key => $val) {
-					$sql .= "`" . $key . "`='" . sanitize($val) . "' AND ";
+			case "SELECT":
+				if ($where) {
+					$sql = "SELECT * FROM" . $table . "WHERE ";
+					foreach($where as $key => $val) {
+						$sql .= "`" . $key . "`='" . sanitize($val) . "' AND ";
+					}
+					$sql = rtrim($sql, " AND ");
+				} else {
+					return false;
 				}
-				$sql = rtrim($sql, " AND ");
 				break;
-			case INSERT:
-				$sql = "INSERT INTO" . $sql;
-				$fields = "(";
-				$values = "(";
-				foreach($params as $key => $val) {
-					$fields .= $key . ", ";
-					$values .= "'" . sanitize($val) . "', ";
+			case "INSERT":
+				if ($params) {
+					$sql = "INSERT INTO" . $table;
+					$fields = "(";
+					$values = "(";
+					foreach($params as $key => $val) {
+						$fields .= $key . ", ";
+						$values .= "'" . sanitize($val) . "', ";
+					}
+					$fields = rtrim($fields, ", ") . ")";
+					$values = rtrim($values, ", ") . ")";
+					$sql .= $fields . " VALUES " . $values;
+				} else {
+					return false;
 				}
-				$fields = rtrim($fields, ", ") . ")";
-				$values = rtrim($values, ", ") . ")";
-				$sql .= $fields . " VALUES " . $values;
 				break;
-			case UPDATE:
-				$sql = "UPDATE" . $sql;
-
+			case "UPDATE":
+				if ($params && $where) {
+					$sql = "UPDATE" . $table . " SET ";
+					foreach($params as $key => $val) {
+						$sql .= "`" . $key . "`='" . sanitize($val) . "', ";
+					}
+					$sql = rtrim($sql, ", ") . " WHERE ";
+					foreach($where as $key => $val) {
+						$sql .= "`" . $key . "`='" . sanitize($val) . "' AND ";
+					}
+					$sql = rtrim($sql, " AND ");
+				} else {
+					return false;
+				}
 				break;
 			default:
 				return false;
 		}
-		$sql .= "`" . $table . "` ";
-		
 	}
 	return $sql;
 }

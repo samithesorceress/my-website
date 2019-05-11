@@ -16,7 +16,9 @@ if (empty($_FILES) === false && valExists("file", $_FILES)) {
 		$file_height,
 		$file_type
 	) = getimagesize($file_name);
+	$sql_params["max_size"] = $file_width;
 	$file_ratio = $file_width / $file_height;
+	$sql_params["ratio"] = $file_ratio;
 
 	try {
 		// Validate
@@ -43,7 +45,7 @@ if (empty($_FILES) === false && valExists("file", $_FILES)) {
 		// Check MIME type
 		$finfo = new finfo(FILEINFO_MIME_TYPE);
 		if (false === $ext = array_search(
-			$finfo->file($tmp_name),
+			$finfo->file($file_name),
 			array(
 				"jpg" => "image/jpeg",
 				"jpeg" => "image/jpeg",
@@ -86,10 +88,11 @@ if (empty($_FILES) === false && valExists("file", $_FILES)) {
 		if ($sql_params["type"] == "image" && $file_width > 200) {
 			$original_file = "../../uploads/" . $new_file_name . "." . $ext;
 			$total_sizes = floor($file_width / 200);
+			$sql_params["sizes"] = $total_sizes;
 
 			for ($i = 1; $i <= $total_sizes; $i += 1) {
 				$new_width = $i * 200;
-				$new_height = $new_width / $ratio;				
+				$new_height = $new_width / $file_ratio;				
 				$new_file = "../../uploads/" . $new_file_name . "_" . $new_width . "w." . $ext;
 
 				// first make a copy of the file
@@ -119,26 +122,24 @@ if (empty($_FILES) === false && valExists("file", $_FILES)) {
 		} else {
 			$sql_params["sizes"] = 0;
 		}
-
-
-
-		$sql_ins .= "`media` (src, ext, type, sizes, max_size, ratio) ";
-		$sql_vals .= "'" . $new_file_name . "', '" . $ext . "', '" . $output["data"]["type"] . "', '" . $total_sizes . "', '" . $file_width . "', '" . $ratio . "')";
-
-		$sql = $sql_ins . $sql_vals;
-		if ($conn->query($sql)) {
+		$output["data"] = $sql_params;
+		$sql = prepareSQL("insert", "media", $sql_params);
+		if ($sql) {
+			if ($conn->query($sql)) {
 			$output["success"] = true;
 			$output["message"] = "File Uploaded";
+			} else {
+				$output["message"] = "Query failed: " . $sql;
+			}
 		} else {
-			$output["success"] = false;
-			$output["message"] = "Query failed: " . $sql;
+			$output["message"] = "Error preparing SQL statement";
 		}
 	} catch (RuntimeException $e) {
-
-		echo $e->getMessage();
-	
+		// Validation failure
+		$output["message"] = $e->getMessage();
 	}
 } else {
+	// Missing $_FILES
 	$output["message"] = "No `file` provided.";
 }
 
