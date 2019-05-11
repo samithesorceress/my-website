@@ -1,26 +1,49 @@
 <?php
 $errors = [];
+
 // is attempting save
 if (empty($_REQUEST) === false) {
-	if (empty($_REQUEST["img"]) === false) {
-		if (empty($_REQUEST["text"]) === false) {
-			if (empty($_REQUEST["url"]) === false) {
-				$attempt_url = "newSlide?img=" . $_REQUEST["img"] . "&text=" . urlencode($_REQUEST["text"]) . "&url=" . urlencode($_REQUEST["url"]) . "&public=" . $_REQUEST["public"];
-				$attempt = xhrFetch($attempt_url);
-				if (valExists("success", $attempt)) {
-					header("Location: http://127.0.0.1/sami-the-sorceress/view-all/slides");
-					die();
-				} else {
-					$errors[] = $attempt["message"];
-				}
-			} else {
-				$errors[] = "Missing url.";
-			}
+	$data = getValues($_REQUEST);
+
+	//check required values
+	$required = [
+		"img",
+		"text",
+		"url"
+	];
+	$validation = checkRequired($required, $data);
+	if (valExists("success", $validation)) {
+
+		//prepare api req
+		$api_endpoint = "newSlide";
+		$api_params = [
+			"img" => $data["img"],
+			"text" => $data["text"],
+			"url" => $data["url"]
+		];
+
+		//check for non-required and add them if they exist
+		if (valExists("public", $data)) {
+			$api_params["public"] = 1;
 		} else {
-			$errors[] = "Missing text.";
+			$api_params["public"] = 0;
+		}
+
+		//make request
+		$slide_req = xhrFetch($api_endpoint, $api_params);
+		
+		// result
+		if (valExists("success", $slide_req)) {
+			header("Location: " . $admin_root . "view-all/slides");
+		} else {
+			$errors[] = "Server error.. " . $slide_req["message"];
 		}
 	} else {
-		$errors[] = "Please choose an image.";
+
+		//missing some values..
+		foreach($validation["missing"] as $missing) {
+			$errors[] = "Missing: " . $missing;
+		}
 	}
 }
 

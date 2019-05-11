@@ -1,101 +1,113 @@
 <?php
 $errors = [];
 // is attempting save
-if (empty($_FILES) === false || empty($_REQUEST) === false) {
-	try {
-		$attempt_url = "new_media";
-		// Undefined | Multiple Files | $_FILES Corruption Attack
-		// If this request falls under any of them, treat it invalid.
-		if (
-			!isset($_FILES['img']['error']) ||
-			is_array($_FILES['img']['error'])
-		) {
-			throw new RuntimeException('Invalid parameters.');
-		}
+if (empty($_FILES) === false) {
+	//api vars
+	$api_endpoint = "newMedia";
+	$api_params = [];
 	
-		// Check $_FILES['upfile']['error'] value.
-		switch ($_FILES['img']['error']) {
+	//file vars
+	$tmp_name = $_FILES["media"]["tmp_name"];
+	$file_err = $_FILES["media"]["error"];
+	$file_size = $_FILES["media"]["size"];
+
+	
+	try {
+		// Validate
+		if (!isset($file_err) || is_array($file_err)) {
+			throw new RuntimeException("Invalid parameters.");
+		}
+		switch ($file_err) {
 			case UPLOAD_ERR_OK:
 				break;
 			case UPLOAD_ERR_NO_FILE:
-				throw new RuntimeException('No file sent.');
+				throw new RuntimeException("No file sent.");
 			case UPLOAD_ERR_INI_SIZE:
 			case UPLOAD_ERR_FORM_SIZE:
-				throw new RuntimeException('Exceeded filesize limit.');
+				throw new RuntimeException("Exceeded filesize limit.");
 			default:
-				throw new RuntimeException('Unknown errors.');
+				throw new RuntimeException("Unknown errors.");
 		}
 	
-		// You should also check filesize here. 
-		if ($_FILES['img']['size'] > 5000000000) { //5 gigs
-			throw new RuntimeException('Exceeded filesize limit.');
+		// Check filesize 
+		if ($file_size > 5000000000) { //5 gigs
+			throw new RuntimeException("Exceeded filesize limit.");
 		}
 	
-		// DO NOT TRUST $_FILES['upfile']['mime'] VALUE !!
-		// Check MIME Type by yourself.
+		// Check MIME type
 		$finfo = new finfo(FILEINFO_MIME_TYPE);
 		if (false === $ext = array_search(
-			$finfo->file($_FILES['img']['tmp_name']),
+			$finfo->file($tmp_name),
 			array(
 				"jpg" => "image/jpeg",
+				"jpeg" => "image/jpeg",
 				"png" => "image/png",
 				"gif" => "image/gif",
 				"mp4" => "video/mp4"
 			),
 			true
 		)) {
-			throw new RuntimeException('Invalid file format.');
+			throw new RuntimeException("Invalid file format.");
 		}
-		$attempt_url .= "?type=";
 		switch($ext) {
 			case "mp4":
-				$attempt_url .= "video";
+				$api_params["type"] = "video";
 				break;
 			default:
-				$attempt_url .= "image";
+				$api_params["type"] = "image";
 		}
 		
-		// You should name it uniquely.
-		// DO NOT USE $_FILES['upfile']['name'] WITHOUT ANY VALIDATION !!
-		// On this example, obtain safe unique name from its binary data.
+		// Gen hash name
+		$date = date('m/d/Y h:i:s a', time());
+		$new_name = sha1($tmp_name . $date);
 		if (!move_uploaded_file(
-			$_FILES['img']['tmp_name'],
+			$tmp_name,
 			sprintf($php_root . 'uploads/%s.%s',
-				sha1($_FILES['img']['tmp_name']),
+				$new_name,
 				$ext
 			)
 		)) {
 			throw new RuntimeException('Failed to move uploaded file.');
 		}
-		$attempt_url .= "&src=" . sha1($_FILES['img']['tmp_name']) . "." . $ext;
-		if (isset($_REQUEST["title"])) {
-			$attempt_url .= "&title=" . urlencode($_REQUEST["title"]);
-		}
-		if (isset($_REQUEST["alt"])) {
-			$attempt_url .= "&alt=" . urlencode($_REQUEST["alt"]);
-		}
-		$attempt_url .= "&public=";
-		if (isset($_REQUEST["public"])) {
-			if ($_REQUEST["public"] == true) {
-				$attempt_url .= "1";
-			} else {
-				$attempt_url .= "0";
+
+		// Successfully uploaded, now let's add it to the database.
+		$api_params["src"] = $new_name;
+		$api_params["ext"] = $ext;
+		
+		// check for non-required values, and add them if they exist
+		if (empty($_REQUEST) === false) {
+			$data = getValues($_REQUEST);
+
+			if (valExists("title", $data)) {
+				$api_params["title"] = $data["title"];
 			}
+			if (valExists("alt", $data)) {
+				$api_params["alt"] = $data["alt"];
+			}
+			if (valExists("public", $data)) {
+				$api_params["public"] = 1;
+			} else {
+				$api_params["public"] = 0;
+			}	
 		} else {
-			$attempt_url .= "0";
+			$api_params["public"] = 0;
 		}
-		$attempt = xhrFetch($attempt_url);
-		if (valExists("success", $attempt)) {
-			echo 'File is uploaded successfully.';
+
+		// Make request
+		$media_req = xhrFetch($api_endpoint, $api_params);
+		if (valExists("success", $media_req)) {
+			header("Location: " . $admin_root . "view-all/media");
+			die();
 		} else {
-			echo "Error processing upload: ". $attempt["message"];
+			$errors[] = "Server error: " . $media_req["message"];
 		}
-	
 	} catch (RuntimeException $e) {
-	
-		echo $e->getMessage();
-	
+		// Validation failure
+		$errors[] = $e->getMessage();
 	}
+} elseif (empty($_REQUEST) === false) {
+	// Missing $_FILES input
+	$errors[] = "Please select an image or video.";
 }
 
 
@@ -122,7 +134,7 @@ require_once($php_root . "components/admin/header.php");
 		<form enctype="multipart/form-data" action="<?php echo $htp_root . $current_path; ?>" method="POST">
 			<?php
 			echo "<div class='card'>";
-				echo newFormField("img", "Image", "file");
+				echo newFormField("media", "Image/Video", "file");
 			echo "</div>";
 			echo "<div class='card'>";
 				echo newFormField("title", "Title");
@@ -131,8 +143,8 @@ require_once($php_root . "components/admin/header.php");
 			echo "</div>";
 			echo newFormField("save", "Save", "submit", "Save");
 			?>
-        </form>
-    </article>
+		</form>
+	</article>
 </main>
 <?php
 require_once($php_root . "components/admin/footer.php");

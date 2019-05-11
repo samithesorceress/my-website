@@ -19,8 +19,8 @@ if (empty($_REQUEST) === false) {
 	if (valExists("success", $validation)) {
 		
 		//prepare api request
-		$video_api_endpoint = "newVideo";
-		$video_api_params = [
+		$api_endpoint = "newVideo";
+		$api_params = [
 			"cover" => $data["cover"],
 			"preview" => $data["preview"],
 			"title" => $data["title"],
@@ -32,19 +32,18 @@ if (empty($_REQUEST) === false) {
 
 		//check for non-required and add them if they exist
 		if (valExists("public", $data)) {
-			$video_api_params["public"] = 1;
+			$api_params["public"] = 1;
 		} else {
-			$video_api_params["public"] = 0;
+			$api_params["public"] = 0;
 		}
-		$video_res = false;
-		$video_req = xhrFetch($video_api_endpoint, $video_api_params);
+		$video_req = xhrFetch($api_endpoint, $api_params);
 
 		//result
 		if (valExists("success", $video_req)) {
 			header("Location: " . $admin_root . "view-all/videos");
 			die();
 		} else {
-			$errors[] = "Server error.. " . $video_req["message"];
+			$errors[] = "Server error: " . $video_req["message"];
 		}
 	} else {
 

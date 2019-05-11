@@ -8,4 +8,8 @@ $sql_vals = " VALUES (";
 $sql_whr = false;
 $sql_ord = false;
 $sql_lmt = " LIMIT ";
-$output = [];
+$output = [
+	"success" => false,
+	"message" => "",
+	"data" => []
+];
