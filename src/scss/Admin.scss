@@ -110,11 +110,13 @@
 	display: flex;
 	justify-content: space-between;
 	overflow: hidden;
+	div {
+		height: 4em;
+		display: flex;
+	}
 }
 
 #actions_for_selections {
-	height: 4em;
-	display: flex;
 	&.disabled {
 		pointer-events: none;
 		.btn{
@@ -129,41 +131,77 @@
 #view_all {
 	min-height: calc(100vh - 22.6em);
 	position: relative;
-	.view_all_list {
-		display: flex;
-		flex-wrap: wrap;
-		li {
-			margin: 0 1em 1em 0;
-			position: relative;
+}
+#view_all_list {
+	display: flex;
+	flex-wrap: wrap;
+	li {
+		margin: 0 1em 1em 0;
+		position: relative;
+		.fab {
+			left: -.5em;
+			top: -.5em;
+			opacity: 0;
+			transform: scale(0.5);
+			transition-duration: .2s;
+			transition-property: transform, opacity;
+		}
+		.media_container {
+			border: 0px solid $teal;
+			transition-duration: .2s;
+			transition-property: border;
+		}
+		&:active, &:focus, &:hover {
 			.fab {
-				left: -.5em;
-				top: -.5em;
+				transform: scale(1);
+				opacity: 1;
 			}
+		}
+		&.selected {
+			.fab .icon{
+				&.checked {
+					display: inline;
+				}
+				&.unchecked {
+					display: none;
+				}
+			}
+			.media_container {
+				border-width: 6px;
+			}
+		}
+		&:not(.selected) {
+			.fab .icon {
+				&.checked {
+					display: none;
+				}
+				&.unchecked {
+					display: inline;
+				}
+			}
+			.media_container {
+				border-width: 0px;
+			}
+		}
+	}
 
-			&.selected {
-				.fab .icon{
-					&.checked {
-						display: inline;
-					}
-					&.unchecked {
-						display: none;
-					}
-				}
-				.media_container {
-					border: 6px solid $teal;
-				}
+	&.selections_active {
+		li {
+			cursor: pointer;
+			* {
+				pointer-events: none;
 			}
-			&:not(.selected) {
-				.fab .icon {
-					&.checked {
-						display: none;
-					}
-					&.unchecked {
-						display: inline;
-					}
+			.fab {
+				transform: scale(1)!important;
+				opacity: 1!important;
+			}
+			&:active, &:focus, &:hover {
+				.fab {
+					background: $active_teal!important;
 				}
 				.media_container {
-					border: 0;
+					filter: brightness(1.1);
+					opacity: 0.8;
 				}
 			}
 		}

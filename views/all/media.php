@@ -3,22 +3,29 @@ require_once($php_root . "components/admin/header.php");
 ?>
 <header id="view-all_actions_bar" class='card'>
 	<div>
-		<?php echo newFormField("select_all","Select All","checkbox"); ?>
+		<button type='button' class='btn cta sml' onClick="selectItems.selectAll()">
+			<?php echo file_get_contents($htp_root . "src/icons/checkbox_checked.svg"); ?>
+			<span>Select All</span>
+		</button>
+		<button type='button' class='btn cta sml' onClick="selectItems.deselectAll()">
+			<?php echo file_get_contents($htp_root . "src/icons/clear.svg"); ?>
+			<span>Clear Selection</span>
+		</button>
 	</div>
 	<div id='actions_for_selections' class='disabled'>
-		<button type='button' class='btn cta sml'>
+		<button type='button' class='btn cta sml' onCLick="selectItems.actions.edit(event)">
 			<?php echo file_get_contents($htp_root . "src/icons/edit.svg"); ?>
-			<span>Edit</span>
+			<span>Edit Selected</span>
 		</button>
 		<button type='button' class='btn cta sml danger'>
 			<?php echo file_get_contents($htp_root . "src/icons/delete.svg"); ?>
-			<span>Delete</span>
+			<span>Delete Selected</span>
 		</button>
 	</div>
 </header>
 <section id="view_all" class="card">
 	<div class='card_contents'>
-		<ul class='view_all_list'>
+		<ul id='view_all_list' data-type="media">
 		<?php
 			$media_api = "listMedia?rows=5&order_by=id&order_dir=DESC";
 			$media_results = xhrFetch($media_api);
@@ -27,7 +34,7 @@ require_once($php_root . "components/admin/header.php");
 				if ($media_items) {
 					foreach ($media_items as $media_item) {
 						echo "<li data-key='" . $media_item["id"] . "'>";
-							echo "<button class='btn cta fab sml'>";
+							echo "<button class='btn cta fab sml' onClick='selectItems.toggle(event)'>";
 								echo file_get_contents($htp_root . "src/icons/checkbox_checked.svg");
 								echo file_get_contents($htp_root . "src/icons/checkbox_unchecked.svg");
 							echo "</button>";
