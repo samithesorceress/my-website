@@ -74,13 +74,13 @@
 	.card_contents {
 		background: $offwhite;
 		border-radius: .5em;
-		height: calc(100%  - 2em);
-		left: 1em;
+		height: 100%;
+		//left: 1em;
 		margin-bottom: 1em;
 		padding: 1em;
-		position: absolute;
-		top: 1em;
-		width: calc(100% - 2em);
+		//position: absolute;
+		//top: 1em;
+		width: 100%;
 	}
 	.field {
 		&:first-child {
@@ -99,24 +99,35 @@
     }
 }
 
+.ctas {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 1em;
+	> * {
+		&:not(:last-child) {
+			margin-right: 1em;
+		}
+	}
+}
+
 .cta, input[type="submit"] {
-    background: $teal;
-    &[type="submit"] {
-        background: $pink;
+	background: $teal;
+	&[type="submit"] {
+		background: $pink;
 	}
 	&.danger {
 		background: $red;
 	}
-    border: 0;
-    color: $white;
-    cursor: pointer;
+	border: 0;
+	color: $white;
+	cursor: pointer;
 	border-radius: 2em;
 	font-size: 16px;
-    min-height: 4em;
-    outline: 0;
-    padding: 1em;
-    text-align: center;
-    transition-property: none;
+	min-height: 4em;
+	outline: 0;
+	padding: 1em;
+	text-align: center;
+	transition-property: none;
 	width: auto;
 		.icon {
 			fill: $white;
@@ -344,24 +355,43 @@ form {
 	z-index: 3;
 }
 
-.profile_photo {
-	align-items: center;
-	background: $slate;
-	border-radius: 2em;
+.profile {
 	display: flex;
-	height: 4em;
-	justify-content: center;
-	overflow: hidden;
-	position: relative;
-	width: 4em;
-	img {
-		&[data-shape="wide"] {
-			height: 100%;
-			width: auto;
-		}
-		&[data-shape="tall"] {
-			height: auto;
-			width: 100%;
+	.profile_photo {
+		align-items: center;
+		background: $slate;
+		border-radius: 4em;
+		display: flex;
+		float: left;
+		height: 8em;
+		justify-content: center;
+		margin: 0 1em 1em 0;
+		overflow: hidden;
+		position: relative;
+		width: 8em;
+		img {
+			&[data-shape="wide"] {
+				height: 100%;
+				width: auto;
+			}
+			&[data-shape="tall"] {
+				height: auto;
+				width: 100%;
+			}
 		}
 	}
+	.profile_info {
+
+	}
+
+}
+
+
+.hidden-flex-item {
+    content: "";
+    flex: 1 0 200px;
+    padding: 5px;     
+    margin-top: 10px;  
+    margin-right: 5px;
+    visibility: hidden;
 }

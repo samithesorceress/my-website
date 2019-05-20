@@ -99,7 +99,6 @@
   width: auto; }
 
 #view_all {
-  min-height: calc(100vh - 22.6em);
   position: relative; }
 
 #view_all_list {
@@ -107,7 +106,65 @@
   flex-wrap: wrap; }
   #view_all_list li {
     margin: 0 1em 1em 0;
-    position: relative; }
+    position: relative;
+    flex-grow: 1; }
+    #view_all_list li a {
+      display: flex;
+      position: relative;
+      width: 100%; }
+      #view_all_list li a:after {
+        content: "";
+        display: block;
+        padding-bottom: 100%; }
+      #view_all_list li a .media_container {
+        height: 100%;
+        position: absolute;
+        width: 100%; }
+    @media (max-width: 245px) {
+      #view_all_list li {
+        flex-basis: 100%;
+        margin-right: 0;
+        width: 100%; } }
+    @media (min-width: 250px) and (max-width: 374px) {
+      #view_all_list li {
+        flex-basis: calc(50% - 1em); }
+        #view_all_list li:nth-child(2n + 2) {
+          margin-right: 0; } }
+    @media (min-width: 375px) and (max-width: 519px) {
+      #view_all_list li {
+        flex-basis: calc(33.3% - 1em); }
+        #view_all_list li:nth-child(3n + 3) {
+          margin-right: 0; } }
+    @media (min-width: 520px) and (max-width: 665px) {
+      #view_all_list li {
+        flex-basis: calc(25% - 1em); }
+        #view_all_list li:nth-child(4n + 4) {
+          margin-right: 0; } }
+    @media (min-width: 666px) and (max-width: 767px) {
+      #view_all_list li {
+        flex-basis: calc(20% - 1em); }
+        #view_all_list li:nth-child(5n + 5) {
+          margin-right: 0; } }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      #view_all_list li {
+        flex-basis: calc(16.6% - 1em); }
+        #view_all_list li:nth-child(6n + 6) {
+          margin-right: 0; } }
+    @media (min-width: 1024px) and (max-width: 1439px) {
+      #view_all_list li {
+        flex-basis: calc(12.5% - 1em); }
+        #view_all_list li:nth-child(8n + 8) {
+          margin-right: 0; } }
+    @media (min-width: 1440px) and (max-width: 1919px) {
+      #view_all_list li {
+        flex-basis: calc(10% - 1em); }
+        #view_all_list li:nth-child(10n + 10) {
+          margin-right: 0; } }
+    @media (min-width: 1920px) {
+      #view_all_list li {
+        flex-basis: calc(8.3% - 1em); }
+        #view_all_list li:nth-child(12n + 12) {
+          margin-right: 0; } }
     #view_all_list li .fab {
       left: -.5em;
       top: -.5em;

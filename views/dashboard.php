@@ -21,50 +21,51 @@ require_once($php_root . "components/admin/header.php");
 			$links = json_decode($links, true);
 		}
 	}
-	
-	echo "<div class='profile_photo'>";
-		if ($profile_photo) {
-			$profile_api = "listMedia?id=" . $profile_photo;
-			$profile_data = false;
-			$profile_res = xhrFetch($profile_api);
-			if (valExists("success", $profile_res)) {
-				$profile_data = $profile_res["data"];
-			}
-			if ($profile_data) {
-				echo "<img src='" . $htp_root . "uploads/" . $profile_data["src"] . "." . $profile_data["ext"] . "' alt='" . $profile_data["alt"] . "' title='" . $profile_data["title"] . "' data-shape='";
-				if ($profile_data["ratio"] > 1) {
-					echo "wide";
-				} else {
-					echo "tall";
+	echo "<div class='profile'>";
+		echo "<div class='profile_photo'>";
+			if ($profile_photo) {
+				$profile_api = "listMedia?id=" . $profile_photo;
+				$profile_data = false;
+				$profile_res = xhrFetch($profile_api);
+				if (valExists("success", $profile_res)) {
+					$profile_data = $profile_res["data"];
 				}
-				echo"'/>";
+				if ($profile_data) {
+					echo "<img src='" . $htp_root . "uploads/" . $profile_data["src"] . "." . $profile_data["ext"] . "' alt='" . $profile_data["alt"] . "' title='" . $profile_data["title"] . "' data-shape='";
+					if ($profile_data["ratio"] > 1) {
+						echo "wide";
+					} else {
+						echo "tall";
+					}
+					echo"'/>";
+				}
 			}
+		echo"</div><div class='profile_info'>";
+		echo "<p><strong>Bio: </strong>" . $bio . "</p>";
+		echo "<p><strong>Links: </strong>";
+		if ($links) {
+			$links_html = "";
+			foreach($links as $link) {
+				$links_html .= "<a href='" . urldecode($link["url"]) . "'>" . $link["title"] . "</a>, ";
+			}
+			$links_html = rtrim($links_html, ", ");
+			echo $links_html;
 		}
-	echo"</div>";
-	echo "<p><strong>Bio: </strong>" . $bio . "</p>";
-	echo "<p><strong>Links: </strong>";
-	if ($links) {
-		$links_html = "";
-		foreach($links as $link) {
-			$links_html .= "<a href='" . urldecode($link["url"]) . "'>" . $link["title"] . "</a>, ";
-		}
-		$links_html = rtrim($links_html, ", ");
-		echo $links_html;
-	}
-	echo "</p>"
+		echo "</p></div>";
+	echo "</div>";
 	?>
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>edit-about">
 			<button class="btn cta">
-				<img class="icon" src="<?php echo $htp_root; ?>src/icons/edit.svg">
-				<span>Edit</span>
+				<?php echo file_get_contents($htp_root . "src/icons/edit.svg"); ?>
+				<span>Update</span>
 			</button>
 		</a>
 	</div>
 </section>
 <section class="card">
 	<h2 class="title">
-		<img class="icon" src="<?php echo $htp_root; ?>src/icons/swarm.svg">
+		<?php echo file_get_contents($htp_root . "src/icons/swarm.svg"); ?>
 		<span>Media Manager</span>
 	</h2>
 	<ul class="carousel">
@@ -106,13 +107,13 @@ require_once($php_root . "components/admin/header.php");
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>view-all/media">
 			<button class="btn cta">
-				<img class="icon" src="<?php echo $htp_root; ?>src/icons/eye.svg">
+				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
 				<span>View All</span>
 			</button>
 		</a>
 		<a href="<?php echo $admin_root; ?>new/media">
 			<button class="btn cta">
-				<img class="icon" src="<?php echo $htp_root; ?>src/icons/upload.svg">
+				<?php echo file_get_contents($htp_root . "src/icons/upload.svg"); ?>
 				<span>Upload More</span>
 			</button>
 		</a>
@@ -174,13 +175,13 @@ require_once($php_root . "components/admin/header.php");
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>view-all/slides">
 			<button class="btn cta">
-				<img class="icon" src="<?php echo $htp_root; ?>src/icons/eye.svg">
+				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
 				<span>View All</span>
 			</button>
 		</a>
 		<a href="<?php echo $admin_root; ?>new/slide">
 			<button class="btn cta">
-				<img class="icon" src="<?php echo $htp_root; ?>src/icons/upload.svg">
+				<?php echo file_get_contents($htp_root . "src/icons/add.svg"); ?>
 				<span>New Slide</span>
 			</button>
 		</a>
@@ -232,13 +233,13 @@ require_once($php_root . "components/admin/header.php");
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>view-all/videos">
 			<button class="btn cta">
-				<img class="icon" src="<?php echo $htp_root; ?>src/icons/eye.svg">
+				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
 				<span>View All</span>
 			</button>
 		</a>
 		<a href="<?php echo $admin_root; ?>new/video">
 			<button class="btn cta">
-				<img class="icon" src="<?php echo $htp_root; ?>src/icons/upload.svg">
+				<?php echo file_get_contents($htp_root . "src/icons/add.svg"); ?>
 				<span>New Video</span>
 			</button>
 		</a>
@@ -253,13 +254,13 @@ require_once($php_root . "components/admin/header.php");
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>view-all/photosets">
 			<button class="btn cta">
-				<img class="icon" src="<?php echo $htp_root; ?>src/icons/eye.svg">
+				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
 				<span>View All</span>
 			</button>
 		</a>
 		<a href="<?php echo $admin_root; ?>new/photoset">
 			<button class="btn cta">
-				<img class="icon" src="<?php echo $htp_root; ?>src/icons/upload.svg">
+				<?php echo file_get_contents($htp_root . "src/icons/add.svg"); ?>
 				<span>New Photoset</span>
 			</button>
 		</a>
@@ -274,13 +275,13 @@ require_once($php_root . "components/admin/header.php");
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>view-all/store-items">
 			<button class="btn cta">
-				<img class="icon" src="<?php echo $htp_root; ?>src/icons/eye.svg">
+				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
 				<span>View All</span>
 			</button>
 		</a>
 		<a href="<?php echo $admin_root; ?>new/store-item">
 			<button class="btn cta">
-				<img class="icon" src="<?php echo $htp_root; ?>src/icons/upload.svg">
+				<?php echo file_get_contents($htp_root . "src/icons/add.svg"); ?>
 				<span>New Store Item</span>
 			</button>
 		</a>

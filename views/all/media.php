@@ -61,6 +61,7 @@ require_once($php_root . "components/admin/header.php");
 							echo "</a>";
 						echo"</li>";
 					}
+					echo "<li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li>";
 				}
 			} else {
 				echo "No Results";

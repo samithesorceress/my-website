@@ -49,13 +49,10 @@
   .card .card_contents {
     background: #f1f1f3;
     border-radius: .5em;
-    height: calc(100%  - 2em);
-    left: 1em;
+    height: 100%;
     margin-bottom: 1em;
     padding: 1em;
-    position: absolute;
-    top: 1em;
-    width: calc(100% - 2em); }
+    width: 100%; }
   .card .field:first-child {
     margin-top: 0; }
   .card .field:last-child {
@@ -65,6 +62,13 @@
   .card .ctas {
     display: flex;
     flex-wrap: wrap; }
+
+.ctas {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1em; }
+  .ctas > *:not(:last-child) {
+    margin-right: 1em; }
 
 .cta, input[type="submit"] {
   background: #00CCFF;
@@ -247,19 +251,31 @@ form .two_columns {
   width: 100vw;
   z-index: 3; }
 
-.profile_photo {
-  align-items: center;
-  background: #252525;
-  border-radius: 2em;
-  display: flex;
-  height: 4em;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-  width: 4em; }
-  .profile_photo img[data-shape="wide"] {
-    height: 100%;
-    width: auto; }
-  .profile_photo img[data-shape="tall"] {
-    height: auto;
-    width: 100%; }
+.profile {
+  display: flex; }
+  .profile .profile_photo {
+    align-items: center;
+    background: #252525;
+    border-radius: 4em;
+    display: flex;
+    float: left;
+    height: 8em;
+    justify-content: center;
+    margin: 0 1em 1em 0;
+    overflow: hidden;
+    position: relative;
+    width: 8em; }
+    .profile .profile_photo img[data-shape="wide"] {
+      height: 100%;
+      width: auto; }
+    .profile .profile_photo img[data-shape="tall"] {
+      height: auto;
+      width: 100%; }
+
+.hidden-flex-item {
+  content: "";
+  flex: 1 0 200px;
+  padding: 5px;
+  margin-top: 10px;
+  margin-right: 5px;
+  visibility: hidden; }
