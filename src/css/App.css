@@ -38,7 +38,9 @@
   background: #FFF;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: .5em;
-  padding: 1em 1em 0 1em; }
+  padding: 1em 1em 0 1em;
+  max-width: 1224px;
+  width: 100%; }
   * + .card {
     margin-top: 1em; }
   .card input:not([type="submit"]), .card input:not([type="checkbox"]), .card input:not([type="radio"]), .card textarea:not([type="submit"]), .card textarea:not([type="checkbox"]), .card textarea:not([type="radio"]) {

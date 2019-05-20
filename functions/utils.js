@@ -117,6 +117,44 @@ var util = {
 				event = event || window.event
 				event.stopPropagation()
 			}
+		},
+		listen: {
+			active: 0,
+			active_cb: false,
+			timer: false,
+			longPress: function (e, cb) {
+				console.log("long press begun");
+				util.events.cancel(e);
+				var trg = util.getTrg(e);
+				util.events.listen.active_cb = cb;
+				util.events.listen.timer = setInterval(function (e) {
+					if (util.events.listen.active > 10) {
+						util.events.listen.endLongPress(e);
+					} else {
+						util.events.listen.active += 1;
+					}
+				}, 100, e);
+				trg.addEventListener("touchend", util.events.listen.endLongPress);
+			},
+			endLongPress: function (e) {
+				console.log("long press end");
+				util.events.cancel(e);
+				var trg = util.getTrg(e),
+					a = false;
+				trg.removeEventListener("touchend", util.events.listen.endLongPress);
+				clearInterval(util.events.listen.timer);
+				if (util.events.listen.active >= 10) {
+					util.events.listen.active_cb(trg);
+				} else {
+					if (trg.tagName == "a") {
+						a = trg;
+					} else {
+						a = trg.getElementsByTagName("a")[0];
+					}
+					window.location.href = a.href;
+				}
+				util.events.listen.active = 0;
+			}
 		}
 	},
 	getChildrenbyClassname: function (parent, classname) {

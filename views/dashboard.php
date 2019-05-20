@@ -56,7 +56,7 @@ require_once($php_root . "components/admin/header.php");
 	?>
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>edit-about">
-			<button class="btn cta">
+			<button class="btn cta sml">
 				<?php echo file_get_contents($htp_root . "src/icons/edit.svg"); ?>
 				<span>Update</span>
 			</button>
@@ -106,13 +106,13 @@ require_once($php_root . "components/admin/header.php");
 	</ul>
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>view-all/media">
-			<button class="btn cta">
+			<button class="btn cta sml">
 				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
 				<span>View All</span>
 			</button>
 		</a>
 		<a href="<?php echo $admin_root; ?>new/media">
-			<button class="btn cta">
+			<button class="btn cta sml">
 				<?php echo file_get_contents($htp_root . "src/icons/upload.svg"); ?>
 				<span>Upload More</span>
 			</button>
@@ -174,13 +174,13 @@ require_once($php_root . "components/admin/header.php");
 	</div>
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>view-all/slides">
-			<button class="btn cta">
+			<button class="btn cta sml">
 				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
 				<span>View All</span>
 			</button>
 		</a>
 		<a href="<?php echo $admin_root; ?>new/slide">
-			<button class="btn cta">
+			<button class="btn cta sml">
 				<?php echo file_get_contents($htp_root . "src/icons/add.svg"); ?>
 				<span>New Slide</span>
 			</button>
@@ -232,13 +232,13 @@ require_once($php_root . "components/admin/header.php");
 	</div>
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>view-all/videos">
-			<button class="btn cta">
+			<button class="btn cta sml">
 				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
 				<span>View All</span>
 			</button>
 		</a>
 		<a href="<?php echo $admin_root; ?>new/video">
-			<button class="btn cta">
+			<button class="btn cta sml">
 				<?php echo file_get_contents($htp_root . "src/icons/add.svg"); ?>
 				<span>New Video</span>
 			</button>
@@ -253,13 +253,13 @@ require_once($php_root . "components/admin/header.php");
 	<div class="carousel">No Results</div>
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>view-all/photosets">
-			<button class="btn cta">
+			<button class="btn cta sml">
 				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
 				<span>View All</span>
 			</button>
 		</a>
 		<a href="<?php echo $admin_root; ?>new/photoset">
-			<button class="btn cta">
+			<button class="btn cta sml">
 				<?php echo file_get_contents($htp_root . "src/icons/add.svg"); ?>
 				<span>New Photoset</span>
 			</button>
@@ -274,13 +274,13 @@ require_once($php_root . "components/admin/header.php");
 	<div class="carousel">No Results</div>
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>view-all/store-items">
-			<button class="btn cta">
+			<button class="btn cta sml">
 				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
 				<span>View All</span>
 			</button>
 		</a>
 		<a href="<?php echo $admin_root; ?>new/store-item">
-			<button class="btn cta">
+			<button class="btn cta sml">
 				<?php echo file_get_contents($htp_root . "src/icons/add.svg"); ?>
 				<span>New Store Item</span>
 			</button>

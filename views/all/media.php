@@ -7,12 +7,12 @@ require_once($php_root . "components/admin/header.php");
 			<?php echo file_get_contents($htp_root . "src/icons/checkbox_checked.svg"); ?>
 			<span>Select All</span>
 		</button>
+	</div>
+	<div id='actions_for_selections' class='disabled'>
 		<button type='button' class='btn cta sml' onClick="selectItems.deselectAll()">
 			<?php echo file_get_contents($htp_root . "src/icons/clear.svg"); ?>
 			<span>Clear Selection</span>
 		</button>
-	</div>
-	<div id='actions_for_selections' class='disabled'>
 		<button type='button' class='btn cta sml' onCLick="selectItems.actions.edit(event)">
 			<?php echo file_get_contents($htp_root . "src/icons/edit.svg"); ?>
 			<span>Edit Selected</span>
@@ -34,7 +34,7 @@ require_once($php_root . "components/admin/header.php");
 				if ($media_items) {
 					foreach ($media_items as $media_item) {
 						echo "<li data-key='" . $media_item["id"] . "'>";
-							echo "<button class='btn cta fab sml' onClick='selectItems.toggle(event)'>";
+							echo "<button class='btn cta fab sml' onClick='selectItems.toggle'>";
 								echo file_get_contents($htp_root . "src/icons/checkbox_checked.svg");
 								echo file_get_contents($htp_root . "src/icons/checkbox_unchecked.svg");
 							echo "</button>";

@@ -54,7 +54,9 @@
     background: $white;
     border: 1px solid $shadow;
     border-radius: .5em;
-    padding: 1em 1em 0 1em;
+	padding: 1em 1em 0 1em;
+	max-width: 1224px;
+	width: 100%;
     * + & {
         margin-top: 1em;
     }

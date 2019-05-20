@@ -112,13 +112,20 @@ h2 {
 }
 
 main {
-    min-height: calc(100vh - 8em);
-    padding: 1em;
+	display: flex;
+	min-height: calc(100vh - 8em);
+	padding: 1em;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+
 }
 
 article {
+	max-width: 1224px;
 	min-height: calc(100vh - 14.5em);
-    padding: 1em 0;
+	padding: 1em 0;
+	width: 100%;
 }
 
 form {

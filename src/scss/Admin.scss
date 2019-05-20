@@ -138,6 +138,9 @@
 		margin: 0 1em 1em 0;
 		position: relative;
 		flex-grow: 1;
+		*:not(.fab) {
+			pointer-events: none;
+		}
 		a {
 			display: flex;
 			position: relative;
@@ -148,6 +151,7 @@
 				padding-bottom: 100%;
 			}
 			.media_container {
+				cursor: alias;
 				height: 100%;
 				position: absolute;
 				width: 100%;
@@ -265,9 +269,6 @@
 	&.selections_active {
 		li {
 			cursor: pointer;
-			* {
-				pointer-events: none;
-			}
 			.fab {
 				transform: scale(1)!important;
 				opacity: 1!important;
