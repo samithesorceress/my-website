@@ -2,18 +2,7 @@
 $root = $_SERVER['DOCUMENT_ROOT'] . "/sami-the-sorceress/api/";
 require_once($root . "core/init.php");
 require_once($root . "core/defaults.php");
-
-// require_once($root . "core/functions.php");
-
-require_once($root . "core/functions/security.php");
-require_once($root . "core/functions/valExists.php");
-require_once($root . "core/functions/checkRequired.php");
-
-// vars
-$output = [
-	"success" => false,
-	"message" => ""
-];
+require_once($root . "core/functions.php");
 
 
 if (empty($_REQUEST) === false) {

@@ -173,6 +173,9 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false) {
 			if ($val) {
 				$input .= "value='" . $val . "'";
 			}
+			if ($val2) {
+				$input .= "onClick='" . $val2 . "()'";
+			}
 			$input .= "/>";
 			break;
 		case "hidden":

@@ -47,8 +47,6 @@ if (empty($_REQUEST) === false) {
 if (!$isLoggedIn) {
 	jsLogs("requires login");
     require_once($php_root . "components/header.php");
-    echo "<main>";
-	echo "<h1>Login</h1>";
 	if ($login_msg) {
 		echo "<p class='error_msg'>" . $login_msg . "</p>";
 	}
@@ -57,6 +55,5 @@ if (!$isLoggedIn) {
 		echo newFormField("password", "Password", "password");
 		echo newFormField("login", "Login", "submit", "Login");
     echo "</form>";
-    echo "</main>";
 	require_once($php_root . "components/footer.php");
 }

@@ -54,3 +54,6 @@
 			</ul>
 		</nav>
 	</header>
+	<main>
+		<h1 class="title"><?php echo $document_title; ?></h1>
+		<article>

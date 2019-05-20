@@ -39,7 +39,7 @@ if (strpos($current_path, "admin") !== false) {
 				break;
 			case "edit":
 				$document_title = "Edit";
-				switch($subdirectories[1]) {
+				switch($subdirectories[2]) {
 					case "about":
 						$document_title .= " About";
 						require_once($php_root . "views/edit/about.php");
@@ -63,6 +63,14 @@ if (strpos($current_path, "admin") !== false) {
 					case "store-item":
 						$document_title .= " Store Item";
 						require_once($php_root . "views/edit/store-item.php");
+						break;
+				}
+				break;
+			case "view-all":
+				switch($subdirectories[2]) {
+					case "media":
+						$document_title = "Media Manager";
+						require_once($php_root . "views/all/media.php");
 						break;
 				}
 				break;

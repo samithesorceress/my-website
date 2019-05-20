@@ -71,6 +71,17 @@
 			margin-top: 0;
 		}
 	}
+	.card_contents {
+		background: $offwhite;
+		border-radius: .5em;
+		height: calc(100%  - 2em);
+		left: 1em;
+		margin-bottom: 1em;
+		padding: 1em;
+		position: absolute;
+		top: 1em;
+		width: calc(100% - 2em);
+	}
 	.field {
 		&:first-child {
 			margin-top: 0;
@@ -92,50 +103,91 @@
     background: $teal;
     &[type="submit"] {
         background: $pink;
-    }
+	}
+	&.danger {
+		background: $red;
+	}
     border: 0;
     color: $white;
     cursor: pointer;
 	border-radius: 2em;
 	font-size: 16px;
-    margin: 0 1em 1em 0;
     min-height: 4em;
     outline: 0;
     padding: 1em;
     text-align: center;
     transition-property: none;
-    width: auto;
-    &:hover, &:focus, &:active {
+	width: auto;
+		.icon {
+			fill: $white;
+			height: 1.5em;
+			width: auto;
+		}
+
+	&:not(:last-child) {
+		margin: 0 1em 1em 0;
+	}
+	&:hover, &:focus, &:active {
 		background: $active_teal;
 		&[type="submit"] {
 			background: $active_pink;
 		}
+		&.danger {
+			background: $active_red;
+		}
 	}
-    .icon {
-        filter: invert(1);
-        height: 1.5em;
-        margin: .25em .5em .25em 0;
-        width: auto;
+
+	&.fab {
+		max-height: 4em;
+		max-width: 4em;
+		padding: .5em;
+		position: absolute;
+		z-index: 2;
+		&.sml {
+			max-height: 2em;
+			min-height: 2em;
+			max-width: 2em;
+			padding: .25em;
+		}
+		.icon {
+			fill: $white;
+			height: 1.5em;
+			width: auto;
+		}
 	}
-	span {
-		height: 2em;
-		line-height: 2em;
+
+	&:not(.fab) {
+		&.sml{
+			min-height: 3em;
+			max-height: 3em;
+			padding: .5em 1em;
+		}
+		.icon {
+			margin: .25em .5em .25em 0;
+		}
+		span {
+			height: 2em;
+			line-height: 2em;
+		}
 	}
 }
+
+
 
 .carousel {
 	background: $offwhite;
 	border-radius: .5em;
 	display: flex;
 	margin-bottom: 1em;
-	min-height: 6em;
-	overflow-x: auto;
-	overflow-y: hidden;
+	overflow: auto;
 	padding: 1em;
+	overflow-y: hidden;
+	min-height: 6em;
 	li {
 		height: 6em;
 		list-style: none;
 		&:not(:last-child) {
+			margin-bottom: 1em;
 			margin-right: 1em;
 		}
 		a {

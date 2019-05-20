@@ -2,11 +2,20 @@
 $root = $_SERVER['DOCUMENT_ROOT'] . "/sami-the-sorceress/api/";
 require_once($root . "core/init.php");
 require_once($root . "core/defaults.php");
-require_once($root . "core/functions/security.php");
-require_once($root . "core/functions/valExists.php");
+require_once($root . "core/functions.php");
 
 if (empty($_REQUEST) === false) {
 	require_once($root . "core/functions/getValues.php");
+	$sql_params = [];
+	$required = [
+		"src",
+		"ext",
+		""
+		"type"
+	];
+
+
+
 
 	if (valExists("src", $data)) {
 		$sql_ins .= "`media` (src";

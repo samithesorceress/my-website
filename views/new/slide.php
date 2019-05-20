@@ -54,33 +54,31 @@ if (empty($_REQUEST) === false) {
 //BEGIN OUTPUT
 
 require_once($php_root . "components/admin/header.php");
+
+if (count($errors) > 0) {
+	echo "<div class='errors'>";
+	foreach($errors as $error) {
+		echo "<p>" . $error . "</p>";
+	}
+	echo "</div>";
+}
 ?>
-<main>
-	<h1 class="title"><?php echo $document_title; ?></h1>
-	<article>
-		<?php
-			if (count($errors) > 0) {
-				echo "<div class='errors'>";
-				foreach($errors as $error) {
-					echo "<p>" . $error . "</p>";
-				}
-				echo "</div>";
-			}
-		?>
-		<form enctype="multipart/form-data" action="<?php echo $htp_root . $current_path; ?>" method="POST">
-			<?php
-			echo "<div class='card'>";
-				echo newFormField("img", "Image", "media_browser", 1);
-			echo "</div>";
-			echo "<div class='card'>";
-				echo newFormField("text", "Text");
-				echo newFormField("url", "Url");
-				echo newFormField("public", "Public", "checkbox");
-			echo "</div>";
-			echo newFormField("save", "Save", "submit", "Save");
-		?>
-		</form>
-	</article>
-</main>
+
+<form enctype="multipart/form-data" action="<?php echo $htp_root . $current_path; ?>" method="POST">
+
+	<?php
+	echo "<div class='card'>";
+		echo newFormField("img", "Image", "media_browser", 1);
+	echo "</div>";
+	echo "<div class='card'>";
+		echo newFormField("text", "Text");
+		echo newFormField("url", "Url");
+		echo newFormField("public", "Public", "checkbox");
+	echo "</div>";
+	echo newFormField("save", "Save", "submit", "Save");
+	?>
+
+</form>
+
 <?php
 require_once($php_root . "components/admin/footer.php");

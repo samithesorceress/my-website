@@ -46,6 +46,16 @@
     border: 1px solid rgba(0, 0, 0, 0.1) !important; }
   .card h2:first-child, .card h3:first-child {
     margin-top: 0; }
+  .card .card_contents {
+    background: #f1f1f3;
+    border-radius: .5em;
+    height: calc(100%  - 2em);
+    left: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+    position: absolute;
+    top: 1em;
+    width: calc(100% - 2em); }
   .card .field:first-child {
     margin-top: 0; }
   .card .field:last-child {
@@ -63,7 +73,6 @@
   cursor: pointer;
   border-radius: 2em;
   font-size: 16px;
-  margin: 0 1em 1em 0;
   min-height: 4em;
   outline: 0;
   padding: 1em;
@@ -72,16 +81,42 @@
   width: auto; }
   .cta[type="submit"], input[type="submit"][type="submit"] {
     background: #ff0090; }
+  .cta.danger, input[type="submit"].danger {
+    background: #ff0047; }
+  .cta .icon, input[type="submit"] .icon {
+    fill: #FFF;
+    height: 1.5em;
+    width: auto; }
+  .cta:not(:last-child), input[type="submit"]:not(:last-child) {
+    margin: 0 1em 1em 0; }
   .cta:hover, .cta:focus, .cta:active, input[type="submit"]:hover, input[type="submit"]:focus, input[type="submit"]:active {
     background: #00E1FF; }
     .cta:hover[type="submit"], .cta:focus[type="submit"], .cta:active[type="submit"], input[type="submit"]:hover[type="submit"], input[type="submit"]:focus[type="submit"], input[type="submit"]:active[type="submit"] {
       background: #ff25a0; }
-  .cta .icon, input[type="submit"] .icon {
-    filter: invert(1);
-    height: 1.5em;
-    margin: .25em .5em .25em 0;
-    width: auto; }
-  .cta span, input[type="submit"] span {
+    .cta:hover.danger, .cta:focus.danger, .cta:active.danger, input[type="submit"]:hover.danger, input[type="submit"]:focus.danger, input[type="submit"]:active.danger {
+      background: #ff2a65; }
+  .cta.fab, input[type="submit"].fab {
+    max-height: 4em;
+    max-width: 4em;
+    padding: .5em;
+    position: absolute;
+    z-index: 2; }
+    .cta.fab.sml, input[type="submit"].fab.sml {
+      max-height: 2em;
+      min-height: 2em;
+      max-width: 2em;
+      padding: .25em; }
+    .cta.fab .icon, input[type="submit"].fab .icon {
+      fill: #FFF;
+      height: 1.5em;
+      width: auto; }
+  .cta:not(.fab).sml, input[type="submit"]:not(.fab).sml {
+    min-height: 3em;
+    max-height: 3em;
+    padding: .5em 1em; }
+  .cta:not(.fab) .icon, input[type="submit"]:not(.fab) .icon {
+    margin: .25em .5em .25em 0; }
+  .cta:not(.fab) span, input[type="submit"]:not(.fab) span {
     height: 2em;
     line-height: 2em; }
 
@@ -90,14 +125,15 @@
   border-radius: .5em;
   display: flex;
   margin-bottom: 1em;
-  min-height: 6em;
-  overflow-x: auto;
+  overflow: auto;
+  padding: 1em;
   overflow-y: hidden;
-  padding: 1em; }
+  min-height: 6em; }
   .carousel li {
     height: 6em;
     list-style: none; }
     .carousel li:not(:last-child) {
+      margin-bottom: 1em;
       margin-right: 1em; }
     .carousel li a {
       height: 100%;

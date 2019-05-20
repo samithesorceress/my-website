@@ -66,22 +66,18 @@ h2 {
 }
 
 .btn {
-    align-items: center;
-    background: none;
-    border: none;
-    display: flex;
-    height: 2em;
-    justify-content: center;
-    outline: none;
-    padding: .25em;
-    width: 2em;
-    *:not(a) {
-        pointer-events: none;
-    }
-    a {
-    }
-    .icon {
-    }
+	align-items: center;
+	background: none;
+	border: none;
+	display: flex;
+	height: 2em;
+	justify-content: center;
+	outline: none;
+	padding: .25em;
+	width: 2em;
+	* {
+		pointer-events: none;
+	}
 }
 
 #notification_bar {
@@ -118,6 +114,7 @@ main {
 }
 
 article {
+	min-height: calc(100vh - 14.5em);
     padding: 1em 0;
 }
 

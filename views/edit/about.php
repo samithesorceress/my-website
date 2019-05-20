@@ -54,60 +54,57 @@ $about_data = false;
 if (valExists("success", $about_res)) {
 	$about_data = $about_res["data"];
 }
+if (count($errors) > 0) {
+	echo "<div class='errors'>";
+	foreach($errors as $error) {
+		echo "<p>" . $error . "</p>";
+	}
+	echo "</div>";
+}
 ?>
-<main>
-    <h1 class="title">Edit About</h1>
-    <article>
-		<?php
-			if (count($errors) > 0) {
-				echo "<div class='errors'>";
-				foreach($errors as $error) {
-					echo "<p>" . $error . "</p>";
-				}
-				echo "</div>";
-			}
-		?>
-        <form enctype="multipart/form-data" action="<?php echo $htp_root . $current_path; ?>" method="POST">
-		<?php 
-			echo "<div class='card'>";
-			$profile_photo = false;
-			if (valExists("profile", $about_data)) {
-				$profile_photo = $about_data["profile"];
-			}
-			echo newFormField("profile", "Profile Photo", "media_browser", 1, $profile_photo);
-			
-			echo "</div><div class='card'>";
-			
-			$bio_text = false;
-			if (valExists("bio", $about_data)) {
-				$bio_text = $about_data["bio"];
-			}
-			echo newFormField("bio", "Bio", "textarea", $bio_text);
-			echo "</div>";
 
-			$links = false;
-			if (valExists("links", $about_data)) {
-				$links = $about_data["links"];
-			}
-			echo "<div class='fields card' id='infinite_link_fields'>";
-			echo "<h3>Links</h3><ul class='links_list'>";
-			if ($links) {
-				$links = json_decode($links, true);
-				for($i = 0; $i < count($links); $i += 1) {
-					$link = $links[$i];
-					$num = $i - 1;
-					echo "<li class='field'><div><label for='link_" . $num ."_url'>Url</label><input id='link_" . $num . "_url' name='link_" . $num . "_url' type='text' value='" . urldecode($link["url"]) . "'/></div><div><label for='link_" . $num . "_title'>Title</label><input id='link_" . $num . "_title' name='link_" . $num . "_title' type='text' value='" . $link["title"] . "'/></div><button class='btn' type='button' onClick='removeLink()'><img src='" . $htp_root . "src/icons/delete.svg'/></button></li>";
-				}
-			} else {
-				echo "<li class='field'><div><label for='link_1_url'>Url</label><input id='link_1_url' name='link_1_url' type='text'/></div><div><label for='link_1_title'>Title</label><input id='link_1_title' name='link_1_title' type='text'></div><button class='btn' type='button' onClick='removeLink()'><img src='" . $htp_root . "src/icons/delete.svg' /></button></li>";
-			}
-			echo "</ul>";
-			echo "<button class='cta btn' type='button' onClick='addNewLink()'><img class='icon' src='" . $htp_root . "src/icons/add.svg'><span>Add Link</span></button></div>";
-			echo "<script src='" . $htp_root . "functions/infiniteLinks.js'></script>";
-			echo newFormField("save", "Save", "submit", "Save");
-        ?>
-        </form>
-    </article>
-</main>
+<form enctype="multipart/form-data" action="<?php echo $htp_root . $current_path; ?>" method="POST">
+
+<?php 
+	echo "<div class='card'>";
+	$profile_photo = false;
+	if (valExists("profile", $about_data)) {
+		$profile_photo = $about_data["profile"];
+	}
+	echo newFormField("profile", "Profile Photo", "media_browser", 1, $profile_photo);
+	
+	echo "</div><div class='card'>";
+	
+	$bio_text = false;
+	if (valExists("bio", $about_data)) {
+		$bio_text = $about_data["bio"];
+	}
+	echo newFormField("bio", "Bio", "textarea", $bio_text);
+	echo "</div>";
+
+	$links = false;
+	if (valExists("links", $about_data)) {
+		$links = $about_data["links"];
+	}
+	echo "<div class='fields card' id='infinite_link_fields'>";
+	echo "<h3>Links</h3><ul class='links_list'>";
+	if ($links) {
+		$links = json_decode($links, true);
+		for($i = 0; $i < count($links); $i += 1) {
+			$link = $links[$i];
+			$num = $i - 1;
+			echo "<li class='field'><div><label for='link_" . $num ."_url'>Url</label><input id='link_" . $num . "_url' name='link_" . $num . "_url' type='text' value='" . urldecode($link["url"]) . "'/></div><div><label for='link_" . $num . "_title'>Title</label><input id='link_" . $num . "_title' name='link_" . $num . "_title' type='text' value='" . $link["title"] . "'/></div><button class='btn' type='button' onClick='removeLink()'><img src='" . $htp_root . "src/icons/delete.svg'/></button></li>";
+		}
+	} else {
+		echo "<li class='field'><div><label for='link_1_url'>Url</label><input id='link_1_url' name='link_1_url' type='text'/></div><div><label for='link_1_title'>Title</label><input id='link_1_title' name='link_1_title' type='text'></div><button class='btn' type='button' onClick='removeLink()'><img src='" . $htp_root . "src/icons/delete.svg' /></button></li>";
+	}
+	echo "</ul>";
+	echo "<button class='cta btn' type='button' onClick='addNewLink()'><img class='icon' src='" . $htp_root . "src/icons/add.svg'><span>Add Link</span></button></div>";
+	echo "<script src='" . $htp_root . "functions/infiniteLinks.js'></script>";
+	echo newFormField("save", "Save", "submit", "Save");
+?>
+
+</form>
+
 <?php
 require_once($php_root . "components/admin/footer.php");
