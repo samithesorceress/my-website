@@ -34,7 +34,7 @@ require_once($php_root . "components/admin/header.php");
 				if ($media_items) {
 					foreach ($media_items as $media_item) {
 						echo "<li data-key='" . $media_item["id"] . "'>";
-							echo "<button class='btn cta fab sml' onClick='selectItems.toggle'>";
+							echo "<button class='btn cta fab sml'>";
 								echo file_get_contents($htp_root . "src/icons/checkbox_checked.svg");
 								echo file_get_contents($htp_root . "src/icons/checkbox_unchecked.svg");
 							echo "</button>";

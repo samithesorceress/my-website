@@ -109,8 +109,26 @@ var selectItems = {
 
 			window.location.href = "http://127.0.0.1/sami-the-sorceress/admin/edit/" + url;
 		},
-		delete: function () {
-			//todo
+		delete: function (e) {
+			util.events.cancel(e);
+			var ul = document.getElementById("view_all_list"),
+				list_items = ul.children,
+				selected = [];
+
+			for (var i = 0; i < list_items.length; i += 1) {
+				list_item = list_items[i];
+				if (list_item.classList.contains("selected")) {
+					selected[] = list_item.dataset.key;
+				}
+			}
+
+			if (selected.length) {
+				// make spawn dialog function <3
+				util.spawn.dialog("confirmation", "Are you sure you want to delete these items? This action cannot be undone.", selectItems.actions.confirmDelete, selected);
+			}
+		},
+		confirmDelete: function () {
+
 		}
 	}
 }

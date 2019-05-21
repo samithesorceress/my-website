@@ -229,5 +229,25 @@ var util = {
 	},
 	replaceAt: function(str, index, char) {
 		return str.substr(0, index) + char + str.substr(index + char.length);
+	},
+	spinner: {
+		timer: false,
+		add: function (parent) {
+
+		},
+		remove: function (child, parent) {
+			if (!util.isElem(child)) { 
+				child = document.getElementById(child);
+			}
+			if (!util.isElem(parent)) {
+				parent = document.getElementById(parent);
+			}
+			child.classList.remove("visible");
+			util.spinner.timer = setTimeout(function () {
+				parent.removeChild(child);
+			}, 1E3);
+		}
 	}
 }
+
+util.spinner.remove("spinner_0", "main");

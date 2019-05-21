@@ -19,6 +19,12 @@
   #app_header .btn {
     font-size: 16px; }
 
+#app_title, #search_btn {
+  opacity: 1; }
+
+h1 {
+  opacity: 1; }
+
 #slideshow {
   background: #f1f1f3;
   height: calc(100vh - 152px);
@@ -38,8 +44,10 @@
   background: #FFF;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: .5em;
-  padding: 1em 1em 0 1em;
   max-width: 1224px;
+  opacity: 1;
+  padding: 1em 1em 0 1em;
+  transform: scale(1);
   width: 100%; }
   * + .card {
     margin-top: 1em; }
@@ -121,7 +129,9 @@
     max-height: 3em;
     padding: .5em 1em; }
   .cta:not(.fab) .icon, input[type="submit"]:not(.fab) .icon {
-    margin: .25em .5em .25em 0; }
+    height: 1.5em;
+    margin: .25em .5em .25em 0;
+    width: auto; }
   .cta:not(.fab) span, input[type="submit"]:not(.fab) span {
     height: 2em;
     line-height: 2em; }

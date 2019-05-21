@@ -29,6 +29,13 @@
     }
 }
 
+#app_title, #search_btn {
+	opacity: 1;
+}
+
+h1 {
+	opacity: 1;
+}
 
 #slideshow {
     background: $offwhite;
@@ -53,9 +60,11 @@
 .card {
     background: $white;
     border: 1px solid $shadow;
-    border-radius: .5em;
-	padding: 1em 1em 0 1em;
+	border-radius: .5em;
 	max-width: 1224px;
+	opacity: 1;
+	padding: 1em 1em 0 1em;
+	transform: scale(1);
 	width: 100%;
     * + & {
         margin-top: 1em;
@@ -176,7 +185,9 @@
 			padding: .5em 1em;
 		}
 		.icon {
+			height: 1.5em;
 			margin: .25em .5em .25em 0;
+			width: auto;
 		}
 		span {
 			height: 2em;

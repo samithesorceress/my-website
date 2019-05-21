@@ -55,7 +55,7 @@ require_once($php_root . "components/admin/header.php");
 	echo "</div>";
 	?>
 	<div class="ctas">
-		<a href="<?php echo $admin_root; ?>edit-about">
+		<a href="<?php echo $admin_root; ?>edit/about">
 			<button class="btn cta sml">
 				<?php echo file_get_contents($htp_root . "src/icons/edit.svg"); ?>
 				<span>Update</span>
@@ -70,7 +70,7 @@ require_once($php_root . "components/admin/header.php");
 	</h2>
 	<ul class="carousel">
 	<?php
-		$media_api = "listMedia?rows=5&order_by=id&order_dir=DESC";
+		$media_api = "listMedia?rows=3&order_by=id&order_dir=DESC";
 		$media_results = xhrFetch($media_api);
 		if (valExists("success", $media_results)) {
 			$media_items = $media_results["data"];
@@ -126,7 +126,7 @@ require_once($php_root . "components/admin/header.php");
 	</h2>
 	<div class="carousel">
 	<?php
-		$slides_api = "listSlides?rows=5&order_by=id&order_dir=DESC";
+		$slides_api = "listSlides?rows=3&order_by=id&order_dir=DESC";
 		$slides_results = xhrFetch($slides_api);
 		if (valExists("success", $slides_results)) {
 			$slides_items = $slides_results["data"];
@@ -194,7 +194,7 @@ require_once($php_root . "components/admin/header.php");
 	</h2>
 	<div class="carousel">
 	<?php
-		$videos_api = "listVideos?rows=5&order_by=id&order_dir=DESC";
+		$videos_api = "listVideos?rows=3&order_by=id&order_dir=DESC";
 		$videos_res = xhrFetch($videos_api);
 		if (valExists("success", $videos_res)) {
 			$videos = $videos_res["data"];
