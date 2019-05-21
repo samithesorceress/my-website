@@ -111,7 +111,7 @@ article {
 
 .card {
   opacity: 0;
-  transform: scale(0.75);
+  transform: scale(0.9);
   transition-property: opacity, transform;
   transition-duration: .4s;
   will-change: transform; }
@@ -183,3 +183,8 @@ form > * {
     stroke: #ff0090; }
   98% {
     stroke: #ff0090; } }
+
+#view_all_list li {
+  opacity: 0;
+  transform: scale(0.5);
+  transition-property: opacity, transform; }

@@ -62,131 +62,7 @@ require_once($php_root . "components/admin/header.php");
 			</button>
 		</a>
 	</div>
-</section>
-<section class="card">
-	<h2 class="title">
-		<?php echo file_get_contents($htp_root . "src/icons/swarm.svg"); ?>
-		<span>Media Manager</span>
-	</h2>
-	<ul class="carousel">
-	<?php
-		$media_api = "listMedia?rows=3&order_by=id&order_dir=DESC";
-		$media_results = xhrFetch($media_api);
-		if (valExists("success", $media_results)) {
-			$media_items = $media_results["data"];
-			if ($media_items) {
-				foreach ($media_items as $media_item) {
-					echo "<li><a href='" . $admin_root . "edit/media/" . $media_item["id"] . "'>";
-						echo "<div class='media_container'>";
-							switch ($media_item["type"]) {
-								case "image": {
-									echo "<img src='" . $htp_root . "uploads/" . $media_item["src"] . "." . $media_item["ext"] . "'";
-									break;
-								}
-								case "video": {
-									echo "<video src='" . $htp_root . "uploads/" . $media_item["src"] . "." . $media_item["ext"] . "'";
-									break;
-								}
-							}
-							echo " data-shape='";
-							if ($media_item["ratio"] > 1) {
-								echo "wide";
-							} else {
-								echo "tall";
-							}
-							echo "'/>";
-						echo "</div>";
-					echo "</a></li>";
-				}
-			}
-		} else {
-			echo "No Results";
-		}
-	?>
-	</ul>
-	<div class="ctas">
-		<a href="<?php echo $admin_root; ?>view-all/media">
-			<button class="btn cta sml">
-				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
-				<span>View All</span>
-			</button>
-		</a>
-		<a href="<?php echo $admin_root; ?>new/media">
-			<button class="btn cta sml">
-				<?php echo file_get_contents($htp_root . "src/icons/upload.svg"); ?>
-				<span>Upload More</span>
-			</button>
-		</a>
-	</div>
-</section>
-<section class="card">
-	<h2 class="title">
-		<img class="icon" src="<?php echo $htp_root; ?>src/icons/photos.svg">
-		<span>Slideshow</span>
-	</h2>
-	<div class="carousel">
-	<?php
-		$slides_api = "listSlides?rows=3&order_by=id&order_dir=DESC";
-		$slides_results = xhrFetch($slides_api);
-		if (valExists("success", $slides_results)) {
-			$slides_items = $slides_results["data"];
-			if ($slides_items) {
-				foreach ($slides_items as $slide_item) {
-					echo "<li><a href='" . $admin_root . "edit/slide/" . $slide_item["id"] . "'>";
-						echo "<div class='media_container wide_container'><p>" . $slide_item["text"] .  "</p>";
-							if ($slide_item["img"]) {
-								$slide_img = false;
-								$slide_img_api = "listMedia?id=" . $slide_item["img"];
-								$slide_img_res = xhrFetch($slide_img_api);
-								if (valExists("success", $slide_img_res)) {
-									$slide_img = $slide_img_res["data"];
-								}
-								if ($slide_img) {
-									switch ($slide_img["type"]) {
-										case "image": {
-											echo "<img src='" . $htp_root . "uploads/" . $slide_img["src"] . "." . $slide_img["ext"] . "'";
-											break;
-										}
-										case "video": {
-											echo "<video src='" . $htp_root . "uploads/" . $slide_img["src"] . "." . $slide_img["ext"] . "'";
-											break;
-										}
-									}
-									echo " data-shape='";
-									if ($slide_img["ratio"] > 2.16) {
-										echo "wide";
-									} else {
-										echo "tall";
-									}
-									echo "'/>";
-								}
-							}
-						echo"</div>";
-					echo "</a></li>";
-				}
-			} else {
-				echo "<p>No Results</p>";
-			}
-		} else {
-			echo "<p>No Results</p>";
-		}
-	?>
-	</div>
-	<div class="ctas">
-		<a href="<?php echo $admin_root; ?>view-all/slides">
-			<button class="btn cta sml">
-				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
-				<span>View All</span>
-			</button>
-		</a>
-		<a href="<?php echo $admin_root; ?>new/slide">
-			<button class="btn cta sml">
-				<?php echo file_get_contents($htp_root . "src/icons/add.svg"); ?>
-				<span>New Slide</span>
-			</button>
-		</a>
-	</div>
-</section>
+	</section>
 <section class="card">
 	<h2 class="title">
 		<img class="icon" src="<?php echo $htp_root; ?>src/icons/movie.svg">
@@ -287,6 +163,129 @@ require_once($php_root . "components/admin/header.php");
 		</a>
 	</div>
 </section>
-
+<section class="card">
+	<h2 class="title">
+		<img class="icon" src="<?php echo $htp_root; ?>src/icons/photos.svg">
+		<span>Slideshow</span>
+	</h2>
+	<div class="carousel">
+	<?php
+		$slides_api = "listSlides?rows=3&order_by=id&order_dir=DESC";
+		$slides_results = xhrFetch($slides_api);
+		if (valExists("success", $slides_results)) {
+			$slides_items = $slides_results["data"];
+			if ($slides_items) {
+				foreach ($slides_items as $slide_item) {
+					echo "<li><a href='" . $admin_root . "edit/slide/" . $slide_item["id"] . "'>";
+						echo "<div class='media_container wide_container'><p>" . $slide_item["text"] .  "</p>";
+							if ($slide_item["img"]) {
+								$slide_img = false;
+								$slide_img_api = "listMedia?id=" . $slide_item["img"];
+								$slide_img_res = xhrFetch($slide_img_api);
+								if (valExists("success", $slide_img_res)) {
+									$slide_img = $slide_img_res["data"];
+								}
+								if ($slide_img) {
+									switch ($slide_img["type"]) {
+										case "image": {
+											echo "<img src='" . $htp_root . "uploads/" . $slide_img["src"] . "." . $slide_img["ext"] . "'";
+											break;
+										}
+										case "video": {
+											echo "<video src='" . $htp_root . "uploads/" . $slide_img["src"] . "." . $slide_img["ext"] . "'";
+											break;
+										}
+									}
+									echo " data-shape='";
+									if ($slide_img["ratio"] > 2.16) {
+										echo "wide";
+									} else {
+										echo "tall";
+									}
+									echo "'/>";
+								}
+							}
+						echo"</div>";
+					echo "</a></li>";
+				}
+			} else {
+				echo "<p>No Results</p>";
+			}
+		} else {
+			echo "<p>No Results</p>";
+		}
+	?>
+	</div>
+	<div class="ctas">
+		<a href="<?php echo $admin_root; ?>view-all/slides">
+			<button class="btn cta sml">
+				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
+				<span>View All</span>
+			</button>
+		</a>
+		<a href="<?php echo $admin_root; ?>new/slide">
+			<button class="btn cta sml">
+				<?php echo file_get_contents($htp_root . "src/icons/add.svg"); ?>
+				<span>New Slide</span>
+			</button>
+		</a>
+	</div>
+</section>
+<section class="card">
+	<h2 class="title">
+		<?php echo file_get_contents($htp_root . "src/icons/swarm.svg"); ?>
+		<span>Media Manager</span>
+	</h2>
+	<ul class="carousel">
+	<?php
+		$media_api = "listMedia?rows=3&order_by=id&order_dir=DESC";
+		$media_results = xhrFetch($media_api);
+		if (valExists("success", $media_results)) {
+			$media_items = $media_results["data"];
+			if ($media_items) {
+				foreach ($media_items as $media_item) {
+					echo "<li><a href='" . $admin_root . "edit/media/" . $media_item["id"] . "'>";
+						echo "<div class='media_container'>";
+							switch ($media_item["type"]) {
+								case "image": {
+									echo "<img src='" . $htp_root . "uploads/" . $media_item["src"] . "." . $media_item["ext"] . "'";
+									break;
+								}
+								case "video": {
+									echo "<video src='" . $htp_root . "uploads/" . $media_item["src"] . "." . $media_item["ext"] . "'";
+									break;
+								}
+							}
+							echo " data-shape='";
+							if ($media_item["ratio"] > 1) {
+								echo "wide";
+							} else {
+								echo "tall";
+							}
+							echo "'/>";
+						echo "</div>";
+					echo "</a></li>";
+				}
+			}
+		} else {
+			echo "No Results";
+		}
+	?>
+	</ul>
+	<div class="ctas">
+		<a href="<?php echo $admin_root; ?>view-all/media">
+			<button class="btn cta sml">
+				<?php echo file_get_contents($htp_root . "src/icons/eye.svg"); ?>
+				<span>View All</span>
+			</button>
+		</a>
+		<a href="<?php echo $admin_root; ?>new/media">
+			<button class="btn cta sml">
+				<?php echo file_get_contents($htp_root . "src/icons/upload.svg"); ?>
+				<span>Upload More</span>
+			</button>
+		</a>
+	</div>
+</section>
 <?php
 require_once($php_root . "components/admin/footer.php");

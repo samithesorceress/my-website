@@ -33,7 +33,7 @@ require_once($php_root . "components/admin/header.php");
 				$media_items = $media_results["data"];
 				if ($media_items) {
 					foreach ($media_items as $media_item) {
-						echo "<li id='list_item_" . $media_item["id"] . "' data-key='" . $media_item["id"] . "' class='visible' oncontextmenu='selectItems.toggle(event)'>";
+						echo "<li id='list_item_" . $media_item["id"] . "' data-key='" . $media_item["id"] . "' oncontextmenu='selectItems.toggle(event)'>";
 							echo "<button class='btn cta fab sml' onClick='selectItems.toggle(event)'>";
 								echo file_get_contents($htp_root . "src/icons/checkbox_checked.svg");
 								echo file_get_contents($htp_root . "src/icons/checkbox_unchecked.svg");
@@ -61,7 +61,9 @@ require_once($php_root . "components/admin/header.php");
 							echo "</a>";
 						echo"</li>";
 					}
-					echo "<li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li><li class='hidden-flex-item'></li>";
+					for ($i = 0; $i < 12; $i += 1) {
+						echo "<li class='hidden-flex-item'></li>";
+					}
 				}
 			} else {
 				echo "No Results";
@@ -73,4 +75,5 @@ require_once($php_root . "components/admin/header.php");
 </section>
 
 <?php
+echo "<script src='" . $htp_root . "functions/mediaManager.js'></script>";
 require_once($php_root . "components/admin/footer.php");

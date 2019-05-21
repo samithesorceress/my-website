@@ -75,8 +75,10 @@ h1 {
 
 .ctas {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1em; }
+  margin-bottom: 1em;
+  justify-content: flex-end; }
+  .ctas.align_left {
+    justify-content: flex-start; }
   .ctas > *:not(:last-child) {
     margin-right: 1em; }
 
@@ -142,7 +144,7 @@ h1 {
   display: flex;
   margin-bottom: 1em;
   overflow: auto;
-  padding: 1em;
+  padding: 1em 1em 0 1em;
   overflow-y: hidden;
   min-height: 6em; }
   .carousel li {
@@ -209,6 +211,11 @@ form .two_columns {
   width: 100%; }
   * + .field {
     margin-top: 1em; }
+  .field.media_browser_field {
+    display: inline-block;
+    width: auto; }
+    .field.media_browser_field .media_container {
+      margin-right: 0; }
   .field.checkbox_field {
     display: flex; }
     .field.checkbox_field label {

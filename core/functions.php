@@ -141,9 +141,15 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false) {
 					$media_data = $media_res["data"];
 				}
 			}
-			$input = "'><label for='" . $id . "'>" . $name . "</label><div class='media_container'>";
+			$input = " media_browser_field'><label for='" . $id . "'>" . $name . "</label><div class='media_container'>";
 			if ($media_data) {
-				$input .= "<img src='http://127.0.0.1/sami-the-sorceress/uploads/" . $media_data["src"] . "." . $media_data["ext"] . "' alt='" . $media_data["alt"] . "' title='" . $media_data["title"] . "'/>";
+				$input .= "<img src='http://127.0.0.1/sami-the-sorceress/uploads/" . $media_data["src"] . "." . $media_data["ext"] . "' alt='" . $media_data["alt"] . "' title='" . $media_data["title"] . "' data-shape='";
+				if ($media_data["ratio"] > 1) {
+					$input .= "wide";
+				} else {
+					$input .= "tall";
+				}
+				$input .= "'/>";
 			} else {
 				$input .= "<p>No Media Selected</p>";
 			}
@@ -151,7 +157,7 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false) {
 			if ($val) {
 				$input .= " value='" . $val . "'";
 			}
-			$input .= "/><button id='" . $id . "_browser' type='button' class='btn cta media_browser_btn";
+			$input .= "/><button id='" . $id . "_browser' type='button' class='btn cta sml media_browser_btn";
 				if ($num !== 1) {
 					$input .= " multi";
 				}

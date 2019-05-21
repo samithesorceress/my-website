@@ -112,8 +112,11 @@ h1 {
 
 .ctas {
 	display: flex;
-	justify-content: flex-end;
 	margin-bottom: 1em;
+	justify-content: flex-end;
+	&.align_left {
+		justify-content: flex-start;
+	}
 	> * {
 		&:not(:last-child) {
 			margin-right: 1em;
@@ -204,7 +207,7 @@ h1 {
 	display: flex;
 	margin-bottom: 1em;
 	overflow: auto;
-	padding: 1em;
+	padding: 1em 1em 0 1em;
 	overflow-y: hidden;
 	min-height: 6em;
 	li {
@@ -290,6 +293,13 @@ form {
 	* + & {
 		margin-top: 1em;
 	}
+	&.media_browser_field {
+		display: inline-block;
+		width: auto;
+		.media_container {
+			margin-right: 0;
+		}
+	}
 	&.checkbox_field {
 		display: flex;
 		label {
@@ -344,8 +354,10 @@ form {
 		padding: 1em;
 	}
 
+	.cta.sml {
+	//	width: auto;
 	}
-
+}
 #footer {
 	background: $slate;
 	color: $white;
@@ -444,3 +456,10 @@ form {
 	transform: scale(1)!important;
 	opacity: 1!important;
 }
+
+
+
+
+
+
+

@@ -93,13 +93,13 @@ if (count($errors) > 0) {
 		for($i = 0; $i < count($links); $i += 1) {
 			$link = $links[$i];
 			$num = $i - 1;
-			echo "<li class='field'><div><label for='link_" . $num ."_url'>Url</label><input id='link_" . $num . "_url' name='link_" . $num . "_url' type='text' value='" . urldecode($link["url"]) . "'/></div><div><label for='link_" . $num . "_title'>Title</label><input id='link_" . $num . "_title' name='link_" . $num . "_title' type='text' value='" . $link["title"] . "'/></div><button class='btn' type='button' onClick='removeLink()'><img src='" . $htp_root . "src/icons/delete.svg'/></button></li>";
+			echo "<li class='field'><div><label for='link_" . $num ."_url'>Url</label><input id='link_" . $num . "_url' name='link_" . $num . "_url' type='text' value='" . urldecode($link["url"]) . "'/></div><div><label for='link_" . $num . "_title'>Title</label><input id='link_" . $num . "_title' name='link_" . $num . "_title' type='text' value='" . $link["title"] . "'/></div><button class='btn' type='button' onClick='removeLink()'>" . file_get_contents($htp_root . "src/icons/delete.svg") . "</button></li>";
 		}
 	} else {
-		echo "<li class='field'><div><label for='link_1_url'>Url</label><input id='link_1_url' name='link_1_url' type='text'/></div><div><label for='link_1_title'>Title</label><input id='link_1_title' name='link_1_title' type='text'></div><button class='btn' type='button' onClick='removeLink()'><img src='" . $htp_root . "src/icons/delete.svg' /></button></li>";
+		echo "<li class='field'><div><label for='link_1_url'>Url</label><input id='link_1_url' name='link_1_url' type='text'/></div><div><label for='link_1_title'>Title</label><input id='link_1_title' name='link_1_title' type='text'></div><button class='btn' type='button' onClick='removeLink()'>" . file_get_contents($htp_root . "src/icons/delete.svg") . "</button></li>";
 	}
 	echo "</ul>";
-	echo "<button class='cta btn' type='button' onClick='addNewLink()'><img class='icon' src='" . $htp_root . "src/icons/add.svg'><span>Add Link</span></button></div>";
+	echo "<div class='ctas align_left'><button class='cta btn' type='button' onClick='addNewLink()'>" . file_get_contents($htp_root . "src/icons/add.svg") . "<span>Add Link</span></button></div></div>";
 	echo "<script src='" . $htp_root . "functions/infiniteLinks.js'></script>";
 	echo newFormField("save", "Save", "submit", "Save");
 ?>

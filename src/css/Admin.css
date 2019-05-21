@@ -56,20 +56,20 @@
   justify-content: space-between;
   height: 8em;
   margin-bottom: 0 !important;
+  position: relative;
   width: 100%; }
   .fields .field div {
-    width: calc(50% - 5em); }
-    .fields .field div:first-child, .fields .field div:last-child {
-      width: calc(50% - .5em); }
-    .fields .field div label {
-      font-weight: normal; }
+    flex-basis: calc(50% - 3em); }
+  .fields .field label {
+    font-weight: normal; }
   .fields .field button {
     cursor: pointer;
     flex-grow: 0;
     height: 4em;
     margin: 2em 0;
     padding: 1em;
-    width: 4em; }
+    width: 4em !important;
+    flex-grow: 0; }
 
 .fields ul:last-child {
   margin-bottom: 1em; }
@@ -79,8 +79,12 @@
   margin-bottom: 1em;
   width: auto; }
   .field .media_container img {
-    height: 8em !important;
-    width: 8em !important; }
+    height: auto;
+    width: auto; }
+    .field .media_container img[data-shape="wide"] {
+      max-width: 32em; }
+    .field .media_container img[data-shape="tall"] {
+      max-height: 16em; }
 
 #view-all_actions_bar {
   display: flex;
@@ -102,16 +106,11 @@
   flex-wrap: wrap; }
   #view_all_list li {
     margin: 0 1em 1em 0;
-    opacity: 0;
     position: relative;
-    flex-grow: 1;
-    transform: scale(0.5);
-    transition-property: opacity, transform; }
+    flex-grow: 1; }
     #view_all_list li.hidden-flex-item {
       margin: 0;
       padding: 0; }
-    #view_all_list li *:not(.fab) {
-      pointer-events: none; }
     #view_all_list li a {
       display: flex;
       position: relative;
@@ -201,6 +200,8 @@
     #view_all_list.selections_active li .fab {
       transform: scale(1) !important;
       opacity: 1 !important; }
+    #view_all_list.selections_active li *:not(.fab) {
+      pointer-events: none; }
     #view_all_list.selections_active li:active .fab, #view_all_list.selections_active li:focus .fab, #view_all_list.selections_active li:hover .fab {
       background: #00E1FF !important; }
     #view_all_list.selections_active li:active .media_container, #view_all_list.selections_active li:focus .media_container, #view_all_list.selections_active li:hover .media_container {

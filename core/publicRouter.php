@@ -3,7 +3,7 @@ jsLogs("routing...");
 $subdirectories = explode("/", $current_path);
 switch($subdirectories[0]) {
 	case "":
-		$document_title = "Sami the Sorceress : Homepage";
+		$document_title = "Sami the Sorceress · Homepage";
 		require_once($php_root . "views/homepage.php");
 		break;
 	case "login":

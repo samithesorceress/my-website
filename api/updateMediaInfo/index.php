@@ -11,8 +11,12 @@ if (empty($_REQUEST) === false) {
 	$sql_sel .= "`media`";
 	
 
-	if (valExists("src", $data)) {
-		$sql_sel .= " WHERE `src`='" . $data["src"] . "'";
+	if (valExists("id", $data) || valExists("src", $data)) {
+		if (valExists("id", $data)) {
+			$sql_sel .= " WHERE `id`='" . $data["id"] . "'";
+		} else {
+			$sql_sel .= " WHERE `src`='" . $data["src"] . "'";
+		}
 		$rows = array();
 		$result = $conn->query($sql_sel);
 		if ($result->num_rows > 0) {

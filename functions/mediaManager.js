@@ -70,9 +70,71 @@ var mediaManager = {
 	},
 	saveEdits: function (inputs) {
 		console.log("saving edits!");
-		items = {};
-		for (var i = 0; i < inputs.length; i += 1) {
+		console.log(inputs);
+		var items = {},
+			api_endpoint = "updateMediaInfo",
+			api_params = "";
+		for (var key in inputs) {
+			var value = inputs[key],
+				id = false;
+			switch(true) {
+				case(key.includes("file")):
+					id = key.replace("media_file_", "");
+					if (!items[id]) {
+						items[id] = [];
+					}
+					items[id]["src"] = value;
+					break;
+				case(key.includes("title")):
+					id = key.replace("media_title_", "");
+					if (!items[id]) {
+						items[id] = [];
+					}
+					items[id]["title"] = value;
+					break;
+				case(key.includes("alt")):
+					id = key.replace("media_alt_", "");
+					if (!items[id]) {
+						items[id] = [];
+					}
+					items[id]["alt"] = value;
+					break;
+				case(key.includes("public")):
+					id = key.replace("media_public_", "");
+					if (!items[id]) {
+						items[id] = [];
+					}
+					items[id]["public"] = value;
+					break;
+			}
+		}
+		for (var id in items) {
+			var item = items[id];
+			api_params = "?id=" + id + "&";
+			for(var key in item) {
+				api_params += key + "=" + item[key] + "&";
+			}
+			api_params = api_params.replace(/&+$/,'');
+			util.api.request("GET", "http://127.0.0.1/sami-the-sorceress/api/" + api_endpoint + api_params, mediaManager.validateSave);
+		}
+		console.dir(items);
+	},
+	validateSave: function (res) {
+		if (res.success) {
+			window.location.href = "http://127.0.0.1/sami-the-sorceress/admin/view-all/media";
+		}
+	}
+}
 
+document.body.onload = function () {
+	var list = document.getElementById("view_all_list"),
+		list_items;
+	if (list) {
+		list_items = list.children;
+
+		for (var i = 0; i < list_items.length; i += 1) {
+			var list_item = list_items[i];
+			list_item.classList.add("visible");
 		}
 	}
 }

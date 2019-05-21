@@ -69,16 +69,15 @@
 		justify-content: space-between;
 		height: 8em;
 		margin-bottom: 0!important;
+		position: relative;
 		width: 100%;
 		div {
-			width: calc(50% - 5em);
-			&:first-child,
-			&:last-child {
-				width: calc(50% - .5em);
-			}
-			label {
+			flex-basis: calc(50% - 3em);
+			//	width: calc(50% - .5em);
+
+		}
+		label {
 				font-weight: normal;
-			}
 		}
 		button {
 			cursor: pointer;
@@ -86,7 +85,8 @@
 			height: 4em;
 			margin: 2em 0;
 			padding: 1em;
-			width: 4em;
+			width: 4em!important;
+			flex-grow: 0;
 		}
 	}
 	ul:last-child {
@@ -100,8 +100,14 @@
 		margin-bottom: 1em;
 		width: auto;
 		img {
-			height: 8em!important;
-			width: 8em!important;
+			height: auto;
+			width: auto;
+			&[data-shape="wide"] {	
+				max-width: 32em;
+			}
+			&[data-shape="tall"] {	
+				max-height: 16em;
+			}
 		}
 	}
 }
@@ -129,17 +135,11 @@
 	flex-wrap: wrap;
 	li {
 		margin: 0 1em 1em 0;
-		opacity: 0;
 		position: relative;
 		flex-grow: 1;
-		transform: scale(.5);
-		transition-property: opacity, transform;
 		&.hidden-flex-item {
 			margin: 0;
 			padding: 0;
-		}
-		*:not(.fab) {
-			pointer-events: none;
 		}
 		a {
 			display: flex;
@@ -272,6 +272,9 @@
 			.fab {
 				transform: scale(1)!important;
 				opacity: 1!important;
+			}
+			*:not(.fab) {
+				pointer-events: none;
 			}
 			&:active, &:focus, &:hover {
 				.fab {

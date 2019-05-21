@@ -56,7 +56,7 @@
 		</nav>
 	</header>
 	<main id="main">
-		<div id="spinner_0" class="spinner" style="height: 54px;  opacity: 1;">
+		<div id="spinner_0" class="spinner visible">
 			<svg viewBox="0 0 50 50">
 				<circle class="progress" cx="25" cy="25" r="20"/>
 			</svg>
