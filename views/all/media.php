@@ -2,7 +2,7 @@
 require_once($php_root . "components/admin/header.php");
 ?>
 <header id="view-all_actions_bar" class='card'>
-	<div>
+	<div id="default_actions">
 		<button type='button' class='btn cta sml' onClick="selectItems.selectAll()">
 			<?php echo file_get_contents($htp_root . "src/icons/checkbox_checked.svg"); ?>
 			<span>Select All</span>
@@ -13,11 +13,11 @@ require_once($php_root . "components/admin/header.php");
 			<?php echo file_get_contents($htp_root . "src/icons/clear.svg"); ?>
 			<span>Clear Selection</span>
 		</button>
-		<button type='button' class='btn cta sml' onCLick="selectItems.actions.edit(event)">
+		<button type='button' class='btn cta sml' onClick="selectItems.actions.edit(event)">
 			<?php echo file_get_contents($htp_root . "src/icons/edit.svg"); ?>
 			<span>Edit Selected</span>
 		</button>
-		<button type='button' class='btn cta sml danger'>
+		<button type='button' class='btn cta sml danger' onClick="selectItems.actions.delete(event)">
 			<?php echo file_get_contents($htp_root . "src/icons/delete.svg"); ?>
 			<span>Delete Selected</span>
 		</button>
@@ -33,8 +33,8 @@ require_once($php_root . "components/admin/header.php");
 				$media_items = $media_results["data"];
 				if ($media_items) {
 					foreach ($media_items as $media_item) {
-						echo "<li data-key='" . $media_item["id"] . "'>";
-							echo "<button class='btn cta fab sml'>";
+						echo "<li id='list_item_" . $media_item["id"] . "' data-key='" . $media_item["id"] . "' class='visible' oncontextmenu='selectItems.toggle(event)'>";
+							echo "<button class='btn cta fab sml' onClick='selectItems.toggle(event)'>";
 								echo file_get_contents($htp_root . "src/icons/checkbox_checked.svg");
 								echo file_get_contents($htp_root . "src/icons/checkbox_unchecked.svg");
 							echo "</button>";

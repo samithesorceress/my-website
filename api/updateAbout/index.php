@@ -9,7 +9,7 @@ if (empty($_REQUEST) === false) {
 	require_once($root . "core/functions/getValues.php");
 
 	$sql_upd .= "`about` SET ";
-	$sql_whr = " WHERE `id`='1'";
+	$sql_whr .= " `id`='1'";
 
 	if (valExists("profile", $data)) {
 		$sql_upd .= "`profile`='" . $data["profile"] . "',";

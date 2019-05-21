@@ -113,21 +113,14 @@
 	div {
 		height: 4em;
 		display: flex;
-	}
-}
-
-#actions_for_selections {
-	&.disabled {
-		pointer-events: none;
-		.btn{
-			background: $offwhite!important;
+		&.disabled {
+			pointer-events: none;
+			.btn{
+				background: $offwhite!important;
+			}
 		}
 	}
-	.btn {
-		width: auto;
-	}
 }
-
 #view_all {
 	position: relative;
 }
@@ -136,8 +129,15 @@
 	flex-wrap: wrap;
 	li {
 		margin: 0 1em 1em 0;
+		opacity: 0;
 		position: relative;
 		flex-grow: 1;
+		transform: scale(.5);
+		transition-property: opacity, transform;
+		&.hidden-flex-item {
+			margin: 0;
+			padding: 0;
+		}
 		*:not(.fab) {
 			pointer-events: none;
 		}

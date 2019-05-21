@@ -28,7 +28,7 @@ if (empty($_REQUEST) === false) {
 		//
 		if (valExists("title", $data) || valExists("alt", $data)) {
 			$sql_upd .= "`media` SET `title`='" . $data["title"] . "', `alt`='" . $data["alt"] . "'";
-			$sql_whr = " WHERE `src`='" . $data["src"] ."'";
+			$sql_whr .= "`src`='" . $data["src"] ."'";
 			$sql = $sql_upd . $sql_whr;
 			if ($conn->query($sql)) {
 				$output["success"] = true;

@@ -104,7 +104,7 @@ main {
   align-items: center; }
 
 article {
-  max-width: 1224px;
+  max-width: 1440px;
   min-height: calc(100vh - 14.5em);
   padding: 1em 0;
   width: 100%; }
