@@ -174,7 +174,7 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false) {
 				$input .= "value='" . $val . "'";
 			}
 			if ($val2) {
-				$input .= "onClick='" . $val2 . "()'";
+				$input .= "data-cb='" . $val2 . "'";
 			}
 			$input .= "/>";
 			break;

@@ -69,6 +69,8 @@ if (count($errors) > 0) {
 	}
 	echo "</div>";
 }
+
+
 ?>
 
 <form enctype="multipart/form-data" action="<?php echo $htp_root . $current_path; ?>" method="POST">
