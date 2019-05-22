@@ -1,16 +1,21 @@
 var forms = {
 	callbacks: { //string conversions
-		"mediaManager.saveEdits": mediaManager.saveEdits
 	},
 	clickSave: function (e) {
 		// first stop submission/bubbles
 		util.events.cancel(e);
 		
+		forms.updateCbList();
+
 		// then collect all the elements
 		var trg = util.getTrg(e),
 			inputs = forms.getElements(),
 			cb = forms.callbacks[trg.dataset.cb];
-			cb(inputs);
+			if (cb) {
+				cb(inputs);
+			} else {
+				alert("no callback for this form");
+			}
 	},
 	getElements: function () {
 		console.log("getting form elements");
@@ -38,6 +43,11 @@ var forms = {
 			}
 		}
 		return inputs;
+	},
+	updateCbList: function () {
+		if (typeof(mediaManager) !== "undefined") {
+			forms.callbacks["mediaManager.saveEdits"] = mediaManager.saveEdits;
+		}
 	}
 },
 inputs = document.getElementsByTagName("input");

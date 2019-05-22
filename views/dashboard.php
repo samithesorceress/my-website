@@ -4,7 +4,7 @@ require_once($php_root . "components/admin/header.php");
 
 <section class="card">
 	<h2 class="title">
-		<img class="icon" src="<?php echo $htp_root; ?>src/icons/text.svg">
+		<?php echo file_get_contents($htp_root . "src/icons/text.svg"); ?>
 		<span>About</span>
 	</h2>
 	<?php
@@ -37,7 +37,7 @@ require_once($php_root . "components/admin/header.php");
 					} else {
 						echo "tall";
 					}
-					echo"'/>";
+					echo"' loading='lazy' />";
 				}
 			}
 		echo"</div><div class='profile_info'>";
@@ -65,7 +65,7 @@ require_once($php_root . "components/admin/header.php");
 	</section>
 <section class="card">
 	<h2 class="title">
-		<img class="icon" src="<?php echo $htp_root; ?>src/icons/movie.svg">
+		<?php echo file_get_contents($htp_root . "src/icons/movie.svg"); ?>
 		<span>Videos</span>
 	</h2>
 	<div class="carousel">
@@ -92,7 +92,7 @@ require_once($php_root . "components/admin/header.php");
 									} else {
 										echo "tall";
 									}
-									echo "'/>";
+									echo "'loading='lazy' />";
 								}
 							}
 						echo"</div>";
@@ -123,7 +123,7 @@ require_once($php_root . "components/admin/header.php");
 </section>
 <section class="card">
 	<h2 class="title">
-		<img class="icon" src="<?php echo $htp_root; ?>src/icons/photo.svg">
+		<?php echo file_get_contents($htp_root . "src/icons/photo.svg"); ?>
 		<span>Photosets</span>
 	</h2>
 	<div class="carousel">No Results</div>
@@ -144,7 +144,7 @@ require_once($php_root . "components/admin/header.php");
 </section>
 <section class="card">
 	<h2 class="title">
-		<img class="icon" src="<?php echo $htp_root; ?>src/icons/cart.svg">
+		<?php echo file_get_contents($htp_root . "src/icons/cart.svg"); ?>
 		<span>Store</span>
 	</h2>
 	<div class="carousel">No Results</div>
@@ -165,7 +165,7 @@ require_once($php_root . "components/admin/header.php");
 </section>
 <section class="card">
 	<h2 class="title">
-		<img class="icon" src="<?php echo $htp_root; ?>src/icons/photos.svg">
+		<?php echo file_get_contents($htp_root . "src/icons/photos.svg"); ?>
 		<span>Slideshow</span>
 	</h2>
 	<div class="carousel">
@@ -202,7 +202,7 @@ require_once($php_root . "components/admin/header.php");
 									} else {
 										echo "tall";
 									}
-									echo "'/>";
+									echo "' loading='lazy' />";
 								}
 							}
 						echo"</div>";
@@ -262,7 +262,7 @@ require_once($php_root . "components/admin/header.php");
 							} else {
 								echo "tall";
 							}
-							echo "'/>";
+							echo "' loading='lazy' />";
 						echo "</div>";
 					echo "</a></li>";
 				}

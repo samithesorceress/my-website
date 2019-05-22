@@ -295,9 +295,18 @@ form {
 	}
 	&.media_browser_field {
 		display: inline-block;
+		min-width: 12em;
 		width: auto;
+		& + & {
+			margin-right: 100%;
+		}
 		.media_container {
+			background: $offwhite;
+			border-radius: .5em;
 			margin-right: 0;
+			p {
+				margin: 1em;
+			}
 		}
 	}
 	&.checkbox_field {
@@ -423,6 +432,7 @@ form {
 
 .dialog {
 	background: $white;
+	border: 1px solid $shadow;
 	border-radius: 1em;
 	left: 1em;
 	max-width: 600px;
@@ -440,7 +450,7 @@ form {
 		left: calc(50% - 300px);
 	}
 }
-.popup_shadow {
+.shadow {
 	background: rgba(0,0,50,.2);
 	height: 100vh;
 	left: 0;
@@ -463,3 +473,5 @@ form {
 
 
 
+::-moz-selection { background: $pink; color: $white}
+::selection { background: $pink; color: $white}

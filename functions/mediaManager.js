@@ -1,39 +1,40 @@
 var mediaManager = {
-	edit: function (e) {
-		util.events.cancel(e);
-		var ul = document.getElementById("view_all_list"),
-			list_items = ul.children,
-			url = "";
-		
-		url += ul.dataset.type + "/";
-		for (var i = 0; i < list_items.length; i += 1) {
-			list_item = list_items[i];
-			if (list_item.classList.contains("selected")) {
-				url += list_item.dataset.key + "%2C";
+	actions: {
+		edit: function (e) {
+			util.events.cancel(e);
+			var ul = document.getElementById("view_all_list"),
+				list_items = ul.children,
+				url = "";
+			
+			url += ul.dataset.type + "/";
+			for (var i = 0; i < list_items.length; i += 1) {
+				list_item = list_items[i];
+				if (list_item.classList.contains("selected")) {
+					url += list_item.dataset.key + "%2C";
+				}
 			}
-		}
-		url = url.replace(/%2C+$/,'');
+			url = url.replace(/%2C+$/,'');
 
-		window.location.href = "http://127.0.0.1/sami-the-sorceress/admin/edit/" + url;
-	},
-	delete: function (e) {
-		util.events.cancel(e);
-		var ul = document.getElementById("view_all_list"),
-			list_items = ul.children,
-			selected = [];
+			window.location.href = "http://127.0.0.1/sami-the-sorceress/admin/edit/" + url;
+		},
+		delete: function (e) {
+			util.events.cancel(e);
+			var ul = document.getElementById("view_all_list"),
+				list_items = ul.children,
+				selected = [];
 
-		for (var i = 0; i < list_items.length; i += 1) {
-			list_item = list_items[i];
-			if (list_item.classList.contains("selected")) {
-				selected.push(list_item.dataset.key);
+			for (var i = 0; i < list_items.length; i += 1) {
+				list_item = list_items[i];
+				if (list_item.classList.contains("selected")) {
+					selected.push(list_item.dataset.key);
+				}
 			}
-		}
-		console.log("selected : ");
-		console.dir(selected);
+			console.log("selected : ");
+			console.dir(selected);
 
-		if (selected.length) {
-			// make spawn dialog function <3
-			util.dialog.add("confirmation", "Are you sure you want to delete these items? This action cannot be undone.", "main",mediaManager.confirmDelete, selected);
+			if (selected.length) {
+				dialogBox.add("confirmation", "Are you sure you want to delete these items? This action cannot be undone.", "main",mediaManager.confirmDelete, selected);
+			}
 		}
 	},
 	confirmDelete: function (res, args) {
@@ -126,15 +127,31 @@ var mediaManager = {
 	}
 }
 
-document.body.onload = function () {
-	var list = document.getElementById("view_all_list"),
-		list_items;
-	if (list) {
-		list_items = list.children;
+var list = document.getElementById("view_all_list"),
+	list_items,
+	actions = document.getElementById("actions_for_selections"),
+	action_btns;
 
-		for (var i = 0; i < list_items.length; i += 1) {
-			var list_item = list_items[i];
-			list_item.classList.add("visible");
+if (list) {
+	list_items = list.children;
+
+	for (var i = 0; i < list_items.length; i += 1) {
+		var list_item = list_items[i];
+		list_item.classList.add("visible");
+	}
+}
+if (actions) {
+	action_btns = actions.children;
+
+	for (var i = 0; i < action_btns.length; i += 1) {
+		var btn = action_btns[i];
+		switch(btn.dataset.action) {
+			case "edit":
+				btn.addEventListener("click", mediaManager.actions.edit);
+				break;
+			case "delete":
+				btn.addEventListener("click", mediaManager.actions.delete);
+				break;
 		}
 	}
 }

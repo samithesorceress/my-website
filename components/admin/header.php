@@ -47,7 +47,7 @@
 				<li>
 					<button id="search_btn" class="btn">
 						<a href="<?php echo $htp_root; ?>logout">
-							<img src="<?php echo $htp_root; ?>src/icons/exit.svg" class="icon" title="Log Out" alt="Log Out Icon">
+							 <?php echo file_get_contents($htp_root . "src/icons/exit.svg"); ?>
 						</a>
 					</button>
 				</li>

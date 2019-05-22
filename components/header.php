@@ -48,7 +48,7 @@
 				<li>
 					<button id="search_btn" class="btn">
 						<a href="<?php echo $htp_root; ?>search">
-							<img src="<?php echo $htp_root; ?>src/icons/search.svg" class="icon">
+							<?php echo file_get_contents($htp_root . "src/icons/search.svg"); ?>
 						</a>
 					</button>
 				</li>

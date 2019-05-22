@@ -213,9 +213,16 @@ form .two_columns {
     margin-top: 1em; }
   .field.media_browser_field {
     display: inline-block;
+    min-width: 12em;
     width: auto; }
+    .field.media_browser_field + .field.media_browser_field {
+      margin-right: 100%; }
     .field.media_browser_field .media_container {
+      background: #f1f1f3;
+      border-radius: .5em;
       margin-right: 0; }
+      .field.media_browser_field .media_container p {
+        margin: 1em; }
   .field.checkbox_field {
     display: flex; }
     .field.checkbox_field label {
@@ -301,6 +308,7 @@ form .two_columns {
 
 .dialog {
   background: #FFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 1em;
   left: 1em;
   max-width: 600px;
@@ -318,7 +326,7 @@ form .two_columns {
     .dialog {
       left: calc(50% - 300px); } }
 
-.popup_shadow {
+.shadow {
   background: rgba(0, 0, 50, 0.2);
   height: 100vh;
   left: 0;
@@ -332,3 +340,11 @@ form .two_columns {
 .visible {
   transform: scale(1) !important;
   opacity: 1 !important; }
+
+::-moz-selection {
+  background: #ff0090;
+  color: #FFF; }
+
+::selection {
+  background: #ff0090;
+  color: #FFF; }

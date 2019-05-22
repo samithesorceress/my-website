@@ -13,11 +13,11 @@ require_once($php_root . "components/admin/header.php");
 			<?php echo file_get_contents($htp_root . "src/icons/clear.svg"); ?>
 			<span>Clear Selection</span>
 		</button>
-		<button type='button' class='btn cta sml' onClick="selectItems.actions.edit(event)">
+		<button type='button' class='btn cta sml' data-action="edit">
 			<?php echo file_get_contents($htp_root . "src/icons/edit.svg"); ?>
 			<span>Edit Selected</span>
 		</button>
-		<button type='button' class='btn cta sml danger' onClick="selectItems.actions.delete(event)">
+		<button type='button' class='btn cta sml danger' data-action='delete'>
 			<?php echo file_get_contents($htp_root . "src/icons/delete.svg"); ?>
 			<span>Delete Selected</span>
 		</button>
@@ -56,7 +56,7 @@ require_once($php_root . "components/admin/header.php");
 									} else {
 										echo "tall";
 									}
-									echo "'/>";
+									echo "' loading='lazy'/>";
 								echo "</div>";
 							echo "</a>";
 						echo"</li>";

@@ -7,10 +7,18 @@ require_once($root . "core/functions.php");
 if (empty($_FILES) === false && valExists("file", $_FILES)) {
 	$sql_params = [];
 	// File vars
+	
 	$file = $_FILES["file"];
+	$output["file"] = $file;
+
 	$file_name = $file["tmp_name"];
 	$file_err = $file["error"];
 	$file_size = $file["size"];
+	$update_id = false;
+	if (empty($_REQUEST) === false && valExists("update_id", $_REQUEST)) {
+		$update_id = $_REQUEST["update_id"];
+	}
+	$output["id"] = $update_id;
 	list(
 		$file_width,
 		$file_height,
@@ -123,11 +131,22 @@ if (empty($_FILES) === false && valExists("file", $_FILES)) {
 			$sql_params["sizes"] = 0;
 		}
 		$output["data"] = $sql_params;
-		$sql = prepareSQL("insert", "media", $sql_params);
+		if ($update_id) {
+			$sql_where = [
+				"id" => $update_id
+			];
+			$sql = prepareSQL("update", "media", $sql_params, $sql_where);
+		} else {
+			$sql = prepareSQL("insert", "media", $sql_params);
+		}
 		if ($sql) {
 			if ($conn->query($sql)) {
 			$output["success"] = true;
-			$output["message"] = "File Uploaded";
+			if ($update_id) {
+				$output["message"] = "File Updated";
+			} else {
+				$output["message"] = "File Uploaded";
+			}
 			} else {
 				$output["message"] = "Query failed: " . $sql;
 			}

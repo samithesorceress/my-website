@@ -79,7 +79,7 @@ function jsLogs($data) {
 
     //echo($html);
 }
-function newFormField($id, $name, $type = "text", $val = false, $val2 = false) {
+function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $val3 = false) {
 	$html = "<div class='field";
 	$input = "";
 	switch($type) {
@@ -130,11 +130,10 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false) {
 		case "media_browser":
 		case "photo_browser":
 		case "video_browser":
-			$num = $val;
-			$val = $val2;
+			
 			$media_data = false;
-			if ($val) {
-				$media_api = "listMedia?id=" . $val;
+			if ($val2) {
+				$media_api = "listMedia?id=" . $val2;
 				$media_res = xhrFetch($media_api);
 				$media_data = false;
 				if (valExists("success", $media_res)) {
@@ -149,7 +148,7 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false) {
 				} else {
 					$input .= "tall";
 				}
-				$input .= "'/>";
+				$input .= "' loading='lazy' />";
 			} else {
 				$input .= "<p>No Media Selected</p>";
 			}
@@ -158,7 +157,7 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false) {
 				$input .= " value='" . $val . "'";
 			}
 			$input .= "/><button id='" . $id . "_browser' type='button' class='btn cta sml media_browser_btn";
-				if ($num !== 1) {
+				if ($val !== 1) {
 					$input .= " multi";
 				}
 				if ($type == "photo_browser") {
@@ -166,11 +165,11 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false) {
 				} elseif ($type == "video_browser") {
 					$input .= " videos_only";
 				}
-			$input .= "' onClick='openMediaBrowser()'><span>";
-			if ($val) {
-				$input .= "Replace";
+			$input .= "' data-action='";
+			if ($val3) {
+				$input .= "replace'><span>Replace";
 			} else {
-				$input .= "Browse";
+				$input .= "browse'><span>Browse";
 			}
 			$input .= "</span></button>";
 			break;
