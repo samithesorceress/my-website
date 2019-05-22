@@ -153,8 +153,8 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 				$input .= "<p>No Media Selected</p>";
 			}
 			$input .= "</div><input id='" . $id . "' name='" . $id . "' type='hidden'";
-			if ($val) {
-				$input .= " value='" . $val . "'";
+			if ($media_data) {
+				$input .= " value='" . $media_data["id"] . "'";
 			}
 			$input .= "/><button id='" . $id . "_browser' type='button' class='btn cta sml media_browser_btn";
 				if ($val !== 1) {

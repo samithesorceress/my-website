@@ -92,8 +92,7 @@ if (count($errors) > 0) {
 		$links = json_decode($links, true);
 		for($i = 0; $i < count($links); $i += 1) {
 			$link = $links[$i];
-			$num = $i - 1;
-			echo "<li class='field'><div><label for='link_" . $num ."_url'>Url</label><input id='link_" . $num . "_url' name='link_" . $num . "_url' type='text' value='" . urldecode($link["url"]) . "'/></div><div><label for='link_" . $num . "_title'>Title</label><input id='link_" . $num . "_title' name='link_" . $num . "_title' type='text' value='" . $link["title"] . "'/></div><button class='btn' type='button' onClick='removeLink()'>" . file_get_contents($htp_root . "src/icons/delete.svg") . "</button></li>";
+			echo "<li class='field'><div><label for='link_url_" . $i . "'>Url</label><input id='link_url_" . $i . "' name='link_url_" . $i . "' type='text' value='" . urldecode($link["url"]) . "'/></div><div><label for='link_title_" . $i . "'>Title</label><input id='link_title_" . $i . "' name='link_title_" . $i . "' type='text' value='" . $link["title"] . "'/></div><button class='btn' type='button' onClick='removeLink()'>" . file_get_contents($htp_root . "src/icons/delete.svg") . "</button></li>";
 		}
 	} else {
 		echo "<li class='field'><div><label for='link_1_url'>Url</label><input id='link_1_url' name='link_1_url' type='text'/></div><div><label for='link_1_title'>Title</label><input id='link_1_title' name='link_1_title' type='text'></div><button class='btn' type='button' onClick='removeLink()'>" . file_get_contents($htp_root . "src/icons/delete.svg") . "</button></li>";
@@ -101,10 +100,11 @@ if (count($errors) > 0) {
 	echo "</ul>";
 	echo "<div class='ctas align_left'><button class='cta btn' type='button' onClick='addNewLink()'>" . file_get_contents($htp_root . "src/icons/add.svg") . "<span>Add Link</span></button></div></div>";
 	echo "<script src='" . $htp_root . "functions/infiniteLinks.js'></script>";
-	echo newFormField("save", "Save", "submit", "Save");
+	echo newFormField("save", "Save", "submit", "Save","editAbout.saveChanges");
 ?>
 
 </form>
 
 <?php
+echo "<script src='" . $htp_root . "functions/editAbout.js'></script>";
 require_once($php_root . "components/admin/footer.php");

@@ -25,18 +25,29 @@ var forms = {
 		for (var i = 0; i < fields.length; i += 1) {
 			var field = fields[i];
 			var children = field.children;
-			for (var j = 0; j < children.length; j += 1) {
-				var child = children[j];
-				if (child.tagName == "INPUT" || child.tagName == "TEXTAREA") {
-					if (child.type !== "submit") {
-						if (child.type == "checkbox") {
-							if (child.checked) {
-								inputs[child.id] = 1;
-							} else {
-								inputs[child.id] = 0;
+			for (var ii = 0; ii < children.length; ii += 1) {
+				var child = children[ii],
+					nested_children = false;
+				if (child.tagName == "INPUT" || child.tagName == "TEXTAREA" || child.tagName == "DIV") {
+					if (child.tagName == "DIV") {
+						var nested_children = child.children;
+						for (var iii = 0; iii < nested_children.length; iii += 1) {
+							var nested_child = nested_children[iii];
+							if (nested_child.tagName == "INPUT" || nested_child.tagName == "TEXTAREA") {
+								inputs[nested_child.id] = nested_child.value;
 							}
-						} else {
-							inputs[child.id] = child.value;
+						}
+					} else {
+						if (child.type !== "submit") {
+							if (child.type == "checkbox") {
+								if (child.checked) {
+									inputs[child.id] = 1;
+								} else {
+									inputs[child.id] = 0;
+								}
+							} else {
+								inputs[child.id] = child.value;
+							}
 						}
 					}
 				}
@@ -46,7 +57,10 @@ var forms = {
 	},
 	updateCbList: function () {
 		if (typeof(mediaManager) !== "undefined") {
-			forms.callbacks["mediaManager.saveEdits"] = mediaManager.saveEdits;
+			forms.callbacks["mediaManager.saveChanges"] = mediaManager.saveChanges;
+		}
+		if (typeof(editAbout) !== "undefined") {
+			forms.callbacks["editAbout.saveChanges"] = editAbout.saveChanges;
 		}
 	}
 },

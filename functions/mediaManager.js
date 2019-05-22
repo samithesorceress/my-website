@@ -69,7 +69,7 @@ var mediaManager = {
 			}
 		}
 	},
-	saveEdits: function (inputs) {
+	saveChanges: function (inputs) {
 		console.log("saving edits!");
 		console.log(inputs);
 		var items = {},

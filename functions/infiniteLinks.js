@@ -7,10 +7,10 @@ function addNewLink(e) {
 		newLink = document.createElement("li");
 
 	
-	num = list_items.length + 1;
+	num = list_items.length;
 
 	newLink.className = "field";
-	newLink.innerHTML = "<div><label for='link_" + num + "_url'>Url</label><input id='link_" + num +  "_url' name='link_" + num + "_url' type='text'></div><div><label>Title</label><input id='link_" + num + "_title' name='link_"  + num + "_title' type='text'></div><button class='btn' type='button' onClick='removeLink()'><img src='" + htp_root + "src/icons/delete.svg' class='icon' /></button>";
+	newLink.innerHTML = "<div><label for='link_url_" + num + "'>Url</label><input id='link_url_" + num +  "' name='link_url_" + num +  "' type='text'></div><div><label>Title</label><input id='link_title_" + num +  "' name='link_title_"  + num + "' type='text'></div><button class='btn' type='button' onClick='removeLink()'><img src='" + htp_root + "src/icons/delete.svg' class='icon' /></button>";
 	list.appendChild(newLink);
 }
 

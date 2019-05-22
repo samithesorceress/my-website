@@ -24,6 +24,6 @@ foreach($ids as $id) {
 	}
 
 }
-echo newFormField("save", "Save", "submit", "Save", "mediaManager.saveEdits");
+echo newFormField("save", "Save", "submit", "Save", "mediaManager.saveChanges");
 echo "<script src='" . $htp_root . "functions/mediaManager.js'></script>";
 require_once($php_root . "components/admin/footer.php");

@@ -132,6 +132,7 @@
 #view_all_list {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: flex-start;
 	li {
 		margin: 0 1em 1em 0;
 		position: relative;
