@@ -45,7 +45,7 @@ var editAbout = {
 	},
 	validateSave: function (res) {
 		if (res.success) {
-			window.location.href = "http://127.0.0.1/sami-the-sorceress/admin";
+		//	window.location.href = "http://127.0.0.1/sami-the-sorceress/admin";
 		}
 	}
 }

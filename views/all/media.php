@@ -39,25 +39,7 @@ require_once($php_root . "components/admin/header.php");
 								echo file_get_contents($htp_root . "src/icons/checkbox_unchecked.svg");
 							echo "</button>";
 							echo "<a href='" . $admin_root . "edit/media/" . $media_item["id"] . "'>";
-								echo "<div class='media_container'>";
-									switch ($media_item["type"]) {
-										case "image": {
-											echo "<img src='" . $htp_root . "uploads/" . $media_item["src"] . "." . $media_item["ext"] . "'";
-											break;
-										}
-										case "video": {
-											echo "<video src='" . $htp_root . "uploads/" . $media_item["src"] . "." . $media_item["ext"] . "'";
-											break;
-										}
-									}
-									echo " data-shape='";
-									if ($media_item["ratio"] > 1) {
-										echo "wide";
-									} else {
-										echo "tall";
-									}
-									echo "' loading='lazy'/>";
-								echo "</div>";
+								echo mediaContainer($media_item);
 							echo "</a>";
 						echo"</li>";
 					}

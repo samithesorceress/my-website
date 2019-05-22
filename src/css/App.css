@@ -182,6 +182,14 @@ h1 {
       top: 1em;
       padding: .5em;
       position: absolute; }
+  .media_container.round_container {
+    background: #252525;
+    border-radius: 4em;
+    display: flex;
+    float: left;
+    height: 8em;
+    margin: 0 1em 1em 0;
+    width: 8em; }
   .media_container * {
     pointer-events: none; }
   .media_container:not(:last-child) {
@@ -279,24 +287,6 @@ form .two_columns {
 
 .profile {
   display: flex; }
-  .profile .profile_photo {
-    align-items: center;
-    background: #252525;
-    border-radius: 4em;
-    display: flex;
-    float: left;
-    height: 8em;
-    justify-content: center;
-    margin: 0 1em 1em 0;
-    overflow: hidden;
-    position: relative;
-    width: 8em; }
-    .profile .profile_photo img[data-shape="wide"] {
-      height: 100%;
-      width: auto; }
-    .profile .profile_photo img[data-shape="tall"] {
-      height: auto;
-      width: 100%; }
 
 .hidden-flex-item {
   content: "";

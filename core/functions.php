@@ -1,9 +1,9 @@
 <?php
 
 function ucSmart($string){//smart ucwords function
-  return preg_replace_callback("/\b(A|An|The|And|Of|But|Or|For|Nor|With|On|At|To|From|By)\b/i",function($matches){//add words here to avoid capitalization
-    return strtolower($matches[1]);
-  },ucwords($string));
+	return preg_replace_callback("/\b(A|An|The|And|Of|But|Or|For|Nor|With|On|At|To|From|By)\b/i",function($matches){//add words here to avoid capitalization
+		return strtolower($matches[1]);
+	},ucwords($string));
 }
 function valExists($key, $arr) {
 	if (is_array($arr)) {
@@ -130,31 +130,15 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 		case "media_browser":
 		case "photo_browser":
 		case "video_browser":
-			
-			$media_data = false;
+			$input = " media_browser_field'><label for='" . $id . "'>" . $name . "</label>";
 			if ($val2) {
-				$media_api = "listMedia?id=" . $val2;
-				$media_res = xhrFetch($media_api);
-				$media_data = false;
-				if (valExists("success", $media_res)) {
-					$media_data = $media_res["data"];
-				}
-			}
-			$input = " media_browser_field'><label for='" . $id . "'>" . $name . "</label><div class='media_container'>";
-			if ($media_data) {
-				$input .= "<img src='http://127.0.0.1/sami-the-sorceress/uploads/" . $media_data["src"] . "." . $media_data["ext"] . "' alt='" . $media_data["alt"] . "' title='" . $media_data["title"] . "' data-shape='";
-				if ($media_data["ratio"] > 1) {
-					$input .= "wide";
-				} else {
-					$input .= "tall";
-				}
-				$input .= "' loading='lazy' />";
+				$input .= mediaContainer($val2);
 			} else {
-				$input .= "<p>No Media Selected</p>";
+				$input .= "<div class='media_container'><p>No Media Selected</p></div>";
 			}
-			$input .= "</div><input id='" . $id . "' name='" . $id . "' type='hidden'";
-			if ($media_data) {
-				$input .= " value='" . $media_data["id"] . "'";
+			$input .= "<input id='" . $id . "' name='" . $id . "' type='hidden'";
+			if ($val2) {
+				$input .= " value='" . $val2 . "'";
 			}
 			$input .= "/><button id='" . $id . "_browser' type='button' class='btn cta sml media_browser_btn";
 				if ($val !== 1) {
@@ -223,4 +207,86 @@ function checkRequired($required, $input) {
 	}
 
 	return $res;
+}
+
+function mediaContainer($obj, $shape = false, $title = false) {
+	$html = false;
+	$media_root = "http://127.0.0.1/sami-the-sorceress/uploads/";
+	if ($obj) {
+		// init wrapper
+		$html = "<div class='media_container";
+		if ($shape) {
+			switch($shape) {
+				case "wide":
+					$html .= " wide_container";
+					break;
+				case "tall":
+					$html .= " wide_container";
+					break;
+				case "round":
+					$html .= " round_container";
+			}
+		}
+		$html .= "'>";
+			// slides/videos title
+			if ($title) {
+				$html .= "<p class='title'>" . $title . "</p>";
+			}
+
+			if (!is_array($obj)) {
+				$api_endpoint = "listMedia";
+				$api_params = [
+					"id" => $obj
+				];
+				$api_res = xhrFetch($api_endpoint, $api_params);
+				if (valExists("success", $api_res)) {
+					$obj = $api_res["data"];
+				} else {
+					$obj = false;
+				}
+			}
+			if ($obj) {
+				switch ($obj["type"]) {
+					case "image":
+						$html .= "<img src='" . $media_root . $obj["src"] . "." . $obj["ext"] . "'";
+						if (valExists("sizes", $obj)) {
+							$sizes = intval($obj["sizes"]);
+							$html .= "srcset='";
+							for ($i = 0; $i < $sizes; $i += 1) {
+								$size = ($i + 1) * 200;
+								$html .= $media_root . $obj["src"] . "_" . $size . "w." . $obj["ext"] . " " . $size . "w, ";
+							}
+							$html = rtrim($html, ", ") . "'";
+						}
+						break;
+					case "video":
+						$html .= "<video src='" . $media_root . $obj["src"] . "." . $obj["ext"] . "'";
+						break;
+				}
+				$html .=  " data-shape='";
+				$ratio = 1;
+				if ($shape) {
+					switch($shape) {
+						case "wide":
+							$ratio = 2.16;
+							break;
+						case "tall";
+							$ratio = .6; // ??
+							break;
+					}
+				}
+				if ($obj["ratio"] > $ratio) {
+					$html .= "wide";
+				} else {
+					$html .= "tall";
+				}
+				$html .= "' loading='lazy' />";
+			} else {
+				$html .= "<img src='http://127.0.0.1/sami-the-sorceress/src/imgs/placeholder.png' alt='Placeholder image for missing file.' title='Missing file.' data-shape='wide' loading='lazy' />";
+			}
+		
+		$html .= "</div>";
+	}
+
+	return $html;
 }

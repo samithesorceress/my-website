@@ -251,6 +251,15 @@ h1 {
 			
 		}
 	}
+	&.round_container {
+		background: $slate;
+		border-radius: 4em;
+		display: flex;
+		float: left;
+		height: 8em;
+		margin: 0 1em 1em 0;
+		width: 8em;
+	}
 	* {
 		pointer-events: none;
 	}
@@ -391,29 +400,6 @@ form {
 
 .profile {
 	display: flex;
-	.profile_photo {
-		align-items: center;
-		background: $slate;
-		border-radius: 4em;
-		display: flex;
-		float: left;
-		height: 8em;
-		justify-content: center;
-		margin: 0 1em 1em 0;
-		overflow: hidden;
-		position: relative;
-		width: 8em;
-		img {
-			&[data-shape="wide"] {
-				height: 100%;
-				width: auto;
-			}
-			&[data-shape="tall"] {
-				height: auto;
-				width: 100%;
-			}
-		}
-	}
 	.profile_info {
 
 	}
