@@ -57,10 +57,19 @@ var forms = {
 	},
 	updateCbList: function () {
 		if (typeof(mediaManager) !== "undefined") {
-			forms.callbacks["mediaManager.saveChanges"] = mediaManager.saveChanges;
+			if (!forms.callbacks["mediaManager.saveChanges"]) {
+				forms.callbacks["mediaManager.saveChanges"] = mediaManager.saveChanges;
+			}
 		}
 		if (typeof(editAbout) !== "undefined") {
-			forms.callbacks["editAbout.saveChanges"] = editAbout.saveChanges;
+			if (!forms.callbacks["editAbout.saveChanges"]) {
+				forms.callbacks["editAbout.saveChanges"] = editAbout.saveChanges;
+			}
+		}
+		if (typeof(videoManager) !== "undefined") {
+			if (!forms.callbacks["videoManager.saveChanges"]) {
+				forms.callbacks["videoManager.saveChanges"] = videoManager.saveChanges;
+			}
 		}
 	}
 },

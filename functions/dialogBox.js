@@ -68,7 +68,7 @@ var dialogBox = {
 		shadow = document.getElementById("shadow_" + key);
 		dialog.classList.remove("visible");
 		shadow.classList.remove("visible");
-		util.dialog.timer = setTimeout(function (d,s,c,r,a) {
+		dialogBox.timer = setTimeout(function (d,s) {
 			d.parentNode.removeChild(d);
 			s.parentNode.removeChild(s);
 		}, 4E2, dialog, shadow);

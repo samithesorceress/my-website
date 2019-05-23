@@ -11,8 +11,8 @@ if (empty($_REQUEST) === false) {
 	$sql_sel .= "`videos`";
 	// single img
 	if (valExists("id", $data)) {
-		$sql_sel .= " WHERE `id`='" . $data["id"] . "'";
-
+		$sql_whr .= "`id`='" . $data["id"] . "'";
+		$sql = $sql_sel . $sql_whr;
 	// paginate
 	} else {
 		//order
@@ -34,8 +34,8 @@ if (empty($_REQUEST) === false) {
 			$sql_lmt .= $pagination_start . ", ";
 		}
 		$sql_lmt .= $pagination_end;
+		$sql = $sql_sel . $sql_ord . $sql_lmt;
 	}
-	$sql = $sql_sel . $sql_ord . $sql_lmt;
 	$rows = array();
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
@@ -43,12 +43,15 @@ if (empty($_REQUEST) === false) {
 			$rows[] = $row;
 		}
 	}
-	if ($rows) {
-		$output["success"] = true;
-	} else {
-		$output["success"] = false;
+	if (count($rows) == 1) {
+		$rows = $rows[0];
 	}
-	$output["data"] = $rows;
+	if ($rows) {
+		$output["success"] = true;	
+		$output["data"] = $rows;
+	} else {
+		$output["message"] = "SQL Failed: " . $sql;
+	}
 } else {
 	$output["success"] = false;
 	$output["message"] = "No arguments provided.";

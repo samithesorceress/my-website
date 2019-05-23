@@ -64,6 +64,9 @@ if (strpos($current_path, "admin") !== false) {
 						$document_title .= " Store Item";
 						require_once($php_root . "views/edit/store-item.php");
 						break;
+					default:
+						$document_title = "404 - Not Found";
+						require_once($php_root . "views/404.php");
 				}
 				break;
 			case "view-all":
@@ -72,6 +75,12 @@ if (strpos($current_path, "admin") !== false) {
 						$document_title = "Media Manager";
 						require_once($php_root . "views/all/media.php");
 						break;
+					case "videos":
+						$document_title = "Video Manager";
+						require_once($php_root . "views/all/videos.php");
+					default:
+						$document_title = "404 - Not Found";
+						require_once($php_root . "views/404.php");
 				}
 				break;
 			default:

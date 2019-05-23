@@ -18,6 +18,7 @@
 	<script src="<?php echo $htp_root; ?>functions/utils.js"></script>
 	<script src="<?php echo $htp_root; ?>functions/mediaBrowser.js"></script>
 	<script src="<?php echo $htp_root; ?>functions/forms.js"></script>
+	<script src="<?php echo $htp_root; ?>functions/dialogBox.js"></script>
 	<script src="<?php echo $htp_root; ?>functions/selectItems.js"></script>
 	<link href="<?php echo $htp_root; ?>src/css/App.css" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
 	<noscript>

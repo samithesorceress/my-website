@@ -15,7 +15,9 @@ var selectItems = {
 
 		for (var i = 0; i < list_items.length; i += 1) {
 			var list_item = list_items[i];
-			selectItems.select(list_item);
+			if (!list_item.classList.contains("hidden-flex-item")) {
+				selectItems.select(list_item);
+			}
 		}
 		selectItems.enableSelectionActions();
 	},
@@ -127,6 +129,20 @@ var selectItems = {
 			if (all_selected) {
 				actions.classList.add("disabled");
 			}
+		}
+	}
+}
+
+var list = document.getElementById("view_all_list"),
+	list_items;
+
+if (list) {
+	list_items = list.children;
+
+	for (var i = 0; i < list_items.length; i += 1) {
+		var list_item = list_items[i];
+		if (!list_item.classList.contains("hidden-flex-item")) {
+			list_item.classList.add("visible");
 		}
 	}
 }
