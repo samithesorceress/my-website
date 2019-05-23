@@ -71,6 +71,14 @@ var forms = {
 				forms.callbacks["videoManager.saveChanges"] = videoManager.saveChanges;
 			}
 		}
+		if (typeof(photosetManager) !== "undefined") {
+			if (!forms.callbacks["photosetManager.saveChanges"]) {
+				forms.callbacks["photosetManager.saveChanges"] = photosetManager.saveChanges;
+			}
+			if (!forms.callbacks["photosetManager.saveNew"]) {
+				forms.callbacks["photosetManager.saveNew"] = photosetManager.saveNew;
+			}
+		}
 	}
 },
 inputs = document.getElementsByTagName("input");

@@ -61,6 +61,9 @@ require_once($php_root . "components/admin/header.php");
 		if (valExists("success", $videos_res)) {
 			$videos = $videos_res["data"];
 			if ($videos) {
+				if (valExists("id", $videos)) { // only one result was returned
+					$videos = [$videos];
+				}
 				foreach ($videos as $video) {
 					echo "<li><a href='" . $admin_root . "edit/video/" . $video["id"] . "'>";
 						echo mediaContainer($video["cover"], "wide", $video["title"]);
@@ -143,6 +146,9 @@ require_once($php_root . "components/admin/header.php");
 		if (valExists("success", $slides_results)) {
 			$slides_items = $slides_results["data"];
 			if ($slides_items) {
+				if (valExists("id", $slides_items)) { // only one result was returned
+					$slides_items = [$slides_items];
+				}
 				foreach ($slides_items as $slide_item) {
 					echo "<li><a href='" . $admin_root . "edit/slide/" . $slide_item["id"] . "'>";
 						echo mediaContainer($slide_item["img"], "wide", $slide_item["text"]);
@@ -183,6 +189,9 @@ require_once($php_root . "components/admin/header.php");
 		if (valExists("success", $media_results)) {
 			$media_items = $media_results["data"];
 			if ($media_items) {
+				if (valExists("id", $media_items)) { // only one result was returned
+					$media_items = [$media_items];
+				}
 				foreach ($media_items as $media_item) {
 					echo "<li><a href='" . $admin_root . "edit/media/" . $media_item["id"] . "'>";
 						echo mediaContainer($media_item);

@@ -1,6 +1,42 @@
-var htp_root = "http://127.0.0.1/sami-the-sorceress/";
+var htp_root = "http://127.0.0.1/sami-the-sorceress/",
+	admin_root = htp_root + "admin/",
+	media_root = htp_root + "uploads/";
 
 var util = {
+	xhrFetch: function (endpoint, params, cb, args = false) {
+		var req = new XMLHttpRequest(),
+			formData = new FormData(),
+			url = "";
+			if (endpoint.indexOf("http") < 0) {
+				url = "http://127.0.0.1/sami-the-sorceress/api/" + endpoint;
+			} else {
+				url = endpoint;
+			}
+		if (params && Array.isArray(params)) {
+			for (var key in params) {
+				var val = params[key];
+				formData.append("\"" + key + "\"", val);
+			}
+		}
+		console.log("xhr req:" + url);
+		console.log("seding data..");
+		console.dir(formData);
+		req.onreadystatechange = function() {
+			if ((req.readyState === 4) && (req.status === 200)) {
+				var res = req.responseText;
+				if (res.indexOf("{") == 0) {
+					res = JSON.parse(res);
+				}
+				if (args) {
+					cb(res, args);
+				} else {
+					cb(res);
+				}
+			}
+		}
+		req.open("POST", endpoint, true);
+		req.send(formData);
+	},
 	api:  {
 		req_queue: [],
 		busy:  false,
@@ -244,6 +280,19 @@ var util = {
 	replaceAt: function(str, index, char) {
 		return str.substr(0, index) + char + str.substr(index + char.length);
 	},
+	valExists: function (key, arr) {
+		var res = false;
+		if (arr && 
+			key &&
+			Array.isArray(arr) &&
+			arr[key] !== "undefined" &&
+			arr[key] !== false &&
+			arr[key] !== ""
+		) {
+			res = true;
+		}
+		return res;
+	},
 	spinner: {
 		timer: false,
 		add: function (parent) {
@@ -261,6 +310,38 @@ var util = {
 				parent.removeChild(child);
 			}, 1E3);
 		}
+	},
+	checkRequired: function (required, input) {
+		var res = {
+			"success": false,
+			"missing": []
+		};
+
+		if (
+			required !== false && 
+			input !== false && 
+			Array.isArray(required) && 
+			Array.isArray(input)
+		) {
+			console.log("passed 1st conditional");
+			for (var i = 0; i < required.length; i += 1) {
+				var req = required[i];
+				console.log("checking: " + req);
+				if (!util.valExists(req, input)) {
+					res["missing"].push((req));
+					console.log("missing: " + req);
+				} else {
+					console.log("val exists");
+				}
+			}
+			console.log("mising totoal: " + res["missing"].length);
+			if (res["missing"].length < 1) {
+				console.log("missing none!!");
+				res["success"] = true;
+			}
+		}
+
+		return res;
 	}
 }
 
