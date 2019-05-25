@@ -1,37 +1,13 @@
 <?php
-$errors = [];
-// is attempting save
-if (empty($_REQUEST) === false) {
-
-}
-
-
-
-
-
-//BEGIN OUTPUT
-
 require_once($php_root . "components/admin/header.php");
-
-if (count($errors) > 0) {
-	echo "<div class='errors'>";
-	foreach($errors as $error) {
-		echo "<p>" . $error . "</p>";
-	}
-	echo "</div>";
-}
-?>
-
-<form enctype="multipart/form-data" action="<?php echo $htp_root . $current_path; ?>" method="POST">
-
-	<?php
+echo "<form enctype='multipart/form-data' action='" . $htp_root . $current_path . "' method='POST'>";
 	echo "<div class='card'>";
 		echo newFormField("cover", "Cover", "media_browser", 1);
-		echo newFormField("preview", "Preview(s)", "media_browser");
+		echo newFormField("previews", "Preview(s)", "media_browser");
 	echo "</div>";
 	echo "<div class='card'>";
 		echo newFormField("title", "Title");
-		echo newFormField("desc", "Description", "textarea");
+		echo newFormField("description", "Description", "textarea");
 		echo newFormField("tags", "Tags", "text");
 		echo newFormField("price", "Price");
 	echo "</div>";
@@ -40,13 +16,10 @@ if (count($errors) > 0) {
 		// todo: infinite link fields
 	echo "</div>";
 	echo "<div class='card'>";
-		echo newFormField("date", "Release Date", "date");
+		echo newFormField("publish_date", "Publish Date", "date");
 		echo newFormField("public", "Public", "checkbox");
 	echo "</div>";
-	echo newFormField("save", "Save", "submit", "Save");
-	?>
-
-</form>
-
-<?php
+	echo newFormField("save", "Save", "submit", "Save", "storeManager.saveNew");
+echo "</form>";
+echo "<script src='" . $htp_root . "functions/storeManager.js'></script>";
 require_once($php_root . "components/admin/footer.php");

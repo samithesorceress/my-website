@@ -8,7 +8,7 @@ require_once($root . "core/functions/valExists.php");
 if (empty($_REQUEST) === false) {
 	require_once($root . "core/functions/getValues.php");
 	if (valExists("id", $data)) {
-		$sql_upd .= "`photosets` SET ";
+		$sql_upd .= "`store` SET ";
 		$sql_whr .= "`id`='" . $data["id"] . "'";
 
 		if (valExists("cover", $data)) {
@@ -41,7 +41,7 @@ if (empty($_REQUEST) === false) {
 
 		if ($conn->query($sql)) {
 			$output["success"] = true;
-			$output["message"] = "photoset updated";
+			$output["message"] = "store item updated";
 		} else {
 			$output["message"] = "failed to update: " . $sql;
 		}

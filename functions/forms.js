@@ -79,6 +79,14 @@ var forms = {
 				forms.callbacks["photosetManager.saveNew"] = photosetManager.saveNew;
 			}
 		}
+		if (typeof(storeManager) !== "undefined") {
+			if (!forms.callbacks["storeManager.saveChanges"]) {
+				forms.callbacks["storeManager.saveChanges"] = storeManager.saveChanges;
+			}
+			if (!forms.callbacks["storeManager.saveNew"]) {
+				forms.callbacks["storeManager.saveNew"] = storeManager.saveNew;
+			}
+		}
 	}
 },
 inputs = document.getElementsByTagName("input");

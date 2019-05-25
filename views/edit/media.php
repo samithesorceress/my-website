@@ -19,7 +19,7 @@ foreach($ids as $id) {
 			echo newFormField("media_file_" . $id, "File", "media_browser", 1, $id, true);
 			echo newFormField("media_title_" . $id, "Title", "text", $media_item["title"]);
 			echo newFormField("media_alt_" . $id, "Alt", "textarea", $media_item["alt"]);
-			echo newFormField("media_public_" . $id, "Public", "checkbox");
+			echo newFormField("media_public_" . $id, "Public", "checkbox", $media_item["public"]);
 		echo "</div>";
 	}
 

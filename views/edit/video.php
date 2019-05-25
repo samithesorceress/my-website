@@ -24,7 +24,7 @@ foreach($ids as $id) {
 			echo newFormField("video_tags_" . $id, "Tags", "textarea", $video_item["tags"]);
 			echo newFormField("video_price_" . $id, "Price", "text", $video_item["price"]);
 			echo newFormField("video_publish_date_" . $id, "Publish Date", "date", $video_item["publish_date"]);
-			echo newFormField("video_public_" . $id, "Public", "checkbox");
+			echo newFormField("video_public_" . $id, "Public", "checkbox", $video_item["public"]);
 		echo "</div>";
 	}
 

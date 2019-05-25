@@ -140,7 +140,29 @@ require_once($php_root . "components/admin/header.php");
 		<?php echo file_get_contents($htp_root . "src/icons/cart.svg"); ?>
 		<span>Store</span>
 	</h2>
-	<div class="carousel">No Results</div>
+	<div class="carousel">
+	<?php
+		$store_api = "listStoreItems?rows=3&order_by=id&order_dir=DESC";
+		$store_res = xhrFetch($store_api);
+		if (valExists("success", $store_res)) {
+			$store_items = $store_res["data"];
+			if ($store_items) {
+				if (valExists("id", $store_items)) { // only one result was returned
+					$store_items = [$store_items];
+				}
+				foreach ($store_items as $store_item) {
+					echo "<li><a href='" . $admin_root . "edit/store-item/" . $store_item["id"] . "'>";
+						echo mediaContainer($store_item["cover"], "wide", $store_item["title"]);
+					echo "</a></li>";
+				}
+			} else {
+				echo "<p>No Results</p>";
+			}
+		} else {
+			echo "<p>No Results</p>";
+		}
+	?>
+	</div>
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>view-all/store-items">
 			<button class="btn cta sml">

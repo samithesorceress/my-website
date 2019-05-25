@@ -81,6 +81,9 @@ if (strpos($current_path, "admin") !== false) {
 					case "photosets":
 						$document_title = "Photoset Manager";
 						require_once($php_root . "views/all/photosets.php");
+					case "store-items":
+						$document_title = "Store Manager";
+						require_once($php_root . "views/all/store-items.php");
 					default:
 						$document_title = "404 - Not Found";
 						require_once($php_root . "views/404.php");

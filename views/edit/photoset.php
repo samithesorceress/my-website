@@ -24,7 +24,7 @@ foreach($ids as $id) {
 			echo newFormField("photoset_tags_" . $id, "Tags", "textarea", $photoset["tags"]);
 			echo newFormField("photoset_price_" . $id, "Price", "text", $photoset["price"]);
 			echo newFormField("photoset_publish_date_" . $id, "Publish Date", "date", $photoset["publish_date"]);
-			echo newFormField("photoset_public_" . $id, "Public", "checkbox");
+			echo newFormField("photoset_public_" . $id, "Public", "checkbox", $photoset["public"]);
 		echo "</div>";
 	}
 
