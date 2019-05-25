@@ -97,7 +97,29 @@ require_once($php_root . "components/admin/header.php");
 		<?php echo file_get_contents($htp_root . "src/icons/photo.svg"); ?>
 		<span>Photosets</span>
 	</h2>
-	<div class="carousel">No Results</div>
+	<div class="carousel">
+	<?php
+		$photosets_api = "listPhotosets?rows=3&order_by=id&order_dir=DESC";
+		$photosets_res = xhrFetch($photosets_api);
+		if (valExists("success", $photosets_res)) {
+			$photosets = $photosets_res["data"];
+			if ($photosets) {
+				if (valExists("id", $photosets)) { // only one result was returned
+					$photosets = [$photosets];
+				}
+				foreach ($photosets as $photoset) {
+					echo "<li><a href='" . $admin_root . "edit/photoset/" . $photoset["id"] . "'>";
+						echo mediaContainer($photoset["cover"], "wide", $photoset["title"]);
+					echo "</a></li>";
+				}
+			} else {
+				echo "<p>No Results</p>";
+			}
+		} else {
+			echo "<p>No Results</p>";
+		}
+	?>
+	</div>
 	<div class="ctas">
 		<a href="<?php echo $admin_root; ?>view-all/photosets">
 			<button class="btn cta sml">

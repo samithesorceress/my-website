@@ -9,18 +9,24 @@ var util = {
 			url = "";
 			if (endpoint.indexOf("http") < 0) {
 				url = "http://127.0.0.1/sami-the-sorceress/api/" + endpoint;
+				if (endpoint.indexOf("?") < 0) {
+					url += "/index.php";
+				}
 			} else {
 				url = endpoint;
 			}
 		if (params && Array.isArray(params)) {
 			for (var key in params) {
 				var val = params[key];
-				formData.append("\"" + key + "\"", val);
+				formData.append(key, val);
 			}
 		}
 		console.log("xhr req:" + url);
-		console.log("seding data..");
-		console.dir(formData);
+		console.log("sending data..");
+		// Display the key/value pairs
+		for (var pair of formData.entries()) {
+			console.log(pair[0]+ ', ' + pair[1]); 
+		}
 		req.onreadystatechange = function() {
 			if ((req.readyState === 4) && (req.status === 200)) {
 				var res = req.responseText;
@@ -34,7 +40,7 @@ var util = {
 				}
 			}
 		}
-		req.open("POST", endpoint, true);
+		req.open("POST", url, true);
 		req.send(formData);
 	},
 	api:  {

@@ -6,8 +6,9 @@ require_once($root . "core/functions.php");
 
 if (empty($_FILES) === false) {
 	$output["message"] = "has files";
+	$output = json_encode($output);
 	echo $output;
-die();
+	die();
 }
 if (empty($_REQUEST) === false) {
 	require_once($root . "core/functions/getValues.php");

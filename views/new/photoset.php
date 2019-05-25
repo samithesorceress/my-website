@@ -3,7 +3,7 @@ require_once($php_root . "components/admin/header.php");
 echo "<form enctype='multipart/form-data' action='" . $htp_root . $current_path . "' method='POST'>";
 	echo "<div class='card'>";
 		echo newFormField("cover", "Cover", "media_browser", 1);
-		echo newFormField("preview", "Preview(s)", "media_browser");
+		echo newFormField("previews", "Preview(s)", "media_browser");
 	echo "</div>";
 	echo "<div class='card'>";
 		echo newFormField("title", "Title");

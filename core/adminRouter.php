@@ -78,6 +78,9 @@ if (strpos($current_path, "admin") !== false) {
 					case "videos":
 						$document_title = "Video Manager";
 						require_once($php_root . "views/all/videos.php");
+					case "photosets":
+						$document_title = "Photoset Manager";
+						require_once($php_root . "views/all/photosets.php");
 					default:
 						$document_title = "404 - Not Found";
 						require_once($php_root . "views/404.php");
