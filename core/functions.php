@@ -234,7 +234,7 @@ function mediaContainer($obj, $shape = false, $title = false) {
 			}
 
 			if (!is_array($obj)) {
-				$api_endpoint = "listMedia";
+				$api_endpoint = "list/media";
 				$api_params = [
 					"id" => $obj
 				];
@@ -289,4 +289,11 @@ function mediaContainer($obj, $shape = false, $title = false) {
 	}
 
 	return $html;
+}
+function icon($src) {
+	$img = file_get_contents("http://127.0.0.1/sami-the-sorceress/src/icons/" . $src . ".svg");
+	if ($img) {
+		return $img;
+	}
+	return false;
 }
