@@ -46,7 +46,11 @@ var forms = {
 									inputs[child.id] = 0;
 								}
 							} else {
-								inputs[child.id] = child.value;
+								if (child.type == "file") {
+									inputs[child.id] = child.files[0];
+								} else {
+									inputs[child.id] = child.value;
+								}
 							}
 						}
 					}
@@ -56,35 +60,41 @@ var forms = {
 		return inputs;
 	},
 	updateCbList: function () {
-		if (typeof(mediaManager) !== "undefined") {
-			if (!forms.callbacks["mediaManager.saveChanges"]) {
-				forms.callbacks["mediaManager.saveChanges"] = mediaManager.saveChanges;
-			}
-		}
 		if (typeof(editAbout) !== "undefined") {
 			if (!forms.callbacks["editAbout.saveChanges"]) {
 				forms.callbacks["editAbout.saveChanges"] = editAbout.saveChanges;
 			}
-		}
+		}		
 		if (typeof(videoManager) !== "undefined") {
+			if (!forms.callbacks["videoManager.saveNew"]) {
+				forms.callbacks["videoManager.saveNew"] = videoManager.saveChanges;
+			}
 			if (!forms.callbacks["videoManager.saveChanges"]) {
 				forms.callbacks["videoManager.saveChanges"] = videoManager.saveChanges;
 			}
 		}
 		if (typeof(photosetManager) !== "undefined") {
-			if (!forms.callbacks["photosetManager.saveChanges"]) {
-				forms.callbacks["photosetManager.saveChanges"] = photosetManager.saveChanges;
-			}
 			if (!forms.callbacks["photosetManager.saveNew"]) {
 				forms.callbacks["photosetManager.saveNew"] = photosetManager.saveNew;
 			}
+			if (!forms.callbacks["photosetManager.saveChanges"]) {
+				forms.callbacks["photosetManager.saveChanges"] = photosetManager.saveChanges;
+			}
 		}
 		if (typeof(storeManager) !== "undefined") {
+			if (!forms.callbacks["storeManager.saveNew"]) {
+				forms.callbacks["storeManager.saveNew"] = storeManager.saveNew;
+			}
 			if (!forms.callbacks["storeManager.saveChanges"]) {
 				forms.callbacks["storeManager.saveChanges"] = storeManager.saveChanges;
 			}
-			if (!forms.callbacks["storeManager.saveNew"]) {
-				forms.callbacks["storeManager.saveNew"] = storeManager.saveNew;
+		}
+		if (typeof(mediaManager) !== "undefined") {
+			if (!forms.callbacks["mediaManager.saveNew"]) {
+				forms.callbacks["mediaManager.saveNew"] = mediaManager.saveNew;
+			}
+			if (!forms.callbacks["mediaManager.saveChanges"]) {
+				forms.callbacks["mediaManager.saveChanges"] = mediaManager.saveChanges;
 			}
 		}
 	}

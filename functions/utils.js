@@ -287,15 +287,25 @@ var util = {
 		return str.substr(0, index) + char + str.substr(index + char.length);
 	},
 	valExists: function (key, arr) {
-		var res = false;
-		if (arr && 
-			key &&
-			Array.isArray(arr) &&
-			arr[key] !== "undefined" &&
-			arr[key] !== false &&
-			arr[key] !== ""
-		) {
-			res = true;
+		console.log("checking val exists");
+		var res = false,
+			val = false;
+		if (arr && key) {
+			console.log("passed first check");
+			if (Array.isArray(arr)) {
+				console.log("passed second check");
+				val = arr[key];
+				if (val !== "undefined" && val !== false &&	val !== "") {
+					console.log("passed third check");
+					res = true;
+				} else {
+					console.log("failed third check");
+				}
+			} else {
+				console.log("failed second check");
+			}
+		} else {
+			console.log("failed first check");
 		}
 		return res;
 	},

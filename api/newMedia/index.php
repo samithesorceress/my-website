@@ -10,7 +10,6 @@ if (empty($_REQUEST) === false) {
 	$required = [
 		"src",
 		"ext",
-		""
 		"type"
 	];
 
