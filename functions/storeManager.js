@@ -1,81 +1,4 @@
 var storeManager = {
-	actions: {
-		edit: function (e) {
-			util.events.cancel(e);
-			var ul = document.getElementById("view_all_list"),
-				list_items = ul.children,
-				url = "";
-			
-			url += ul.dataset.type + "/";
-			for (var i = 0; i < list_items.length; i += 1) {
-				list_item = list_items[i];
-				if (list_item.classList.contains("selected")) {
-					url += list_item.dataset.key + "%2C";
-				}
-			}
-			url = url.replace(/%2C+$/,'');
-
-			window.location.href = "http://127.0.0.1/sami-the-sorceress/admin/edit/" + url;
-		},
-		delete: function (e) {
-			util.events.cancel(e);
-			var ul = document.getElementById("view_all_list"),
-				list_items = ul.children,
-				selected = [];
-
-			for (var i = 0; i < list_items.length; i += 1) {
-				list_item = list_items[i];
-				if (list_item.classList.contains("selected")) {
-					selected.push(list_item.dataset.key);
-				}
-			}
-			console.log("selected : ");
-			console.dir(selected);
-
-			if (selected.length) {
-				dialogBox.add("confirmation", "Are you sure you want to delete these items? This action cannot be undone.", "main",storeManager.confirmDelete, selected);
-			}
-		}
-	},
-	confirmDelete: function (res, args) {
-		console.log("confirming delete..");
-		var api_endpoint = "deleteStoreItem",
-			api_params = [];
-			ids = "";
-			
-		if (res === true) {
-				console.log("user clicked confirm");
-			for (var i = 0; i < args.length; i += 1) {
-				var id = args[i];
-				ids += id + ",";
-			}
-			ids = ids.replace(/,+$/,'');
-			api_params["id"] = ids;
-			console.log(api_params);
-			util.xhrFetch(api_endpoint, api_params, storeManager.updateGrid);
-		}
-	},
-	updateGrid: function (res) {
-		console.log("updating grid");
-		console.log(res);
-		var ids = false;
-		if (res.success == true) {
-			console.log("xhr was successful, deleting dom node");
-			ids = res.data;
-			console.log(ids);
-			for(var i = 0; i < ids.length; i += 1) {
-				var id = ids[i],
-					elem = document.getElementById("list_item_" + id);
-
-				elem.classList.remove("visible");
-				setTimeout(function (elem) {
-					elem.parentNode.removeChild(elem);
-				}, 6E2, elem);
-			}
-		} else {
-			console.log("it didn't work");
-		}
-	},
 	saveChanges: function (inputs) {
 		console.log("saving changes~");
 		console.log(inputs);
@@ -204,25 +127,6 @@ var storeManager = {
 			window.location.href = admin_root + "view-all/store-items";
 		} else {
 			console.log("didnt work :(");
-		}
-	}
-}
-
-var actions = document.getElementById("actions_for_selections"),
-	action_btns;
-
-if (actions) {
-	action_btns = actions.children;
-
-	for (var i = 0; i < action_btns.length; i += 1) {
-		var btn = action_btns[i];
-		switch(btn.dataset.action) {
-			case "edit":
-				btn.addEventListener("click", storeManager.actions.edit);
-				break;
-			case "delete":
-				btn.addEventListener("click", storeManager.actions.delete);
-				break;
 		}
 	}
 }

@@ -75,16 +75,16 @@
     max-height: 32em;
     width: auto; }
 
-#view-all_actions_bar {
+#view_all_actions_bar {
   display: flex;
   justify-content: space-between;
   overflow: hidden; }
-  #view-all_actions_bar div {
+  #view_all_actions_bar div {
     height: 4em;
     display: flex; }
-    #view-all_actions_bar div.disabled {
+    #view_all_actions_bar div.disabled {
       pointer-events: none; }
-      #view-all_actions_bar div.disabled .btn {
+      #view_all_actions_bar div.disabled .btn {
         background: #f1f1f3 !important; }
 
 #view_all {
