@@ -2,7 +2,7 @@
 function viewAll($type) {
 	$htp_root = "http://127.0.0.1/sami-the-sorceress/";
 	$html = "<section id='view_all' class='card'><div class='card_contents'>";
-	$api_endpoint  = "list";
+	$api_endpoint  = "list/";
 	$api_params = [
 		"rows" => 5,
 		"order_by" => "id",
@@ -10,13 +10,11 @@ function viewAll($type) {
 	];
 	switch($type) {
 		case "media":
-			$api_endpoint .= "Media";
-			break;
 		case "store-item":
-			$api_endpoint .= "StoreItem";
+			$api_endpoint .= $type;
 			break;
 		default:
-			$api_endpoint .= ucWords($type) . "s";
+			$api_endpoint .= $type . "s";
 			break;
 	}
 	$api_res = xhrFetch($api_endpoint, $api_params);

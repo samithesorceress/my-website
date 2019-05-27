@@ -22,11 +22,11 @@ require_once($php_root . "components/admin/ctas.php");
 		if ($profile_photo) {
 			$profile .= mediaContainer($profile_photo, "round");
 		}
-		$profile .= "<div class='profile_info'><p><strong>Bio: </strong>" . $bio . "</p><p><strong>Links: </strong>";
+		$profile .= "<div class='profile_info'><p><strong>Bio: </strong>" . urldecode($bio) . "</p><p><strong>Links: </strong>";
 			if ($links) {
 				$links_html = "";
 				foreach($links as $link) {
-					$links_html .= "<a href='" . urldecode($link["url"]) . "'>" . $link["title"] . "</a>, ";
+					$links_html .= "<a href='" . urldecode($link["url"]) . "'>" . urldecode($link["title"]) . "</a>, ";
 				}
 				$links_html = rtrim($links_html, ", ");
 				$profile .= $links_html;

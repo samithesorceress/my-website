@@ -2,9 +2,10 @@ var editAbout = {
 	saveChanges: function (inputs) {
 		console.log("saving edits!");
 		console.log(inputs);
-		var api_endpoint = "updateAbout",
-			api_params = "?",
-			links = {};
+		var api_endpoint = "update/about",
+			api_params = [],
+			links = {}, 
+			json = {};
 
 		for (var key in inputs) {
 			var value = inputs[key],
@@ -27,25 +28,28 @@ var editAbout = {
 						break;
 				}
 			} else {
-				api_params += encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&";
+				api_params[key] = encodeURIComponent(value);
 			}
 		}
 
 		if (links) {
-			links = JSON.stringify(links);
-			api_params += "links=" + links;
-			util.api.request("GET", "http://127.0.0.1/sami-the-sorceress/api/" + api_endpoint + api_params, editAbout.validateSave);
+			var i = 0;
+			for (var key in links) {
+				json[i] = links[key];
+				i  += 1;
+			}
+			json = JSON.stringify(json);
+			console.log(json);
+			api_params["links"] = json;
 		}
-		
-		console.log(links);
-
-		api_params = api_params.replace(/&+$/,'');
-
 		console.log(api_params);
+		util.xhrFetch(api_endpoint, api_params, editAbout.validateSave);
+
+		
 	},
 	validateSave: function (res) {
 		if (res.success) {
-		//	window.location.href = "http://127.0.0.1/sami-the-sorceress/admin";
+			window.location.href = "http://127.0.0.1/sami-the-sorceress/admin";
 		}
 	}
 }

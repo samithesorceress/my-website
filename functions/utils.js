@@ -9,7 +9,7 @@ var util = {
 			url = "";
 			if (endpoint.indexOf("http") < 0) {
 				url = "http://127.0.0.1/sami-the-sorceress/api/" + endpoint;
-				if (endpoint.indexOf("?") < 0) {
+				if (endpoint.indexOf("upload") > -1) {
 					url += "/index.php";
 				}
 			} else {
@@ -30,17 +30,28 @@ var util = {
 		req.onreadystatechange = function() {
 			if ((req.readyState === 4) && (req.status === 200)) {
 				var res = req.responseText;
+				console.log("xhr res: " + res);
 				if (res.indexOf("{") == 0) {
 					res = JSON.parse(res);
 				}
-				if (args) {
-					cb(res, args);
+				if (cb) {
+					if (args) {
+						cb(res, args);
+					} else {
+						cb(res);
+					}
 				} else {
-					cb(res);
+					return res;
 				}
 			}
 		}
-		req.open("POST", url, true);
+		//if (endpoint == "get-contents") {
+		//	console.log("using GET method");
+		//	req.open("GET", url, true);
+		//} else {
+			console.log("using POST method");
+			req.open("POST", url, true);
+		//}
 		req.send(formData);
 	},
 	api:  {
@@ -358,6 +369,22 @@ var util = {
 		}
 
 		return res;
+	},
+	icon: function (src) {
+		var svg = "<svg class='icon' height='24' width='24' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>";
+
+		switch(src) {
+			case "delete":
+				svg += "<path fill='none' d='M0 0h24v24H0V0z'></path><path d='M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v10zM18 4h-2.5l-.71-.71c-.18-.18-.44-.29-.7-.29H9.91c-.26 0-.52.11-.7.29L8.5 4H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1z'></path></svg>";
+				return svg;
+				break;
+			case "add":
+				svg.innerHTML = "add";
+				break;
+			default: 
+				return false;
+		}
+		return false;
 	}
 }
 

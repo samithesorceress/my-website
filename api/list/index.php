@@ -75,20 +75,21 @@ if ($type) {
 				$output["message"] = "No arguments provided.";
 			}
 		}
-
-		$rows = array();
-		$result = $conn->query($sql);
-		if ($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()) {
-				$rows[] = $row;
+		if ($sql) {
+			$rows = array();
+			$result = $conn->query($sql);
+			if ($result->num_rows > 0) {
+				while($row = $result->fetch_assoc()) {
+					$rows[] = $row;
+				}
 			}
-		}
-		if (count($rows) == 1) {
-			$rows = $rows[0];
-		}
-		if ($rows) {
-			$output["success"] = true;
-			$output["data"] = $rows;
+			if (count($rows) == 1) {
+				$rows = $rows[0];
+			}
+			if ($rows) {
+				$output["success"] = true;
+				$output["data"] = $rows;
+			}
 		}
 	} else {
 		$output["message"] = "Requested table does not exist.";
