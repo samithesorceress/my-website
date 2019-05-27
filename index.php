@@ -19,10 +19,7 @@ $robots_txt = "NOFOLLOW NOINDEX";
 $fonts = "Quicksand:400,500";
 
 // Functions
-require_once($php_root . "core/functions.php");
-jsLogs("hello world");
-// Find where we are
-require_once($php_root . "core/headers.php");
+require_once($php_root . "functions/utils.php");
 
-// Verify user
-require_once($php_root . "core/checkLogin.php");
+// Start Routing
+require_once($php_root . "core/init.php");

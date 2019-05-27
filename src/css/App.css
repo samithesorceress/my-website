@@ -299,7 +299,7 @@ form .two_columns {
 .dialog {
   background: #FFF;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 1em;
+  border-radius: .5em;
   left: 1em;
   max-width: 600px;
   opacity: 0;

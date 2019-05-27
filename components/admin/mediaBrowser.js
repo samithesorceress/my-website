@@ -10,8 +10,10 @@ var mediaBrowser = {
 			footer = document.createElement("footer"),
 			field = document.createElement("div"),
 			newBtn = document.createElement("input"),
-			shadow = document.createElement("div");
-		
+			shadow = document.createElement("div"),
+			api_endpoint = "list/media",
+			api_params = [];
+
 		console.log(size);
 		trg.parentNode.id = "media_target_" + key;
 		browser.id = "media_browser_" + key;
@@ -45,7 +47,10 @@ var mediaBrowser = {
 				footer.appendChild(field);
 				browser.appendChild(library);
 				browser.appendChild(footer);
-				util.api.request("GET", "http://127.0.0.1/sami-the-sorceress/api/listMedia?order_by=id&order_dir=DESC", mediaBrowser.populate, {"id":key, "attempt":1});
+				api_params["order_by"] = "id";
+				api_params["order_dir"] = "DESC";
+				api_params["rows"] = "3";
+				util.xhrFetch(api_endpoint, api_params, mediaBrowser.populate, {"id": key, "attempt": 1});
 				break;
 		}
 
@@ -111,14 +116,6 @@ var mediaBrowser = {
 					container.addEventListener("click", mediaBrowser.choose);
 					media_library.appendChild(container);
 					
-			}
-		} else {
-			if (attempt < 3) {
-				attempt += 1;
-				util.api.request("GET", "http://127.0.0.1/sami-the-sorceress/api/listMedia?rows=5&order_by=id&order_dir=DESC", populateMediaBrowser, {"id": key, "attempt": attempt});
-				console.log("attempt #" + attempt + " failed, retrying...");
-			} else {
-				container.innerHTML += "<p>No Connection :(</p>";
 			}
 		}
 	},

@@ -1,6 +1,4 @@
 <?php
-require_once($php_root . "core/publicRouter.php");
-
 if (strpos($current_path, "admin") !== false) {
 	jsLogs("checking login...");
 	if ($user_name && $user_token) {

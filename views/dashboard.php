@@ -40,7 +40,7 @@ require_once($php_root . "components/admin/ctas.php");
 	
 	echo card("Photosets", false, carousel("photosets"), ctas("photosets", ["view-all", "new"]));
 
-	echo card("Store", false, carousel("store"), ctas("store", ["view-all", "new"]));
+	echo card("Store", false, carousel("store"), ctas("store-items", ["view-all", "new"]));
 
 	echo card("Slideshow", false, carousel("slideshow"), ctas("slideshow", ["view-all", "new"]));
 

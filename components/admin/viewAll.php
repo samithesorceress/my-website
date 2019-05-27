@@ -10,7 +10,9 @@ function viewAll($type) {
 	];
 	switch($type) {
 		case "media":
-		case "store-item":
+		case "store-items":
+		case "videos":
+		case "photosets":
 			$api_endpoint .= $type;
 			break;
 		default:
@@ -22,8 +24,24 @@ function viewAll($type) {
 		$list_items = $api_res["data"];
 		if ($list_items) {
 			$html .= "<ul id='view_all_list' data-type='" . $type . "'>";
+			if (valExists("id", $list_items)) {
+				$list_items = [$list_items];
+			}
 			foreach ($list_items as $list_item) {
-				$html .= "<li id='list_item_" . $list_item["id"] . "' class='view_all_list_item' data-key='" . $list_item["id"] . "'><button id='list_item_fab_btn' type='button' class='btn cta fab sml'>" . file_get_contents($htp_root . "src/icons/checkbox_checked.svg") . file_get_contents($htp_root . "src/icons/checkbox_unchecked.svg") . "</button><a href='" . $htp_root . "admin/edit/" . $type . "/" . $list_item["id"] . "'>" . mediaContainer($list_item) . "</a></li>";
+				$shape = false;
+				$src = $list_item;
+				$title = false;
+				if ($type !== "media") {
+					$shape = "wide";
+				}
+				if (valExists("cover", $src)) {
+					$src = $src["cover"];
+				}
+				if (valExists("title", $list_item)) {
+					$title = $list_item["title"];
+				}
+
+				$html .= "<li id='list_item_" . $list_item["id"] . "' class='view_all_list_item " . $shape . "' data-key='" . $list_item["id"] . "'><button type='button' class='btn cta fab sml list_item_fab_btn'>" . file_get_contents($htp_root . "src/icons/checkbox_checked.svg") . file_get_contents($htp_root . "src/icons/checkbox_unchecked.svg") . "</button><a href='" . $htp_root . "admin/edit/" . $type . "/" . $list_item["id"] . "'>" . mediaContainer($src, $shape, $title) . "</a></li>";
 			}
 			for ($i = 0; $i < 12; $i += 1) {
 				$html .= "<li class='hidden-flex-item'></li>";

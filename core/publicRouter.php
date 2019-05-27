@@ -14,9 +14,10 @@ switch($subdirectories[0]) {
 		$document_title = "Logout";
 		require_once($php_root . "views/logout.php");
 		break;
+	case "admin":
+	require_once($php_root . "core/checkLogin.php");
+		break;
 	default:
-	if (strpos($current_path, "admin") === false) {
 		$document_title = "404 - Not Found";
 		require_once($php_root . "views/404.php");
-	}
 }

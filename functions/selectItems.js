@@ -234,12 +234,20 @@ var selectItems = {
 	}
 }
 
-var list_items = document.getElementsByClassName("view_all_list_item"),
+var fabs = document.getElementsByClassName("list_item_fab_btn"),
+	list_items = document.getElementsByClassName("view_all_list_item"),
 	actions_bar = document.getElementById("view_all_actions_bar"),
 	select_all_btn = document.getElementById("select_all_btn"),
 	deselect_all_btn = document.getElementById("deselect_all_btn"),
 	edit_selected_btn = document.getElementById("edit_selected_btn"),
 	delete_selected_btn = document.getElementById("delete_selected_btn");
+	
+if (fabs) {
+	for (var i = 0; i < fabs.length; i += 1) {
+		var fab = fabs[i];
+		fab.addEventListener("click", selectItems.toggle);
+	}
+}
 
 if (list_items) {
 	for (var i = 0; i < list_items.length; i += 1) {
