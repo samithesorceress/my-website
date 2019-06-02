@@ -2,8 +2,8 @@ var videoManager = {
 	saveChanges: function (inputs) {
 		console.log("saving edits!", inputs);
 		var api_endpoint = "update/video",
-			api_params = [],
 			items = {},
+			links = {},
 			fields = [
 				"cover",
 				"preview",
@@ -14,7 +14,6 @@ var videoManager = {
 				"publish_date",
 				"public"
 			],
-			links = {},
 			current_links;
 
 		for (var key in inputs) {
@@ -48,8 +47,8 @@ var videoManager = {
 		console.log("links", links);
 
 		for (var id in items) {
-			var item = items[id];
-			api_params = [];
+			var item = items[id],
+				api_params = [];
 			api_params["id"] = id;
 			for(var key in item) {
 				api_params[key] = item[key];

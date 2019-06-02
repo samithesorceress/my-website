@@ -1,25 +1,37 @@
 <?php
 require_once($php_root . "components/admin/header.php");
-echo "<form enctype='multipart/form-data' action='" . $htp_root . $current_path . "' method='POST'>";
-	echo "<div class='card'>";
-		echo newFormField("cover", "Cover", "media_browser", 1);
-		echo newFormField("previews", "Preview(s)", "media_browser");
-	echo "</div>";
-	echo "<div class='card'>";
-		echo newFormField("title", "Title");
-		echo newFormField("description", "Description", "textarea");
-		echo newFormField("tags", "Tags", "text");
-		echo newFormField("price", "Price");
-	echo "</div>";
-	echo "<div class='card'>";
-		echo "<h3>Purchase Links</h3>";
-		// todo: infinite link fields
-	echo "</div>";
-	echo "<div class='card'>";
-		echo newFormField("publish_date", "Publish Date", "date");
-		echo newFormField("public", "Public", "checkbox");
-	echo "</div>";
+require_once($php_root . "components/card.php");
+
+	echo card(
+		"Files",
+		false,
+		newFormField("store_item_cover", "Cover", "media_browser", 1) . 
+		newFormField("store_item_previews", "Preview(s)", "media_browser")
+	);
+
+	echo card(
+		"Info",
+		false,
+		newFormField("store_item_title", "Title") . 
+		newFormField("store_item_description", "Description", "textarea") . 
+		newFormField("store_item_tags", "Tags", "text") . 
+		newFormField("store_item_price", "Price")
+	);
+	
+	echo card(
+		"Purchase Links",
+		false,
+		newFormField("store_item_links", "Links", "links")
+	);
+	
+	echo card(
+		"Metadata",
+		false,
+		newFormField("store_item_publish_date", "Publish Date", "date") . 
+		newFormField("store_item_public", "Public", "checkbox")
+	);
+
 	echo newFormField("save", "Save", "submit", "Save", "storeManager.saveNew");
-echo "</form>";
 echo "<script src='" . $htp_root . "functions/storeManager.js'></script>";
+echo "<script src='" . $htp_root . "functions/infiniteLinks.js'></script>";
 require_once($php_root . "components/admin/footer.php");

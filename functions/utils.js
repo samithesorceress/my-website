@@ -373,7 +373,11 @@ var util = {
 			var value = inputs[key],
 				id = false;
 			if (key.includes("link")) {
-				id = key.split("_")[5];
+				if (key.includes("store")) {
+					id = key.split("_")[6];
+				} else {
+					id = key.split("_")[5];
+				}
 				if (!links[id]) {
 					links[id] = {};
 				}

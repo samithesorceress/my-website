@@ -191,7 +191,7 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 			}
 			if ($fresh_inputs) {
 				//fresh input, build placeholder
-				$input .= "<li class='field'><div><label for='link_url_0'>Url</label><input id='link_url_0' name='link_url_0' type='text'/></div><div><label for='link_title_0'>Title</label><input id='link_title_0' name='link_title_0' type='text'></div><button class='btn delete_link_btn' type='button'>" . icon("delete") . "</button></li>";
+				$input .= "<li class='field'><div><label for='" . $id . "_link_url_0'>Url</label><input id='" . $id . "_link_url_0' name='" . $id . "_link_url_0' type='text'/></div><div><label for='" . $id . "_link_title_0'>Title</label><input id='" . $id . "_link_title_0' name='" . $id . "_link_title_0' type='text'></div><button class='btn delete_link_btn' type='button'>" . icon("delete") . "</button></li>";
 			}
 			$input .= "</ul><div class='ctas align_left'><button class='cta btn add_link_btn' type='button'>" . icon("add") . "<span>Add Link</span></button></div>";
 			break;

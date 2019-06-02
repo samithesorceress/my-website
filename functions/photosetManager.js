@@ -1,9 +1,9 @@
 var photosetManager = {
 	saveChanges: function (inputs) {
-		console.log("saving changes~", inputs);
+		console.log("saving photoset changes~", inputs);
 		var api_endpoint = "update/photoset",
-			api_params = [],
 			items = {},
+			links = {},
 			fields = [
 				"cover",
 				"previews",
@@ -13,8 +13,7 @@ var photosetManager = {
 				"price",
 				"publish_date",
 				"public"
-			],
-			links = {};
+			];
 
 		for (var key in inputs) {
 			var val = inputs[key],
@@ -47,8 +46,9 @@ var photosetManager = {
 		console.log("links", links);
 
 		for (var id in items) {
-			var item = items[id];
-			api_params = [];
+			var item = items[id],
+				api_params = [],
+				current_links;
 			api_params["id"] = id;
 			for(var key in item) {
 				api_params[key] = item[key];
@@ -62,8 +62,7 @@ var photosetManager = {
 		}
 	},
 	saveNew: function (inputs) {
-		console.log("saving new photoset");
-		console.log(inputs);
+		console.log("saving new photoset", inputs);
 		var api_endpoint = "new/photoset",
 			api_params = [],
 			prefix = "photoset_",

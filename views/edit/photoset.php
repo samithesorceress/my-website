@@ -7,9 +7,6 @@ if (strpos($ids, ",") !== false) {
 } else {
 	$ids = [$ids];
 }
-//echo "<pre>";
-//print_r($ids);
-//echo "</pre>";
 foreach($ids as $id) {
 	echo "<h2>Photoset ID: " . $id . "</h2>";
 	$api_endpoint = "list/photosets";
