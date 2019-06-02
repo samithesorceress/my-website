@@ -8,6 +8,7 @@ if (strpos($ids, ",") !== false) {
 	$ids = [$ids];
 }
 foreach($ids as $id) {
+	echo "<h2>Video ID: " . $id . "</h2>";
 	$video_api = "list/videos?id=" . $id;
 	$video_res = xhrFetch($video_api);
 	if (valExists("success", $video_res)) {

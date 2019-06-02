@@ -4,7 +4,6 @@ var videoManager = {
 		var api_endpoint = "update/video",
 			api_params = [],
 			items = {},
-			prefix = "video",
 			fields = [
 				"cover",
 				"preview",
@@ -15,39 +14,53 @@ var videoManager = {
 				"publish_date",
 				"public"
 			],
-			links;
+			links = {},
+			current_links;
 
 		for (var key in inputs) {
 			var val = inputs[key],
-				id = false;
-			for (var i = 0; i < fields.length; i += 1) {
-				var field = fields[i],
-					field_id;
-				if (key.includes(field) && !key.includes("link")) {
-					field_id = prefix + "_" + field + "_";
-					id = key.replace(field_id, "");
-					if (!items[id]) {
-						items[id] = [];
+				id = key.split("_");
+			if (key.includes("publish_date")) {
+				id = id[3];
+			} else {
+				id = id[2];
+			}
+			console.log(id);
+			if (!items[id]) {
+				items[id] = [];
+			}
+			if (!links[id]) {
+				links[id] = [];
+			}
+			if (key.includes("link")) {
+				links[id][key] = val;
+			} else {
+				for (var i = 0; i < fields.length; i += 1) {
+					var field = fields[i]
+					if (key.includes(field)) {
+						items[id][field] = val;
 					}
-					items[id][field] = val;
 				}
 			}
 		}
-		links = util.formatLinks(inputs);
-		if (links) {
-			api_params["links"] = links;
-		}
-		console.log("items", items);
 		
+		console.log("items", items);
+		console.log("links", links);
+
 		for (var id in items) {
 			var item = items[id];
+			api_params = [];
 			api_params["id"] = id;
 			for(var key in item) {
 				api_params[key] = item[key];
 			}
+			current_links = util.formatLinks(links[id]);
+			if (current_links) {
+				api_params["links"] = current_links;
+			}
 			console.log("params", api_params);
+			util.xhrFetch(api_endpoint, api_params, videoManager.validateSave);
 		}
-		util.xhrFetch(api_endpoint, api_params, videoManager.validateSave);
 	},
 	saveNew: function (inputs) {
 		console.log("saving new video");
@@ -76,7 +89,7 @@ var videoManager = {
 			],
 			links;
 		
-		validation = util.checkRequired(required, inputs);
+		var validation = util.checkRequired(required, inputs);
 		if (validation.success === true) {
 			for (var key in inputs) {
 				var name = key.replace(prefix, "");
@@ -88,7 +101,7 @@ var videoManager = {
 			if (links) {
 				api_params["links"] = links;
 			}
-			console.log('items', api_params);
+			console.log('api_params', api_params);
 			util.xhrFetch(api_endpoint, api_params, videoManager.validateSave);
 		} else {
 			console.log("missing required", validation.data);

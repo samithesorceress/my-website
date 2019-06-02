@@ -95,7 +95,7 @@ function prepareSQL($action, $table, $params = false, $where = false, $order = f
 				break;
 			case "UPDATE":
 				if ($params && $where) {
-					$sql = "UPDATE" . $table . " SET ";
+					$sql = "UPDATE" . $table . "SET ";
 					foreach($params as $key => $val) {
 						if ($key !== "links") {
 							$val = sanitize($val);

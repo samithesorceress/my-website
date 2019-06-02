@@ -181,7 +181,7 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 				if (!empty($val)) {
 					for($i = 0; $i < count($val); $i += 1) {
 						$link = $val[$i];
-						$input .= "<li class='field'><div><label for='link_url_" . $i . "'>Url</label><input id='link_url_" . $i . "' name='link_url_" . $i . "' type='text' value='" . urldecode($link["url"]) . "'/></div><div><label for='link_title_" . $i . "'>Title</label><input id='link_title_" . $i . "' name='link_title_" . $i . "' type='text' value='" . $link["title"] . "'/></div><button class='btn delete_link_btn' type='button'>" . icon("delete") . "</button></li>";
+						$input .= "<li class='field'><div><label for='" . $id . "_link_url_" . $i . "'>Url</label><input id='" . $id . "_link_url_" . $i . "' name='" . $id . "_link_url_" . $i . "' type='text' value='" . urldecode($link["url"]) . "'/></div><div><label for='" . $id . "_link_title_" . $i . "'>Title</label><input id='" . $id . "_link_title_" . $i . "' name='" . $id . "_link_title_" . $i . "' type='text' value='" . $link["title"] . "'/></div><button class='btn delete_link_btn' type='button'>" . icon("delete") . "</button></li>";
 					}
 				} else {
 					$fresh_inputs = true;

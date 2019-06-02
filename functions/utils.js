@@ -373,21 +373,14 @@ var util = {
 			var value = inputs[key],
 				id = false;
 			if (key.includes("link")) {
-				switch(true) {
-					case(key.includes("url")):
-						id = key.replace("link_url_", "");
-						if (!links[id]) {
-							links[id] = {};
-						}
-						links[id]["url"] = encodeURIComponent(value);
-						break;
-					case(key.includes("title")):
-						id = key.replace("link_title_", "");
-						if (!links[id]) {
-							links[id] = {};
-						}
-						links[id]["title"] = encodeURIComponent(value);
-						break;
+				id = key.split("_")[5];
+				if (!links[id]) {
+					links[id] = {};
+				}
+				if(key.includes("url")) {
+					links[id]["url"] = encodeURIComponent(value);
+				} else {
+					links[id]["title"] = encodeURIComponent(value);
 				}
 			}
 		}

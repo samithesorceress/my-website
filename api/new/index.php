@@ -37,10 +37,20 @@ if (empty($_REQUEST) === false) {
 
 		if ($table) {
 			switch($table) {
-				default:
+				case "videos":
 				$required = [
 					"cover",
 					"preview",
+					"title",
+					"description",
+					"tags",
+					"price",
+					"publish_date"
+				];
+				default:
+				$required = [
+					"cover",
+					"previews",
 					"title",
 					"description",
 					"tags",

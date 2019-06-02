@@ -5,18 +5,20 @@ var infiniteLinks = {
 			field = trg.parentNode.parentNode,
 			list,
 			num = null,
-			newLink, url_field, title_field, delete_btn;
+			newLink, url_field, title_field, delete_btn,
+			parent_id;
 
 		if (field.classList.contains("infinite_links")) {
 			list = field.getElementsByClassName("links_list")[0];
+			parent_id = list.parentNode.id;
 			num = list.children.length;
 			newLink = document.createElement("li");
 			newLink.className = "field";
 
 			url_field = document.createElement("div");
-			url_field.innerHTML = "<label for='link_url_" + num + "'>Url</label><input id='link_url_" + num +  "' name='link_url_" + num +  "' type='text'></input>";
+			url_field.innerHTML = "<label for='" + parent_id + "_link_url_" + num + "'>Url</label><input id='" + parent_id + "_link_url_" + num +  "' name='" + parent_id + "_link_url_" + num +  "' type='text'></input>";
 			title_field = document.createElement("div");
-			title_field.innerHTML = "<label>Title</label><input id='link_title_" + num +  "' name='link_title_"  + num + "' type='text'>";
+			title_field.innerHTML = "<label for='" + parent_id + "_link_title_" + num + "'>Title</label><input id='" + parent_id + "_link_title_" + num +  "' name='" + parent_id + "_link_title_"  + num + "' type='text'>";
 			
 			delete_btn = document.createElement("button");
 			delete_btn.className = "btn delete_link_btn";
