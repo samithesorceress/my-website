@@ -6,18 +6,31 @@ require_once($root . "core/functions/security.php");
 require_once($root . "core/functions/valExists.php");
 
 if (empty($_REQUEST) === false) {
+	require_once($root . "core/functions/getValues.php");
 	$table = false;
+	$cwd = $_SERVER['REQUEST_URI'];
+	$subdirectories = explode("sami-the-sorceress/", $cwd);
+	$subdirectories = explode("?", $subdirectories[1]);
+	$subdirectories = explode("/", $subdirectories[0]);
 	$type =	$subdirectories[2];
 	if ($type) {
 		switch($type) {
+			case "about":
 			case "media":
+			case "videos":
+			case "photosets":
+			case "slides":
 				$table = $type;
 				break;
 			case "photoset":
 			case "video":
+			case "slide":
 				$table = $type . "s";
 				break;
 			case "store-item":
+			case "store-items":
+			case "storeItem":
+			case "storeItems":
 				$table = "store";
 				break;
 		}

@@ -89,6 +89,14 @@ var forms = {
 				forms.callbacks["storeManager.saveChanges"] = storeManager.saveChanges;
 			}
 		}
+		if (typeof(slideshowManager) !== "undefined") {
+			if (!forms.callbacks["slideshowManager.saveNew"]) {
+				forms.callbacks["slideshowManager.saveNew"] = slideshowManager.saveNew;
+			}
+			if (!forms.callbacks["slideshowManager.saveChanges"]) {
+				forms.callbacks["slideshowManager.saveChanges"] = slideshowManager.saveChanges;
+			}
+		}
 		if (typeof(mediaManager) !== "undefined") {
 			if (!forms.callbacks["mediaManager.saveNew"]) {
 				forms.callbacks["mediaManager.saveNew"] = mediaManager.saveNew;

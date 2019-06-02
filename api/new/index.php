@@ -38,25 +38,33 @@ if (empty($_REQUEST) === false) {
 		if ($table) {
 			switch($table) {
 				case "videos":
-				$required = [
-					"cover",
-					"preview",
-					"title",
-					"description",
-					"tags",
-					"price",
-					"publish_date"
-				];
+					$required = [
+						"cover",
+						"preview",
+						"title",
+						"description",
+						"tags",
+						"price",
+						"publish_date"
+					];
+					break;
+				case "slides":
+					$required = [
+						"cover",
+						"title",
+						"url"
+					];
+					break;
 				default:
-				$required = [
-					"cover",
-					"previews",
-					"title",
-					"description",
-					"tags",
-					"price",
-					"publish_date"
-				];
+					$required = [
+						"cover",
+						"previews",
+						"title",
+						"description",
+						"tags",
+						"price",
+						"publish_date"
+					];
 			}
 			$missing = false;
 			foreach($required as $field) {

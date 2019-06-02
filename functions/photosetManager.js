@@ -117,7 +117,6 @@ var photosetManager = {
 		console.log(res);
 		if (res["success"] === true) {
 			console.log("save validated!");
-			
 			window.location.href = admin_root + "view-all/photosets";
 		} else {
 			console.log("didnt work :(");

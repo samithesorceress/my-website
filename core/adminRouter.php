@@ -84,6 +84,9 @@ if (strpos($current_path, "admin") !== false) {
 					case "store-items":
 						$document_title = "Store Manager";
 						require_once($php_root . "views/all/store-items.php");
+					case "slides":
+						$document_title = "Slideshow Manager";
+						require_once($php_root . "views/all/slides.php");
 					default:
 						$document_title = "404 - Not Found";
 						require_once($php_root . "views/404.php");

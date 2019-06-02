@@ -43,7 +43,7 @@ require_once($php_root . "components/admin/ctas.php");
 
 	echo card("Store", false, carousel("store"), ctas("store-items", ["view-all", "new"]));
 
-	echo card("Slideshow", false, carousel("slideshow"), ctas("slideshow", ["view-all", "new"]));
+	echo card("Slideshow", false, carousel("slideshow"), ctas("slides", ["view-all", "new"]));
 
 	echo card("Media Manager", false, carousel("media"), ctas("media", ["view-all", "upload"]));
 

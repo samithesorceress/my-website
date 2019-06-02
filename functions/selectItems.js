@@ -60,24 +60,29 @@ var selectItems = {
 		},
 		confirmDelete: function (res, args) {
 			console.log("confirming delete..");
-			var api_endpoint = "delete",
+			var api_endpoint = "delete/",
 				api_params = [],
-				ids = "";
+				ids = "",
+				list = document.getElementById("view_all_list"),
+				type = list.dataset.type;
 				
 			if (res === true) {
 				console.log("user clicked confirm");
 				switch(type) {
 					case "media":
-							api_endpoint += "Media";
+						api_endpoint += "media";
 						break;
 					case "photoset":
-							api_endpoint += "Photoset";
+						api_endpoint += "photoset";
 						break;
 					case "store-item":
-							api_endpoint += "StoreItem";
+						api_endpoint += "store-item";
 						break;
 					case "video":
-							api_endpoint += "Video";
+						api_endpoint += "video";
+						break;
+					case "slide":
+						api_endpoint += "slide";
 						break;
 				}
 				for (var i = 0; i < args.length; i += 1) {
