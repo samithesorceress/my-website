@@ -298,25 +298,21 @@ var util = {
 		return str.substr(0, index) + char + str.substr(index + char.length);
 	},
 	valExists: function (key, arr) {
-		console.log("checking val exists");
 		var res = false,
-			val = false;
-		if (arr && key) {
-			console.log("passed first check");
-			if (Array.isArray(arr)) {
-				console.log("passed second check");
-				val = arr[key];
-				if (val !== "undefined" && val !== false &&	val !== "") {
-					console.log("passed third check");
-					res = true;
-				} else {
-					console.log("failed third check");
-				}
-			} else {
-				console.log("failed second check");
+			val;
+		if (arr &&
+			key &&
+			Array.isArray(arr)
+			) {
+				
+			val = arr[key];
+			if (
+				val !== "undefined" &&
+				val !== false &&
+				val !== ""
+				) {
+				res = true;
 			}
-		} else {
-			console.log("failed first check");
 		}
 		return res;
 	},
@@ -350,7 +346,7 @@ var util = {
 			Array.isArray(required) && 
 			Array.isArray(input)
 		) {
-			console.log("passed 1st conditional");
+			console.log("arguments are prepared correctly");
 			for (var i = 0; i < required.length; i += 1) {
 				var req = required[i];
 				console.log("checking: " + req);

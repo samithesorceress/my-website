@@ -109,7 +109,7 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 			$input .= "</textarea>";
 			break;
 		case "checkbox":
-			$input = " checkbox_field'><input id='" . $id . "' name='" . $id . "' type='" . $type . "'";
+			$input .= " checkbox_field'><input id='" . $id . "' name='" . $id . "' type='" . $type . "'";
 			if ($val) {
 				$input .= " checked";
 			}

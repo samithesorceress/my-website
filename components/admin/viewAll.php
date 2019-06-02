@@ -8,17 +8,16 @@ function viewAll($type) {
 		"order_by" => "id",
 		"order_dir" => "DESC"
 	];
+	$type = rtrim($type, "s");
 	switch($type) {
 		case "media":
-		case "store-items":
-		case "videos":
-		case "photosets":
 			$api_endpoint .= $type;
 			break;
 		default:
 			$api_endpoint .= $type . "s";
 			break;
 	}
+	
 	$api_res = xhrFetch($api_endpoint, $api_params);
 	if (valExists("success", $api_res)) {
 		$list_items = $api_res["data"];

@@ -23,11 +23,15 @@ function card($title = false, $description = false, $contents = false, $footer =
 			case "Media Manager":
 				$icon .= "swarm";
 				break;
+			default:
+				$icon = false;
 		}
-		$icon .= ".svg";
-		$icon = file_get_contents($icon);
 		if ($icon) {
-			$html .= $icon;
+			$icon .= ".svg";
+			$icon = file_get_contents($icon);
+			if ($icon) {
+				$html .= $icon;
+			}
 		}
 		$html .= "<span>" . $title . "</span></h2>";
 	}

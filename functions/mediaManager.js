@@ -53,9 +53,6 @@ var mediaManager = {
 	saveNew: function (inputs) {
 		console.log("saving new media");
 		console.log(inputs);
-		var api_endpoint = "uploadFile",
-			api_params = [],
-			file, url;
 		if (util.valExists("src", inputs)) {
 			util.api.upload(inputs["src"], mediaManager.processNew, inputs)
 		} else {

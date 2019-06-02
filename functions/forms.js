@@ -67,7 +67,7 @@ var forms = {
 		}		
 		if (typeof(videoManager) !== "undefined") {
 			if (!forms.callbacks["videoManager.saveNew"]) {
-				forms.callbacks["videoManager.saveNew"] = videoManager.saveChanges;
+				forms.callbacks["videoManager.saveNew"] = videoManager.saveNew;
 			}
 			if (!forms.callbacks["videoManager.saveChanges"]) {
 				forms.callbacks["videoManager.saveChanges"] = videoManager.saveChanges;

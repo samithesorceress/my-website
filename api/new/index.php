@@ -33,36 +33,46 @@ if (empty($_REQUEST) === false) {
 				$table = "store";
 				break;
 		}
+		$sql_params = [];
 
 		if ($table) {
-			//about
-			if ($table == "about") {
-				$sql_where["id"] = 1;
-			//all others
-			} else {
-				if (valExists("id", $data)) {
-					$sql_where["id"] = $data["id"];
+			switch($table) {
+				default:
+				$required = [
+					"cover",
+					"preview",
+					"title",
+					"description",
+					"tags",
+					"price",
+					"publish_date"
+				];
+			}
+			$missing = false;
+			foreach($required as $field) {
+				if (!valExists($field, $data)) {
+					$missing = true;
 				}
 			}
-			foreach($data as $key => $val) {
-				if ($key !== "id") {
+			if (!$missing) {
+				foreach($data as $key => $val) {
 					$sql_params[$key] = $val;
 				}
 			}
-			$sql = prepareSQL("update", $table, $sql_params, $sql_where);
-			if ($conn->query($sql)) {
-				$output["success"] = true;
-				$output["message"] = $table . " item updated";
-			} else {
-				$output["success"] = false;
-				$output["message"] = "failed to update: " . $sql;
-			}
+		}
+		$sql = prepareSQL("insert", $table, $sql_params);
+		if ($conn->query($sql)) {
+			$output["success"] = true;
+			$output["message"] = "new " . $table . " item created";
+		} else {
+			$output["message"] = "failed to insert: " . $sql;
 		}
 	}
 } else {
-	$output["success"] = false;
 	$output["message"] = "No arguments provided.";
 }
+
+
 
 // output results
 $output = json_encode($output);

@@ -16,3 +16,8 @@ $output = [
 	"data" => []
 ];
 $htp_root = "127.0.0.1/sami-the-sorceress/";
+
+$sql_params = [];
+$sql_where = [];
+$sql_order = [];
+$sql_limit = [];

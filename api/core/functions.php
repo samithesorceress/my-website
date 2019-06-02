@@ -36,25 +36,46 @@ function checkRequired($required, $input) {
 	return $res;
 }
 
-function prepareSQL($action, $table, $params = false, $where = false) {
+function prepareSQL($action, $table, $params = false, $where = false, $order = false, $limit = false) {
 	$sql = false;
 	if ($action && $table) {
 		$table = " `" . $table . "` ";
 		$action = strtoupper($action);
 		switch($action) {
 			case "SELECT":
-				if ($where) {
-					$sql = "SELECT * FROM" . $table . "WHERE ";
+				$sql = "SELECT * FROM " . $table;
+				if (!empty($where)) {
+					$sql .= " WHERE ";
 					foreach($where as $key => $val) {
 						$sql .= "`" . $key . "`='" . sanitize($val) . "' AND ";
 					}
 					$sql = rtrim($sql, " AND ");
-				} else {
-					return false;
 				}
+				if (!empty($order)) {
+					if ($order["by"]) {
+						$sql .= " ORDER BY `" . $order["by"] . "`";
+						if ($order["dir"]) {
+							$sql .= " " . strtoupper($order["dir"]);
+						}
+					}
+					
+				}
+				if (!empty($limit)) {
+					$sql .= " LIMIT ";
+					if ($limit["start"]) {
+						$sql .= $limit["start"] . ", ";
+					}
+					if ($limit["end"]) {
+						$sql .= $limit["end"];
+					}
+					if (!$limit["start"] && !$limit["end"]) {
+						$sql .= $limit;
+					}
+				}
+				return $sql;
 				break;
 			case "INSERT":
-				if ($params) {
+				if (!empty($params)) {
 					$sql = "INSERT INTO" . $table;
 					$fields = "(";
 					$values = "(";

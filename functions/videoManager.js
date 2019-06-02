@@ -1,85 +1,90 @@
 var videoManager = {
 	saveChanges: function (inputs) {
-		console.log("saving edits!");
-		console.log(inputs);
-		var items = {},
-			api_endpoint = "updateVideo",
-			api_params = "";
+		console.log("saving edits!", inputs);
+		var api_endpoint = "update/video",
+			api_params = [],
+			items = {},
+			prefix = "video",
+			fields = [
+				"cover",
+				"preview",
+				"title",
+				"description",
+				"tags",
+				"price",
+				"publish_date",
+				"public"
+			];
+
 		for (var key in inputs) {
-			var value = inputs[key],
+			var val = inputs[key],
 				id = false;
-			switch(true) {
-				case(key.includes("cover")):
-					id = key.replace("video_cover_", "");
+			for (var i = 0; i < fields.length; i += 1) {
+				var field = fields[i],
+					field_id;
+				if (key.includes(field)) {
+					field_id = prefix + "_" + field + "_";
+					id = key.replace(field_id, "");
 					if (!items[id]) {
 						items[id] = [];
 					}
-					items[id]["cover"] = value;
-					break;
-				case(key.includes("preview")):
-					id = key.replace("video_preview_", "");
-					if (!items[id]) {
-						items[id] = [];
-					}
-					items[id]["preview"] = value;
-					break;
-				case(key.includes("title")):
-					id = key.replace("video_title_", "");
-					if (!items[id]) {
-						items[id] = [];
-					}
-					items[id]["title"] = value;
-					break;
-				case(key.includes("description")):
-					id = key.replace("video_description_", "");
-					if (!items[id]) {
-						items[id] = [];
-					}
-					items[id]["description"] = value;
-					break;
-				case(key.includes("tags")):
-					id = key.replace("video_tags_", "");
-					if (!items[id]) {
-						items[id] = [];
-					}
-					items[id]["tags"] = value;
-					break;
-				case(key.includes("price")):
-					id = key.replace("video_price_", "");
-					if (!items[id]) {
-						items[id] = [];
-					}
-					items[id]["price"] = value;
-					break;
-				case(key.includes("publish_date")):
-					id = key.replace("video_publish_date", "");
-					if (!items[id]) {
-						items[id] = [];
-					}
-					items[id]["publish_date"] = value;
-					break;
-				case(key.includes("public")):
-					id = key.replace("video_public_", "");
-					if (!items[id]) {
-						items[id] = [];
-					}
-					items[id]["public"] = value;
-					break;
+					items[id][field] = val;
+				}
 			}
 		}
+		console.log("items", items);
+		
 		for (var id in items) {
 			var item = items[id];
-			api_params = "?id=" + id + "&";
+			api_params["id"] = id;
 			for(var key in item) {
-				api_params += key + "=" + item[key] + "&";
+				api_params[key] = item[key];
 			}
-			api_params = api_params.replace(/&+$/,'');
-			util.api.request("GET", "http://127.0.0.1/sami-the-sorceress/api/" + api_endpoint + api_params, videoManager.validateSave);
+			console.log("params", api_params);
+			util.xhrFetch(api_endpoint, api_params, videoManager.validateSave);
 		}
-		console.dir(items);
+		
+	},
+	saveNew: function (inputs) {
+		var api_endpoint = "new/video",
+			api_params = [],
+			prefix = "video_",
+			fields = [
+				"cover",
+				"preview",
+				"title",
+				"description",
+				"tags",
+				"price",
+				"publish_date",
+				"public"
+			],
+			required = [
+				prefix + "cover",
+				prefix + "preview",
+				prefix + "title",
+				prefix + "description",
+				prefix + "tags",
+				prefix + "price",
+				prefix + "publish_date"
+			];
+
+		validation = util.checkRequired(required, inputs);
+		if (validation.success === true) {
+			for (var key in inputs) {
+				var name = key.replace(prefix, "");
+				if (fields[name] !== "undefined") {
+					api_params[name] = inputs[key];
+				}
+			}
+			console.log(api_params);
+			util.xhrFetch(api_endpoint, api_params, videoManager.validateSave);
+		} else {
+			console.log("missing required", validation.data);
+		}
 	},
 	validateSave: function (res) {
-		if (res.success) {
+		if (res.success === true) {
 			window.location.href = "http://127.0.0.1/sami-the-sorceress/admin/view-all/videos";
 		}
 	}

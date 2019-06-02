@@ -33,47 +33,43 @@ if ($type) {
 	}
 
 	if ($table) {
-		$sql_sel .= "`" . $table . "`";
-
+		//about
 		if ($table == "about") {
-			$sql = $sql_sel;
-		} else {
-			if (empty($_REQUEST) === false) {
-				require_once($root . "core/functions/getValues.php");
+			$sql_where["id"] = 1;
+			$sql = prepareSQL("select", $table, false, $sql_where);
+		//all others
+		} elseif (empty($_REQUEST) === false) {
+			require_once($root . "core/functions/getValues.php");
 
-				//single result
-				if (valExists("id", $data)) {
-					$sql_sel .= " WHERE `id`='" . $data["id"] . "'";
-					$sql = $sql_sel;
-				// paginate
-				} else {
-					if (valExists("type", $data)) {
-						$sql_sel .= " WHERE `type`='" . $data["type"] . "'";
-					}
-					if (valExists("order_by",$data)) {
-						$sql_ord = " ORDER BY " . $data["order_by"];
-						if (valExists("order_dir", $data)) {
-							$sql_ord .= " " . $data["order_dir"];
-						}
-					}
-					$pagination_start = 0;
-					$pagination_end = 5;
-					if (valExists("offset", $data)) {
-						$pagination_start = $data["offset"];
-					}
-					if (valExists("rows", $data)) {
-						$pagination_end = (string)$pagination_start + ((int)$data["rows"] * 5);
-					}
-					if ($pagination_start) {
-						$sql_lmt .= $pagination_start . ", ";
-					}
-					$sql_lmt .= $pagination_end;
-
-					$sql = $sql_sel . $sql_ord . $sql_lmt;
-				}
+			//single result
+			if (valExists("id", $data)) {
+				$sql_where["id"] = $data["id"];
+				$sql = prepareSQL("select", $table, false, $sql_where);
+			// paginate
 			} else {
-				$output["message"] = "No arguments provided.";
+				if (valExists("type", $data)) {
+					$sql_where["type"] = $data["type"];
+				}
+				if (valExists("order_by",$data)) {
+					$sql_order["by"] = $data["order_by"];
+					if (valExists("order_dir", $data)) {
+						$sql_order["dir"] = $data["order_dir"];
+					}
+				}
+				$pagination_start = 0;
+				$pagination_end = 5;
+				if (valExists("offset", $data)) {
+					$pagination_start = $data["offset"];
+				}
+				if (valExists("rows", $data)) {
+					$pagination_end = (string)$pagination_start + ((int)$data["rows"] * 5);
+				}
+				$sql_limit["start"] = $pagination_start;
+				$sql_limit["end"] = $pagination_end;
+				$sql = prepareSQL("select", $table, false, $sql_where, $sql_order, $sql_limit);
 			}
+		} else {
+			$output["message"] = "No arguments provided.";
 		}
 		if ($sql) {
 			$rows = array();
