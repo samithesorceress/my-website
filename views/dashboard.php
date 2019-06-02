@@ -11,12 +11,13 @@ require_once($php_root . "components/admin/ctas.php");
 	$about_api = "list/about";
 	$about_res = xhrFetch($about_api);
 	if (valExists("success", $about_res)) {
-		$profile_photo = $about_res["data"]["profile"];
-		$bio = $about_res["data"]["bio"];
-		$links = $about_res["data"]["links"];
+		$about_data = $about_res["data"];
+		$profile_photo = $about_data["profile"];
+		$bio = $about_data["bio"];
+		$links = $about_data["links"];
 		if ($links) {
 			$links = json_decode($links, true);
-		}
+		}		
 	}
 	$profile = "<div class='profile'>";
 		if ($profile_photo) {

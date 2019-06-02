@@ -366,6 +366,44 @@ var util = {
 
 		return res;
 	},
+	formatLinks: function (inputs) {
+		var links = [],
+			json = false;
+		for (var key in inputs) {
+			var value = inputs[key],
+				id = false;
+			if (key.includes("link")) {
+				switch(true) {
+					case(key.includes("url")):
+						id = key.replace("link_url_", "");
+						if (!links[id]) {
+							links[id] = {};
+						}
+						links[id]["url"] = encodeURIComponent(value);
+						break;
+					case(key.includes("title")):
+						id = key.replace("link_title_", "");
+						if (!links[id]) {
+							links[id] = {};
+						}
+						links[id]["title"] = encodeURIComponent(value);
+						break;
+				}
+			}
+		}
+		console.log("links", links);
+		if (links) {
+			var json = {},
+				i = 0;
+			for (var key in links) {
+				json[i] = links[key];
+				i += 1;
+			}
+			console.log("links", links);
+			json = JSON.stringify(json);
+		}
+		return json;
+	},
 	icon: function (src) {
 		var svg = "<svg class='icon' height='24' width='24' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>";
 

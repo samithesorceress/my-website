@@ -81,7 +81,10 @@ function prepareSQL($action, $table, $params = false, $where = false, $order = f
 					$values = "(";
 					foreach($params as $key => $val) {
 						$fields .= $key . ", ";
-						$values .= "'" . sanitize($val) . "', ";
+						if ($key !== "links") {
+							$val = sanitize($val);
+						}
+						$values .= "'" . $val . "', ";
 					}
 					$fields = rtrim($fields, ", ") . ")";
 					$values = rtrim($values, ", ") . ")";
@@ -94,7 +97,10 @@ function prepareSQL($action, $table, $params = false, $where = false, $order = f
 				if ($params && $where) {
 					$sql = "UPDATE" . $table . " SET ";
 					foreach($params as $key => $val) {
-						$sql .= "`" . $key . "`='" . sanitize($val) . "', ";
+						if ($key !== "links") {
+							$val = sanitize($val);
+						}
+						$sql .= "`" . $key . "`='" . $val . "', ";
 					}
 					$sql = rtrim($sql, ", ") . " WHERE ";
 					foreach($where as $key => $val) {

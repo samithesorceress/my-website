@@ -172,18 +172,26 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 		case "links":
 		case "infinite_links":
 			$input .= "s infinite_links' id='" . $id . "'><h3>" . $name . "</h3><ul class='links_list'>";
+			$fresh_inputs = false;
 			if ($val) {
 				//has data, build existing links
 				if (!is_array($val)) {
 					$val = json_decode($val, true);
 				}
-				for($i = 0; $i < count($val); $i += 1) {
-					$link = $val[$i];
-					$input .= "<li class='field'><div><label for='link_url_" . $i . "'>Url</label><input id='link_url_" . $i . "' name='link_url_" . $i . "' type='text' value='" . urldecode($link["url"]) . "'/></div><div><label for='link_title_" . $i . "'>Title</label><input id='link_title_" . $i . "' name='link_title_" . $i . "' type='text' value='" . $link["title"] . "'/></div><button class='btn delete_link_btn' type='button'>" . icon("delete") . "</button></li>";
+				if (!empty($val)) {
+					for($i = 0; $i < count($val); $i += 1) {
+						$link = $val[$i];
+						$input .= "<li class='field'><div><label for='link_url_" . $i . "'>Url</label><input id='link_url_" . $i . "' name='link_url_" . $i . "' type='text' value='" . urldecode($link["url"]) . "'/></div><div><label for='link_title_" . $i . "'>Title</label><input id='link_title_" . $i . "' name='link_title_" . $i . "' type='text' value='" . $link["title"] . "'/></div><button class='btn delete_link_btn' type='button'>" . icon("delete") . "</button></li>";
+					}
+				} else {
+					$fresh_inputs = true;
 				}
 			} else {
+				$fresh_inputs = true;
+			}
+			if ($fresh_inputs) {
 				//fresh input, build placeholder
-				$input .= "<li class='field'><div><label for='link_1_url'>Url</label><input id='link_1_url' name='link_1_url' type='text'/></div><div><label for='link_1_title'>Title</label><input id='link_1_title' name='link_1_title' type='text'></div><button class='btn delete_link_btn' type='button'>" . icon("delete") . "</button></li>";
+				$input .= "<li class='field'><div><label for='link_url_0'>Url</label><input id='link_url_0' name='link_url_0' type='text'/></div><div><label for='link_title_0'>Title</label><input id='link_title_0' name='link_title_0' type='text'></div><button class='btn delete_link_btn' type='button'>" . icon("delete") . "</button></li>";
 			}
 			$input .= "</ul><div class='ctas align_left'><button class='cta btn add_link_btn' type='button'>" . icon("add") . "<span>Add Link</span></button></div>";
 			break;

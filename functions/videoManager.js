@@ -14,7 +14,8 @@ var videoManager = {
 				"price",
 				"publish_date",
 				"public"
-			];
+			],
+			links;
 
 		for (var key in inputs) {
 			var val = inputs[key],
@@ -22,7 +23,7 @@ var videoManager = {
 			for (var i = 0; i < fields.length; i += 1) {
 				var field = fields[i],
 					field_id;
-				if (key.includes(field)) {
+				if (key.includes(field) && !key.includes("link")) {
 					field_id = prefix + "_" + field + "_";
 					id = key.replace(field_id, "");
 					if (!items[id]) {
@@ -31,6 +32,10 @@ var videoManager = {
 					items[id][field] = val;
 				}
 			}
+		}
+		links = util.formatLinks(inputs);
+		if (links) {
+			api_params["links"] = links;
 		}
 		console.log("items", items);
 		
@@ -41,11 +46,12 @@ var videoManager = {
 				api_params[key] = item[key];
 			}
 			console.log("params", api_params);
-			util.xhrFetch(api_endpoint, api_params, videoManager.validateSave);
 		}
-		
+		util.xhrFetch(api_endpoint, api_params, videoManager.validateSave);
 	},
 	saveNew: function (inputs) {
+		console.log("saving new video");
+		console.log(inputs);
 		var api_endpoint = "new/video",
 			api_params = [],
 			prefix = "video_",
@@ -67,17 +73,22 @@ var videoManager = {
 				prefix + "tags",
 				prefix + "price",
 				prefix + "publish_date"
-			];
-
+			],
+			links;
+		
 		validation = util.checkRequired(required, inputs);
 		if (validation.success === true) {
 			for (var key in inputs) {
 				var name = key.replace(prefix, "");
-				if (fields[name] !== "undefined") {
+				if (fields[name] !== "undefined" && !key.includes("link")) {
 					api_params[name] = inputs[key];
 				}
 			}
-			console.log(api_params);
+			links = util.formatLinks(inputs);
+			if (links) {
+				api_params["links"] = links;
+			}
+			console.log('items', api_params);
 			util.xhrFetch(api_endpoint, api_params, videoManager.validateSave);
 		} else {
 			console.log("missing required", validation.data);
