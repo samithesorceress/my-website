@@ -4,7 +4,7 @@ function viewAll($type) {
 	$html = "<section id='view_all' class='card'><div class='card_contents'>";
 	$api_endpoint  = "list/";
 	$api_params = [
-		"rows" => 5,
+		"rows" => 1,
 		"order_by" => "id",
 		"order_dir" => "DESC"
 	];
@@ -19,8 +19,10 @@ function viewAll($type) {
 	}
 	
 	$api_res = xhrFetch($api_endpoint, $api_params);
+	$pagination = false;
 	if (valExists("success", $api_res)) {
 		$list_items = $api_res["data"];
+		$pagination = $api_res["pagination"];
 		if ($list_items) {
 			$html .= "<ul id='view_all_list' data-type='" . $type . "'>";
 			if (valExists("id", $list_items)) {
@@ -32,12 +34,12 @@ function viewAll($type) {
 				$title = false;
 				if ($type !== "media") {
 					$shape = "wide";
-				}
-				if (valExists("cover", $src)) {
-					$src = $src["cover"];
-				}
-				if (valExists("title", $list_item)) {
-					$title = $list_item["title"];
+					if (valExists("cover", $src)) {
+						$src = $src["cover"];
+					}
+					if (valExists("title", $list_item)) {
+						$title = $list_item["title"];
+					}	
 				}
 
 				$html .= "<li id='list_item_" . $list_item["id"] . "' class='view_all_list_item " . $shape . "' data-key='" . $list_item["id"] . "'><button type='button' class='btn cta fab sml list_item_fab_btn'>" . file_get_contents($htp_root . "src/icons/checkbox_checked.svg") . file_get_contents($htp_root . "src/icons/checkbox_unchecked.svg") . "</button><a href='" . $htp_root . "admin/edit/" . $type . "/" . $list_item["id"] . "'>" . mediaContainer($src, $shape, $title) . "</a></li>";
@@ -50,6 +52,26 @@ function viewAll($type) {
 	} else {
 		$html .= "<p>No Results</p>";
 	}
-	$html .= "</div></section>";
+	$html .= "</div><footer><div class='ctas'>";
+		$html .= "<button id='prev_page_btn' class='cta btn sml";
+		if ($pagination) {
+			if ($pagination["prev"] === false) {
+				$html .= " disabled";
+			}
+		$html .= "' data-offset='" . $pagination["prev"];
+		} else {
+			$html .= " disabled";
+		}
+		$html .= "'>" . icon("arrow_left") . "<span>Prev Page</span></button><button id='next_page_btn' class='cta btn sml";
+		if ($pagination) {
+			if ($pagination["next"] === false) {
+				$html .= " disabled";
+			}
+		$html .= "' data-offset='" . $pagination["next"];
+		} else {
+			$html .= " disabled";
+		}
+		$html .= "'><span>Next Page</span>" . icon("arrow_right") . "</button>";
+	$html .= "</div></footer></section>";
 	return $html;
 }

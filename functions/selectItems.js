@@ -97,7 +97,99 @@ var selectItems = {
 				console.log("user clicked no");
 			}
 		}
-	},	
+	},
+	pagination: {
+		prev: function (e) {
+			util.events.cancel(e);
+			var trg = util.getTrg(e),
+				offset = trg.dataset.offset,
+				list = document.getElementById("view_all_list"),
+				type = list.dataset.type;
+			api_endpoint  = "list/" + type;
+			api_params = [];
+			api_params["rows"] = 1;
+			api_params["order_by"] = "id";
+			api_params["order_dir"] = "DESC";
+			api_params["offset"] = offset;
+			console.log("api_params", api_params);
+			util.xhrFetch(api_endpoint, api_params, selectItems.pagination.updateGrid);
+
+		},
+		next: function (e) {
+			util.events.cancel(e);
+			var trg = util.getTrg(e),
+				offset = trg.dataset.offset,
+				list = document.getElementById("view_all_list"),
+				type = list.dataset.type;
+			api_endpoint  = "list/" + type;
+			api_params = [];
+			api_params["rows"] = 1;
+			api_params["order_by"] = "id";
+			api_params["order_dir"] = "DESC";
+			api_params["offset"] = offset;
+			console.log("api_params", api_params);
+			util.xhrFetch(api_endpoint, api_params, selectItems.pagination.updateGrid);
+		},
+		updateGrid: function (res) {
+			var list = document.getElementById("view_all_list"),
+				type = list.dataset.type,
+				shape = "wide",
+				prev_btn = document.getElementById("prev_page_btn"),
+				next_btn = document.getElementById("next_page_btn");
+			if (res["success"] === true) {
+				for(var i = 0; i < list_items.length; i += 1) {
+					list_items[i].classList.remove("visible");
+				}
+				if (type == "media") {
+					shape = false;
+				}
+				setTimeout(function (list, items, pagination) {
+					list.innerHTML = "";
+					var html = "";
+					//if (util.valExists("id", items)) {
+					//	items = [items];
+					//}
+					for (var i = 0; i < items.length; i += 1) {
+						var item = items[i];
+						html += "<li id='list_item_" + item["id"] + "' class='view_all_list_item " + shape + "' data-key='" + item["id"] + "'><button type='button' class='btn cta fab sml list_item_fab_btn'>" + util.icon("checkbox_checked") + util.icon("checkbox_unchecked") + "</button><a href='" + "http://127.0.0.1/sami-the-sorceress/admin/edit/" + type + "/" + list_item["id"] + "'>";
+						if (type == "media") {
+							html += util.mediaContainer(item);
+						} else {
+							html += util.mediaContainer(item["cover"], shape, item["title"]);
+						}
+						html += "</a></li>";
+					}
+					for (var i = 0; i < 12; i += 1) {
+						html += "<li class='hidden-flex-item'></li>";
+					}
+					list.innerHTML = html;
+					setTimeout(function (){
+						var list = document.getElementById("view_all_list"),
+							list_items = list.children;
+						for(var i = 0; i < list_items.length; i += 1) {
+							list_items[i].classList.add("visible");
+						}
+					}, 10);
+
+					if (pagination) {
+						prev_btn.dataset.offset = pagination.prev;
+						next_btn.dataset.offset = pagination.next;
+						if (pagination["prev"] !== false) {
+							prev_btn.classList.remove("disabled");
+						} else {
+							prev_btn.classList.add("disabled");
+						}
+						if (pagination["next"] !== false) {
+							next_btn.classList.remove("disabled");
+						} else {
+							next_btn.classList.add("disabled");
+						}
+					}
+
+				}, 6E2, list, res["data"], res["pagination"]);
+			}
+		}
+	},
 	toggle: function(e) {
 		if (!util.isNode(e)) {
 			util.events.cancel(e);
@@ -245,7 +337,9 @@ var fabs = document.getElementsByClassName("list_item_fab_btn"),
 	select_all_btn = document.getElementById("select_all_btn"),
 	deselect_all_btn = document.getElementById("deselect_all_btn"),
 	edit_selected_btn = document.getElementById("edit_selected_btn"),
-	delete_selected_btn = document.getElementById("delete_selected_btn");
+	delete_selected_btn = document.getElementById("delete_selected_btn"),
+	prev_page_btn = document.getElementById("prev_page_btn"),
+	next_page_btn = document.getElementById("next_page_btn");
 	
 if (fabs) {
 	for (var i = 0; i < fabs.length; i += 1) {
@@ -262,9 +356,15 @@ if (list_items) {
 		}
 	}
 }
+
 if (actions_bar) {
 	select_all_btn.addEventListener("click", selectItems.actions.selectAll);
 	deselect_all_btn.addEventListener("click", selectItems.actions.deselectAll);
 	edit_selected_btn.addEventListener("click", selectItems.actions.edit);
 	delete_selected_btn.addEventListener("click", selectItems.actions.delete);
+}
+
+if (prev_page_btn && next_page_btn) {
+	prev_page_btn.addEventListener("click", selectItems.pagination.prev);
+	next_page_btn.addEventListener("click", selectItems.pagination.next);
 }

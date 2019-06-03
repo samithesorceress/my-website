@@ -54,7 +54,7 @@ var util = {
 		//}
 		req.send(formData);
 	},
-	api:  {
+	api: {
 		req_queue: [],
 		busy:  false,
 		retry:  0,
@@ -416,6 +416,103 @@ var util = {
 				return false;
 		}
 		return false;
+	},
+	mediaContainer: function (obj, shape, title) {
+		var html = false,
+			api_endpoint = "list/media",
+			api_params = [],
+			id = util.makeID(6);
+		console.log("media container", obj);
+		if (obj) {
+			// init wrapper
+			html = "<div id='media_container_" + id + "' class='media_container";
+			if (shape) {
+				switch(shape) {
+					case "wide":
+						html += " wide_container";
+						break;
+					case "tall":
+						html += " wide_container";
+						break;
+					case "round":
+						html += " round_container";
+				}
+				html += "' dataset-shape='" + shape;
+			}
+			html += "'>";
+			// slides/videos title
+			if (title) {
+				html += "<p class='title'>" + title + "</p>";
+			}
+			if (!util.valExists("type", obj)) {
+				api_params["id"] = obj;
+				util.xhrFetch(api_endpoint, api_params, util.populateMediaContainer, "media_container_" + id);
+			} else {
+				util.populateMediaContainer(obj, "media_container_" + id);
+			}
+			html += "</div>";
+		}
+		return html;
+	},
+	populateMediaContainer: function (res, id) {
+		var media_root = "http://127.0.0.1/sami-the-sorceress/uploads/",
+			trg = document.getElementById(id),
+			obj = res,
+			elem,
+			shape = trg.dataset.shape,
+			sizes,
+			srcset = "";
+
+		if (obj["success"] === true) {
+			obj = obj["data"];
+		}
+		console.log("populating", obj);
+		if (typeof(obj["type"]) !== "undefined") {
+			switch (obj["type"]) {
+				case "image":
+					elem = document.createElement("img");
+					elem.src = media_root + obj["src"] + "." + obj["ext"];
+
+					if (typeof(obj["sizes"]) !== "undefined" && obj["sizes"] !== false) {
+						sizes = parseInt(obj["sizes"]);
+						for (var i = 0; i < sizes; i += 1) {
+							var size = (i + 1) * 200;
+							srcset += media_root + obj["src"] + "_" + size + "w." + obj["ext"] + " " + size + "w, ";
+						}
+						srcset = srcset.replace(/, +$/,'');
+						elem.srcset = srcset;
+					}
+					break;
+				case "video":
+					elem = document.createElement("video");
+					elem.src = media_root + obj["src"] + "." + obj["ext"];
+					break;
+			}
+			ratio = 1;
+			if (shape) {
+				switch(shape) {
+					case "wide":
+						ratio = 2.16;
+						break;
+					case "tall":
+						ratio = .6;
+						break;
+				}
+			}
+			if (obj["ratio"] < ratio) {
+				elem.dataset.shape = "wide";
+			} else {
+				elem.dataset.shape = "tall";
+			}
+		} else {
+			elem = document.createElement("img");
+			elem.src = "http://127.0.0.1/sami-the-sorceress/src/imgs/placeholder.png";
+			elem.alt = "Placeholder image for missing file.";
+			elem.title = "Missing file.";
+			elem.dataset.shape = "wide";
+		}
+		elem.setAttribute("loading", "lazy");
+		trg.appendChild(elem);
 	}
 }
 

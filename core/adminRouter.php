@@ -35,6 +35,9 @@ if (strpos($current_path, "admin") !== false) {
 						$document_title .= " Store Item";
 						require_once($php_root . "views/new/store-item.php");
 						break;
+					default:
+						$document_title = "404 - Not Found";
+						require_once($php_root . "views/404.php");
 				}
 				break;
 			case "edit":
@@ -78,15 +81,19 @@ if (strpos($current_path, "admin") !== false) {
 					case "videos":
 						$document_title = "Video Manager";
 						require_once($php_root . "views/all/videos.php");
+						break;
 					case "photosets":
 						$document_title = "Photoset Manager";
 						require_once($php_root . "views/all/photosets.php");
+						break;
 					case "store-items":
 						$document_title = "Store Manager";
 						require_once($php_root . "views/all/store-items.php");
+						break;
 					case "slides":
 						$document_title = "Slideshow Manager";
 						require_once($php_root . "views/all/slides.php");
+						break;
 					default:
 						$document_title = "404 - Not Found";
 						require_once($php_root . "views/404.php");

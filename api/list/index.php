@@ -61,11 +61,12 @@ if ($type) {
 				if (valExists("offset", $data)) {
 					$pagination_start = $data["offset"];
 				}
+				$num_rows = ((int)$data["rows"] * 5);
 				if (valExists("rows", $data)) {
-					$pagination_end = (string)$pagination_start + ((int)$data["rows"] * 5);
+					$pagination_end = (string)$pagination_start + $num_rows;
 				}
 				$sql_limit["start"] = $pagination_start;
-				$sql_limit["end"] = $pagination_end;
+				$sql_limit["end"] = $num_rows;
 				$sql = prepareSQL("select", $table, false, $sql_where, $sql_order, $sql_limit);
 			}
 		} else {
@@ -85,6 +86,32 @@ if ($type) {
 			if ($rows) {
 				$output["success"] = true;
 				$output["data"] = $rows;
+				if (!valExists("id", $data) && $table !== "about") {
+					$output["pagination"] = [
+						"prev" => false,
+						"next" => false
+					];
+					if ($pagination_start > 0 ) {
+						$prev = $pagination_start - $num_rows;
+						if ($prev < 0) {
+							$prev = 0;
+						}
+						$output["pagination"]["prev"] = $prev;
+					}
+					if (count($rows) == $num_rows) {
+						$sql = "SELECT COUNT(*) FROM `" . $table . "`";
+						$total = false;
+						$result = $conn->query($sql);
+						if ($result->num_rows > 0) {
+							while($row = $result->fetch_assoc()) {
+								$total = $row["COUNT(*)"];
+							}
+						}
+						if ($total && $total > $pagination_end) {
+							$output["pagination"]["next"] = $pagination_end;
+						}
+					}
+				}
 			}
 		}
 	} else {

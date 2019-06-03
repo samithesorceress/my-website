@@ -331,6 +331,12 @@ form .two_columns {
   transform: scale(1) !important;
   opacity: 1 !important; }
 
+.disabled {
+  pointer-events: none; }
+  .disabled.btn,
+  .disabled > .btn {
+    background: #f1f1f3 !important; }
+
 ::-moz-selection {
   background: #ff0090;
   color: #FFF; }

@@ -452,8 +452,13 @@ form {
 	transform: scale(1)!important;
 	opacity: 1!important;
 }
-
-
+.disabled {
+	pointer-events: none;
+	&.btn,
+	> .btn{
+		background: $offwhite!important;
+	}
+}
 
 
 

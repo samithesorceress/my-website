@@ -1,51 +1,46 @@
 var mediaManager = {
 	saveChanges: function (inputs) {
-		console.log("saving edits!");
-		console.log(inputs);
-		var items = {},
-			api_endpoint = "updateMediaInfo",
-			api_params = [];
+		console.log("saving mEDIA edits!", inputs);
+		var api_endpoint = "update/media",
+			items = {},
+			fields = [
+				"title",
+				"alt",
+				"public"
+			];
+
 		for (var key in inputs) {
-			var value = inputs[key],
-				id = false;
-			switch(true) {
-				case(key.includes("file")):
-					id = key.replace("media_file_", "");
-					if (!items[id]) {
-						items[id] = [];
-					}
-					items[id]["src"] = value;
-					break;
-				case(key.includes("title")):
-					id = key.replace("media_title_", "");
-					if (!items[id]) {
-						items[id] = [];
-					}
-					items[id]["title"] = value;
-					break;
-				case(key.includes("alt")):
-					id = key.replace("media_alt_", "");
-					if (!items[id]) {
-						items[id] = [];
-					}
-					items[id]["alt"] = value;
-					break;
-				case(key.includes("public")):
-					id = key.replace("media_public_", "");
-					if (!items[id]) {
-						items[id] = [];
-					}
-					items[id]["public"] = value;
-					break;
+			var val = inputs[key],
+				id = key.split("_");
+			if (key.includes("publish_date")) {
+				id = id[3];
+			} else {
+				id = id[2];
+			}
+			console.log(id);
+			if (!items[id]) {
+				items[id] = [];
+			}
+			for (var i = 0; i < fields.length; i += 1) {
+				var field = fields[i];
+				if (key.includes(field)) {
+					items[id][field] = val;
+				}
 			}
 		}
+		
+		console.log("items", items);
+
 		for (var id in items) {
-			var item = items[id];
+			var item = items[id],
+				api_params = [];
 			api_params["id"] = id;
 			for(var key in item) {
-				var val = item[key];
-				api_params[key] = val;
+				if (!key.includes("file")) {
+					api_params[key] = item[key];
+				}
 			}
+			console.log("params", api_params)
 			util.xhrFetch(api_endpoint, api_params, mediaManager.validateSave);
 		}
 		console.dir(items);
@@ -60,7 +55,7 @@ var mediaManager = {
 		}
 	},
 	processNew: function (res, inputs) {
-		var api_endpoint = "updateMediaInfo",
+		var api_endpoint = "update/media",
 			api_params = [],
 			src = false;
 		console.log(res);
