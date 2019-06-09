@@ -4,7 +4,7 @@ function viewAll($type) {
 	$html = "<section id='view_all' class='card'><div class='card_contents'>";
 	$api_endpoint  = "list/";
 	$api_params = [
-		"rows" => 1,
+		"rows" => 5,
 		"order_by" => "id",
 		"order_dir" => "DESC"
 	];

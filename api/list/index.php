@@ -50,6 +50,9 @@ if ($type) {
 				if (valExists("type", $data)) {
 					$sql_where["type"] = $data["type"];
 				}
+				if (valExists("public", $data)) {
+					$sql_where["public"] = $data["public"];
+				}
 				if (valExists("order_by",$data)) {
 					$sql_order["by"] = $data["order_by"];
 					if (valExists("order_dir", $data)) {
@@ -61,18 +64,20 @@ if ($type) {
 				if (valExists("offset", $data)) {
 					$pagination_start = $data["offset"];
 				}
-				$num_rows = ((int)$data["rows"] * 5);
+				$num_rows = $pagination_end;
 				if (valExists("rows", $data)) {
+					$num_rows = ((int)$data["rows"] * 5);
 					$pagination_end = (string)$pagination_start + $num_rows;
 				}
 				$sql_limit["start"] = $pagination_start;
-				$sql_limit["end"] = $num_rows;
+				$sql_limit["end"] = $pagination_end;
 				$sql = prepareSQL("select", $table, false, $sql_where, $sql_order, $sql_limit);
 			}
 		} else {
 			$output["message"] = "No arguments provided.";
 		}
 		if ($sql) {
+			$output["sql"] = $sql;
 			$rows = array();
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {

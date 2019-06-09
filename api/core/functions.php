@@ -39,11 +39,11 @@ function checkRequired($required, $input) {
 function prepareSQL($action, $table, $params = false, $where = false, $order = false, $limit = false) {
 	$sql = false;
 	if ($action && $table) {
-		$table = " `" . $table . "` ";
+		$table = " `" . $table . "`";
 		$action = strtoupper($action);
 		switch($action) {
 			case "SELECT":
-				$sql = "SELECT * FROM " . $table;
+				$sql = "SELECT * FROM" . $table;
 				if (!empty($where)) {
 					$sql .= " WHERE ";
 					foreach($where as $key => $val) {
@@ -62,10 +62,10 @@ function prepareSQL($action, $table, $params = false, $where = false, $order = f
 				}
 				if (!empty($limit)) {
 					$sql .= " LIMIT ";
-					if ($limit["start"]) {
+					if (valExists("start", $limit)) {
 						$sql .= $limit["start"] . ", ";
 					}
-					if ($limit["end"]) {
+					if (valExists("end", $limit)) {
 						$sql .= $limit["end"];
 					}
 					if (!$limit["start"] && !$limit["end"]) {
@@ -76,7 +76,7 @@ function prepareSQL($action, $table, $params = false, $where = false, $order = f
 				break;
 			case "INSERT":
 				if (!empty($params)) {
-					$sql = "INSERT INTO" . $table;
+					$sql = "INSERT INTO" . $table . " ";
 					$fields = "(";
 					$values = "(";
 					foreach($params as $key => $val) {
@@ -95,7 +95,7 @@ function prepareSQL($action, $table, $params = false, $where = false, $order = f
 				break;
 			case "UPDATE":
 				if ($params && $where) {
-					$sql = "UPDATE" . $table . "SET ";
+					$sql = "UPDATE" . $table . " SET ";
 					foreach($params as $key => $val) {
 						if ($key !== "links") {
 							$val = sanitize($val);
@@ -114,6 +114,8 @@ function prepareSQL($action, $table, $params = false, $where = false, $order = f
 			default:
 				return false;
 		}
+		rtrim($sql, " ");
 	}
+	
 	return $sql;
 }

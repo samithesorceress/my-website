@@ -19,6 +19,7 @@
 	}
 	?>
 	<link href="<?php echo $htp_root; ?>src/css/App.css" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
+	<script src="<?php echo $htp_root; ?>functions/utils.js"></script>
 	<noscript>
 		<?php
 		if (isset($fonts)) {
