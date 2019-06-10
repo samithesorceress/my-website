@@ -18,6 +18,7 @@
 		echo "<link href='https://fonts.googleapis.com/css?family=" . $fonts . "' rel='stylesheet' media='none' onload='if(media!=\"all\")media=\"all\"'>";
 	}
 	?>
+	<link href="https://fonts.googleapis.com/css?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 	<link href="<?php echo $htp_root; ?>src/css/App.css" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
 	<script src="<?php echo $htp_root; ?>functions/utils.js"></script>
 	<noscript>

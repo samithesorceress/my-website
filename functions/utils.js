@@ -530,4 +530,6 @@ var util = {
 	}
 }
 
-util.spinner.remove("spinner_0", "main");
+document.body.onload = setTimeout(function () {
+	util.spinner.remove("spinner_0", "main");
+}, 5E2);

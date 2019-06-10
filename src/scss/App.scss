@@ -13,6 +13,10 @@ p:first-child {
 	margin-top: 0;
 }
 
+h1, h2 {
+	opacity: 1;
+}
+
 h1 {
     font-size: 2em;
 	margin: 0.5em 0;
@@ -48,6 +52,7 @@ h2 {
 	align-items: center;
 	background: none;
 	border: none;
+	cursor: pointer;
 	display: flex;
 	height: 2em;
 	justify-content: center;
@@ -103,31 +108,44 @@ form {
 }
 
 #app_header {
-    nav {
-        padding: 1em;
-        ul {
-            display: flex;
-            li {
-                flex-grow: 0;
-                flex-shrink: 0;
-                height: 32px;
-                &:first-child {
-                    flex-grow: 1;
-                }
-            }
-        }
-    }
-    #app_title {
-        color: $slate;
-        font-size: 1.25em;
-        line-height: 1.6em;
+	nav {
+		padding: 1em;
+		height: 5em;
+		ul {
+			display: flex;
+			justify-content: space-between;
+			height: 100%;
+			li {
+				flex-grow: 0;
+				flex-shrink: 0;
+				height: 100%;
+				opacity: 1;
+				.btn {
+					font-size: 24px;
+					&:hover, &:focus {
+						svg {
+							fill: $teal;
+						}
+					}
+					&:active {
+						svg {
+							fill: $active_teal;
+						}
+					}
+				}
+			}
+		}
 	}
-	#app_title, #search_btn {
-		opacity: 1;
+
+	#app_title {
+		color: $pink;
+		font-family: "UnifrakturMaguntia", "Quicksand", sans-serif;
+		font-size: 2.5em;
+		text-shadow: -1px 0 black, 0 1px rgb(36, 16, 16), 1px 0 black, 0 -1px black;
+		line-height: 1.25em;
+		&::-moz-selection { background: $teal; color: $white}
+		&::selection { background: $teal; color: $white}
 	}
-    .btn {
-        font-size: 16px;
-    }
 }
 
 
@@ -137,35 +155,55 @@ h1 {
 }
 
 #slideshow {
+	align-items: center;
 	background: $offwhite;
 	height: 38.46vw;
+	display: flex;
+	justify-content: space-between;
 	opacity: 1;
 	position: relative;
 	width: 100%;
+	z-index: 1;
 	.slide_arrow {
 		background: $offwhite;
 		border-radius: 50%;
-		cursor: pointer;
-		font-size: 1.25em;
-		position: absolute;
-		top: calc(50% - .5em);
-		z-index: 3;
-		&:hover, &:focus, &:active {
-			background: $white;
+		font-size: 1.5em;
+		margin: 1em;
+		position: relative;
+		&::before {
+			background: $shadow;
+			border-radius: 50%;
+			content: "";
+			display: block;
+			font-size: inherit;
+			height: 2.2em;
+			left: -.1em;
+			position: absolute;
+			top: -.1em;
+			width: 2.2em;
+			z-index: -1;
 		}
-	}
-	#prev_slide_btn {
-		left: .5em;
-	}
-	#next_slide_btn {
-		right: .5em;
+		&:hover, &:focus {
+			background: $white;
+			.icon {
+				fill: $teal;
+			}
+		}
+		&:active {
+			.icon {
+				fill: $active_teal;
+			}
+		}
 	}
 	.slides_container {
 		height: 100%;
+		left: 0;
 		overflow: hidden;
 		position: absolute;
+		top: 0;
 		width: 100%;
 		background: blue;
+		z-index: -2;
 		.slide {
 			align-items: flex-start;
 			background: red;

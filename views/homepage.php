@@ -1,12 +1,12 @@
 <?php
 require_once($php_root . "components/header.php");
+require_once($php_root . "components/card.php");
 require_once($php_root . "components/slideshow.php");
-?><main id="main">
-		<div id="spinner_0" class="spinner visible">
-			<svg viewBox="0 0 50 50">
-				<circle class="progress" cx="25" cy="25" r="20"/>
-			</svg>
-		</div>
-		<h1 class="title"><?php echo $document_title; ?></h1>
-		<article>
-<?php require_once($php_root . "components/footer.php");
+require_once($php_root . "components/ctas.php");
+require_once($php_root . "components/intro.php");
+	
+	echo intro($document_title, "~~~~");
+	echo card("Videos", false, false, ctas("videos", "view-all"));
+	echo card("Photosets", false, false, ctas("photosets", "view-all"));
+	echo card("Store", false, false, ctas("store", "view-all"));
+require_once($php_root . "components/footer.php");

@@ -43,7 +43,12 @@
 		<nav>
 			<ul>
 				<li>
-					<a id="app_title" class="title" href="<?php echo $htp_root; ?>">Sami the Sorceress</a>
+					<button id="menu_btn" class="btn">
+						<?php echo file_get_contents($htp_root . "src/icons/menu.svg"); ?>
+					</button>
+				</li>
+				<li>
+					<a id="app_title" class="title" href="<?php echo $htp_root; ?>">sami the sorceress</a>
 				</li>
 				<li>
 					<button id="search_btn" class="btn">
