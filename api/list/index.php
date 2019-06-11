@@ -24,6 +24,8 @@ if ($type) {
 		case "slide":
 			$table = $type . "s";
 			break;
+		case "store":
+		case "stores":
 		case "store-item":
 		case "store-items":
 		case "storeItem":
@@ -66,7 +68,7 @@ if ($type) {
 				}
 				$num_rows = $pagination_end;
 				if (valExists("rows", $data)) {
-					$num_rows = ((int)$data["rows"] * 5);
+					$num_rows = ((int)$data["rows"] * 3);
 					$pagination_end = (string)$pagination_start + $num_rows;
 				}
 				$sql_limit["start"] = $pagination_start;

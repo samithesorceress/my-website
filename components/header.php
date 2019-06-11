@@ -48,7 +48,7 @@
 					</button>
 				</li>
 				<li>
-					<a id="app_title" class="title" href="<?php echo $htp_root; ?>">sami the sorceress</a>
+					<a id="app_title" class="title" href="<?php echo $htp_root; ?>"><?php echo file_get_contents($htp_root . "src/imgs/logo.svg"); ?></a>
 				</li>
 				<li>
 					<button id="search_btn" class="btn">

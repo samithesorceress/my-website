@@ -32,6 +32,7 @@ ul, ol {
 
 #app_header {
 	background: $white;
+	box-shadow: 0 0 0 3px $shadow;
 	height: 6.5em;
 	left: 0;
 	line-height: 2em;
@@ -40,16 +41,6 @@ ul, ol {
 	top: -24px;
 	width: 100%;
 	z-index: 2;
-	&::after {
-		background: $shadow;
-		content: "";
-		display: block;
-		height: .2em;
-		left: 0;
-		top: 0;
-		width: 100%;
-		z-index: -1;
-	}
 	nav li {
 		opacity: 0;
 		transition-property: opacity;

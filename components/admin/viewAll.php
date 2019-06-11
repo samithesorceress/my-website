@@ -13,6 +13,13 @@ function viewAll($type) {
 		case "media":
 			$api_endpoint .= $type;
 			break;
+		case "store":
+		case "stores":
+		case "store_item":
+		case "store-item":
+		case "store_items":
+		case "store-items":
+			$api_endpoint .= "store-items";
 		default:
 			$api_endpoint .= $type . "s";
 			break;

@@ -15,8 +15,11 @@
 		
 		
 		echo "<div id='slideshow'>";
-			echo "<button id='prev_slide_btn' class='btn slide_arrow'>" . file_get_contents($htp_root . "src/icons/arrow_left.svg") . "</button>";
-			echo "<button id='next_slide_btn' class='btn slide_arrow'>" . file_get_contents($htp_root . "src/icons/arrow_right.svg") . "</button>";
+			echo "<ul class='slide_nav'>";
+				echo "<li><button class='prev_slide_btn btn slide_arrow'>" . file_get_contents($htp_root . "src/icons/arrow_left.svg") . "</button></li>";
+				
+				echo "<li><button class='next_slide_btn btn slide_arrow'>" . file_get_contents($htp_root . "src/icons/arrow_right.svg") . "</button></li>";
+			echo "</ul>";
 			echo "<ul class='slides_container'>";
 			foreach($slides as $slide) {
 				echo "<li class='slide'>";
@@ -57,6 +60,8 @@
 				echo "</li>";
 			}
 			echo "</ul>";
+			echo "<footer class='slideshow_footer'>";
+			echo "</footer>";
 		echo "</div>";
 	}
 ?>

@@ -1,7 +1,7 @@
 .media_browser .actions_footer {
   background: #FFF;
   border-radius: 0 0 .5em .5em;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.075);
   display: flex;
   justify-content: space-between;
   height: 4em;

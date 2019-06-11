@@ -249,6 +249,10 @@ function mediaContainer($obj, $shape = false, $title = false) {
 					break;
 				case "round":
 					$html .= " round_container";
+					break;
+				case "hd":
+					$html .= " hd_container";
+					break;
 			}
 		}
 		$html .= "'>";
@@ -294,8 +298,11 @@ function mediaContainer($obj, $shape = false, $title = false) {
 						case "wide":
 							$ratio = 2.16;
 							break;
-						case "tall";
+						case "tall":
 							$ratio = .6; // ??
+							break;
+						case "hd":
+							$ratio = 1.77;
 							break;
 					}
 				}
