@@ -2,10 +2,14 @@
 
 
 a {
-    text-decoration: none;
-    p > & {
-        color: $teal;
-    }
+	color: $teal;
+	text-decoration: none;
+	p > & {
+		color: $teal;
+	}
+	&:hover, &:focus, &:active {
+		color: $active_teal;
+	}
 }
 
 
@@ -18,7 +22,7 @@ h1, h2 {
 }
 
 h1 {
-    font-size: 2em;
+	font-size: 2.5em;
 	margin: 0.5em 0;
 	opacity: 0;
 	transition-property: opacity;
@@ -26,26 +30,28 @@ h1 {
 }
 
 h2 {
-    display: flex;
-    font-size: 1.5em;
+	display: flex;
+	font-size: 1.75em;
+	font-weight: 500;
 	margin: 0 0 .666em 0;
-    .icon {
-        display: inline;
-        flex-grow: 0;
-        flex-shrink: 0;
-        font-size: 16px;
-        margin: 0.25em .5em 0.25em 0.25em;
-        * + & {
-            margin: 0.25em 0.25em 0.25em 1em;
-        }
-    }
-    span {
-        font-size: 24px;
-    }
+	.icon {
+		display: inline;
+		flex-grow: 0;
+		flex-shrink: 0;
+		font-size: 16px;
+		margin: 0.25em .5em 0.25em 0.25em;
+		* + & {
+			margin: 0.25em 0.25em 0.25em 1em;
+		}
+	}
+	span {
+		font-size: inherit;
+		font-weight: inherit;
+	}
 }
 
 .title {
-    font-weight: 500;
+	font-weight: 500;
 }
 
 .btn {
@@ -65,15 +71,15 @@ h2 {
 }
 
 #notification_bar {
-    background: $pink;
-    color: $white;
-    height: 1.5em;
-    text-align: center;
-    width: 100%;
-    span {
-        font-size: .8em;
-        line-height: 1.875em;
-    }
+	background: $pink;
+	color: $white;
+	height: 1.5em;
+	text-align: center;
+	width: 100%;
+	span {
+		font-size: .8em;
+		line-height: 1.875em;
+	}
 }
 
 
@@ -109,12 +115,11 @@ form {
 
 #app_header {
 	nav {
-		padding: 1em;
 		height: 5em;
 		ul {
 			display: flex;
-			justify-content: space-between;
 			height: 100%;
+			position: relative;
 			li {
 				flex-grow: 0;
 				flex-shrink: 0;
@@ -134,11 +139,37 @@ form {
 					}
 				}
 			}
+			&.static_nav {
+				box-shadow: 0 0 0 1px $shadow;
+				height: 5em;
+				justify-content: space-between;
+				padding: 1em;
+				z-index: 5;
+			}
+			&.menu {
+				background: $white;
+				height: 3em;
+				justify-content: center;
+				padding: .5em;
+				z-index: inherit;
+				li {
+					font-weight: bold;
+					max-width: 12em;
+					text-align: center;
+					width: calc(100% / 6);
+				}
+			}
 		}
 	}
 
 	#menu_btn {
-		@media(min-width: 1440px) {
+		@media(min-width: 768px) {
+			display: none;
+		}
+	}
+	
+	#mailing_list_btn {
+		@media(max-width: 767px) {
 			display: none;
 		}
 	}
@@ -239,28 +270,29 @@ h1 {
 
 
 .card {
-    background: $white;
-    box-shadow: 0 0 0 1px $shadow;
+	background: $white;
+	box-shadow: 0 0 0 1px $shadow;
 	border-radius: .5em;
 	display: flex;
-    flex-direction: column;
+	flex-direction: column;
 	max-width: 1440px;
 	opacity: 1;
 	padding: 1em 1em 0 1em;
 	transform: scale(1);
 	width: 100%;
-    * + & {
-        margin-top: 1em;
-    }
-    input, textarea {
-        &:not([type="submit"]),
-        &:not([type="checkbox"]),
-        &:not([type="radio"]) { 
+	* + & {
+		margin-top: 1em;
+	}
+	input, textarea {
+		&:not([type="submit"]),
+		&:not([type="checkbox"]),
+		&:not([type="radio"]) { 
 			background: $offwhite;
 			border: 1px solid $shadow!important;
 		}
 	}
-	h2, h3 {
+	h2 {
+		font-size: 2em;
 		&:first-child {
 			margin-top: 0;
 		}
@@ -287,10 +319,10 @@ h1 {
 	> ul {
 		margin-bottom: 1em;
 	}
-    .ctas {
-        display: flex;
-        flex-wrap: wrap;
-    }
+	.ctas {
+		display: flex;
+		flex-wrap: wrap;
+	}
 }
 
 .ctas {
@@ -314,6 +346,9 @@ h1 {
 	}
 	&.danger {
 		background: $red;
+	}
+	&.buy {
+		background: $pink;
 	}
 	border: 0;
 	color: $white;
@@ -418,6 +453,7 @@ h1 {
 	flex-shrink: 0;
 	height: 6em;
 	justify-content: center;
+	opacity: 1;
 	overflow: hidden;
 	position: relative;
 	width: 6em;
@@ -671,32 +707,38 @@ form {
 			width: calc(33.33% - 2em);
 		}
 		&.thumbnail {
+			align-items: center;
 			box-shadow: 0 0 0 0 $shadow;
 			cursor: pointer;
-			display: flex;
+			display: flex; 
+			//justify-content: flex-start;
 			margin: 0 0 2em 0;
+			padding: 1em;
 			position: relative;
 			transition-property: box-shadow;
+			max-width: 18em;
+			.thumbnail_content {
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				> a {
+					display: flex;
+				}
+			}
+			&:hover, &:focus, &:active {
+				box-shadow: 0 0 0 2px $shadow;
+				.media_container {
+					//filter: brightness(1.1);
+					opacity: 0.75;
+				}
+			}
 		}
 		.media_container {
 			pointer-events: none;
 		}
-		&:hover, &:focus, &:active {
-			box-shadow: 0 0 0 2px $shadow;
-			.media_container {
-				filter: brightness(1.1);
-				opacity: 0.8;
-			}
-		}
-		> a {
-			//align-items: center;
-			display: flex;
-			flex-direction: column;
-			//justify-content: flex-start;
-		}
 		dl {
+			flex: 1 0 auto;
 			margin: 0;
-			max-width: 16em;
 			width: 100%;
 			* {
 				margin: .5em 0;
@@ -711,22 +753,32 @@ form {
 		}
 		.thumbnail_description {
 			color: $slate;
-			flex: 1 0 auto;
-		}
-		.thumbnail_price {
-			color: $pink;
-			font-weight: bold;
 		}
 		.thumbnail_footer {
-			display: flex;
-			justify-content: space-between;
-			margin-bottom: 1em;
+			max-width: 16em;
 			width: 100%;
-			a {
-				display: block;
-				width: calc(50% - 1em);
-				.btn {
-					width: 100%;
+			ul {
+			display: flex;
+			justify-content: flex-end;
+			//margin-bottom: 1em;
+			width: 100%;
+				li {
+					display: block;
+					width: calc(50% - 1em);
+					&.thumbnail_price {
+						flex-grow: 1;
+						p {
+							color: $pink;
+							font-weight: bold;
+							height: 3em;
+							line-height: 1em;
+							margin: 0;
+							padding: 1em 1em 1em 0;
+						}
+					}
+					.btn {
+						width: 100%;
+					}
 				}
 			}
 		}

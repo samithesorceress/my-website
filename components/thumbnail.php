@@ -4,22 +4,25 @@ function thumbnail($type, $item) {
 	if (is_string($item)) {
 		//handle edge case?
 	}
-	$html = "<li class='thumbnail card'><a href='" . $htp_root . $type . "/" . $item["id"] . "'>";
+	$url = $htp_root . $type . "/" . $item["id"];
+	$thumbnail = "<li class='thumbnail card'><div class='thumbnail_content'>";
 	if (valExists("cover", $item)) {
-		$html .= mediaContainer($item["cover"], "hd");
+		$thumbnail .= "<a href='" . $url . "'>" . mediaContainer($item["cover"], "hd") . "</a>";
 	}
-	$html .= "<dl>";
+	$info = "<dl>";
 		if (valExists("title", $item)) {
-			$html .= "<dt class='thumbnail_title'>" . $item["title"] . "</dt>";
+			$info .= "<dt class='thumbnail_title'>" . $item["title"] . "</dt>";
 		}
 		if (valExists("description", $item)) {
-			$html .= "<dd class='thumbnail_description'>" . substr($item["description"], 0, 56) . "...</dd>";
+			$info .= "<dd class='thumbnail_description'>" . substr($item["description"], 0, 56) . "... <a href='" . $url . "'>[read more]</a></dd>";
 		}
+	$info .= "</dl>";
+	$footer = "<footer class='thumbnail_footer'><ul>";
 		if (valExists("price", $item)) {
-			$html .= "<dd class='thumbnail_price'>$" . $item["price"] . "</dd>";
+			$footer .= "<li class='thumbnail_price'><p>$" . $item["price"] . "</p></li>";
 		}
-	$html .= "</dl>";
-	$html .= "<footer class='thumbnail_footer'><a href='" . $htp_root . "'><button type='button' class='btn cta sml'><span>Info</span></button></a><a href='" . $htp_root . "'><button type='button' class='btn cta sml'><span>Buy</span></button></a></footer>";
-	$html .= "</a></li>";
-	return $html;
+		$footer .= "<li><a href='" . $htp_root . "'><button type='button' class='btn cta sml'><span>Buy</span></button></a></li>";
+	$footer .= "</ul></footer>";
+	$thumbnail .= $info . $footer . "</div></li>";
+	return $thumbnail;
 }

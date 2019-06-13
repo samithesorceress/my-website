@@ -7,7 +7,20 @@ require_once($php_root . "components/intro.php");
 require_once($php_root . "components/thumbnail_group.php");
 	
 	echo intro($document_title, "~~~~");
-	echo card("Videos", false, thumbnailGroup("videos", 3), ctas("videos", "view-all"));
-	echo card("Photosets", false, thumbnailGroup("photosets", 1), ctas("photosets", "view-all"));
-	echo card("Store", false, thumbnailGroup("store", 1), ctas("store", "view-all"));
+
+	echo "<div class='card'><h2>Latest Videos</h2>";
+		echo thumbnailGroup("videos", 3);
+		echo ctas("videos", "view-all");
+	echo "</div>";
+
+	echo "<div class='card'><h2>Photosets</h2>";
+		echo thumbnailGroup("photosets", 1);
+		echo ctas("photosets", "view-all");
+	echo "</div>";
+
+	echo "<div class='card'><h2>Store</h2>";
+		echo thumbnailGroup("store", 1);
+		echo ctas("store", "view-all");
+	echo "</div>";
+
 require_once($php_root . "components/footer.php");

@@ -26,14 +26,14 @@ ul, ol {
 #app_header {
   background: #FFF;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.075);
-  height: 6.5em;
+  height: 9.5em;
   left: 0;
   line-height: 2em;
   padding: 0;
   position: fixed;
   top: -24px;
   width: 100%;
-  z-index: 2; }
+  z-index: 4; }
   #app_header nav li {
     opacity: 0;
     transition-property: opacity;
@@ -50,10 +50,16 @@ main {
 #slideshow,
 h1, h2,
 .card,
+.media_container,
 #footer > * {
   opacity: 0;
   transition-property: opacity;
   transition-duration: .6s; }
+
+.media_container {
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: .4s; }
 
 .spinner {
   height: 4em;
@@ -66,7 +72,7 @@ h1, h2,
   transition-property: scale, opacity;
   transition-duration: .4s;
   width: 4em;
-  z-index: 5;
+  z-index: 3;
   will-change: transform; }
   .spinner.visible {
     transform: scale(1);
