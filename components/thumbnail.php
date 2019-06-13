@@ -6,9 +6,17 @@ function thumbnail($type, $item) {
 	}
 	$url = $htp_root . $type . "/" . $item["id"];
 	$thumbnail = "<li class='thumbnail card'><div class='thumbnail_content'>";
-	if (valExists("cover", $item)) {
-		$thumbnail .= "<a href='" . $url . "'>" . mediaContainer($item["cover"], "hd") . "</a>";
+	$thumbnail .= "<a href='" . $url . "'>";
+	$thumbnail .= mediaContainer($item["cover"], "hd");
+	switch($type) {
+		case "video":
+			$thumbnail .= "<span class='timestamp'>26:05</span>";
+			break;
+		case "photoset":
+			$thumbnail .= "<span class='timestamp'>12 Photos</span>";
+			break;
 	}
+	$thumbnail .= "</a>";
 	$info = "<dl>";
 		if (valExists("title", $item)) {
 			$info .= "<dt class='thumbnail_title'>" . $item["title"] . "</dt>";

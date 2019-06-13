@@ -95,8 +95,13 @@ form > * {
     #app_header ul li {
       flex-grow: 0;
       flex-shrink: 0;
-      height: 100%;
-      opacity: 1; }
+      height: 4em;
+      opacity: 1;
+      min-width: 4em; }
+      @media (min-width: 768px) {
+        #app_header ul li {
+          height: 5em;
+          min-width: 5px; } }
       #app_header ul li .btn {
         font-size: 16px;
         padding: 0;
@@ -151,6 +156,9 @@ form > * {
               display: block;
               height: 100%;
               width: 100%; } }
+  @media (max-width: 767px) and (max-height: 29em) {
+    #app_header ul#menu {
+      overflow-y: scroll; } }
       @media (min-width: 768px) {
         #app_header ul#menu {
           align-items: center;
@@ -644,13 +652,22 @@ form .two_columns {
         flex-direction: column;
         width: 100%; }
         .thumbnail_group li.thumbnail .thumbnail_content > a {
-          display: flex; }
+          display: flex;
+          position: relative; }
       .thumbnail_group li.thumbnail:hover, .thumbnail_group li.thumbnail:focus, .thumbnail_group li.thumbnail:active {
         box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.075); }
         .thumbnail_group li.thumbnail:hover .media_container, .thumbnail_group li.thumbnail:focus .media_container, .thumbnail_group li.thumbnail:active .media_container {
           opacity: 0.75; }
     .thumbnail_group li .media_container {
       pointer-events: none; }
+    .thumbnail_group li .timestamp {
+      background: rgba(0, 0, 50, 0.2);
+      color: #FFF;
+      font-size: 12px;
+      padding: 8px;
+      position: absolute;
+      left: 8px;
+      bottom: 8px; }
     .thumbnail_group li dl {
       flex: 1 0 auto;
       margin: 0;
