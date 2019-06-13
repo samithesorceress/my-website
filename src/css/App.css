@@ -126,13 +126,13 @@ form > * {
         #app_header ul.static_nav {
           box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.075);
           height: 5em; } }
-    #app_header ul.menu {
+    #app_header ul#menu {
       display: none;
       background: #FFF;
       height: 3em;
       z-index: inherit; }
       @media (max-width: 767px) {
-        #app_header ul.menu {
+        #app_header ul#menu {
           box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.075);
           display: flex;
           height: 100vh;
@@ -145,24 +145,24 @@ form > * {
           width: 16em;
           z-index: 7;
           transition-property: transform; }
-          #app_header ul.menu li {
+          #app_header ul#menu li {
             height: 4em; }
-            #app_header ul.menu li a {
+            #app_header ul#menu li a {
               display: block;
               height: 100%;
               width: 100%; } }
       @media (min-width: 768px) {
-        #app_header ul.menu {
+        #app_header ul#menu {
           align-items: center;
           display: inline-flex;
           justify-content: center;
           padding: 0; }
-          #app_header ul.menu li {
+          #app_header ul#menu li {
             height: 3em;
             max-width: 12em;
             text-align: center;
             width: calc(100% / 6); }
-            #app_header ul.menu li a {
+            #app_header ul#menu li a {
               align-items: center;
               display: inline-flex;
               height: 100%;
@@ -170,34 +170,47 @@ form > * {
               line-height: 1em;
               padding: 1em;
               width: 100%; } }
-      #app_header ul.menu li {
+      #app_header ul#menu li {
         font-weight: bold; }
-  @media (min-width: 768px) {
-    #app_header #menu_btn {
-      display: none; } }
-  #app_header #menu_btn_hitbox {
+  #app_header #menu_btn {
     display: none; }
     @media (max-width: 767px) {
-      #app_header #menu_btn_hitbox {
-        background: rgba(0, 0, 50, 0.2);
-        display: block;
+      #app_header #menu_btn {
+        display: flex;
+        font-size: 16px;
         height: 4em;
         left: 0;
+        opacity: 1;
         position: absolute;
         top: 1.5em;
         transition-property: opacity;
         width: 4em;
         z-index: 6; }
-        #app_header #menu_btn_hitbox div {
-          height: 100%;
-          width: 100%; } }
+        #app_header #menu_btn .icon {
+          height: 1.25em;
+          width: 1.25em; }
+        #app_header #menu_btn:hover .icon, #app_header #menu_btn:focus .icon {
+          fill: #00CCFF; }
+        #app_header #menu_btn:active .icon {
+          fill: #00E1FF; } }
+  #app_header #menu_shadow {
+    background: rgba(0, 0, 50, 0.2);
+    content: "";
+    display: block;
+    height: 100vh;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transition-property: opacity;
+    width: 100vw;
+    z-index: -1; }
   @media (max-width: 767px) {
-    #app_header #menu_checkbox:checked ~ .menu {
+    #app_header #menu_checkbox:checked ~ #menu {
       transform: translateX(16em); }
-    #app_header #menu_checkbox:checked ~ #menu_btn_hitbox {
-      height: 100vh;
+    #app_header #menu_checkbox:checked ~ #menu_shadow {
       opacity: 1;
-      width: 100vw; } }
+      pointer-events: all; } }
   @media (max-width: 767px) {
     #app_header #mailing_list_btn {
       display: none; } }

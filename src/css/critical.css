@@ -52,8 +52,10 @@ ul, ol {
   background: none !important;
   border: none; }
 
-#menu_btn_hitbox {
-  opacity: 0; }
+#menu_btn, #menu_shadow {
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: .6s; }
 
 main {
   display: flex;

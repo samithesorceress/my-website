@@ -164,7 +164,7 @@ form {
 				height: 5em;
 			}
 		}
-		&.menu {
+		&#menu {
 			display: none;
 			background: $white;
 			height: 3em;
@@ -182,7 +182,6 @@ form {
 				width: 16em;
 				z-index: 7;
 				transition-property: transform;
-
 				li {
 					height: 4em;
 					a {
@@ -220,36 +219,56 @@ form {
 	}
 
 	#menu_btn {
-		@media(min-width: 768px) {
-			display: none;
-		}
-	}
-	#menu_btn_hitbox {
 		display: none;
 		@media(max-width: 767px) {
-			background: $dimmed_lights;
-			display: block;
+			display: flex;
+			font-size: 16px;
 			height: 4em;
 			left: 0;
+			opacity: 1;
 			position: absolute;
 			top: 1.5em;
 			transition-property: opacity;
 			width: 4em;
 			z-index: 6;
-			div {
-				height: 100%;
-				width: 100%;
+			.icon {
+				height: 1.25em;
+				width: 1.25em;
+			}
+			&:hover, &:focus {
+				.icon {
+					fill: $teal;
+				}
+			}
+			&:active {
+				.icon {
+					fill: $active_teal;
+				}
 			}
 		}
 	}
+
+	#menu_shadow {
+		background: $dimmed_lights;
+		content: "";
+		display: block;
+		height: 100vh;
+		left: 0;
+		pointer-events: none;
+		position: absolute;
+		top: 0;
+		transition-property: opacity;
+		width: 100vw;
+		z-index: -1;
+	}
+
 	@media(max-width: 767px) {
-		#menu_checkbox:checked ~ .menu {
+		#menu_checkbox:checked ~ #menu {
 			transform: translateX(16em);
 		}
-		#menu_checkbox:checked ~ #menu_btn_hitbox {
-			height: 100vh;
+		#menu_checkbox:checked ~ #menu_shadow {
 			opacity: 1;
-			width: 100vw;
+			pointer-events: all;
 		}
 	}
 

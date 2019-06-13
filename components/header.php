@@ -42,9 +42,6 @@
 		<div id="notification_bar"><span>Under construction...</span></div>
 		<ul class="static_nav">
 			<li>
-				<button id="menu_btn" class="btn">
-					<?php echo file_get_contents($htp_root . "src/icons/menu.svg"); ?>
-				</button>
 				<button id="mailing_list_btn" class="btn">
 					<?php echo file_get_contents($htp_root . "src/icons/mail.svg"); ?>
 				</button>
@@ -61,8 +58,11 @@
 			</li>
 		</ul>
 		<input type="checkbox" id="menu_checkbox" name="menu_checkbox" />
-		<label id="menu_btn_hitbox" for="menu_checkbox"></label>
-		<ul class="menu">
+		<label for="menu_checkbox" id="menu_btn" class="btn">
+			<?php echo file_get_contents($htp_root . "src/icons/menu.svg"); ?>
+		</label>
+		<label for="menu_checkbox" id="menu_shadow"></label>
+		<ul id="menu">
 		<?php
 		echo "<li><a href='" . $htp_root . "'>Homepage</a></li>";
 		echo "<li><a href='" . $htp_root . "about'>About</a></li>";
