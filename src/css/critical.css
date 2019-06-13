@@ -4,12 +4,14 @@ html, body {
 
 body {
   box-sizing: border-box;
-  color: #252525;
   font-family: "Quicksand", sans-serif;
   font-size: 16px;
   font-weight: 400;
   margin: 0;
-  padding: 5em 0 0 0; }
+  padding: 4em 0 0 0; }
+  @media (min-width: 768px) {
+    body {
+      padding-top: 8em; } }
 
 *, *::before, *::after {
   box-sizing: inherit;
@@ -26,7 +28,7 @@ ul, ol {
 #app_header {
   background: #FFF;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.075);
-  height: 9.5em;
+  height: 5.5em;
   left: 0;
   line-height: 2em;
   padding: 0;
@@ -34,10 +36,24 @@ ul, ol {
   top: -24px;
   width: 100%;
   z-index: 4; }
-  #app_header nav li {
+  @media (min-width: 768px) {
+    #app_header {
+      height: 9.5em; } }
+  #app_header li {
     opacity: 0;
     transition-property: opacity;
     transition-duration: .6s; }
+
+#menu_checkbox {
+  height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  background: none !important;
+  border: none; }
+
+#menu_btn_hitbox {
+  opacity: 0; }
 
 main {
   display: flex;

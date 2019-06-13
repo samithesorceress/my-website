@@ -114,50 +114,107 @@ form {
 }
 
 #app_header {
-	nav {
-		height: 5em;
-		ul {
-			display: flex;
+	display: flex;
+	flex-direction: column;
+	ul {
+		display: flex;
+		height: 100%;
+		position: relative;
+		li {
+			flex-grow: 0;
+			flex-shrink: 0;
 			height: 100%;
-			position: relative;
-			li {
-				flex-grow: 0;
-				flex-shrink: 0;
-				height: 100%;
-				opacity: 1;
-				.btn {
-					font-size: 24px;
-					&:hover, &:focus {
-						svg {
-							fill: $teal;
-						}
+			opacity: 1;
+			.btn {
+				font-size: 16px;
+				padding: 0;
+				height: 4em;
+				width: 4em;
+				@media(min-width: 768px) {
+					padding: 1.25em;
+					height: 5em;
+					width: 5em;
+				}
+				.icon {
+					height: 1.25em;
+					width: 1.25em;
+					@media(min-width: 768px) {
+						height: 1.5em;
+						width: 1.5em;
 					}
-					&:active {
-						svg {
-							fill: $active_teal;
-						}
+				}
+				&:hover, &:focus {
+					.icon {
+						fill: $teal;
+					}
+				}
+				&:active {
+					.icon {
+						fill: $active_teal;
 					}
 				}
 			}
-			&.static_nav {
+		}
+		&.static_nav {
+			height: 4em;
+			justify-content: space-between;
+			z-index: 5;
+			@media(min-width: 768px) {
 				box-shadow: 0 0 0 1px $shadow;
 				height: 5em;
-				justify-content: space-between;
-				padding: 1em;
-				z-index: 5;
 			}
-			&.menu {
-				background: $white;
-				height: 3em;
-				justify-content: center;
-				padding: .5em;
-				z-index: inherit;
+		}
+		&.menu {
+			display: none;
+			background: $white;
+			height: 3em;
+			z-index: inherit;
+			@media(max-width: 767px) {
+				box-shadow: 0 0 0 3px $shadow;
+				display: flex;
+				height: 100vh;
+				flex-direction: column;
+				left: -16em;
+				max-width: calc(100vw - 2em);
+				padding: 5em 1em 1em 1em;
+				position: absolute;
+				top: 1.5em;
+				width: 16em;
+				z-index: 7;
+				transition-property: transform;
+
 				li {
-					font-weight: bold;
+					height: 4em;
+					a {
+						display: block;
+						height: 100%;
+						width: 100%;
+					}
+				}
+			}
+			@media(min-width: 768px) {
+				align-items: center;
+				display: inline-flex;
+				justify-content: center;
+				padding: 0;
+				li {
+					height: 3em;
 					max-width: 12em;
 					text-align: center;
 					width: calc(100% / 6);
+					a {
+						align-items: center;
+						display: inline-flex;
+						height: 100%;
+						justify-content: center;
+						line-height: 1em;
+						padding: 1em;
+						width: 100%;
+					}
 				}
+			}
+			li {
+				font-weight: bold;
 			}
 		}
 	}
@@ -167,7 +224,35 @@ form {
 			display: none;
 		}
 	}
-	
+	#menu_btn_hitbox {
+		display: none;
+		@media(max-width: 767px) {
+			background: $dimmed_lights;
+			display: block;
+			height: 4em;
+			left: 0;
+			position: absolute;
+			top: 1.5em;
+			transition-property: opacity;
+			width: 4em;
+			z-index: 6;
+			div {
+				height: 100%;
+				width: 100%;
+			}
+		}
+	}
+	@media(max-width: 767px) {
+		#menu_checkbox:checked ~ .menu {
+			transform: translateX(16em);
+		}
+		#menu_checkbox:checked ~ #menu_btn_hitbox {
+			height: 100vh;
+			opacity: 1;
+			width: 100vw;
+		}
+	}
+
 	#mailing_list_btn {
 		@media(max-width: 767px) {
 			display: none;
@@ -175,9 +260,22 @@ form {
 	}
 
 	#app_title {
-		display: flex;
-		height: 36px;
-		padding: 6px 0;
+		align-items: center;
+		display: inline-flex;
+		flex-shrink: 1;
+		height: 4em;
+		justify-content: center;
+		padding: 0;
+		@media(min-width: 768px) {
+			height: 5em;
+		}
+		svg {
+			@media(min-width: 430px){
+				height: 36px;
+				stroke-width: 2.1;
+				width: 276px;
+			}
+		}
 	}
 }
 
@@ -747,7 +845,7 @@ form {
 			}
 		}
 		.thumbnail_title {
-			color: $teal;
+			color: $slate;
 			font-size: 1.25em;
 			font-weight: bold;
 		}

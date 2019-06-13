@@ -40,37 +40,37 @@
     
 	<header id="app_header">
 		<div id="notification_bar"><span>Under construction...</span></div>
-		<nav>
-			<ul class="static_nav">
-				<li>
-					<button id="menu_btn" class="btn">
-						<?php echo file_get_contents($htp_root . "src/icons/menu.svg"); ?>
-					</button>
-					<button id="mailing_list_btn" class="btn">
-						<?php echo file_get_contents($htp_root . "src/icons/mail.svg"); ?>
-					</button>
-				</li>
-				<li>
-					<a id="app_title" class="title" href="<?php echo $htp_root; ?>"><?php echo file_get_contents($htp_root . "src/imgs/logo.svg"); ?></a>
-				</li>
-				<li>
-					<button id="search_btn" class="btn">
-						<a href="<?php echo $htp_root; ?>search">
-							<?php echo file_get_contents($htp_root . "src/icons/search.svg"); ?>
-						</a>
-					</button>
-				</li>
-			</ul>
-			<ul class="menu">
-			<?php
-			echo "<li><a href='" . $htp_root . "'>Homepage</a></li>";
-			echo "<li><a href='" . $htp_root . "about'>About</a></li>";
-			echo "<li><a href='" . $htp_root . "videos'>Videos</a></li>";
-			echo "<li><a href='" . $htp_root . "photosets'>Photosets</a></li>";
-			echo "<li><a href='" . $htp_root . "store'>Store</a></li>";
-			echo "<li><a href='" . $htp_root . "contact'>Contact</a></li>";
-			?>
-			</ul>
-		</nav>
+		<ul class="static_nav">
+			<li>
+				<button id="menu_btn" class="btn">
+					<?php echo file_get_contents($htp_root . "src/icons/menu.svg"); ?>
+				</button>
+				<button id="mailing_list_btn" class="btn">
+					<?php echo file_get_contents($htp_root . "src/icons/mail.svg"); ?>
+				</button>
+			</li>
+			<li>
+				<a id="app_title" class="title" href="<?php echo $htp_root; ?>"><?php echo file_get_contents($htp_root . "src/imgs/logo.svg"); ?></a>
+			</li>
+			<li>
+				<button id="search_btn" class="btn">
+					<a href="<?php echo $htp_root; ?>search">
+						<?php echo file_get_contents($htp_root . "src/icons/search.svg"); ?>
+					</a>
+				</button>
+			</li>
+		</ul>
+		<input type="checkbox" id="menu_checkbox" name="menu_checkbox" />
+		<label id="menu_btn_hitbox" for="menu_checkbox"></label>
+		<ul class="menu">
+		<?php
+		echo "<li><a href='" . $htp_root . "'>Homepage</a></li>";
+		echo "<li><a href='" . $htp_root . "about'>About</a></li>";
+		echo "<li><a href='" . $htp_root . "videos'>Videos</a></li>";
+		echo "<li><a href='" . $htp_root . "photosets'>Photosets</a></li>";
+		echo "<li><a href='" . $htp_root . "store'>Store</a></li>";
+		echo "<li><a href='" . $htp_root . "contact'>Contact</a></li>";
+		?>
+		</ul>
 	</header>
 	
