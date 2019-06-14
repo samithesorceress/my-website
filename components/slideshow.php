@@ -55,7 +55,14 @@
 					}
 					echo "' loading='lazy' />";
 				}
-				echo "</li>";
+				echo "<dl class='slide_text'>";
+				if (valExists("title", $slide)) {
+					echo "<dt class='slide_title'>" . $slide["title"] . "</dt>";
+				}
+				if (valExists("description", $slide)) {
+					echo "<dd class='slide_desc'>" . $slide["description"] . "</dd>";
+				}
+				echo "</dl></li>";
 			}
 			echo "</ul>";
 			echo "<footer class='slideshow_footer'>";
