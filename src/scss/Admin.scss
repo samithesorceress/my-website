@@ -1,5 +1,27 @@
 @import "./vars/colors";
 
+body {
+	padding-top: 5.2em!important;
+	@media (min-width: 768px) {
+		padding-top: 5.2em!important;
+	}
+}
+
+#app_header.admin_header {
+	height: 6.5em!important;
+	@media (min-width: 768px) {
+		height: 6.5em!important;
+	}
+	ul {
+		justify-content: space-between!important;
+		#app_title {
+			padding: 1em;
+		}
+	}
+	
+}
+
+
 .media_browser {
 	//border: 1px solid $shadow;
 	//box-shadow: 0 1em 5em;

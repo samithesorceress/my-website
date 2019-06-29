@@ -28,6 +28,7 @@ require_once($php_root . "components/card.php");
 		"Metadata",
 		false,
 		newFormField("store_item_publish_date", "Publish Date", "date") . 
+		newFormField("store_item_url", "Url", "text") . 
 		newFormField("store_item_public", "Public", "checkbox")
 	);
 

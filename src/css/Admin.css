@@ -1,3 +1,19 @@
+body {
+  padding-top: 5.2em !important; }
+  @media (min-width: 768px) {
+    body {
+      padding-top: 5.2em !important; } }
+
+#app_header.admin_header {
+  height: 6.5em !important; }
+  @media (min-width: 768px) {
+    #app_header.admin_header {
+      height: 6.5em !important; } }
+  #app_header.admin_header ul {
+    justify-content: space-between !important; }
+    #app_header.admin_header ul #app_title {
+      padding: 1em; }
+
 .media_browser .actions_footer {
   background: #FFF;
   border-radius: 0 0 .5em .5em;

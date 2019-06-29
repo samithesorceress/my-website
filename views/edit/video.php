@@ -39,7 +39,7 @@ foreach($ids as $id) {
 		echo card(
 			"Metadata", 
 			false, 
-			newFormField("video_publish_date_" . $id, "Publish Date", "date", $video_item["publish_date"]) . 
+			newFormField("video_publish_date_" . $id, "Publish Date", "date", $video_item["publish_date"]) . newFormField("video_timestamp_" . $id, "Length", "text", $video_item["timestamp"]) . newFormField("video_url_" . $id, "Url", "text", $video_item["url"]) . 
 			newFormField("video_public_" . $id, "Public", "checkbox", $video_item["public"])
 		);
 	}

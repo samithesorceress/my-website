@@ -42,19 +42,19 @@
 		<div id="notification_bar"><span>Under construction...</span></div>
 		<ul class="static_nav">
 			<li>
-				<button id="mailing_list_btn" class="btn">
-					<?php echo file_get_contents($htp_root . "src/icons/mail.svg"); ?>
-				</button>
+				<a href="<?php echo $htp_root; ?>mailing-list/signup">
+					<button id="mailing_list_btn" class="btn">
+						<?php echo file_get_contents($htp_root . "src/icons/mail.svg"); ?>
+					</button>
+				</a>
 			</li>
 			<li>
 				<a id="app_title" class="title" href="<?php echo $htp_root; ?>"><?php echo file_get_contents($htp_root . "src/imgs/logo.svg"); ?></a>
 			</li>
-			<li>
-				<button id="search_btn" class="btn">
-					<a href="<?php echo $htp_root; ?>search">
+			<li><a href="<?php echo $htp_root; ?>search" class='header_btn'>
+					<button id="search_btn" class="btn">
 						<?php echo file_get_contents($htp_root . "src/icons/search.svg"); ?>
-					</a>
-				</button>
+					</button></a>
 			</li>
 		</ul>
 		<input type="checkbox" id="menu_checkbox" name="menu_checkbox" />

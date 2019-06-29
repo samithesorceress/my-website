@@ -12,6 +12,8 @@ var videoManager = {
 				"tags",
 				"price",
 				"publish_date",
+				"timestamp",
+				"url",
 				"public"
 			],
 			current_links;
@@ -75,6 +77,8 @@ var videoManager = {
 				"tags",
 				"price",
 				"publish_date",
+				"timestamp",
+				"url",
 				"public"
 			],
 			required = [
@@ -84,7 +88,9 @@ var videoManager = {
 				prefix + "description",
 				prefix + "tags",
 				prefix + "price",
-				prefix + "publish_date"
+				prefix + "publish_date",
+				prefix + "timestamp",
+				prefix + "url"
 			],
 			links;
 		
@@ -108,7 +114,8 @@ var videoManager = {
 	},
 	validateSave: function (res) {
 		if (res.success === true) {
-			window.location.href = "http://127.0.0.1/sami-the-sorceress/admin/view-all/videos";
+			console.log("save validated");
+		//	window.location.href = "http://127.0.0.1/sami-the-sorceress/admin/view-all/videos";
 		}
 	}
 }

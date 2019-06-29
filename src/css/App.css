@@ -102,6 +102,10 @@ form > * {
         #app_header ul li {
           height: 5em;
           min-width: 5px; } }
+      #app_header ul li .header_btn {
+        height: 100%;
+        display: block !important;
+        width: 100%; }
       #app_header ul li .btn {
         font-size: 16px;
         padding: 0;

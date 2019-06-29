@@ -27,7 +27,7 @@ require_once($php_root . "components/card.php");
 	echo card(
 		"Metadata",
 		false,
-		newFormField("photoset_publish_date", "Publish Date", "date") . 
+		newFormField("photoset_publish_date", "Publish Date", "date") . newFormField("photoset_photocount", "# of Photos", "text") . newFormField("photoset_url", "Url", "text") . 
 		newFormField("photoset_public", "Public", "checkbox", 1)
 	);
 

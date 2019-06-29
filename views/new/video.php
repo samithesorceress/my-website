@@ -28,6 +28,7 @@ require_once($php_root . "components/card.php");
 		"Metadata",
 		false,
 		newFormField("video_publish_date", "Publish Date", "date") . 
+		newFormField("video_timestamp", "Length", "text") . newFormField("video_url", "Url", "text") . 
 		newFormField("video_public", "Public", "checkbox")
 	);
 

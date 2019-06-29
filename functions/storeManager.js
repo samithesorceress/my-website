@@ -12,6 +12,7 @@ var storeManager = {
 				"tags",
 				"price",
 				"publish_date",
+				"url",
 				"public"
 			];
 			
@@ -73,6 +74,7 @@ var storeManager = {
 				"description",
 				"tags",
 				"price",
+				"url",
 				"publish_date"
 			],
 			required = [
@@ -82,6 +84,7 @@ var storeManager = {
 				prefix + "description",
 				prefix + "tags",
 				prefix + "price",
+				prefix + "url",
 				prefix + "publish_date"
 			],
 			links;

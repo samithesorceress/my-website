@@ -41,7 +41,7 @@ foreach($ids as $id) {
 		echo card(
 			"Metadata",
 			false,
-			newFormField("store_item_publish_date_" . $id, "Publish Date", "date", $store_item["publish_date"]) . 
+			newFormField("store_item_publish_date_" . $id, "Publish Date", "date", $store_item["publish_date"]) . newFormField("store_item_url_" . $id, "Url", "text", $store_item["url"]) . 
 			newFormField("store_item_public_" . $id, "Public", "checkbox", $store_item["public"])
 		);
 	}

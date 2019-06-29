@@ -36,8 +36,8 @@
 		<?php echo file_get_contents($htp_root . "src/css/critical.css"); ?>
 	</style>	
 </head>
-<body>
-	<header id="app_header">
+<body class='admin'>
+	<header id="app_header" class="admin_header">
     <div id="notification_bar"><span>Changes Saved!</span></div>
 		<nav>
 			<ul>
@@ -45,11 +45,11 @@
 					<a id="app_title" class="title" href="<?php echo $htp_root; ?>admin">Admin Zone</a>
 				</li>
 				<li>
-					<button id="search_btn" class="btn">
-						<a href="<?php echo $htp_root; ?>logout">
-							 <?php echo file_get_contents($htp_root . "src/icons/exit.svg"); ?>
-						</a>
-					</button>
+					<a href="<?php echo $htp_root; ?>" target="_blank" title="View Site">
+						<button class="btn">	
+							 <?php echo file_get_contents($htp_root . "src/icons/public.svg"); ?>
+						</button>
+					</a>
 				</li>
 			</ul>
 		</nav>

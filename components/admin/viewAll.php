@@ -20,6 +20,7 @@ function viewAll($type) {
 		case "store_items":
 		case "store-items":
 			$api_endpoint .= "store-items";
+			break;
 		default:
 			$api_endpoint .= $type . "s";
 			break;

@@ -17,6 +17,12 @@ body {
 	@media(min-width: 768px) {
 		padding-top: 8em;
 	}
+	&.admin {
+		padding-top: 5.2em!important;
+		@media (min-width: 768px) {
+			padding-top: 5.2em!important;
+		}
+	}
 }
 
 *, *::before, *::after {
@@ -46,6 +52,12 @@ ul, ol {
 	z-index: 4;
 	@media(min-width: 768px) {
 		height: 9.5em;
+	}
+	&.admin_header {
+		height: 6.5em!important;
+		@media (min-width: 768px) {
+			height: 6.5em!important;
+		}
 	}
 	li {
 		opacity: 0;

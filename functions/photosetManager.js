@@ -12,6 +12,8 @@ var photosetManager = {
 				"tags",
 				"price",
 				"publish_date",
+				"photocount",
+				"url",
 				"public"
 			];
 
@@ -74,6 +76,8 @@ var photosetManager = {
 				"tags",
 				"price",
 				"publish_date",
+				"photocount",
+				"url",
 				"public"
 			],
 			required = [
@@ -83,7 +87,9 @@ var photosetManager = {
 				prefix + "description",
 				prefix + "tags",
 				prefix + "price",
-				prefix + "publish_date"
+				prefix + "publish_date",
+				prefix + "photocount",
+				prefix + "url"
 			],
 			links;
 		

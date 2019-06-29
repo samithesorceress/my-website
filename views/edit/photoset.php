@@ -42,7 +42,7 @@ foreach($ids as $id) {
 		echo card(
 			"Metadata",
 			false,
-			newFormField("photoset_publish_date_" . $id, "Publish Date", "date", $photoset["publish_date"]) . 
+			newFormField("photoset_publish_date_" . $id, "Publish Date", "date", $photoset["publish_date"]) . newFormField("photoset_photocount_" . $id, "# of Photos", "text", $photoset["photocount"]) . newFormField("photoset_url_" . $id, "Url", "text", $photoset["url"]) . 
 			newFormField("photoset_public_" . $id, "Public", "checkbox", $photoset["public"])
 		);
 
