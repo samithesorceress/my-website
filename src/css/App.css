@@ -692,6 +692,7 @@ form .two_columns {
           opacity: 0.75; }
     .thumbnail_group li .media_container {
       height: 0;
+      margin: 0;
       pointer-events: none;
       width: 100%; }
       .thumbnail_group li .media_container.hd_container {

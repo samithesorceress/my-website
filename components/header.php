@@ -13,7 +13,7 @@
 
 	<!-- proper meta -->
     <?php
-	echo "<title>" . $document_title . "</title>";
+	echo "<title>" . $document_title . " · Sami the Sorceress</title>";
     
     echo (isset($document_author)) ? "<meta name='author' content='" . $document_author . "'>" : false;
     echo (isset($robots_txt)) ? "<meta name='robots' content='" . $robots_txt . "'>" : false;

@@ -1,10 +1,9 @@
 <?php
 function thumbnail($type, $item) {
-	$htp_root = "http://127.0.0.1/sami_the_sorceress/";
 	if (is_string($item)) {
 		//handle edge case?
 	}
-	$url = $htp_root . $type;
+	$url = $GLOBALS["htp_root"] . $type;
 	if ($type !== "store") {
 		$url .= "s";
 	}
@@ -12,15 +11,20 @@ function thumbnail($type, $item) {
 	
 	$thumbnail = "<li class='thumbnail card'><div class='thumbnail_content'>";
 	$thumbnail .= "<a href='" . $url . "'>";
+		$thumbnail .= mediaContainer($item["cover"], "hd");
 		switch($type) {
 			case "video":
-				$thumbnail .= "<span class='timestamp'>" . $item["timestamp"] . "</span>";
+				$thumbnail .= "<span class='timestamp'>";
+					$thumbnail .= $item["timestamp"];
+					if (strpos($item["timestamp"], ":") === false) {
+						$thumbnail .= ":00";
+					}
+				$thumbnail .= "</span>";
 				break;
 			case "photoset":
 				$thumbnail .= "<span class='timestamp'>" . $item["photocount"] . " Photos</span>";
 				break;
 		}
-		$thumbnail .= mediaContainer($item["cover"], "hd");
 	$thumbnail .= "</a>";
 	$info = "<dl>";
 		if (valExists("title", $item)) {
@@ -31,9 +35,13 @@ function thumbnail($type, $item) {
 		}
 	$info .= "</dl>";
 	$footer = "<footer class='thumbnail_footer'><ul>";
-		if (valExists("price", $item)) {
-			$footer .= "<li class='thumbnail_price'><p>$" . $item["price"] . "</p></li>";
+		$footer .= "<li class='thumbnail_price'><p>";
+		if (valExists("price", $item) && $item["price"] !== 0) {
+			$footer .= "$" . $item["price"];
+		} else {
+			$footer .= "FREE";
 		}
+		$footer .= "</p></li>";
 		$buy_link = "#";
 		if (valExists("links", $item)) {
 			$links = json_decode($item["links"], true);
@@ -41,7 +49,13 @@ function thumbnail($type, $item) {
 				$buy_link = urldecode($links["0"]["url"]);
 			}
 		}
-		$footer .= "<li><a href='" . $buy_link . "' target='_blank'><button type='button' class='btn cta sml'><span>Buy</span></button></a></li>";
+		$footer .= "<li><a href='" . $buy_link . "' target='_blank'><button type='button' class='btn cta sml'><span>";
+		if (valExists("price", $item) && $item["price"] !== 0) {
+			$footer .= "Buy";
+		} else {
+			$footer .= "Download";
+		}
+		$footer .= "</span></button></a></li>";
 	$footer .= "</ul></footer>";
 	$thumbnail .= $info . $footer . "</div></li>";
 	return $thumbnail;

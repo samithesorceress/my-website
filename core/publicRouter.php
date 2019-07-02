@@ -3,7 +3,7 @@ jsLogs("routing...");
 $subdirectories = explode("/", $current_path);
 switch($subdirectories[0]) {
 	case "":
-		$document_title = "Sami the Sorceress · Homepage";
+		$document_title = "Homepage";
 		require_once($php_root . "views/homepage.php");
 		break;
 	case "login":
@@ -26,10 +26,9 @@ switch($subdirectories[0]) {
 		if ($current_category !== "store") {
 			$current_category = rtrim($current_category, "s") . "s";
 		}
-		$document_title = ucSmart($current_category);
-		echo count($subdirectories);
-		if (count($subdirectories) >= 2) {
-			$current_item_slug = $subdirectories[1];
+		$document_title = ucWords($current_category);
+		if (count($subdirectories) > 1 && $subdirectories[1] !== "") {
+			$current_url_slug = $subdirectories[1];
 			require_once($php_root . "views/product.php");
 		} else {
 			require_once($php_root . "views/category.php");

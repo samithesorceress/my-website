@@ -52,6 +52,9 @@ if ($type) {
 				if (valExists("type", $data)) {
 					$sql_where["type"] = $data["type"];
 				}
+				if (valExists("url", $data)) {
+					$sql_where["url"] = $data["url"];
+				}
 				if (valExists("public", $data)) {
 					$sql_where["public"] = $data["public"];
 				}
