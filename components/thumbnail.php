@@ -4,7 +4,12 @@ function thumbnail($type, $item) {
 	if (is_string($item)) {
 		//handle edge case?
 	}
-	$url = $htp_root . $type . "/" . $item["url"];
+	$url = $htp_root . $type;
+	if ($type !== "store") {
+		$url .= "s";
+	}
+	$url .= "/" . $item["url"];
+	
 	$thumbnail = "<li class='thumbnail card'><div class='thumbnail_content'>";
 	$thumbnail .= "<a href='" . $url . "'>";
 		switch($type) {

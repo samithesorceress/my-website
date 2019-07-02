@@ -23,4 +23,4 @@ require_once($php_root . "components/thumbnail_group.php");
 		echo ctas("store", "view-all");
 	echo "</div>";
 
-require_once($php_root . "components/footer.php");
+	require_once($php_root . "components/footer.php");
