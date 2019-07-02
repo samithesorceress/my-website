@@ -4,18 +4,18 @@ function thumbnail($type, $item) {
 	if (is_string($item)) {
 		//handle edge case?
 	}
-	$url = $htp_root . $type . "/" . $item["id"];
+	$url = $htp_root . $type . "/" . $item["url"];
 	$thumbnail = "<li class='thumbnail card'><div class='thumbnail_content'>";
 	$thumbnail .= "<a href='" . $url . "'>";
-	$thumbnail .= mediaContainer($item["cover"], "hd");
-	switch($type) {
-		case "video":
-			$thumbnail .= "<span class='timestamp'>26:05</span>";
-			break;
-		case "photoset":
-			$thumbnail .= "<span class='timestamp'>12 Photos</span>";
-			break;
-	}
+		switch($type) {
+			case "video":
+				$thumbnail .= "<span class='timestamp'>" . $item["timestamp"] . "</span>";
+				break;
+			case "photoset":
+				$thumbnail .= "<span class='timestamp'>" . $item["photocount"] . " Photos</span>";
+				break;
+		}
+		$thumbnail .= mediaContainer($item["cover"], "hd");
 	$thumbnail .= "</a>";
 	$info = "<dl>";
 		if (valExists("title", $item)) {
@@ -29,7 +29,14 @@ function thumbnail($type, $item) {
 		if (valExists("price", $item)) {
 			$footer .= "<li class='thumbnail_price'><p>$" . $item["price"] . "</p></li>";
 		}
-		$footer .= "<li><a href='" . $htp_root . "'><button type='button' class='btn cta sml'><span>Buy</span></button></a></li>";
+		$buy_link = "#";
+		if (valExists("links", $item)) {
+			$links = json_decode($item["links"], true);
+			if (valExists("0", $links)) {
+				$buy_link = urldecode($links["0"]["url"]);
+			}
+		}
+		$footer .= "<li><a href='" . $buy_link . "' target='_blank'><button type='button' class='btn cta sml'><span>Buy</span></button></a></li>";
 	$footer .= "</ul></footer>";
 	$thumbnail .= $info . $footer . "</div></li>";
 	return $thumbnail;

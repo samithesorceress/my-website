@@ -1,3 +1,6 @@
+<?php 
+	require_once($php_root . "components/mediaContainer.php");
+?>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
