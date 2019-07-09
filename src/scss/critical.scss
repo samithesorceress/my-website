@@ -81,9 +81,12 @@ ul, ol {
 
 main {
 	display: flex;
-	min-height: calc(100vh - 8em);
+	min-height: calc(100vh - 4em);
+	@media(min-width: 767px) {
+		min-height: calc(100vh - 8em);
+	}
 	padding: 1em;
-	justify-content: center;
+	//justify-content: center;
 	flex-direction: column;
 	align-items: center;
 }

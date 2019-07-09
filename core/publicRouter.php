@@ -15,7 +15,13 @@ switch($subdirectories[0]) {
 		require_once($php_root . "views/logout.php");
 		break;
 	case "admin":
-	require_once($php_root . "core/checkLogin.php");
+		require_once($php_root . "core/checkLogin.php");
+		break;
+	case "about":
+		require_once($php_root . "views/about.php");
+		break;
+	case "contact":
+		require_once($php_root . "views/contact.php");
 		break;
 	case "video":
 	case "videos":

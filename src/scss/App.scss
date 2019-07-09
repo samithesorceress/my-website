@@ -87,7 +87,8 @@ h2 {
 
 article {
 	max-width: 1440px;
-	min-height: calc(100vh - 14.5em);
+	//min-height: calc(100vh - 14.5em);
+	min-height: 0;
 	padding: 1em 0;
 	width: 100%;
 }
@@ -424,7 +425,17 @@ h1 {
 	}
 }
 
-
+.preview_video {
+	height: 100vw;
+	width: 100%;
+	z-index: -2;
+	@media(min-width: 425px) {
+		height: 50vw;
+	}
+	@media(min-width: 1440px) {
+		height: 38.46vw;
+	}
+}
 .card {
 	background: $white;
 	box-shadow: 0 0 0 1px $shadow;
