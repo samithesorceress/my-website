@@ -76,7 +76,7 @@ ul, ol {
 #menu_btn, #menu_shadow {
 	opacity: 0;
 	transition-property: opacity;
-	transition-duration: .6s;
+	transition-duration: .4s;
 }
 
 main {
@@ -85,7 +85,7 @@ main {
 	@media(min-width: 767px) {
 		min-height: calc(100vh - 8em);
 	}
-	padding: 1em;
+	//padding: 1em;
 	//justify-content: center;
 	flex-direction: column;
 	align-items: center;

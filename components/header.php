@@ -76,4 +76,4 @@
 		?>
 		</ul>
 	</header>
-	
+	<main id='main'>

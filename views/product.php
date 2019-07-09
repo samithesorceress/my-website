@@ -12,14 +12,20 @@ if (valExists("success", $api_res)) {
 	$product = $api_res["data"];
 	$document_title = $product["title"];
 	require_once($php_root . "components/header.php");
-	echo intro();
-	echo preview("test");
-	echo card($document_title, $product["description"]);
+	if (valExists("stream", $product)) {
+		echo preview($product["stream"]);
+	} elseif (valExists("preview", $product)) {
+		echo preview($product["preview"]);
+	} elseif (valExists("previews", $product)) {
+		echo preview($product["previews"]);
+	}
+	
+	echo intro($document_title, $product["description"]);
+	
 } else {
+
 	$document_title = "404";
 	require_once($php_root . "components/header.php");
-
-
 	echo intro("404", "Unable to find this " . $current_category);
 	echo card("Maybe try one of these pages...");
 }

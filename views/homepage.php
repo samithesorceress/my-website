@@ -9,7 +9,7 @@ require_once($php_root . "components/thumbnail_group.php");
 	echo intro($document_title, "~~~~");
 
 	echo "<div class='card'><h2>Latest Videos</h2>";
-		echo thumbnailGroup("videos", 3);
+		echo thumbnailGroup("videos", 1);
 		echo ctas("videos", "view-all");
 	echo "</div>";
 

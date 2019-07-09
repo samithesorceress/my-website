@@ -65,7 +65,7 @@ if ($type) {
 					}
 				}
 				$pagination_start = 0;
-				$pagination_end = 5;
+				$pagination_end = 3;
 				if (valExists("offset", $data)) {
 					$pagination_start = $data["offset"];
 				}

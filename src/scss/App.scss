@@ -89,8 +89,11 @@ article {
 	max-width: 1440px;
 	//min-height: calc(100vh - 14.5em);
 	min-height: 0;
-	padding: 1em 0;
+	padding: 1em .5em;
 	width: 100%;
+	@media(min-width: 767px) {
+		padding: 1em;
+	}
 }
 .card {
 	opacity: 0;
@@ -130,6 +133,10 @@ form {
 			@media(min-width: 768px) {
 				height: 5em;
 				min-width: 5px;
+			}
+			&:nth-child(2) {//logo
+				max-width: 276px;
+				width: calc(100% - 10em);
 			}
 			.header_btn {
 				height: 100%;
@@ -299,15 +306,14 @@ form {
 		height: 4em;
 		justify-content: center;
 		padding: 0;
+		width: 100%;
 		@media(min-width: 768px) {
 			height: 5em;
 		}
 		svg {
-			@media(min-width: 430px) {
-				height: 36px;
-				stroke-width: 2.1;
-				width: 276px;
-			}
+			stroke-width: 2.1;
+			height: 100%;
+			width: 100%;
 		}
 	}
 }
@@ -425,10 +431,20 @@ h1 {
 	}
 }
 
-.preview_video {
+.intro {
+	h1 {
+		margin: 0;
+	}
+}
+
+.product_preview_container {
+	align-items: center;
+	display: flex;
 	height: 100vw;
+	justify-content: center;
+	overflow: hidden;
 	width: 100%;
-	z-index: -2;
+	//z-index: -2;
 	@media(min-width: 425px) {
 		height: 50vw;
 	}
@@ -904,6 +920,9 @@ form {
 					position: relative;
 				}
 			}
+			@media(max-width: 766px) {
+				box-shadow: 0 0 0 2px $shadow;
+			}
 			&:hover, &:focus, &:active {
 				box-shadow: 0 0 0 2px $shadow;
 				.media_container {
@@ -949,6 +968,7 @@ form {
 			color: $slate;
 		}
 		.thumbnail_footer {
+			margin-top: 1em;
 			//max-width: 16em;
 			width: 100%;
 			ul {

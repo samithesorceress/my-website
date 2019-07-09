@@ -65,8 +65,8 @@
 				echo "</dl></li>";
 			}
 			echo "</ul>";
-			echo "<footer class='slideshow_footer'>";
-			echo "</footer>";
+			//echo "<footer class='slideshow_footer'>";
+			//echo "</footer>";
 		echo "</div>";
 	}
 ?>

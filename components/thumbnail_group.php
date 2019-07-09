@@ -4,7 +4,7 @@ function thumbnailGroup($type, $limit = false) {
 	$html = "<ul class='thumbnail_group'>";
 	$api_endpoint  = "list/";
 	$api_params = [
-		"rows" => 3,
+		"rows" => 1,
 		"order_by" => "id",
 		"order_dir" => "DESC"
 	];
