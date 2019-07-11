@@ -15,9 +15,6 @@
 		
 		
 		echo "<div id='slideshow'>";
-			echo "<ul class='slide_nav'>";
-				
-			echo "</ul>";
 			echo "<ul class='slides_container'>";
 			foreach($slides as $slide) {
 				echo "<li class='slide'>";
@@ -65,8 +62,7 @@
 				echo "</dl></li>";
 			}
 			echo "</ul>";
-			//echo "<footer class='slideshow_footer'>";
-			//echo "</footer>";
-		echo "</div>";
+			echo "<footer class='slideshow_footer'><div class='progress_bar'></div></footer>";
+		echo "</div><noscript><style>#slideshow .slides_container{overflow-x: scroll!important}</style></noscript>";
 	}
 ?>

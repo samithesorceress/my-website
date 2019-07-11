@@ -322,16 +322,18 @@ var util = {
 
 		},
 		remove: function (child, parent) {
-			if (!util.isElem(child)) { 
+			if (!util.isElem(child)) {
 				child = document.getElementById(child);
 			}
 			if (!util.isElem(parent)) {
 				parent = document.getElementById(parent);
 			}
-			child.classList.remove("visible");
-			util.spinner.timer = setTimeout(function () {
-				parent.removeChild(child);
-			}, 1E3);
+			if (util.isElem(child)) {
+				child.classList.remove("visible");
+				util.spinner.timer = setTimeout(function () {
+					parent.removeChild(child);
+				}, 1E3);
+			}
 		}
 	},
 	checkRequired: function (required, input) {

@@ -120,6 +120,12 @@ form {
 #app_header {
 	display: flex;
 	flex-direction: column;
+	&:not(.admin_header) {
+		ul li:nth-child(2) {//logo
+			max-width: 276px;
+			width: calc(100% - 10em);
+		}
+	}
 	ul {
 		display: flex;
 		height: 100%;
@@ -133,10 +139,6 @@ form {
 			@media(min-width: 768px) {
 				height: 5em;
 				min-width: 5px;
-			}
-			&:nth-child(2) {//logo
-				max-width: 276px;
-				width: calc(100% - 10em);
 			}
 			.header_btn {
 				height: 100%;
@@ -325,23 +327,24 @@ h1 {
 }
 
 #slideshow {
+	height: 100vw;
 	opacity: 1;
 	position: relative;
 	width: 100%;
 	z-index: 1;
-	.slide_nav {
+	@media(min-width: 425px) {
+		height: 50vw;
+	}
+	@media(min-width: 1440px) {
+		height: 38.46vw;
+	}
+	.slides_nav {
 		align-items: center;
 		display: flex;
-		height: 100vw;
+		height: 100%;
 		justify-content: space-between;
 		pointer-events: none;
 		width: 100%;
-		@media(min-width: 425px) {
-			height: 50vw;
-		}
-		@media(min-width: 1440px) {
-			height: 38.46vw;
-		}
 		.btn {
 			pointer-events: all;
 		}
@@ -367,20 +370,13 @@ h1 {
 	}
 	.slides_container {
 		display: flex;
-		height: 100vw;
+		height: 100%;
 		left: 0;
-		overflow-x: scroll;
-		overflow-y: hidden;
+		overflow: hidden;
 		position: absolute;
 		top: 0;
 		width: 100%;
 		z-index: -2;
-		@media(min-width: 425px) {
-			height: 50vw;
-		}
-		@media(min-width: 1440px) {
-			height: 38.46vw;
-		}
 		.slide {
 			align-items: flex-start;
 			display: inline-flex;
@@ -389,10 +385,14 @@ h1 {
 			justify-content: center;
 			left: 0;
 			overflow: hidden;
-			position: relative;
+			position: absolute;
 			top: 0;
+			transition-property: transform;
 			width: 100%;
-			z-index: 2;
+			z-index: 1;
+			&:first-child {
+				z-index: 2;
+			}
 			img, video {
 				filter: brightness(.8);
 				&[data-shape="wide"] {
@@ -410,6 +410,7 @@ h1 {
 				margin: 1em;
 				padding: 0;
 				position: absolute;
+				transition-property: opacity;
 				* {
 					background: $dimmed_lights;
 					color: $white;
@@ -425,9 +426,22 @@ h1 {
 	}
 	.slideshow_footer {
 		background: $white;
+		bottom: 0;
 		box-shadow: 0 0 0 1px $shadow;
-		height: 4em;
+		height: .25em;
+		left: 0;
+		overflow: hidden;
+		position: absolute;
 		width: 100%;
+		.progress_bar {
+			background: $teal;
+			height: .25em;
+			transform: scale(0);
+			transition-duration: 5s;
+			transition-property: transform;
+			transition-timing-function: linear;
+			width: 1%;
+		}
 	}
 }
 
