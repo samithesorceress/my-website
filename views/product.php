@@ -19,9 +19,37 @@ if (valExists("success", $api_res)) {
 	} elseif (valExists("previews", $product)) {
 		echo preview($product["previews"]);
 	}
-	
-	echo intro($document_title, $product["description"]);
-	
+	echo "<article><section class='product_card_group'><div class='card product_section'>";
+	echo "<h1>" . $document_title . "</h1>";
+	echo "<p class='desc'>" . $product["description"] . "</p>";
+	if (valExists("tags", $product)) {
+		$tags = explode(",", str_replace(", ", ",", $product["tags"]));
+
+		echo "<br/><span>Tags:</span><ul class='tags'>";
+
+		
+
+		foreach($tags as $tag) {
+			echo "<li class='tag'><a href='" . $GLOBALS["htp_root"] . "search/" . $tag . "'>" . $tag . "</a></li>";
+		}
+
+		echo "</ul>";
+	}
+	echo "</div>";
+	if (valExists("links", $product)) {
+		$links = json_decode($product["links"], true);
+		
+		echo "<div class='card product_section'><h2>Purchase:</h2><ul id='product_links'>";
+		for ($i = 0; $i < count($links); $i += 1) {
+			$link = $links[$i];
+			echo "<li class='product_link'><a href='" . $link["url"] . "'><button type='button' class='btn cta";
+			if ($i == 0) { 
+				echo " buy";
+			}
+			echo"'>" . $link["title"] . "</button></a></li>";
+		}
+		echo "</ul></aside>";
+	}
 } else {
 
 	$document_title = "404";

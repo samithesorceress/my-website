@@ -12,18 +12,18 @@ function preview($item) {
 
 	if ($items) {//carousel
 		$item = false;
-		$html .= "<ul>";
+		$html .= "<div class='carousel_container'><ul>";
 		foreach($items as $item) {
 			$html .= "<li>";
 
 			$html .= "</li>";
 		}
-		$html .= "</ul>";
+		$html .= "</ul></div>";
 	} else {//single res
 		if (is_numeric($item)) {//get img
-			$html .= mediaContainer($item, "hd");
+			$html .= "<div class='image_container'>" .  mediaContainer($item, "hd") . "</div>";
 		} else {//is a stream link
-
+			$html .= "<div class='stream_container'><iframe src='https://www.pornhub.com/embed/" . $item . "' frameborder='0' width='560' height='315' scrolling='no' allowfullscreen></iframe></div>";
 		}
 	}
 
