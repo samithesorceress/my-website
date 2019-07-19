@@ -1,7 +1,7 @@
 <?php
 if ($subdirectories[3]) {
-	require_once($php_root . "components/admin/header.php");
-	require_once($php_root . "components/card.php");
+	require_once($GLOBALS["php_root"] . "components/admin/header.php");
+	require_once($GLOBALS["php_root"] . "components/card.php");
 
 	$ids = urldecode($subdirectories[3]);
 	if (strpos($ids, ",") !== false) {
@@ -34,8 +34,8 @@ if ($subdirectories[3]) {
 
 	}
 	echo newFormField("save", "Save", "submit", "Save", "mediaManager.saveChanges");
-	echo "<script src='" . $htp_root . "functions/mediaManager.js'></script>";
-	require_once($php_root . "components/admin/footer.php");
+	echo "<script src='" . $GLOBALS["htp_root"] . "functions/mediaManager.js'></script>";
+	require_once($GLOBALS["php_root"] . "components/admin/footer.php");
 } else {
-	header("Location: " . $htp_root . "admin/view-all/media");
+	header("Location: " . $GLOBALS["htp_root"] . "admin/view-all/media");
 }

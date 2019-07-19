@@ -143,12 +143,12 @@ var slideshow = {
 		reset: function () {
 			clearInterval(slideshow.queue.timer);
 			slideshow.progress_bar.style.transitionProperty = "none";
-			slideshow.progress_bar.style.transform = "scale(0)";
+			slideshow.progress_bar.style.transform = "scaleX(0)";
 			setTimeout(function () {
 				slideshow.progress_bar.style.transitionProperty = "transform";
 			}, 10);
 			setTimeout(function () {
-				slideshow.progress_bar.style.transform = "scale(200)";
+				slideshow.progress_bar.style.transform = "scaleX(200)";
 				slideshow.queue.timer = setInterval(slideshow.change.advance, 5e3);
 			}, 20);
 		}

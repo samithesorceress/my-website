@@ -436,11 +436,11 @@ h1 {
 		.progress_bar {
 			background: $teal;
 			height: .25em;
-			transform: scale(0);
+			transform: scaleX(0);
 			transition-duration: 5s;
 			transition-property: transform;
 			transition-timing-function: linear;
-			width: 1%;
+			width: 1.1%;
 		}
 	}
 }
@@ -993,7 +993,6 @@ form {
 
 
 .thumbnail_group {
-	align-items: flex-start;
 	display:flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
@@ -1018,11 +1017,15 @@ form {
 			//max-width: 18em;
 			.thumbnail_content {
 				display: flex;
+				flex: 1 0 auto;
 				flex-direction: column;
+				position: relative;
 				width: 100%;
-				> a {
-					display: flex;
-					position: relative;
+				figure {
+					margin: 0;
+					figcaption {
+						margin: 0;
+					}
 				}
 			}
 			@media(max-width: 766px) {

@@ -1,6 +1,6 @@
 <?php
-require_once($php_root . "components/admin/header.php");
-require_once($php_root . "components/card.php");
+require_once($GLOBALS["php_root"] . "components/admin/header.php");
+require_once($GLOBALS["php_root"] . "components/card.php");
 $about_api = "list/about";
 $about_res = xhrFetch($about_api);
 $about_data = false;
@@ -41,6 +41,6 @@ if (valExists("success", $about_res)) {
 	
 	echo newFormField("save", "Save", "submit", "Save","editAbout.saveChanges");
 
-echo "<script src='" . $htp_root . "functions/infiniteLinks.js'></script>";
-echo "<script src='" . $htp_root . "functions/editAbout.js'></script>";
-require_once($php_root . "components/admin/footer.php");
+echo "<script src='" . $GLOBALS["htp_root"] . "functions/infiniteLinks.js'></script>";
+echo "<script src='" . $GLOBALS["htp_root"] . "functions/editAbout.js'></script>";
+require_once($GLOBALS["php_root"] . "components/admin/footer.php");

@@ -27,20 +27,20 @@
 					$cover = $api_res["data"];
 					switch ($cover["type"]) {
 						case "image":
-							echo "<img src='" . $htp_root . "uploads/" . $cover["src"] . "." . $cover["ext"] . "'";
+							echo "<img src='" . $GLOBALS["htp_root"] . "uploads/" . $cover["src"] . "." . $cover["ext"] . "'";
 							if (valExists("sizes", $cover)) {
 								$sizes = intval($cover["sizes"]);
 								$srcset = "srcset='";
 								for ($i = 0; $i < $sizes; $i += 1) {
 									$size = ($i + 1) * 200;
-									$srcset .= $htp_root . "uploads/" . $cover["src"] . "_" . $size . "w." . $cover["ext"] . " " . $size . "w, ";
+									$srcset .= $GLOBALS["htp_root"] . "uploads/" . $cover["src"] . "_" . $size . "w." . $cover["ext"] . " " . $size . "w, ";
 								}
 								$srcset = rtrim($srcset, ", ") . "'";
 								echo $srcset;
 							}
 							break;
 						case "video":
-							echo "<video src='" . $htp_root . "uploads/" . $cover["src"] . "." . $cover["ext"] . "'";
+							echo "<video src='" . $GLOBALS["htp_root"] . "uploads/" . $cover["src"] . "." . $cover["ext"] . "'";
 							break;
 					}
 					echo " data-shape='";

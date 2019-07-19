@@ -30,4 +30,4 @@ if (isset($_COOKIE["user_token"])) {
 //empty data
 $post_data = false;
 
-require_once($php_root . "core/publicRouter.php");
+require_once($GLOBALS["php_root"] . "core/publicRouter.php");

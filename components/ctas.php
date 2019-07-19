@@ -1,7 +1,7 @@
 <?php
 function ctas($type, $btns) {
 	$type = rtrim($type, "s");
-	$htp_root = "http://127.0.0.1/sami-the-sorceress/";
+	$GLOBALS["htp_root"] = "http://127.0.0.1/sami-the-sorceress/";
 	$html = "<div class='ctas'>";
 	if (!is_array($btns)) {
 		$btns = [$btns];

@@ -7,13 +7,13 @@ if (strpos($current_path, "admin") !== false) {
 		if (valExists("success", $verification)) {
 			$current_user_data = json_decode($verification["user_data"], true);
 			jsLogs("token verified");
-			require_once($php_root . "core/adminRouter.php");
+			require_once($GLOBALS["php_root"] . "core/adminRouter.php");
 		} else {
 			jsLogs("bad token");
-			header("Location: " . $htp_root . "login");
+			header("Location: " . $GLOBALS["htp_root"] . "login");
 		}
 	} else {
 		jsLogs("no cookies");
-		header("Location: " . $htp_root . "login");
+		header("Location: " . $GLOBALS["htp_root"] . "login");
 	}
 }

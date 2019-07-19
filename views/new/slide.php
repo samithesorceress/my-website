@@ -1,6 +1,6 @@
 <?php
-require_once($php_root . "components/admin/header.php");
-require_once($php_root . "components/card.php");
+require_once($GLOBALS["php_root"] . "components/admin/header.php");
+require_once($GLOBALS["php_root"] . "components/card.php");
 
 	echo card(
 		"File",
@@ -17,5 +17,5 @@ require_once($php_root . "components/card.php");
 	);
 	
 	echo newFormField("save", "Save", "submit", "Save", "slideshowManager.saveNew");
-	echo "<script src='" . $htp_root . "functions/slideshowManager.js'></script>";
-require_once($php_root . "components/admin/footer.php");
+	echo "<script src='" . $GLOBALS["htp_root"] . "functions/slideshowManager.js'></script>";
+require_once($GLOBALS["php_root"] . "components/admin/footer.php");

@@ -1,7 +1,7 @@
 <?php
-require_once($php_root . "components/header.php");
-require_once($php_root . "components/intro.php");
-require_once($php_root . "components/card.php");
+require_once($GLOBALS["php_root"] . "components/header.php");
+require_once($GLOBALS["php_root"] . "components/intro.php");
+require_once($GLOBALS["php_root"] . "components/card.php");
 
 echo intro("Contact");
 //get data
@@ -19,4 +19,4 @@ if (valExists("links", $about_data)) {
 	}
 }
 
-require_once($php_root . "components/footer.php");
+require_once($GLOBALS["php_root"] . "components/footer.php");

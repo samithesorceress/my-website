@@ -1,10 +1,10 @@
 <?php
-require_once($php_root . "components/header.php");
-require_once($php_root . "components/card.php");
-require_once($php_root . "components/slideshow.php");
-require_once($php_root . "components/ctas.php");
-require_once($php_root . "components/intro.php");
-require_once($php_root . "components/thumbnail_group.php");
+require_once($GLOBALS["php_root"] . "components/header.php");
+require_once($GLOBALS["php_root"] . "components/card.php");
+require_once($GLOBALS["php_root"] . "components/slideshow.php");
+require_once($GLOBALS["php_root"] . "components/ctas.php");
+require_once($GLOBALS["php_root"] . "components/intro.php");
+require_once($GLOBALS["php_root"] . "components/thumbnail_group.php");
 	
 	echo intro($document_title, "~~~~");
 
@@ -23,4 +23,4 @@ require_once($php_root . "components/thumbnail_group.php");
 		echo ctas("store", "view-all");
 	echo "</div>";
 
-	require_once($php_root . "components/footer.php");
+	require_once($GLOBALS["php_root"] . "components/footer.php");

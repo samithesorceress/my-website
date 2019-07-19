@@ -1,6 +1,6 @@
 <?php
-require_once($php_root . "components/admin/header.php");
-require_once($php_root . "components/card.php");
+require_once($GLOBALS["php_root"] . "components/admin/header.php");
+require_once($GLOBALS["php_root"] . "components/card.php");
 
 	echo card(
 		"Files",
@@ -33,6 +33,6 @@ require_once($php_root . "components/card.php");
 	);
 
 	echo newFormField("save", "Save", "submit", "Save", "storeManager.saveNew");
-echo "<script src='" . $htp_root . "functions/storeManager.js'></script>";
-echo "<script src='" . $htp_root . "functions/infiniteLinks.js'></script>";
-require_once($php_root . "components/admin/footer.php");
+echo "<script src='" . $GLOBALS["htp_root"] . "functions/storeManager.js'></script>";
+echo "<script src='" . $GLOBALS["htp_root"] . "functions/infiniteLinks.js'></script>";
+require_once($GLOBALS["php_root"] . "components/admin/footer.php");

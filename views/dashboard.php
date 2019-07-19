@@ -1,8 +1,8 @@
 <?php
-require_once($php_root . "components/admin/header.php");
-require_once($php_root . "components/admin/carousel.php");
-require_once($php_root . "components/card.php");
-require_once($php_root . "components/admin/ctas.php");
+require_once($GLOBALS["php_root"] . "components/admin/header.php");
+require_once($GLOBALS["php_root"] . "components/admin/carousel.php");
+require_once($GLOBALS["php_root"] . "components/card.php");
+require_once($GLOBALS["php_root"] . "components/admin/ctas.php");
 
 	$profile = "";
 	$profile_photo = false;
@@ -47,4 +47,4 @@ require_once($php_root . "components/admin/ctas.php");
 
 	echo card("Media Manager", false, carousel("media"), ctas("media", ["view-all", "upload"]));
 
-require_once($php_root . "components/admin/footer.php");
+require_once($GLOBALS["php_root"] . "components/admin/footer.php");

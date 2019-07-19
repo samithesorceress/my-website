@@ -1,6 +1,6 @@
 <?php
 function viewAll($type) {
-	$htp_root = "http://127.0.0.1/sami-the-sorceress/";
+	$GLOBALS["htp_root"] = "http://127.0.0.1/sami-the-sorceress/";
 	$html = "<section id='view_all' class='card'><div class='card_contents'>";
 	$api_endpoint  = "list/";
 	$api_params = [
@@ -50,7 +50,7 @@ function viewAll($type) {
 					}	
 				}
 
-				$html .= "<li id='list_item_" . $list_item["id"] . "' class='view_all_list_item " . $shape . "' data-key='" . $list_item["id"] . "'><button type='button' class='btn cta fab sml list_item_fab_btn'>" . file_get_contents($htp_root . "src/icons/checkbox_checked.svg") . file_get_contents($htp_root . "src/icons/checkbox_unchecked.svg") . "</button><a href='" . $htp_root . "admin/edit/" . $type . "/" . $list_item["id"] . "'>" . mediaContainer($src, $shape, $title) . "</a></li>";
+				$html .= "<li id='list_item_" . $list_item["id"] . "' class='view_all_list_item " . $shape . "' data-key='" . $list_item["id"] . "'><button type='button' class='btn cta fab sml list_item_fab_btn'>" . file_get_contents($GLOBALS["htp_root"] . "src/icons/checkbox_checked.svg") . file_get_contents($GLOBALS["htp_root"] . "src/icons/checkbox_unchecked.svg") . "</button><a href='" . $GLOBALS["htp_root"] . "admin/edit/" . $type . "/" . $list_item["id"] . "'>" . mediaContainer($src, $shape, $title) . "</a></li>";
 			}
 			for ($i = 0; $i < 12; $i += 1) {
 				$html .= "<li class='hidden-flex-item'></li>";

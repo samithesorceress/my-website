@@ -35,7 +35,7 @@ if (empty($_REQUEST) === false) {
 		setcookie("user_token", $returnedToken, time() + (86400 * 30), "/");
         
         // And finally route to the next page
-        header("Location: " . $htp_root . "admin");
+        header("Location: " . $GLOBALS["htp_root"] . "admin");
         
 	} else {
 		$login_msg = "Incorrect email or password.";
@@ -46,14 +46,14 @@ if (empty($_REQUEST) === false) {
 
 if (!$isLoggedIn) {
 	jsLogs("requires login");
-    require_once($php_root . "components/header.php");
+    require_once($GLOBALS["php_root"] . "components/header.php");
 	if ($login_msg) {
 		echo "<p class='error_msg'>" . $login_msg . "</p>";
 	}
-	echo "<form action='" . $htp_root . "login' method='POST'>";
+	echo "<form action='" . $GLOBALS["htp_root"] . "login' method='POST'>";
 		echo newFormField("email", "Email", "email");
 		echo newFormField("password", "Password", "password");
 		echo newFormField("login", "Login", "submit", "Login");
     echo "</form>";
-	require_once($php_root . "components/footer.php");
+	require_once($GLOBALS["php_root"] . "components/footer.php");
 }

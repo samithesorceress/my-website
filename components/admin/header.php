@@ -1,5 +1,5 @@
 <?php 
-	require_once($php_root . "components/mediaContainer.php");
+	require_once($GLOBALS["php_root"] . "components/mediaContainer.php");
 ?>
 <!DOCTYPE html>
 
@@ -26,17 +26,17 @@
 	<link rel="cannonical" href="<?php echo $document_url; ?>">
 
     <!--favicon-->
-	<link rel="apple-touch-icon" sizes="144x144" href="<?php echo $htp_root; ?>apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo $htp_root; ?>favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo $htp_root; ?>favicon-16x16.png">
-	<link rel="manifest" href="<?php echo $htp_root; ?>site.webmanifest">
-	<link rel="mask-icon" href="<?php echo $htp_root; ?>safari-pinned-tab.svg" color="#00ccff">
+	<link rel="apple-touch-icon" sizes="144x144" href="<?php echo $GLOBALS["htp_root"]; ?>apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo $GLOBALS["htp_root"]; ?>favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo $GLOBALS["htp_root"]; ?>favicon-16x16.png">
+	<link rel="manifest" href="<?php echo $GLOBALS["htp_root"]; ?>site.webmanifest">
+	<link rel="mask-icon" href="<?php echo $GLOBALS["htp_root"]; ?>safari-pinned-tab.svg" color="#00ccff">
 	<meta name="msapplication-TileColor" content="#00ccff">
 	<meta name="theme-color" content="#00ccff">
 
     <!--critical styles-->
 	<style>
-		<?php echo file_get_contents($htp_root . "src/css/critical.css"); ?>
+		<?php echo file_get_contents($GLOBALS["htp_root"] . "src/css/critical.css"); ?>
 	</style>	
 </head>
 <body class='admin'>
@@ -45,12 +45,12 @@
 		<nav>
 			<ul>
 				<li>
-					<a id="app_title" class="title" href="<?php echo $htp_root; ?>admin">Admin Zone</a>
+					<a id="app_title" class="title" href="<?php echo $GLOBALS["htp_root"]; ?>admin">Admin Zone</a>
 				</li>
 				<li>
-					<a href="<?php echo $htp_root; ?>" target="_blank" title="View Site">
+					<a href="<?php echo $GLOBALS["htp_root"]; ?>" target="_blank" title="View Site">
 						<button class="btn">	
-							 <?php echo file_get_contents($htp_root . "src/icons/public.svg"); ?>
+							 <?php echo file_get_contents($GLOBALS["htp_root"] . "src/icons/public.svg"); ?>
 						</button>
 					</a>
 				</li>

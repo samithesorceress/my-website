@@ -1,5 +1,5 @@
 <?php
-require_once $php_root . "components/thumbnail.php";
+require_once $GLOBALS["php_root"] . "components/thumbnail.php";
 function thumbnailGroup($type, $limit = false) {
 	$html = "<ul class='thumbnail_group'>";
 	$api_endpoint  = "list/";

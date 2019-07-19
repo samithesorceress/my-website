@@ -1,6 +1,5 @@
 <?php
 $root = $_SERVER['DOCUMENT_ROOT'] . "/sami-the-sorceress/api/";
-$htp_root = "http://127.0.0.1/sami-the-sorceress/";
 require_once($root . "core/init.php");
 require_once($root . "core/defaults.php");
 require_once($root . "core/functions/security.php");

@@ -344,11 +344,11 @@ h1 {
     #slideshow .slideshow_footer .progress_bar {
       background: #00CCFF;
       height: .25em;
-      transform: scale(0);
+      transform: scaleX(0);
       transition-duration: 5s;
       transition-property: transform;
       transition-timing-function: linear;
-      width: 1%; }
+      width: 1.1%; }
 
 .intro h1 {
   color: #000;
@@ -761,7 +761,6 @@ form .two_columns {
   color: #FFF; }
 
 .thumbnail_group {
-  align-items: flex-start;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around; }
@@ -784,11 +783,14 @@ form .two_columns {
       transition-property: box-shadow; }
       .thumbnail_group li.thumbnail .thumbnail_content {
         display: flex;
+        flex: 1 0 auto;
         flex-direction: column;
+        position: relative;
         width: 100%; }
-        .thumbnail_group li.thumbnail .thumbnail_content > a {
-          display: flex;
-          position: relative; }
+        .thumbnail_group li.thumbnail .thumbnail_content figure {
+          margin: 0; }
+          .thumbnail_group li.thumbnail .thumbnail_content figure figcaption {
+            margin: 0; }
       @media (max-width: 766px) {
         .thumbnail_group li.thumbnail {
           box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.075); } }

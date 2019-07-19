@@ -10,38 +10,36 @@ function thumbnail($type, $item) {
 	$url .= "/" . $item["url"];
 	
 	$thumbnail = "<li class='thumbnail card'><div class='thumbnail_content'>";
-	$thumbnail .= "<a href='" . $url . "'>";
-		$thumbnail .= mediaContainer($item["cover"], "hd");
-		switch($type) {
-			case "video":
-				$thumbnail .= "<span class='timestamp'>";
-					$thumbnail .= $item["timestamp"];
-					if (strpos($item["timestamp"], ":") === false) {
-						$thumbnail .= ":00";
-					}
-				$thumbnail .= "</span>";
-				break;
-			case "photoset":
-				$thumbnail .= "<span class='timestamp'>" . $item["photocount"] . " Photos</span>";
-				break;
-		}
-	$thumbnail .= "</a>";
-	$info = "<dl>";
+	switch($type) {
+		case "video":
+			$timestamp = $item["timestamp"];
+			if (strpos($item["timestamp"], ":") === false) {
+				$timestamp .= ":00";
+			}
+			break;
+		case "photoset":
+			$timestamp = $item["photocount"] . " Photos";
+			break;
+		default:
+			$timestamp = false;
+	}
+	$thumbnail .= "<figure>" . mediaContainer($item["cover"], "hd", false, $timestamp);
+		$thumbnail .= "<figcaption><dl>";
 		if (valExists("title", $item)) {
-			$info .= "<dt class='thumbnail_title'>" . $item["title"] . "</dt>";
+			$thumbnail .= "<dt class='thumbnail_title'>" . $item["title"] . "</dt>";
 		}
 		if (valExists("description", $item)) {
-			$info .= "<dd class='thumbnail_description'>" . substr($item["description"], 0, 56) . "... <a href='" . $url . "'>[read more]</a></dd>";
+			$thumbnail .= "<dd class='thumbnail_description'>" . substr($item["description"], 0, 56) . "... <a href='" . $url . "'>[read more]</a></dd>";
 		}
-	$info .= "</dl>";
-	$footer = "<footer class='thumbnail_footer'><ul>";
-		$footer .= "<li class='thumbnail_price'><p>";
+		$thumbnail .= "</dl></figcaption>";
+	$thumbnail .= "</figure><footer class='thumbnail_footer'><ul>";
+		$thumbnail .= "<li class='thumbnail_price'><p>";
 		if (valExists("price", $item) && $item["price"] !== 0) {
-			$footer .= "$" . $item["price"];
+				$thumbnail .= "$" . $item["price"];
 		} else {
-			$footer .= "FREE";
+				$thumbnail .= "FREE";
 		}
-		$footer .= "</p></li>";
+			$thumbnail .= "</p></li>";
 		$buy_link = "#";
 		if (valExists("links", $item)) {
 			$links = json_decode($item["links"], true);
@@ -49,14 +47,14 @@ function thumbnail($type, $item) {
 				$buy_link = urldecode($links["0"]["url"]);
 			}
 		}
-		$footer .= "<li><a href='" . $buy_link . "' target='_blank'><button type='button' class='btn cta sml'><span>";
+		$thumbnail .= "<li><a href='" . $buy_link . "' target='_blank'><button type='button' class='btn cta sml'><span>";
 		if (valExists("price", $item) && $item["price"] !== 0) {
-			$footer .= "Buy";
+			$thumbnail .= "Buy";
 		} else {
-			$footer .= "Download";
+			$thumbnail .= "Download";
 		}
-		$footer .= "</span></button></a></li>";
-	$footer .= "</ul></footer>";
-	$thumbnail .= $info . $footer . "</div></li>";
+		$thumbnail .= "</span></button></a></li>";
+	$thumbnail .= "</ul></footer>";
+	$thumbnail .= "</div></li>";
 	return $thumbnail;
 }
