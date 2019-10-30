@@ -93,13 +93,21 @@ main {
 
 #slideshow,
 h1, h2,
-.card,
 .media_container,
+.card,
 #footer > * {
 	opacity: 0;
 	transition-property: opacity;
 	transition-duration: .6s;
 }
+
+/*.card {
+	opacity: 0;
+	transform: scale(.9);
+	transition-property: opacity, transform;
+	transition-duration: .4s;
+	will-change: transform;
+}*/
 
 .media_container {
 	opacity: 0;

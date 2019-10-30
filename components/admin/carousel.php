@@ -31,7 +31,7 @@ function carousel($type) {
 			$api_endpoint .= "slides";
 	}
 	$api_params = [
-		"rows" => 3,
+		"rows" => 5,
 		"order_by" => "id",
 		"order_dir" => "DESC"
 	];
@@ -39,11 +39,16 @@ function carousel($type) {
 	if (valExists("success", $api_res)) {
 		$items = $api_res["data"];
 		if ($items) {
+			$html .= "<ul class='carousel_contents'>";
 			if (valExists("id", $items)) { // only one result was returned
 				$items = [$items];
 			}
 			foreach ($items as $item) {
-				$html .= "<li><a href='" . $edit_link . $item["id"] . "'>";
+				$html .= "<li";
+				if ($type == "media" || $type == "media-items") {
+					$html .= " class='square_carousel_item'";
+				}
+				$html .= "><a href='" . $edit_link . $item["id"] . "'>";
 					if ($type == "media" || $type == "media-items") {
 						if (valExists("cover", $item)) {
 							$html .= mediaContainer($item["cover"]);
@@ -57,6 +62,7 @@ function carousel($type) {
 					
 					$html .= "</a></li>";
 			}
+			$html .= "</ul>";
 		} else {
 			$html .= "<p>No Results</p>";
 		}

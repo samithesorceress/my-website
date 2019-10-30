@@ -23,7 +23,7 @@ function thumbnail($type, $item) {
 		default:
 			$timestamp = false;
 	}
-	$thumbnail .= "<figure>" . mediaContainer($item["cover"], "hd", false, $timestamp);
+	$thumbnail .= "<figure><a href='" . $url . "'>" . mediaContainer($item["cover"], "hd", false, $timestamp) . "</a>";
 		$thumbnail .= "<figcaption><dl>";
 		if (valExists("title", $item)) {
 			$thumbnail .= "<dt class='thumbnail_title'>" . $item["title"] . "</dt>";

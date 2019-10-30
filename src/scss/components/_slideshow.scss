@@ -1,0 +1,120 @@
+@import "../vars/colors";
+
+#slideshow {
+	height: 100vw;
+	opacity: 1;
+	position: relative;
+	width: 100%;
+	z-index: 1;
+	@media(min-width: 425px) {
+		height: 50vw;
+	}
+	@media(min-width: 1440px) {
+		height: 38.46vw;
+	}
+	.slides_nav {
+		align-items: center;
+		display: flex;
+		height: 100%;
+		justify-content: space-between;
+		pointer-events: none;
+		width: 100%;
+		.btn {
+			pointer-events: all;
+		}
+	}
+	.slide_arrow {
+		background: $offwhite;
+		border-radius: 50%;
+		box-shadow: 0 0 0 2px $shadow;
+		font-size: 1.5em;
+		margin: 1em;
+		position: relative;
+		&:hover, &:focus {
+			background: $white;
+			.icon {
+				fill: $teal;
+			}
+		}
+		&:active {
+			.icon {
+				fill: $active_teal;
+			}
+		}
+	}
+	.slides_container {
+		display: flex;
+		height: 100%;
+		left: 0;
+		overflow: hidden;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: -2;
+		.slide {
+			align-items: flex-start;
+			display: inline-flex;
+			flex-shrink: 0;
+			height: 100%;
+			justify-content: center;
+			left: 0;
+			overflow: hidden;
+			position: absolute;
+			top: 0;
+			transition-property: transform;
+			width: 100%;
+			z-index: 1;
+			&:first-child {
+				z-index: 2;
+			}
+			img, video {
+				filter: brightness(.8);
+				&[data-shape="wide"] {
+					height: 100%;
+					width: auto;
+				}
+				&[data-shape="tall"] {
+					height: auto;
+					width: 100%;
+				}
+			}
+			.slide_text {
+				bottom: 0;
+				left: 0;
+				margin: 1em;
+				padding: 0;
+				position: absolute;
+				transition-property: opacity;
+				* {
+					background: $dimmed_lights;
+					color: $white;
+					padding: .5em;
+					&.slide_title {
+						font-size: 1.5em;
+						font-weight: bold;
+						line-height: 1.5em;
+					}
+				}
+			}
+		}
+	}
+	.slideshow_footer {
+		background: $white;
+		bottom: 0;
+		box-shadow: 0 0 0 1px $shadow;
+		height: .25em;
+		left: 0;
+		overflow: hidden;
+		position: absolute;
+		width: 100%;
+		.progress_bar {
+			background: $teal;
+			height: .25em;
+			transform: scaleX(0);
+			transition-duration: 5s;
+			transition-property: transform;
+			transition-timing-function: linear;
+			width: 1.1%;
+		}
+	}
+}

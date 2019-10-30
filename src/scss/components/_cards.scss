@@ -1,0 +1,57 @@
+@import "../vars/colors";
+
+.card {
+	background: $white;
+	box-shadow: 0 0 0 1px $shadow;
+	border-radius: .5em;
+	display: flex;
+	flex-direction: column;
+	max-width: 1440px;
+	opacity: 1;
+	padding: 1em 1em 0 1em;
+	//transform: scale(1);
+	width: 100%;
+	* + & {
+		margin-top: 1em;
+	}
+	input, textarea {
+		&:not([type="submit"]),
+		&:not([type="checkbox"]),
+		&:not([type="radio"]) { 
+			background: $offwhite;
+			border: 1px solid $shadow!important;
+		}
+	}
+	h2 {
+		font-size: 2em;
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	.card_contents {
+		background: $offwhite;
+		border-radius: .5em;
+		height: 100%;
+		//left: 1em;
+		margin-bottom: 1em;
+		padding: 1em 1em 0 1em;
+		//position: absolute;
+		//top: 1em;
+		width: 100%;
+	}
+	.field {
+		&:first-child {
+			margin-top: 0;
+		}
+		&:last-child {
+			margin-bottom: 1em;
+		}
+	}
+	> ul {
+		margin-bottom: 1em;
+	}
+	.ctas {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}

@@ -1,0 +1,31 @@
+@import "../vars/colors";
+
+.carousel {
+	background: $offwhite;
+	border-radius: .5em;
+	min-height: 8em;
+	margin-bottom: 1em;
+	.carousel_contents {
+		display: flex;
+		margin: 0;
+		overflow: auto;
+		padding: 1em;
+		li {
+			height: 6em;
+			list-style: none;
+			width: 12em;
+			flex-shrink: 0;
+			&.square_carousel_item {
+				width: 6em;
+			}
+			&:not(:last-child) {
+				margin-right: 1em;
+			}
+			a {
+				height: 100%;
+				display: block;
+				width: 100%;
+			}
+		}
+	}
+}

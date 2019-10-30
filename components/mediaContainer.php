@@ -21,10 +21,12 @@ function mediaContainer($obj, $shape = false, $title = false, $timestamp = false
 					break;
 			}
 		}
-		$html .= "'><div class='media_contents'>";
+		$html .= "'>";
 			// slides/videos title
 			if ($title) {
-				$html .= "<p class='title'>" . $title . "</p>";
+				$html .= "<div class='media_title'>";
+					$html .= "<span>" . $title . "</span>";
+				$html .= "</div>";
 			}
 
 			if (!is_array($obj)) {
@@ -39,6 +41,8 @@ function mediaContainer($obj, $shape = false, $title = false, $timestamp = false
 					$obj = false;
 				}
 			}
+
+			$html .= "<div class='media_contents'>";
 			if ($obj) {
 				switch ($obj["type"]) {
 					case "image":
@@ -77,14 +81,15 @@ function mediaContainer($obj, $shape = false, $title = false, $timestamp = false
 				} else {
 					$html .= "tall";
 				}
-				$html .= "' loading='lazy' />";
+				$html .= "'";
+			//	$html .= " loading='lazy'";
+				$html .= " />";
 				if ($timestamp) {
 					$html .= "<span class='timestamp'>" . $timestamp . "</span>";
 				}
 			} else {
 				$html .= "<img src='http://127.0.0.1/sami-the-sorceress/src/imgs/placeholder.png' alt='Placeholder image for missing file.' title='Missing file.' data-shape='wide' loading='lazy' />";
 			}
-		
 		$html .= "</div></div>";
 	}
 

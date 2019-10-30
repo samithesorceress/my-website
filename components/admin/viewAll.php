@@ -1,7 +1,7 @@
 <?php
 function viewAll($type) {
 	$GLOBALS["htp_root"] = "http://127.0.0.1/sami-the-sorceress/";
-	$html = "<section id='view_all' class='card'><div class='card_contents'>";
+	$html = "<section id='view_all' class='grid card'><div class='card_contents'>";
 	$api_endpoint  = "list/";
 	$api_params = [
 		"rows" => 5,
@@ -11,14 +11,13 @@ function viewAll($type) {
 	$type = rtrim($type, "s");
 	switch($type) {
 		case "media":
-			$api_endpoint .= $type;
+		case "media_item":
+		case "media-item":
+			$api_endpoint .= "media";
 			break;
 		case "store":
-		case "stores":
 		case "store_item":
 		case "store-item":
-		case "store_items":
-		case "store-items":
 			$api_endpoint .= "store-items";
 			break;
 		default:
@@ -32,7 +31,7 @@ function viewAll($type) {
 		$list_items = $api_res["data"];
 		$pagination = $api_res["pagination"];
 		if ($list_items) {
-			$html .= "<ul id='view_all_list' data-type='" . $type . "'>";
+			$html .= "<ul id='view_all_list' class='grid_contents' data-type='" . $type . "'>";
 			if (valExists("id", $list_items)) {
 				$list_items = [$list_items];
 			}
@@ -40,7 +39,9 @@ function viewAll($type) {
 				$shape = false;
 				$src = $list_item;
 				$title = false;
-				if ($type !== "media") {
+				if ($type == "media" || $type == "media-items") {
+					$shape = "square";
+				} else {
 					$shape = "wide";
 					if (valExists("cover", $src)) {
 						$src = $src["cover"];
@@ -50,10 +51,10 @@ function viewAll($type) {
 					}	
 				}
 
-				$html .= "<li id='list_item_" . $list_item["id"] . "' class='view_all_list_item " . $shape . "' data-key='" . $list_item["id"] . "'><button type='button' class='btn cta fab sml list_item_fab_btn'>" . file_get_contents($GLOBALS["htp_root"] . "src/icons/checkbox_checked.svg") . file_get_contents($GLOBALS["htp_root"] . "src/icons/checkbox_unchecked.svg") . "</button><a href='" . $GLOBALS["htp_root"] . "admin/edit/" . $type . "/" . $list_item["id"] . "'>" . mediaContainer($src, $shape, $title) . "</a></li>";
+				$html .= "<li id='list_item_" . $list_item["id"] . "' class='view_all_list_item grid_item " . $shape . "_grid_item' data-key='" . $list_item["id"] . "'><button type='button' class='btn cta fab sml list_item_fab_btn'>" . file_get_contents($GLOBALS["htp_root"] . "src/icons/checkbox_checked.svg") . file_get_contents($GLOBALS["htp_root"] . "src/icons/checkbox_unchecked.svg") . "</button><a href='" . $GLOBALS["htp_root"] . "admin/edit/" . $type . "/" . $list_item["id"] . "'>" . mediaContainer($src, $shape, $title) . "</a></li>";
 			}
 			for ($i = 0; $i < 12; $i += 1) {
-				$html .= "<li class='hidden-flex-item'></li>";
+				$html .= "<li class='hidden_flex_item grid_item " . $shape . "_grid_item'></li>";
 			}
 			$html .= "</ul>";
 		}

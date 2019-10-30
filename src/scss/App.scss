@@ -1,5 +1,8 @@
 @import "./vars/colors";
-
+@import "./components/carousel";
+@import "./components/cards";
+@import "./components/media_container";
+@import "./components/slideshow";
 
 a {
 	color: $teal;
@@ -95,22 +98,15 @@ article {
 		padding: 1em;
 	}
 }
-.card {
-	opacity: 0;
-	transform: scale(.9);
-	transition-property: opacity, transform;
-	transition-duration: .4s;
-	will-change: transform;
-}
+
 
 form {
-    > * {
-        opacity: 0;
-        transition-property: opacity;
-    }
+	> * {
+		opacity: 0;
+		transition-property: opacity;
+	}
 }
 #footer {
-   // min-height: 4em;
 	padding: 1em;
 	> * {
 		opacity: 1;
@@ -326,125 +322,6 @@ h1 {
 	opacity: 1;
 }
 
-#slideshow {
-	height: 100vw;
-	opacity: 1;
-	position: relative;
-	width: 100%;
-	z-index: 1;
-	@media(min-width: 425px) {
-		height: 50vw;
-	}
-	@media(min-width: 1440px) {
-		height: 38.46vw;
-	}
-	.slides_nav {
-		align-items: center;
-		display: flex;
-		height: 100%;
-		justify-content: space-between;
-		pointer-events: none;
-		width: 100%;
-		.btn {
-			pointer-events: all;
-		}
-	}
-	.slide_arrow {
-		background: $offwhite;
-		border-radius: 50%;
-		box-shadow: 0 0 0 2px $shadow;
-		font-size: 1.5em;
-		margin: 1em;
-		position: relative;
-		&:hover, &:focus {
-			background: $white;
-			.icon {
-				fill: $teal;
-			}
-		}
-		&:active {
-			.icon {
-				fill: $active_teal;
-			}
-		}
-	}
-	.slides_container {
-		display: flex;
-		height: 100%;
-		left: 0;
-		overflow: hidden;
-		position: absolute;
-		top: 0;
-		width: 100%;
-		z-index: -2;
-		.slide {
-			align-items: flex-start;
-			display: inline-flex;
-			flex-shrink: 0;
-			height: 100%;
-			justify-content: center;
-			left: 0;
-			overflow: hidden;
-			position: absolute;
-			top: 0;
-			transition-property: transform;
-			width: 100%;
-			z-index: 1;
-			&:first-child {
-				z-index: 2;
-			}
-			img, video {
-				filter: brightness(.8);
-				&[data-shape="wide"] {
-					height: 100%;
-					width: auto;
-				}
-				&[data-shape="tall"] {
-					height: auto;
-					width: 100%;
-				}
-			}
-			.slide_text {
-				bottom: 0;
-				left: 0;
-				margin: 1em;
-				padding: 0;
-				position: absolute;
-				transition-property: opacity;
-				* {
-					background: $dimmed_lights;
-					color: $white;
-					padding: .5em;
-					&.slide_title {
-						font-size: 1.5em;
-						font-weight: bold;
-						line-height: 1.5em;
-					}
-				}
-			}
-		}
-	}
-	.slideshow_footer {
-		background: $white;
-		bottom: 0;
-		box-shadow: 0 0 0 1px $shadow;
-		height: .25em;
-		left: 0;
-		overflow: hidden;
-		position: absolute;
-		width: 100%;
-		.progress_bar {
-			background: $teal;
-			height: .25em;
-			transform: scaleX(0);
-			transition-duration: 5s;
-			transition-property: transform;
-			transition-timing-function: linear;
-			width: 1.1%;
-		}
-	}
-}
-
 .intro {
 	h1 {
 		color: $black;
@@ -455,6 +332,7 @@ h1 {
 		color: $slate;
 	}
 }
+
 .product_card_group {
 	display: flex;
 	flex-direction: row;
@@ -542,61 +420,7 @@ h1 {
 		}
 	}
 }
-.card {
-	background: $white;
-	box-shadow: 0 0 0 1px $shadow;
-	border-radius: .5em;
-	display: flex;
-	flex-direction: column;
-	max-width: 1440px;
-	opacity: 1;
-	padding: 1em 1em 0 1em;
-	transform: scale(1);
-	width: 100%;
-	* + & {
-		margin-top: 1em;
-	}
-	input, textarea {
-		&:not([type="submit"]),
-		&:not([type="checkbox"]),
-		&:not([type="radio"]) { 
-			background: $offwhite;
-			border: 1px solid $shadow!important;
-		}
-	}
-	h2 {
-		font-size: 2em;
-		&:first-child {
-			margin-top: 0;
-		}
-	}
-	.card_contents {
-		background: $offwhite;
-		border-radius: .5em;
-		height: 100%;
-		//left: 1em;
-		margin-bottom: 1em;
-		padding: 1em 1em 0 1em;
-		//position: absolute;
-		//top: 1em;
-		width: 100%;
-	}
-	.field {
-		&:first-child {
-			margin-top: 0;
-		}
-		&:last-child {
-			margin-bottom: 1em;
-		}
-	}
-	> ul {
-		margin-bottom: 1em;
-	}
-	.ctas {
-		display: flex;
-		flex-wrap: wrap;
-	}
-}
+
 
 .ctas {
 	display: flex;
@@ -686,104 +510,6 @@ h1 {
 		span {
 			height: 2em;
 			line-height: 2em;
-		}
-	}
-}
-
-
-
-.carousel {
-	background: $offwhite;
-	border-radius: .5em;
-	display: flex;
-	margin-bottom: 1em;
-	overflow: auto;
-	padding: 1em 1em 0 1em;
-	overflow-y: hidden;
-	//min-height: 6em;
-	li {
-		height: 6em;
-		list-style: none;
-		width: 12em;
-		&:not(:last-child) {
-			margin-bottom: 1em;
-			margin-right: 1em;
-		}
-		a {
-			height: 100%;
-			display: block;
-			width: 100%;
-		}
-	}
-}
-.media_container {
-	background: $white;
-	border: 0;
-	border-radius: .5em;
-	align-items: flex-start;
-	cursor: pointer;
-	display: inline-flex;
-	flex-grow: 0;
-	flex-shrink: 0;
-	height: 0em;
-	justify-content: flex-start;
-	opacity: 1;
-	overflow: hidden;
-	padding-bottom: 100%;
-	position: relative;
-	width: 100%;
-	&.wide_container {
-		padding-bottom: 50%;
-		p {
-			background: $white;
-			color: $teal;
-			min-height: 1em;
-			text-align: center;
-			top: 1em;
-			padding: .5em;
-			position: absolute;
-			
-		}
-	}
-	&.round_container {
-		background: $slate;
-		border-radius: 4em;
-		display: flex;
-		float: left;
-		//height: 8em;
-		margin: 0 1em 1em 0;
-		//width: 8em;
-	}
-	&.hd_container {
-		border-radius: 0;
-		padding-bottom: 56.25%;
-	}
-	* {
-		pointer-events: none;
-	}
-	&:not(:last-child) {
-		margin-right: 1em;
-	}
-	&:hover, &:focus, &:active {
-		filter: brightness(1.1);
-		opacity: 0.8;
-	}
-	.media_contents {
-		position: absolute;
-		height: 100%;
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	img, video {
-		&[data-shape="wide"] {
-			height: 100%;
-			width: auto;
-		}
-		&[data-shape="tall"] {
-			height: auto;
-			width: 100%;
 		}
 	}
 }
@@ -923,10 +649,6 @@ form {
 	display: flex;
 	height: 8em;
 	width: 8em;
-	.profile_info {
-
-	}
-
 }
 
 
@@ -1023,6 +745,10 @@ form {
 				width: 100%;
 				figure {
 					margin: 0;
+					a {
+						display: flex;
+						position: relative;
+					}
 					figcaption {
 						margin: 0;
 					}
