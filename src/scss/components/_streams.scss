@@ -1,6 +1,6 @@
+@import "../vars/colors";
+
 .stream_field {
-
-
 	.stream_url {
 		padding: 1em 0;
 		*, & {
@@ -10,6 +10,8 @@
 }
 
 .stream_container {
+	background: $offwhite;
+	border-radius: .5em;
 	position: relative;
 	overflow: hidden;
 	padding-top: 56.25%;

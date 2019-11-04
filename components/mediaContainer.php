@@ -1,34 +1,34 @@
 <?php 
-function mediaContainer($obj, $shape = false, $title = false, $timestamp = false) {
+function mediaContainer($obj = false, $shape = false, $title = false, $timestamp = false) {
 	$html = false;
 	$media_root = "http://127.0.0.1/sami-the-sorceress/uploads/";
-	if ($obj) {
-		// init wrapper
-		$html = "<div class='media_container";
-		if ($shape) {
-			switch($shape) {
-				case "wide":
-					$html .= " wide_container";
-					break;
-				case "tall":
-					$html .= " wide_container";
-					break;
-				case "round":
-					$html .= " round_container";
-					break;
-				case "hd":
-					$html .= " hd_container";
-					break;
-			}
-		}
-		$html .= "'>";
-			// slides/videos title
-			if ($title) {
-				$html .= "<div class='media_title'>";
-					$html .= "<span>" . $title . "</span>";
-				$html .= "</div>";
-			}
 
+	// init wrapper
+	$html = "<div class='media_container";
+	if ($shape) {
+		switch($shape) {
+			case "wide":
+				$html .= " wide_container";
+				break;
+			case "tall":
+				$html .= " wide_container";
+				break;
+			case "round":
+				$html .= " round_container";
+				break;
+			case "hd":
+				$html .= " hd_container";
+				break;
+		}
+	}
+	$html .= "'>";
+		// slides/videos title
+		if ($title) {
+			$html .= "<div class='media_title'>";
+				$html .= "<span>" . $title . "</span>";
+			$html .= "</div>";
+		}
+		if ($obj !== false) {
 			if (!is_array($obj)) {
 				$api_endpoint = "list/media";
 				$api_params = [
@@ -41,9 +41,10 @@ function mediaContainer($obj, $shape = false, $title = false, $timestamp = false
 					$obj = false;
 				}
 			}
-
-			$html .= "<div class='media_contents'>";
-			if ($obj) {
+		}
+		$html .= "<div class='media_contents'>";
+		if ($obj) {
+			if (valExists("type", $obj)) {
 				switch ($obj["type"]) {
 					case "image":
 						$html .= "<img src='" . $media_root . $obj["src"] . "." . $obj["ext"] . "'";
@@ -61,6 +62,8 @@ function mediaContainer($obj, $shape = false, $title = false, $timestamp = false
 						$html .= "<video src='" . $media_root . $obj["src"] . "." . $obj["ext"] . "'";
 						break;
 				}
+			}
+			if (valExists("ratio", $obj)) {
 				$html .=  " data-shape='";
 				$ratio = 1;
 				if ($shape) {
@@ -81,17 +84,15 @@ function mediaContainer($obj, $shape = false, $title = false, $timestamp = false
 				} else {
 					$html .= "tall";
 				}
-				$html .= "'";
-			//	$html .= " loading='lazy'";
-				$html .= " />";
-				if ($timestamp) {
-					$html .= "<span class='timestamp'>" . $timestamp . "</span>";
-				}
-			} else {
-				$html .= "<img src='http://127.0.0.1/sami-the-sorceress/src/imgs/placeholder.png' alt='Placeholder image for missing file.' title='Missing file.' data-shape='wide' loading='lazy' />";
+				$html .= "' />";
 			}
-		$html .= "</div></div>";
-	}
+			if ($timestamp) {
+				$html .= "<span class='timestamp'>" . $timestamp . "</span>";
+			}
+		} else {
+			$html .= "<img src='http://127.0.0.1/sami-the-sorceress/src/imgs/placeholder.png' alt='Placeholder image for missing file.' title='Missing file.' data-shape='wide' loading='lazy' />";
+		}
+	$html .= "</div></div>";
 
 	return $html;
 }

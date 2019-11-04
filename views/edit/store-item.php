@@ -20,7 +20,7 @@ foreach($ids as $id) {
 		echo card(
 			"Files",
 			false,
-			newFormField("store_item_cover_" . $id, "Cover", "media_browser", 1, $store_item["cover"]) . newFormField("store_item_previews_" . $id, "Preview(s)", "media_browser", 1, $store_item["previews"])
+			newFormField("store_item_cover_" . $id, "Cover", "media_browser", $store_item["cover"]) . newFormField("store_item_previews_" . $id, "Preview(s)", "media_browser", $store_item["previews"])
 		);
 
 		echo card(

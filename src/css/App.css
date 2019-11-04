@@ -344,6 +344,8 @@ form > * {
     width: 100%; }
 
 .stream_container {
+  background: #f1f1f3;
+  border-radius: .5em;
   position: relative;
   overflow: hidden;
   padding-top: 56.25%;

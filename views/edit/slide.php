@@ -20,7 +20,7 @@ foreach($ids as $id) {
 		echo card(
 			"Files",
 			false,
-			newFormField("slide_cover_" . $id, "Slide Image", "media_browser", 1, $slide["cover"])
+			newFormField("slide_cover_" . $id, "Slide Image", "media_browser", $slide["cover"])
 		);
 
 		echo card (

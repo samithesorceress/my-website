@@ -131,26 +131,14 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 		case "photo_browser":
 		case "video_browser":
 			$input .= " media_browser_field'><label for='" . $id . "'>" . $name . "</label>";
-			if ($val2) {
-				$input .= "<div class='media_browser_contents'>" . mediaContainer($val2, "hd") . "</div>";
-			} else {
-				$input .= "<div class='media_container'><p>No Media Selected</p></div>";
-			}
+			$input .= "<div class='media_browser_contents'>" . mediaContainer($val, "hd") . "</div>";
 			$input .= "<input id='" . $id . "' name='" . $id . "' type='hidden'";
-			if ($val2) {
-				$input .= " value='" . $val2 . "'";
+			if ($val) {
+				$input .= " value='" . $val . "'";
 			}
 			$input .= "/><button id='" . $id . "_browser' type='button' class='btn cta media_browser_btn";
-				if ($val !== 1) {
-					$input .= " multi";
-				}
-				if ($type == "photo_browser") {
-					$input .= " photos_only";
-				} elseif ($type == "video_browser") {
-					$input .= " videos_only";
-				}
 			$input .= "' data-action='";
-			if ($val2) {
+			if ($val) {
 				$input .= "replace'>" . icon("upload") . "<span>Replace";
 			} else {
 				$input .= "browse'>" . icon("upload") . "<span>Browse";

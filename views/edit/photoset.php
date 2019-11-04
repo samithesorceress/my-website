@@ -20,8 +20,8 @@ foreach($ids as $id) {
 		echo card(
 			"Files",
 			false,
-			newFormField("photoset_cover_" . $id, "Cover", "media_browser", 1, $photoset["cover"]) . 
-			newFormField("photoset_previews_" . $id, "Preview(s)", "media_browser", 1, $photoset["previews"])
+			newFormField("photoset_cover_" . $id, "Cover", "media_browser", $photoset["cover"]) . 
+			newFormField("photoset_previews_" . $id, "Preview(s)", "media_browser", $photoset["previews"])
 		);
 
 		echo card (

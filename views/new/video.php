@@ -5,8 +5,10 @@ require_once($GLOBALS["php_root"] . "components/card.php");
 	echo card (
 		"Files",
 		false,
-		newFormField("video_cover", "Cover", "media_browser", 1) .
-		newFormField("video_preview", "Preview Video", "media_browser", 1)
+		"<div class='fields'>" . 
+		newFormField("video_cover", "Cover", "media_browser") .
+		newFormField("video_stream", "Pornhub Preview", "stream") . 
+		"</div>"
 	);
 	
 	echo card(

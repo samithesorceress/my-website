@@ -16,7 +16,7 @@ if (valExists("success", $about_res)) {
 	echo card(
 		false, 
 		false, 
-		newFormField("profile", "Profile Photo", "media_browser", 1, $profile_photo)
+		newFormField("profile", "Profile Photo", "media_browser", $profile_photo)
 	);
 	
 	$bio_text = false;

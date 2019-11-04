@@ -20,7 +20,7 @@ if ($subdirectories[3]) {
 			echo card(
 				"File",
 				false,
-				newFormField("media_file_" . $id, "File", "media_browser", 1, $id, true)
+				newFormField("media_file_" . $id, "File", "media_browser", $id, true)
 			);
 
 			echo card(

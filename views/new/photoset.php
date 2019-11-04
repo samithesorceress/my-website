@@ -5,7 +5,7 @@ require_once($GLOBALS["php_root"] . "components/card.php");
 	echo card(
 		"Files",
 		false,
-		newFormField("photoset_cover", "Cover", "media_browser", 1) . 
+		newFormField("photoset_cover", "Cover", "media_browser") . 
 		newFormField("photoset_previews", "Preview(s)", "media_browser")
 	);
 
