@@ -18,7 +18,7 @@ foreach($ids as $id) {
 			"Files", 
 			false, "<div class='fields'>" . 
 			newFormField("video_cover_" . $id, "Cover", "media_browser", 1, $video_item["cover"]) . 
-			newFormField("video_preview_" . $id, "Preview", "media_browser", 1, $video_item["preview"]) . 
+			newFormField("video_stream_" . $id, "Pornhub Preview", "stream", $video_item["stream"]) . 
 			"</div>"
 		);
 

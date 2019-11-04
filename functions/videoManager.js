@@ -6,7 +6,7 @@ var videoManager = {
 			links = {},
 			fields = [
 				"cover",
-				"preview",
+				"stream",
 				"title",
 				"description",
 				"tags",

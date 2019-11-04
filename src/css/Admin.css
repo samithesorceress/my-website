@@ -157,8 +157,7 @@
   .field.media_browser_field + .field.media_browser_field {
     margin-left: 1em; }
   .field.media_browser_field .media_browser_contents {
-    display: inline-block;
-    margin-bottom: 1em; }
+    display: inline-block; }
     .field.media_browser_field .media_browser_contents .media_container {
       background: #f1f1f3;
       border-radius: .5em;

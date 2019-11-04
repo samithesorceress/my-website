@@ -1,4 +1,5 @@
 <?php
+require_once($GLOBALS["php_root"] . "components/stream.php");
 
 function ucSmart($string){//smart ucwords function
 	return preg_replace_callback("/\b(A|An|The|And|Of|But|Or|For|Nor|With|On|At|To|From|By)\b/i",function($matches){//add words here to avoid capitalization
@@ -131,7 +132,7 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 		case "video_browser":
 			$input .= " media_browser_field'><label for='" . $id . "'>" . $name . "</label>";
 			if ($val2) {
-				$input .= "<div class='media_browser_contents'>" . mediaContainer($val2, "wide") . "</div>";
+				$input .= "<div class='media_browser_contents'>" . mediaContainer($val2, "hd") . "</div>";
 			} else {
 				$input .= "<div class='media_container'><p>No Media Selected</p></div>";
 			}
@@ -139,7 +140,7 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 			if ($val2) {
 				$input .= " value='" . $val2 . "'";
 			}
-			$input .= "/><button id='" . $id . "_browser' type='button' class='btn cta sml media_browser_btn";
+			$input .= "/><button id='" . $id . "_browser' type='button' class='btn cta media_browser_btn";
 				if ($val !== 1) {
 					$input .= " multi";
 				}
@@ -210,6 +211,9 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 				$input .= "<li class='field'><div><label for='" . $id . "_link_url_0'>Url</label><input id='" . $id . "_link_url_0' name='" . $id . "_link_url_0' type='text'/></div><div><label for='" . $id . "_link_title_0'>Title</label><input id='" . $id . "_link_title_0' name='" . $id . "_link_title_0' type='text'></div><button class='btn delete_link_btn' type='button'>" . icon("delete") . "</button></li>";
 			}
 			$input .= "</ul><div class='ctas align_left'><button class='cta btn add_link_btn' type='button'>" . icon("add") . "<span>Add Link</span></button></div>";
+			break;
+		case "stream":
+			$input .= " stream_field'><label for='" . $id . "'>" . $name . "</label><div class='stream_contents'>" . stream($val) . "</div><div class='stream_url'><input id='" . $id . "' name='" . $id . "' type='text' value='" . $val . "' placeholder='video key'/></div>";
 			break;
 	}
 	$input .= "</div>";
