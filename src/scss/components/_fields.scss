@@ -1,0 +1,163 @@
+form {
+	> * {
+		opacity: 1;
+	}
+}
+
+.fields {
+	display: flex;
+	flex-wrap: wrap;
+	.field {
+		@media(min-width: 520px) {
+			width: calc(50% - .5em);
+		}
+	}
+}
+
+.field {
+	width: 100%;
+	margin-top: 1em;
+	.card & {
+		margin-top: 0;
+		margin-bottom: 1em;
+	}
+	&.checkbox_field {
+		display: flex;
+		label {
+			flex-grow: 1;
+			flex-shrink: 0;
+		}
+		input {
+			color: $slate;
+			flex-grow: 0;
+			flex-shrink: 0;
+		}
+	}
+	&:not(.checkbox_field) {
+		> * {
+			font-family: "Quicksand", sans-serif;
+			&:not(.media_browser_contents) {
+				width: 100%;
+			}
+		}
+	}
+	label {
+		display: block;
+		padding: 0.375em 0;
+		font-weight: bold;
+	}
+	input:not([type="submit"]) {
+		border: 0;
+		border-radius: .5em;
+		outline: 0;
+		padding: 1em;
+		&[type="text"],
+		&[type="email"],
+		&[type="date"],
+		&[type="password"] {
+			min-height: 4em;
+		}
+		&[type="checkbox"] {
+			height: 1em;
+			margin: .5em .5em .5em 0;
+			width: 1em;
+		}
+		&[type="file"],
+		&[type="files"] {
+			font-family: "Quicksand", sans-serif;
+		}
+	}
+	textarea {
+		border: 0;
+		border-radius: .5em;
+		min-height: 8em;
+		outline: 0;
+		padding: 1em;
+	}
+
+	.cta.sml {
+	//	width: auto;
+	}
+}
+
+.infinite_links {
+	.links_list{
+		display: flex;
+		flex-direction: column;
+		.field {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			@media(max-width: 519px) {
+				margin-bottom: 2em;
+			}
+			> * {
+				&:last-child {
+					align-items: center;
+					display: flex;
+					height: 4em;
+					margin-top: 2em;
+					width: 2em;
+					@media(max-width: 519px) {
+						margin-right: 1em;
+					}
+				}
+				@media(max-width: 519px) {
+					&:first-child {
+						width: 100%;
+					}
+					&:nth-child(2) {
+						width: calc(100% - 4em);
+					}
+				}
+				@media(min-width: 520px) {
+					&:not(:last-child) {
+						width: calc(50% - 2.5em);
+					}
+				}
+				input {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+/*.fields {
+	.field {
+		display: flex;
+		justify-content: space-between;
+		height: 8em;
+		margin-bottom: 0!important;
+		position: relative;
+		width: 100%;
+		div {
+			flex-basis: calc(50% - 3em);
+			//	width: calc(50% - .5em);
+
+		}
+		label {
+				font-weight: normal;
+		}
+		button {
+			cursor: pointer;
+			flex-grow: 0;
+			height: 4em;
+			margin: 2em 0;
+			padding: 1em;
+			width: 4em!important;
+			flex-grow: 0;
+		}
+	}
+	ul:last-child {
+		margin-bottom: 1em;
+	}
+}
+*/

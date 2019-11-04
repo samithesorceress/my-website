@@ -1,0 +1,53 @@
+@import "../vars/colors";
+
+.field.media_browser_field {
+	display: flex;
+	flex-direction: column;
+	& + & {
+		margin-left: 1em;
+	}
+	.media_browser_contents {
+		display: inline-block;
+		//height: 6em;
+		margin-bottom: 1em;
+		//width: 12em;
+		.media_container {
+			background: $offwhite;
+			border-radius: .5em;
+			margin: 0 0 1em 0;
+			p {
+				margin: 1em;
+			}
+		}	
+	}
+	.media_browser_button {
+		width: 12em;
+	}
+	.actions_footer {
+		background: $white;
+		border-radius: 0 0 .5em .5em;
+		border-top: 1px solid $shadow;
+		display: flex;
+		justify-content: space-between;
+		height: 4em;
+		padding: 1em;
+		width: 12em;
+		.field {
+			display: flex;
+			justify-content: flex-start;
+			margin: 0!important;
+			input {
+				background: none;
+				border: 0!important;
+				padding: 0;
+			}
+		}
+		.cta {
+			font-size: 16px;
+			padding: 0.125em 1em;
+			line-height: 2em;
+			margin: 0;
+			min-height: 2em;
+		}
+	}
+}

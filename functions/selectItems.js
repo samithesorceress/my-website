@@ -141,7 +141,7 @@ var selectItems = {
 					list_items[i].classList.remove("visible");
 				}
 				if (type == "media") {
-					shape = false;
+					shape = "square";
 				}
 				setTimeout(function (list, items, pagination) {
 					list.innerHTML = "";
@@ -151,16 +151,16 @@ var selectItems = {
 					//}
 					for (var i = 0; i < items.length; i += 1) {
 						var item = items[i];
-						html += "<li id='list_item_" + item["id"] + "' class='view_all_list_item " + shape + "' data-key='" + item["id"] + "'><button type='button' class='btn cta fab sml list_item_fab_btn'>" + util.icon("checkbox_checked") + util.icon("checkbox_unchecked") + "</button><a href='" + "http://127.0.0.1/sami-the-sorceress/admin/edit/" + type + "/" + list_item["id"] + "'>";
+						html += "<li id='list_item_" + item["id"] + "' class='view_all_list_item grid_item " + shape + "_grid_item' data-key='" + item["id"] + "'><button type='button' class='btn cta fab sml list_item_fab_btn'>" + util.icon("checkbox_checked") + util.icon("checkbox_unchecked") + "</button><a href='" + "http://127.0.0.1/sami-the-sorceress/admin/edit/" + type + "/" + list_item["id"] + "'>";
 						if (type == "media") {
-							html += util.mediaContainer(item);
+							html += util.mediaContainer(item, shape);
 						} else {
 							html += util.mediaContainer(item["cover"], shape, item["title"]);
 						}
 						html += "</a></li>";
 					}
 					for (var i = 0; i < 12; i += 1) {
-						html += "<li class='hidden-flex-item'></li>";
+						html += "<li class='hidden_flex_item grid_item " + shape + "_grid_item'></li>";
 					}
 					list.innerHTML = html;
 					setTimeout(function (){

@@ -131,7 +131,7 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 		case "video_browser":
 			$input .= " media_browser_field'><label for='" . $id . "'>" . $name . "</label>";
 			if ($val2) {
-				$input .= mediaContainer($val2);
+				$input .= "<div class='media_browser_contents'>" . mediaContainer($val2, "wide") . "</div>";
 			} else {
 				$input .= "<div class='media_container'><p>No Media Selected</p></div>";
 			}
@@ -149,10 +149,10 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 					$input .= " videos_only";
 				}
 			$input .= "' data-action='";
-			if ($val3) {
-				$input .= "replace'><span>Replace";
+			if ($val2) {
+				$input .= "replace'>" . icon("upload") . "<span>Replace";
 			} else {
-				$input .= "browse'><span>Browse";
+				$input .= "browse'>" . icon("upload") . "<span>Browse";
 			}
 			$input .= "</span></button>";
 			break;
@@ -171,7 +171,7 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 			break;
 		case "links":
 		case "infinite_links":
-			$input .= "s infinite_links' id='" . $id . "'><h3>" . $name . "</h3><ul class='links_list'>";
+			$input .= " infinite_links' id='" . $id . "'><h3>" . $name . "</h3><ul class='links_list'>";
 			$fresh_inputs = false;
 			if ($val) {
 				//has data, build existing links
@@ -181,7 +181,23 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 				if (!empty($val)) {
 					for($i = 0; $i < count($val); $i += 1) {
 						$link = $val[$i];
-						$input .= "<li class='field'><div><label for='" . $id . "_link_url_" . $i . "'>Url</label><input id='" . $id . "_link_url_" . $i . "' name='" . $id . "_link_url_" . $i . "' type='text' value='" . urldecode($link["url"]) . "'/></div><div><label for='" . $id . "_link_title_" . $i . "'>Title</label><input id='" . $id . "_link_title_" . $i . "' name='" . $id . "_link_title_" . $i . "' type='text' value='" . $link["title"] . "'/></div><button class='btn delete_link_btn' type='button'>" . icon("delete") . "</button></li>";
+						$link_title = "";
+						if (valExists("title", $link)) {
+							$link_title = $link["title"];
+						}
+						$link_url = "";
+						if (valExists("url", $link)) {
+							$link_url = urldecode($link["url"]);
+						}
+						$input .= "<li class='field'>";
+							$input .= "<div>";
+								$input .= "<label for='" . $id . "_link_url_" . $i . "'>Url</label><input id='" . $id . "_link_url_" . $i . "' name='" . $id . "_link_url_" . $i . "' type='text' value='" . $link_url . "'/>";
+							$input .= "</div><div>";
+								$input .= "<label for='" . $id . "_link_title_" . $i . "'>Title</label><input id='" . $id . "_link_title_" . $i . "' name='" . $id . "_link_title_" . $i . "' type='text' value='" . $link_title . "'/>";
+							$input .= "</div><div>";
+								$input .= "<button class='btn delete_link_btn' type='button'>" . icon("delete") . "</button>";
+							$input .= "</div>";
+						$input .= "</li>";
 					}
 				} else {
 					$fresh_inputs = true;

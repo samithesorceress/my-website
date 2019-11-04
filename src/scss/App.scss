@@ -3,6 +3,7 @@
 @import "./components/cards";
 @import "./components/media_container";
 @import "./components/slideshow";
+@import "./components/fields";
 
 a {
 	color: $teal;
@@ -530,99 +531,6 @@ h1 {
 }
 
 
-form {
-	> * {
-		opacity: 1;
-	}
-	.two_columns {
-		display: flex;
-		flex-wrap: wrap;
-		.field {
-			width: 50%;
-			margin-top: 0;
-			padding: 1em;
-		}
-	}
-}
-.field {
-	width: 100%;
-	* + & {
-		margin-top: 1em;
-	}
-	&.media_browser_field {
-		display: inline-block;
-		min-width: 12em;
-		width: auto;
-		& + & {
-			margin-right: 100%;
-		}
-		.media_container {
-			background: $offwhite;
-			border-radius: .5em;
-			margin-right: 0;
-			p {
-				margin: 1em;
-			}
-		}
-	}
-	&.checkbox_field {
-		display: flex;
-		label {
-			flex-grow: 1;
-			flex-shrink: 0;
-		}
-		input {
-			color: $slate;
-			flex-grow: 0;
-			flex-shrink: 0;
-		}
-	}
-	&:not(.checkbox_field) {
-		* {
-			font-family: "Quicksand", sans-serif;
-			&:not(.media_container) {
-				width: 100%;
-			}
-		}
-	}
-	label {
-		display: block;
-		padding: 0.375em 0;
-		font-weight: bold;
-	}
-	input:not([type="submit"]) {
-		border: 0;
-		border-radius: .5em;
-		outline: 0;
-		padding: 1em;
-		&[type="text"],
-		&[type="email"],
-		&[type="date"],
-		&[type="password"] {
-			min-height: 4em;
-		}
-		&[type="checkbox"] {
-			height: 1em;
-			margin: .5em .5em .5em 0;
-			width: 1em;
-		}
-		&[type="file"],
-		&[type="files"] {
-			font-family: "Quicksand", sans-serif;
-		}
-	}
-	textarea {
-		border: 0;
-		border-radius: .5em;
-		min-height: 8em;
-		outline: 0;
-		padding: 1em;
-	}
-
-	.cta.sml {
-	//	width: auto;
-	}
-}
 #footer {
 	background: $slate;
 	color: $white;

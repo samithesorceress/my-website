@@ -452,16 +452,19 @@ var util = {
 						break;
 					case "round":
 						html += " round_container";
+						break;
+					case "hd":
+						$html += " hd_container";
 				}
 				html += "' dataset-shape='" + shape;
 			}
 			html += "'>";
 			// slides/videos title
 			if (title) {
-				html += "<p class='title'>" + title + "</p>";
+				html += "<div class='media_title'><span>" + title + "</span></div>";
 			}
-			if (!util.valExists("type", obj)) {
-				api_params["id"] = obj;
+			if (!util.valExists("id", obj)) {
+				api_params["id"] = obj["id"];
 				util.xhrFetch(api_endpoint, api_params, util.populateMediaContainer, "media_container_" + id);
 			} else {
 				util.populateMediaContainer(obj, "media_container_" + id);
@@ -477,8 +480,10 @@ var util = {
 			elem,
 			shape = trg.dataset.shape,
 			sizes,
-			srcset = "";
+			srcset = "",
+			container = document.createElement("div");
 
+		container.className = "media_contents";
 		if (obj["success"] === true) {
 			obj = obj["data"];
 		}
@@ -528,7 +533,8 @@ var util = {
 			elem.dataset.shape = "wide";
 		}
 		elem.setAttribute("loading", "lazy");
-		trg.appendChild(elem);
+		container.appendChild(elem);
+		trg.appendChild(container);
 	}
 }
 
