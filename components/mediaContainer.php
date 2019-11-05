@@ -86,11 +86,11 @@ function mediaContainer($obj = false, $shape = false, $title = false, $timestamp
 				}
 				$html .= "' />";
 			}
-			if ($timestamp) {
-				$html .= "<span class='timestamp'>" . $timestamp . "</span>";
-			}
 		} else {
 			$html .= "<img src='http://127.0.0.1/sami-the-sorceress/src/imgs/placeholder.png' alt='Placeholder image for missing file.' title='Missing file.' data-shape='wide' loading='lazy' />";
+		}
+		if ($timestamp) {
+			$html .= "<span class='timestamp'>" . $timestamp . "</span>";
 		}
 	$html .= "</div></div>";
 

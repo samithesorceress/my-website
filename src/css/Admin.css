@@ -206,26 +206,6 @@ body {
     #app_header.admin_header ul #app_title {
       padding: 1em; }
 
-.media_library {
-  background: #f1f1f3;
-  border-radius: .5em 0 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  height: 16em;
-  margin: 0 !important;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 1em; }
-  .media_library .field {
-    width: 100%; }
-    .media_library .field input, .media_library .field textarea {
-      background: #FFF !important; }
-
-.preview_new_img {
-  max-width: 100%;
-  height: auto;
-  display: block; }
-
 #view_all_actions_bar {
   display: flex;
   justify-content: space-between;

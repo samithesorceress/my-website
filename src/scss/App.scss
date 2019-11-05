@@ -5,6 +5,7 @@
 @import "./components/slideshow";
 @import "./components/fields";
 @import "./components/streams";
+@import "./components/thumbnails";
 
 a {
 	color: $teal;
@@ -604,127 +605,6 @@ h1 {
 
 ::-moz-selection { background: $pink; color: $white}
 ::selection { background: $pink; color: $white}
-
-
-
-.thumbnail_group {
-	display:flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	li {
-		width: 100%;
-		@media(min-width: 425px) {
-			width: calc(50% - 1em);
-		}
-		@media(min-width: 1024px) {
-			width: calc(33.33% - 2em);
-		}
-		&.thumbnail {
-			align-items: center;
-			box-shadow: 0 0 0 0 $shadow;
-			cursor: pointer;
-			display: flex; 
-			//justify-content: flex-start;
-			margin: 0 0 2em 0;
-			padding: 1em;
-			position: relative;
-			transition-property: box-shadow;
-			//max-width: 18em;
-			.thumbnail_content {
-				display: flex;
-				flex: 1 0 auto;
-				flex-direction: column;
-				position: relative;
-				width: 100%;
-				figure {
-					margin: 0;
-					a {
-						display: flex;
-						position: relative;
-					}
-					figcaption {
-						margin: 0;
-					}
-				}
-			}
-			@media(max-width: 766px) {
-				box-shadow: 0 0 0 2px $shadow;
-			}
-			&:hover, &:focus, &:active {
-				box-shadow: 0 0 0 2px $shadow;
-				.media_container {
-					//filter: brightness(1.1);
-					opacity: 0.75;
-				}
-			}
-		}
-		.media_container {
-			height: 0;
-			margin: 0;
-			pointer-events: none;
-			width: 100%;
-			&.hd_container {
-				padding-bottom: 56.25%;
-			}
-		}
-		.timestamp {
-			background: $dimmed_lights;
-			color: $white;
-			font-size: 12px;
-			padding: 8px;
-			position: absolute;
-			left: 8px;
-			bottom: 8px;
-		}
-		dl {
-			flex: 1 0 auto;
-			margin: 0;
-			width: 100%;
-			* {
-				margin: .5em 0;
-				text-align: left;
-				width: 100%;
-			}
-		}
-		.thumbnail_title {
-			color: $slate;
-			font-size: 1.25em;
-			font-weight: bold;
-		}
-		.thumbnail_description {
-			color: $slate;
-		}
-		.thumbnail_footer {
-			margin-top: 1em;
-			//max-width: 16em;
-			width: 100%;
-			ul {
-			display: flex;
-			justify-content: flex-end;
-			//margin-bottom: 1em;
-			width: 100%;
-				li {
-					display: block;
-					width: calc(50% - 1em);
-					&.thumbnail_price {
-						flex-grow: 1;
-						p {
-							color: $pink;
-							font-weight: bold;
-							height: 3em;
-							line-height: 1em;
-							margin: 0;
-							padding: 1em 1em 1em 0;
-						}
-					}
-					.btn {
-						width: 100%;
-					}
-				}
-			}
-		}
-	}
-}
 
 .hidden-flex-item {
 	margin: 0;

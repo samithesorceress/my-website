@@ -115,7 +115,7 @@ var videoManager = {
 	validateSave: function (res) {
 		if (res.success === true) {
 			console.log("save validated");
-		//	window.location.href = "http://127.0.0.1/sami-the-sorceress/admin/view-all/videos";
+			window.location.href = "http://127.0.0.1/sami-the-sorceress/admin/view-all/videos";
 		}
 	}
 }

@@ -309,6 +309,7 @@ var util = {
 			if (
 				val !== "undefined" &&
 				val !== false &&
+				val !== null &&
 				val !== ""
 				) {
 				res = true;
@@ -352,10 +353,11 @@ var util = {
 			for (var i = 0; i < required.length; i += 1) {
 				var req = required[i];
 				console.log("checking: " + req);
-				if (!util.valExists(req, input)) {
+				if (!util.valExists(req, input) || input[req] == false) {
 					res["missing"].push((req));
 					console.log("missing: " + req);
 				} else {
+
 					console.log("val exists");
 				}
 			}

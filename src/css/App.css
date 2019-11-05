@@ -358,6 +358,100 @@ form > * {
     height: 100%;
     border: 0; }
 
+.thumbnail_group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; }
+  .thumbnail_group li {
+    width: 100%; }
+    @media (min-width: 425px) {
+      .thumbnail_group li {
+        width: calc(50% - 1em); } }
+    @media (min-width: 1024px) {
+      .thumbnail_group li {
+        width: calc(33.33% - 2em); } }
+    .thumbnail_group li.thumbnail {
+      align-items: center;
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.075);
+      cursor: pointer;
+      display: flex;
+      margin: 0 0 2em 0;
+      padding: 1em;
+      position: relative;
+      transition-property: box-shadow; }
+      .thumbnail_group li.thumbnail .thumbnail_content {
+        display: flex;
+        flex: 1 0 auto;
+        flex-direction: column;
+        position: relative;
+        width: 100%; }
+        .thumbnail_group li.thumbnail .thumbnail_content figure {
+          margin: 0 0 4em 0; }
+          .thumbnail_group li.thumbnail .thumbnail_content figure a {
+            display: flex;
+            position: relative; }
+          .thumbnail_group li.thumbnail .thumbnail_content figure figcaption {
+            margin: 0; }
+      @media (max-width: 766px) {
+        .thumbnail_group li.thumbnail {
+          box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.075); } }
+      .thumbnail_group li.thumbnail:hover, .thumbnail_group li.thumbnail:focus, .thumbnail_group li.thumbnail:active {
+        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.075); }
+        .thumbnail_group li.thumbnail:hover .media_container, .thumbnail_group li.thumbnail:focus .media_container, .thumbnail_group li.thumbnail:active .media_container {
+          opacity: 0.75; }
+    .thumbnail_group li .media_container {
+      height: 0;
+      margin: 0;
+      pointer-events: none;
+      width: 100%; }
+      .thumbnail_group li .media_container.hd_container {
+        padding-bottom: 56.25%; }
+    .thumbnail_group li .timestamp {
+      background: rgba(0, 0, 50, 0.2);
+      color: #FFF;
+      font-size: 12px;
+      padding: 8px;
+      position: absolute;
+      left: 8px;
+      bottom: 8px; }
+    .thumbnail_group li dl {
+      flex: 1 0 auto;
+      margin: 0;
+      width: 100%; }
+      .thumbnail_group li dl * {
+        margin: .5em 0;
+        text-align: left;
+        width: 100%; }
+    .thumbnail_group li .thumbnail_title {
+      color: #252525;
+      font-size: 1.25em;
+      font-weight: bold; }
+    .thumbnail_group li .thumbnail_description {
+      color: #252525; }
+    .thumbnail_group li .thumbnail_footer {
+      bottom: 1em;
+      height: 2em;
+      position: absolute;
+      width: 100%; }
+      .thumbnail_group li .thumbnail_footer ul {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%; }
+        .thumbnail_group li .thumbnail_footer ul li {
+          display: block;
+          width: calc(50% - 1em); }
+          .thumbnail_group li .thumbnail_footer ul li.thumbnail_price {
+            flex-grow: 1; }
+            .thumbnail_group li .thumbnail_footer ul li.thumbnail_price p {
+              color: #ff0090;
+              font-weight: bold;
+              height: 3em;
+              line-height: 1em;
+              margin: 0;
+              padding: 1em 1em 1em 0; }
+          .thumbnail_group li .thumbnail_footer ul li .btn {
+            width: 100%; }
+
 a {
   color: #00CCFF;
   text-decoration: none; }
@@ -823,98 +917,6 @@ h1 {
 ::selection {
   background: #ff0090;
   color: #FFF; }
-
-.thumbnail_group {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around; }
-  .thumbnail_group li {
-    width: 100%; }
-    @media (min-width: 425px) {
-      .thumbnail_group li {
-        width: calc(50% - 1em); } }
-    @media (min-width: 1024px) {
-      .thumbnail_group li {
-        width: calc(33.33% - 2em); } }
-    .thumbnail_group li.thumbnail {
-      align-items: center;
-      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.075);
-      cursor: pointer;
-      display: flex;
-      margin: 0 0 2em 0;
-      padding: 1em;
-      position: relative;
-      transition-property: box-shadow; }
-      .thumbnail_group li.thumbnail .thumbnail_content {
-        display: flex;
-        flex: 1 0 auto;
-        flex-direction: column;
-        position: relative;
-        width: 100%; }
-        .thumbnail_group li.thumbnail .thumbnail_content figure {
-          margin: 0; }
-          .thumbnail_group li.thumbnail .thumbnail_content figure a {
-            display: flex;
-            position: relative; }
-          .thumbnail_group li.thumbnail .thumbnail_content figure figcaption {
-            margin: 0; }
-      @media (max-width: 766px) {
-        .thumbnail_group li.thumbnail {
-          box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.075); } }
-      .thumbnail_group li.thumbnail:hover, .thumbnail_group li.thumbnail:focus, .thumbnail_group li.thumbnail:active {
-        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.075); }
-        .thumbnail_group li.thumbnail:hover .media_container, .thumbnail_group li.thumbnail:focus .media_container, .thumbnail_group li.thumbnail:active .media_container {
-          opacity: 0.75; }
-    .thumbnail_group li .media_container {
-      height: 0;
-      margin: 0;
-      pointer-events: none;
-      width: 100%; }
-      .thumbnail_group li .media_container.hd_container {
-        padding-bottom: 56.25%; }
-    .thumbnail_group li .timestamp {
-      background: rgba(0, 0, 50, 0.2);
-      color: #FFF;
-      font-size: 12px;
-      padding: 8px;
-      position: absolute;
-      left: 8px;
-      bottom: 8px; }
-    .thumbnail_group li dl {
-      flex: 1 0 auto;
-      margin: 0;
-      width: 100%; }
-      .thumbnail_group li dl * {
-        margin: .5em 0;
-        text-align: left;
-        width: 100%; }
-    .thumbnail_group li .thumbnail_title {
-      color: #252525;
-      font-size: 1.25em;
-      font-weight: bold; }
-    .thumbnail_group li .thumbnail_description {
-      color: #252525; }
-    .thumbnail_group li .thumbnail_footer {
-      margin-top: 1em;
-      width: 100%; }
-      .thumbnail_group li .thumbnail_footer ul {
-        display: flex;
-        justify-content: flex-end;
-        width: 100%; }
-        .thumbnail_group li .thumbnail_footer ul li {
-          display: block;
-          width: calc(50% - 1em); }
-          .thumbnail_group li .thumbnail_footer ul li.thumbnail_price {
-            flex-grow: 1; }
-            .thumbnail_group li .thumbnail_footer ul li.thumbnail_price p {
-              color: #ff0090;
-              font-weight: bold;
-              height: 3em;
-              line-height: 1em;
-              margin: 0;
-              padding: 1em 1em 1em 0; }
-          .thumbnail_group li .thumbnail_footer ul li .btn {
-            width: 100%; }
 
 .hidden-flex-item {
   margin: 0;

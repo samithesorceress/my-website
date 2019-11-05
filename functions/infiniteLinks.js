@@ -5,7 +5,7 @@ var infiniteLinks = {
 			field = trg.parentNode.parentNode,
 			list,
 			num = null,
-			newLink, url_field, title_field, delete_btn,
+			newLink, url_field, title_field, delete_div, delete_btn,
 			parent_id;
 
 		if (field.classList.contains("infinite_links")) {
@@ -20,22 +20,24 @@ var infiniteLinks = {
 			title_field = document.createElement("div");
 			title_field.innerHTML = "<label for='" + parent_id + "_link_title_" + num + "'>Title</label><input id='" + parent_id + "_link_title_" + num +  "' name='" + parent_id + "_link_title_"  + num + "' type='text'>";
 			
+			delete_div = document.createElement("div");
+
 			delete_btn = document.createElement("button");
 			delete_btn.className = "btn delete_link_btn";
-			delete_btn.type = "button";
 			delete_btn.innerHTML = util.icon("delete");
 			delete_btn.addEventListener("click", infiniteLinks.delete);
+			delete_div.appendChild(delete_btn)
 
 			newLink.appendChild(url_field);
 			newLink.appendChild(title_field);
-			newLink.appendChild(delete_btn);
+			newLink.appendChild(delete_div);
 
 			list.appendChild(newLink);
 		}
 	},
 	delete(e) {
 		var trg = util.getTrg(e), li;
-		li = trg.parentNode;
+		li = trg.parentNode.parentNode;
 		li.parentNode.removeChild(li);
 	}
 },

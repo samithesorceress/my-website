@@ -13,7 +13,9 @@ function thumbnail($type, $item) {
 	switch($type) {
 		case "video":
 			$timestamp = $item["timestamp"];
-			if (strpos($item["timestamp"], ":") === false) {
+			if ($timestamp == false) {
+				$timestamp = "0:00";	
+			} elseif (strpos($item["timestamp"], ":") === false) {
 				$timestamp .= ":00";
 			}
 			break;
@@ -47,11 +49,11 @@ function thumbnail($type, $item) {
 				$buy_link = urldecode($links["0"]["url"]);
 			}
 		}
-		$thumbnail .= "<li><a href='" . $buy_link . "' target='_blank'><button type='button' class='btn cta sml'><span>";
+		$thumbnail .= "<li><a href='" . $buy_link . "' target='_blank'><button type='button' class='btn cta sml'>";
 		if (valExists("price", $item) && $item["price"] !== 0) {
-			$thumbnail .= "Buy";
+			$thumbnail .= icon("open_new") . "<span>Buy</span>";
 		} else {
-			$thumbnail .= "Download";
+			$thumbnail .= icon("download") . "<span>Download</span>";
 		}
 		$thumbnail .= "</span></button></a></li>";
 	$thumbnail .= "</ul></footer>";
