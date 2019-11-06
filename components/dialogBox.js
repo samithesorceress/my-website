@@ -1,14 +1,16 @@
 var dialogBox = {
 	timer: false,
-	add: function (type, msg, parent, cb, args = false) {
+	add: function (type, msg, cb, args = false) {
 		console.log("spawning dialog box");
 		var id = util.makeID(6),
 			wrapper = document.createElement("div"),
+			dialog = document.createElement("div"),
 			ctas = document.createElement("div"),
 			shadow = document.createElement("div"),
 			btns = [];
-		wrapper.className = "dialog visible";
-		wrapper.id = "dialog_" + id;
+		wrapper.className = "dialog_wrapper";
+		dialog.className = "dialog visible";
+		dialog.id = "dialog_" + id;
 		ctas.className = "ctas";
 		shadow.className = "shadow visible";
 		shadow.id = "shadow_" + id;
@@ -17,7 +19,7 @@ var dialogBox = {
 		}, false);
 		switch(type) {
 			case "confirmation":
-				wrapper.innerHTML = "<h3>Confirmation</h3><p>" + msg + "</p>";
+				dialog.innerHTML = "<h3>Confirmation</h3><p>" + msg + "</p>";
 				btns[0] = document.createElement("button");
 				btns[0].type = "button";
 				btns[0].className = "btn cta sml";
@@ -41,16 +43,10 @@ var dialogBox = {
 			btn = btns[i];
 			ctas.appendChild(btn);
 		}
-		wrapper.appendChild(ctas);
-		if (parent) {
-			if (!util.isElem(parent)) {
-				parent = document.getElementById(parent);
-			}
-		} else {
-			parent = document.getElementById("main");
-		}
-		parent.appendChild(shadow);
-		parent.appendChild(wrapper);
+		dialog.appendChild(ctas);
+		wrapper.appendChild(dialog);
+		document.body.appendChild(dialog);
+		//parent.appendChild(shadow);
 		
 	},
 	remove: function (e, res, cb, args) {

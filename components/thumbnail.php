@@ -31,7 +31,11 @@ function thumbnail($type, $item) {
 			$thumbnail .= "<dt class='thumbnail_title'>" . $item["title"] . "</dt>";
 		}
 		if (valExists("description", $item)) {
-			$thumbnail .= "<dd class='thumbnail_description'>" . substr($item["description"], 0, 56) . "... <a href='" . $url . "'>[read more]</a></dd>";
+			$thumbnail .= "<dd class='thumbnail_description'>" . substr($item["description"], 0, 56);
+			if (strlen($item["description"]) > 56) {
+				$thumbnail .= "... <a href='" . $url . "'>[read more]</a>";
+			}
+			"</dd>";
 		}
 		$thumbnail .= "</dl></figcaption>";
 	$thumbnail .= "</figure><footer class='thumbnail_footer'><ul>";

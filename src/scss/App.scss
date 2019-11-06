@@ -6,6 +6,7 @@
 @import "./components/fields";
 @import "./components/streams";
 @import "./components/thumbnails";
+@import "./components/media_browser";
 
 a {
 	color: $teal;
@@ -555,26 +556,6 @@ h1 {
 	visibility: hidden;
 }
 
-.dialog {
-	background: $white;
-	border: 1px solid $shadow;
-	border-radius: .5em;
-	left: 1em;
-	max-width: 600px;
-	opacity: 0;
-	padding: 1em 1em 0 1em;
-	position: absolute;
-	top: 33%;
-	transform: scale(.5);
-	transition-property: opacity, transform;
-	transition-duration: .4s;
-	width: calc(100% - 2em);
-	z-index: 4;
-	will-change: transform;
-	@media(min-width: 632px) {
-		left: calc(50% - 300px);
-	}
-}
 .shadow {
 	background: rgba(0,0,50,.2);
 	height: 100vh;

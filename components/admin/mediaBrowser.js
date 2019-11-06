@@ -3,24 +3,27 @@ var mediaBrowser = {
 		util.events.cancel(e);
 		var trg = util.getTrg(e),
 			key = util.makeID(6),
-			size = util.getSize(trg),
-			action = trg.dataset.action,
-			browser = document.createElement("div"),
-			library = document.createElement("ul"),
+			wrapper = document.createElement("div"),
+			dialog = document.createElement("div"),
+			contents = document.createElement("div"),
 			footer = document.createElement("footer"),
 			field = document.createElement("div"),
 			newBtn = document.createElement("input"),
-			shadow = document.createElement("div"),
 			api_endpoint = "list/media",
 			api_params = [];
 
-		console.log(size);
 		trg.parentNode.id = "media_target_" + key;
-		browser.id = "media_browser_" + key;
-		browser.className = "card media_browser dialog";
-		browser.style.top = size.top + "px";
+
+		wrapper.id = "dialog_wrapper_" + key;
+		wrapper.className = "dialog_wrapper";
+		wrapper.dataset.key = key;
+	//	wrapper.addEventListener("click", mediaBrowser.close);
+
+		dialog.id = "dialog_" + key;
+		dialog.className = "card media_browser_dialog dialog";
 		
-		library.className = "media_library";
+		contents.id = "media_browser_contents_" + key;
+		contents.className = "media_browser_contents grid";
 
 		field.className = "field";
 		field.innerHTML = "<label for='new_media_upload'>Upload New:</label>";
@@ -29,75 +32,67 @@ var mediaBrowser = {
 		newBtn.name = "new_media_upload";
 		newBtn.type = "file";
 		newBtn.dataset.key = key;
+		newBtn.addEventListener("change", mediaBrowser.uploadNew);
+		
+		api_params["order_by"] = "id";
+		api_params["order_dir"] = "DESC";
+		api_params["rows"] = 5;
+		util.xhrFetch(api_endpoint, api_params, mediaBrowser.populate, {"id": key, "attempt": 1});
 
-		shadow.id = "shadow_" + key;
-		shadow.className = "shadow";
-		shadow.dataset.key = key;
-		shadow.addEventListener("click", mediaBrowser.close);
+		field.appendChild(newBtn);
+		footer.appendChild(field);
+		dialog.appendChild(contents);
+		dialog.appendChild(footer);
+		wrapper.appendChild(dialog)
+		document.body.appendChild(wrapper);
 
-		switch(action) {
-			case "replace":
-				newBtn.addEventListener("change", mediaBrowser.uploadReplacement);
-				field.appendChild(newBtn);
-				browser.appendChild(field);
-				break;
-			default:
-				newBtn.addEventListener("change", mediaBrowser.uploadNew);
-				field.appendChild(newBtn);
-				footer.appendChild(field);
-				browser.appendChild(library);
-				browser.appendChild(footer);
-				api_params["order_by"] = "id";
-				api_params["order_dir"] = "DESC";
-				api_params["rows"] = "3";
-				util.xhrFetch(api_endpoint, api_params, mediaBrowser.populate, {"id": key, "attempt": 1});
-				break;
-		}
-
-		document.body.appendChild(shadow);
-		document.body.appendChild(browser);
-		setTimeout(function (s, b) {
-			s.classList.add("visible");
-			b.classList.add("visible");
-		}, 10, shadow, browser);
+		setTimeout(function (w, d) {
+			w.classList.add("visible");
+			dialog.classList.add("visible");
+		}, 10, wrapper, dialog);
 	},
 	close: function (e) {
 		var trg = util.getTrg(e),
-			key, broser, shadow;
+			key, dialog, wrapper;
 
 		if (!util.isElem(trg)) {
 			key = e;
 		} else {
 			key = trg.dataset.key;
 		}
-		browser = document.getElementById("media_browser_" + key);
-		shadow = document.getElementById("shadow_" + key);
+		dialog = document.getElementById("dialog_" + key);
+		wrapper = document.getElementById("dialog_wrapper_" + key);
 		
-		browser.classList.remove("visible");
-		shadow.classList.remove("visible");
+		dialog.classList.remove("visible");
+		wrapper.classList.remove("visible");
 
-		setTimeout(function (s, b) {
-			document.body.removeChild(s);
-			document.body.removeChild(b);
-		}, 600, shadow, browser);
+		setTimeout(function (w) {
+			document.body.removeChild(w);
+		}, 600, wrapper);
 	},
 	populate: function (res, args) {
 		var key = args.id,
-			attempt = args.attempt,
-			browser = document.getElementById("media_browser_" + key),
-			media_library = util.getChildrenbyClassname(browser, "media_library")[0];
+			library = document.getElementById("media_browser_contents_" + key),
+			grid = document.createElement("ul");
 		console.log(res);
+
+		grid.className = "grid_contents";
 
 		if (res.success == true) {
 			for(var i = 0; i < res.data.length; i += 1) {
 				var media_data = res.data[i],
-					container = document.createElement("li"),
+					grid_item = document.createElement("li"),
+					media_container = document.createElement("div"),
 					media_item = "";
-					container.id = "container_" + media_data.id;
-					container.className = "media_container";
-					container.dataset.key = key;
+
+					grid_item.className = "grid_item square_grid_item";
+
+					media_container.id = "container_" + media_data.id;
+					media_container.className = "media_container";
+					media_container.dataset.key = key;
+
 					if (media_data.shape) {
-						container.classList.add("shape_" + media_data.shape);
+						media_container.classList.add("shape_" + media_data.shape);
 					}
 					switch (media_data.type) {
 						case "video":
@@ -110,40 +105,51 @@ var mediaBrowser = {
 								} else {
 									media_item += "tall";
 								}
-							media_item += "'/>";		
+							media_item += "'/>";
 					}
-					container.innerHTML += media_item;
-					container.addEventListener("click", mediaBrowser.choose);
-					media_library.appendChild(container);
+					media_container.innerHTML += "<div class='media_contents'>" + media_item + "</div>";
 					
+					grid_item.appendChild(media_container);
+					grid.appendChild(grid_item);
+			}
+			for (var i = 0; i < 12; i += 1) {
+				grid.innerHTML += "<li class='hidden_flex_item grid_item square_grid_item'></li>";
+			}
+			library.appendChild(grid);
+			grid = library.childNodes[0];
+			for (var i = 0; i < grid.childNodes.length; i += 1) {
+				var item = grid.childNodes[i];
+				if (!item.classList.contains("hidden_flex_item")) {
+					item.childNodes[0].addEventListener("click", mediaBrowser.choose);
+				}
+
 			}
 		}
 	},
 	choose: function (e, id) {
 		var trg = util.getTrg(e);
-		var key = trg.dataset.key;
+		var key = trg.dataset.key,
+			field, media_container, hidden_input, cta;
 		var id = trg.id.replace("container_", "");
 		var media_item = trg.childNodes[0];
-		var field = document.getElementById("media_target_" + key);
-		var field_children = field.childNodes;
-		var media_container = util.getChildrenbyClassname(field, "media_container")[0];
-		var cta = util.getChildrenbyClassname(field, "cta")[0];
-		var browser = document.getElementById("media_browser_" + key);
-		var dismiss_zone = document.getElementById("dismiss_zone_" + key);
+		
+		// get parent
+		field = document.getElementById("media_target_" + key);
+		util.addStyle(field, "background", "red");
+		// transfer id
+		hidden_input = util.getChildrenbyClassname(field, "media_id")[0];
+		hidden_input.value = id;
 
-		//save media id to hidden field
-		for (var i = 0; i < field_children.length; i += 1) {
-			var child = field_children[i];
-			if (child.type == "hidden") {
-				child.value = id;
-			}
-		}
-		//render preview of chosen img
-		media_container.innerHTML = "";
-		media_container.appendChild(media_item);
-		//update btn text
-		cta.innerHTML = "<span>Replace</span>";
-		//remove browser
+		// render chosen img
+		media_container = util.getChildrenbyClassname(field, "media_browser_field_contents")[0];
+		media_container = media_container.childNodes[0];
+		media_container.childNodes[0].appendChild(media_item);
+
+		// update btn txt
+		cta = util.getChildrenbyClassname(field, "cta")[0];
+		cta.innerHTML = util.icon("upload") + "<span>Replace</span>";
+		
+		// finish & remove browser
 		mediaBrowser.close()
 	},
 	uploadNew: function (e) {

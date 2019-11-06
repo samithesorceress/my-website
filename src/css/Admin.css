@@ -151,45 +151,6 @@
   .grid_item:not(.selected) .media_container {
     border-width: 0px; }
 
-.field.media_browser_field {
-  display: flex;
-  flex-direction: column; }
-  .field.media_browser_field + .field.media_browser_field {
-    margin-left: 1em; }
-  .field.media_browser_field .media_browser_contents {
-    display: inline-block; }
-    .field.media_browser_field .media_browser_contents .media_container {
-      background: #f1f1f3;
-      border-radius: .5em;
-      margin: 0 0 1em 0; }
-      .field.media_browser_field .media_browser_contents .media_container p {
-        margin: 1em; }
-  .field.media_browser_field .media_browser_button {
-    width: 12em; }
-  .field.media_browser_field .actions_footer {
-    background: #FFF;
-    border-radius: 0 0 .5em .5em;
-    border-top: 1px solid rgba(0, 0, 0, 0.075);
-    display: flex;
-    justify-content: space-between;
-    height: 4em;
-    padding: 1em;
-    width: 12em; }
-    .field.media_browser_field .actions_footer .field {
-      display: flex;
-      justify-content: flex-start;
-      margin: 0 !important; }
-      .field.media_browser_field .actions_footer .field input {
-        background: none;
-        border: 0 !important;
-        padding: 0; }
-    .field.media_browser_field .actions_footer .cta {
-      font-size: 16px;
-      padding: 0.125em 1em;
-      line-height: 2em;
-      margin: 0;
-      min-height: 2em; }
-
 body {
   padding-top: 5.2em !important; }
   @media (min-width: 768px) {

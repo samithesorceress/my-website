@@ -131,8 +131,8 @@ function newFormField($id, $name, $type = "text", $val = false, $val2 = false, $
 		case "photo_browser":
 		case "video_browser":
 			$input .= " media_browser_field'><label for='" . $id . "'>" . $name . "</label>";
-			$input .= "<div class='media_browser_contents'>" . mediaContainer($val, "hd") . "</div>";
-			$input .= "<input id='" . $id . "' name='" . $id . "' type='hidden'";
+			$input .= "<div class='media_browser_field_contents'>" . mediaContainer($val, "hd") . "</div>";
+			$input .= "<input id='" . $id . "' name='" . $id . "' class='media_id' type='hidden'";
 			if ($val) {
 				$input .= " value='" . $val . "'";
 			}
