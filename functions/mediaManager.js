@@ -1,6 +1,6 @@
 var mediaManager = {
 	saveChanges: function (inputs) {
-		console.log("saving mEDIA edits!", inputs);
+		console.log("saving MEDIA edits!", inputs);
 		var api_endpoint = "update/media",
 			items = {},
 			fields = [

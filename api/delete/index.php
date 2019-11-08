@@ -46,25 +46,49 @@ if (empty($_REQUEST) === false) {
 					$ids = [$data["id"]];
 				}
 		
-				$errs = 0;
+				$errs = [];
 				foreach($ids as $id) {
 					$sql_whr = " WHERE `id`='" . $id . "'";
 					$sql = $sql_del . $sql_whr;
 					if (!$conn->query($sql)) {
-						$errs += 1;
+						$errs[] = $id;
 					}
 				}
 		
-				if (!$errs) {
+				if (!count($errs)) {
 					$output["success"] = true;
-					$output["message"] = "Item(s) deleted suceessfully.";
+					$output["message"] = "Item(s) deleted sucessfully.";
 					$output["data"] = $ids;
 				} else {
-					$output["message"] = $errs . " sql statements failed.";
+					$output["message"] = count($errs) . " sql statements failed.";
+					$output["data"] = $errs;
 				}
 		
+			} elseif(valExists("src", $data)) {
+				if (strpos($data["src"], ",") !== false) {
+					$srcs = explode(",", $data["src"]);
+				} else {
+					$srcs = [$data["src"]];
+				}
+		
+				$errs = [];
+				foreach($srcs as $src) {
+					$sql_whr = " WHERE `src`='" . $src . "'";
+					$sql = $sql_del . $sql_whr;
+					if (!$conn->query($sql)) {
+						$errs[] = $src;
+					}
+				}
+				if (!count($errs)) {
+					$output["success"] = true;
+					$output["message"] = "Item(s) deleted sucessfully.";
+					$output["data"] = $srcs;
+				} else {
+					$output["message"] = count($errs) . " sql statements failed.";
+					$output["data"] = $errs;
+				}
 			} else {
-				$output["message"] = "Please supply an ID to delete.";
+				$output["message"] = "Please supply an ID or SRC to delete.";
 			}
 			
 		} else {

@@ -68,7 +68,7 @@
 	top: 0;
 	transition-property: opacity;
 	width: 100vw;
-	z-index: 999;
+	z-index: 32;
 }
 .dialog {
 	background: $white;
@@ -82,6 +82,7 @@
 	transition-duration: .4s;
 	width: calc(100% - 2em);
 	will-change: transform;
+	z-index: 34;
 	.media_browser_contents {
 		background: $offwhite;
 		border: 1px solid $shadow;
@@ -89,18 +90,37 @@
 		height: 24em;
 		overflow-x: hidden;
 		overflow-y: auto;
-		padding: .5em;
+		padding: .5em .5em 0 .5em;
 		width: 100%;
-		.grid_item {
-			@media(min-width: 1022px) {
-				flex-basis: calc(22% - 1em)!important;
-			}
+		&.processing_new {
+			height: 32em;
+		}
+		.preview_new_img {
+			border-radius: .5em!important;
+		}
+		.load_more_container {
+			align-items: center;
+			display: flex;
+			justify-content: center;
+			padding-bottom: .5em;
 		}
 	}
-	footer {
+	.actions_footer {
 		#new_media_upload {
 			border-radius: .25em!important;
+		}
+		.ctas {
+			margin: 1em 1em 0 1em;
 		}
 	}
 }
 
+.dismiss_zone {
+	height: 100vh;
+	left: 0;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	width: 100vw;
+	z-index: 33;
+}

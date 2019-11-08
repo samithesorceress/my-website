@@ -320,7 +320,21 @@ var util = {
 	spinner: {
 		timer: false,
 		add: function (parent) {
-
+			var elem = document.createElement("div"),
+				num = document.getElementsByClassName("spinner").length;
+			
+			elem.id = "spinner_" + num;
+			elem.className = "spinner";
+			elem.innerHTML = "<svg viewBox='0 0 50 50'><circle class='progress' cx='25' cy='25' r='20'/></svg>";
+			if (!util.isElem(parent)) {
+				parent = document.getElementById(parent);
+			}
+			if (util.isElem(parent)) {
+				parent.appendChild(elem);
+			}
+			setTimeout(function (e) {
+				e.classList.add("visible");
+			}, 10, elem)
 		},
 		remove: function (child, parent) {
 			if (!util.isElem(child)) {
@@ -415,27 +429,43 @@ var util = {
 		svg += "' height='24' width='24' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>";
 
 		switch(src) {
-			case "delete":
-				svg += "<path fill='none' d='M0 0h24v24H0V0z'></path><path d='M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v10zM18 4h-2.5l-.71-.71c-.18-.18-.44-.29-.7-.29H9.91c-.26 0-.52.11-.7.29L8.5 4H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1z'></path></svg>";
-				return svg;
+			case "add":
+				svg.innerHTML = "<path fill='none' d='M0 0h24v24H0V0z'/><path d='M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z'/>";
+				break;
+			case "arrow_left":
+				svg.innerHTML = "<path fill='none' d='M0 0h24v24H0V0z'/><path d='M14.71 6.71c-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L10.83 12l3.88-3.88c.39-.39.38-1.03 0-1.41z'/>"
+				break;
+			case "arrow_right":
+				svg.innerHTML = "<path fill='none' d='M0 0h24v24H0V0z'/><path d='M9.29 6.71c-.39.39-.39 1.02 0 1.41L13.17 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01z'/>";
 				break;
 			case "checkbox_checked":
-				svg += "<path fill='none' d='M0 0h24v24H0V0z'/><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.29 16.29L5.7 12.7c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L10 14.17l6.88-6.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-7.59 7.59c-.38.39-1.02.39-1.41 0z'/></svg>";
-				return svg;
+				svg += "<path fill='none' d='M0 0h24v24H0V0z'/><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.29 16.29L5.7 12.7c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L10 14.17l6.88-6.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-7.59 7.59c-.38.39-1.02.39-1.41 0z'/>";
 				break;
 			case "checkbox_unchecked":
-				svg += "<path fill='none' d='M0 0h24v24H0V0z'/><path d='M18 19H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zm1-16H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z'/></svg>";
-				return svg;
+				svg += "<path fill='none' d='M0 0h24v24H0V0z'/><path d='M18 19H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zm1-16H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z'/>";
 				break;
-			case "add":
-				svg.innerHTML = "add";
+			case "delete":
+				svg += "<path fill='none' d='M0 0h24v24H0V0z'></path><path d='M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v10zM18 4h-2.5l-.71-.71c-.18-.18-.44-.29-.7-.29H9.91c-.26 0-.52.11-.7.29L8.5 4H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1z'></path>";
+				break;
+			case "download":
+				svg += "<path fill='none' d='M0 0h24v24H0V0z'/><path d='M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z'/>"
+				break;
+			case "exit":
+				svg += "<path fill='none' d='M0 0h24v24H0V0z'/><path d='M10.79 16.29c.39.39 1.02.39 1.41 0l3.59-3.59c.39-.39.39-1.02 0-1.41L12.2 7.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L12.67 11H4c-.55 0-1 .45-1 1s.45 1 1 1h8.67l-1.88 1.88c-.39.39-.38 1.03 0 1.41zM19 3H5c-1.11 0-2 .9-2 2v3c0 .55.45 1 1 1s1-.45 1-1V6c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1v3c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z'/>";
+				break;
+			case "save":
+				svg += "<path fill='none' d='M0 0h24v24H0V0z'/><path d='M17.59 3.59c-.38-.38-.89-.59-1.42-.59H5c-1.11 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7.83c0-.53-.21-1.04-.59-1.41l-2.82-2.83zM12 19c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm1-10H7c-1.1 0-2-.9-2-2s.9-2 2-2h6c1.1 0 2 .9 2 2s-.9 2-2 2z'/>";
 				break;
 			case "upload":
-				svg += "<path fill='none' d='M0 0h24v24H0V0z'></path><path d='M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l4.65-4.65c.2-.2.51-.2.71 0L17 13h-3z'></path></svg>";
-			default: 
-				return false;
+				svg += "<path fill='none' d='M0 0h24v24H0V0z'></path><path d='M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l4.65-4.65c.2-.2.51-.2.71 0L17 13h-3z'></path>";
+				break;
+			default:
+				svg = false;
 		}
-		return false;
+		if (svg) {
+			svg += "</svg>";
+		}
+		return svg;
 	},
 	mediaContainer: function (obj, shape, title) {
 		var html = false,

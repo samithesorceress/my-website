@@ -42,6 +42,8 @@ if (empty($_REQUEST) === false) {
 			} else {
 				if (valExists("id", $data)) {
 					$sql_where["id"] = $data["id"];
+				} elseif(valExists("src", $data)) {
+					$sql_where["src"] = $data["src"];
 				}
 			}
 			foreach($data as $key => $val) {
@@ -53,6 +55,17 @@ if (empty($_REQUEST) === false) {
 			if ($conn->query($sql)) {
 				$output["success"] = true;
 				$output["message"] = $table . " item updated";
+				$sql = prepareSQL("select", $table, false, $sql_where);
+				$result = $conn->query($sql);
+				if ($result->num_rows > 0) {
+					while($row = $result->fetch_assoc()) {
+						$rows[] = $row;
+					}
+				}
+				if (count($rows) == 1) {
+					$rows = $rows[0];
+				}
+				$output["data"] = $rows;
 			} else {
 				$output["success"] = false;
 				$output["message"] = "failed to update: " . $sql;

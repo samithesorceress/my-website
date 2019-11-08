@@ -34,9 +34,6 @@
   width: 100%; }
   * + .card {
     margin-top: 1em; }
-  .card input:not([type="submit"]), .card input:not([type="checkbox"]), .card input:not([type="radio"]), .card textarea:not([type="submit"]), .card textarea:not([type="checkbox"]), .card textarea:not([type="radio"]) {
-    background: #f1f1f3;
-    border: 1px solid rgba(0, 0, 0, 0.075) !important; }
   .card h2 {
     font-size: 2em; }
     .card h2:first-child {
@@ -257,25 +254,28 @@ form > * {
     display: block;
     padding: 0.375em 0;
     font-weight: bold; }
-  .field input:not([type="submit"]) {
+  .field input:not([type="submit"]), .field textarea {
     border: 0;
     border-radius: .5em;
     outline: 0;
     padding: 1em; }
-    .field input:not([type="submit"])[type="text"], .field input:not([type="submit"])[type="email"], .field input:not([type="submit"])[type="date"], .field input:not([type="submit"])[type="password"] {
+    .field input:not([type="submit"]):not([type="checkbox"]), .field input:not([type="submit"]):not([type="radio"]), .field textarea:not([type="checkbox"]), .field textarea:not([type="radio"]) {
+      background: #f1f1f3;
+      border: 2px solid rgba(0, 0, 0, 0.075); }
+      .field input:not([type="submit"]):not([type="checkbox"]):active, .field input:not([type="submit"]):not([type="checkbox"]):focus, .field input:not([type="submit"]):not([type="checkbox"]):hover, .field input:not([type="submit"]):not([type="radio"]):active, .field input:not([type="submit"]):not([type="radio"]):focus, .field input:not([type="submit"]):not([type="radio"]):hover, .field textarea:not([type="checkbox"]):active, .field textarea:not([type="checkbox"]):focus, .field textarea:not([type="checkbox"]):hover, .field textarea:not([type="radio"]):active, .field textarea:not([type="radio"]):focus, .field textarea:not([type="radio"]):hover {
+        border-color: #00CCFF; }
+      .field input:not([type="submit"]):not([type="checkbox"]).dark, .field input:not([type="submit"]):not([type="radio"]).dark, .field textarea:not([type="checkbox"]).dark, .field textarea:not([type="radio"]).dark {
+        background: rgba(0, 0, 50, 0.2); }
+    .field input:not([type="submit"])[type="text"], .field input:not([type="submit"])[type="email"], .field input:not([type="submit"])[type="date"], .field input:not([type="submit"])[type="password"], .field textarea[type="text"], .field textarea[type="email"], .field textarea[type="date"], .field textarea[type="password"] {
       min-height: 4em; }
-    .field input:not([type="submit"])[type="checkbox"] {
+    .field input:not([type="submit"])[type="checkbox"], .field textarea[type="checkbox"] {
       height: 1em;
       margin: .5em .5em .5em 0;
       width: 1em; }
-    .field input:not([type="submit"])[type="file"], .field input:not([type="submit"])[type="files"] {
+    .field input:not([type="submit"])[type="file"], .field input:not([type="submit"])[type="files"], .field textarea[type="file"], .field textarea[type="files"] {
       font-family: "Quicksand", sans-serif; }
   .field textarea {
-    border: 0;
-    border-radius: .5em;
-    min-height: 8em;
-    outline: 0;
-    padding: 1em; }
+    min-height: 12em; }
 
 .infinite_links .links_list {
   display: flex;
@@ -503,7 +503,7 @@ form > * {
   top: 0;
   transition-property: opacity;
   width: 100vw;
-  z-index: 999; }
+  z-index: 32; }
 
 .dialog {
   background: #FFF;
@@ -516,7 +516,8 @@ form > * {
   transition-property: opacity, transform;
   transition-duration: .4s;
   width: calc(100% - 2em);
-  will-change: transform; }
+  will-change: transform;
+  z-index: 34; }
   .dialog .media_browser_contents {
     background: #f1f1f3;
     border: 1px solid rgba(0, 0, 0, 0.075);
@@ -524,13 +525,30 @@ form > * {
     height: 24em;
     overflow-x: hidden;
     overflow-y: auto;
-    padding: .5em;
+    padding: .5em .5em 0 .5em;
     width: 100%; }
-    @media (min-width: 1022px) {
-      .dialog .media_browser_contents .grid_item {
-        flex-basis: calc(22% - 1em) !important; } }
-  .dialog footer #new_media_upload {
+    .dialog .media_browser_contents.processing_new {
+      height: 32em; }
+    .dialog .media_browser_contents .preview_new_img {
+      border-radius: 0.5em !important; }
+    .dialog .media_browser_contents .load_more_container {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      padding-bottom: .5em; }
+  .dialog .actions_footer #new_media_upload {
     border-radius: 0.25em !important; }
+  .dialog .actions_footer .ctas {
+    margin: 1em 1em 0 1em; }
+
+.dismiss_zone {
+  height: 100vh;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: 33; }
 
 a {
   color: #00CCFF;
@@ -874,24 +892,22 @@ h1 {
   text-align: center;
   transition-property: none;
   width: auto; }
-  .cta[type="submit"], input[type="submit"][type="submit"] {
+  .cta:hover, .cta:focus, .cta:active, input[type="submit"]:hover, input[type="submit"]:focus, input[type="submit"]:active {
+    background: #00E1FF; }
+  .cta[type="submit"], .cta.buy, .cta.pink, input[type="submit"][type="submit"], input[type="submit"].buy, input[type="submit"].pink {
     background: #ff0090; }
-  .cta.danger, input[type="submit"].danger {
-    background: #ff0047; }
-  .cta.buy, input[type="submit"].buy {
-    background: #ff0090; }
+    .cta[type="submit"]:hover, .cta[type="submit"]:focus, .cta[type="submit"]:active, .cta.buy:hover, .cta.buy:focus, .cta.buy:active, .cta.pink:hover, .cta.pink:focus, .cta.pink:active, input[type="submit"][type="submit"]:hover, input[type="submit"][type="submit"]:focus, input[type="submit"][type="submit"]:active, input[type="submit"].buy:hover, input[type="submit"].buy:focus, input[type="submit"].buy:active, input[type="submit"].pink:hover, input[type="submit"].pink:focus, input[type="submit"].pink:active {
+      background: #ff25a0; }
   .cta .icon, input[type="submit"] .icon {
     fill: #FFF;
     height: 1.5em;
     width: auto; }
+  .cta.danger, input[type="submit"].danger {
+    background: #ff0047; }
+    .cta.danger:hover, .cta.danger:focus, .cta.danger:active, input[type="submit"].danger:hover, input[type="submit"].danger:focus, input[type="submit"].danger:active {
+      background: #ff2a65; }
   .cta:not(:last-child), input[type="submit"]:not(:last-child) {
     margin: 0 1em 1em 0; }
-  .cta:hover, .cta:focus, .cta:active, input[type="submit"]:hover, input[type="submit"]:focus, input[type="submit"]:active {
-    background: #00E1FF; }
-    .cta:hover[type="submit"], .cta:focus[type="submit"], .cta:active[type="submit"], input[type="submit"]:hover[type="submit"], input[type="submit"]:focus[type="submit"], input[type="submit"]:active[type="submit"] {
-      background: #ff25a0; }
-    .cta:hover.danger, .cta:focus.danger, .cta:active.danger, input[type="submit"]:hover.danger, input[type="submit"]:focus.danger, input[type="submit"]:active.danger {
-      background: #ff2a65; }
   .cta.fab, input[type="submit"].fab {
     max-height: 4em;
     max-width: 4em;
@@ -903,18 +919,12 @@ h1 {
       min-height: 2em;
       max-width: 2em;
       padding: .25em; }
-    .cta.fab .icon, input[type="submit"].fab .icon {
-      fill: #FFF;
-      height: 1.5em;
-      width: auto; }
   .cta:not(.fab).sml, input[type="submit"]:not(.fab).sml {
     min-height: 3em;
     max-height: 3em;
     padding: .5em 1em; }
   .cta:not(.fab) .icon, input[type="submit"]:not(.fab) .icon {
-    height: 1.5em;
-    margin: .25em .5em .25em 0;
-    width: auto; }
+    margin: .25em .5em .25em 0; }
   .cta:not(.fab) span, input[type="submit"]:not(.fab) span {
     height: 2em;
     line-height: 2em; }
@@ -926,15 +936,6 @@ h1 {
     color: #FFF; }
   #footer li {
     padding: 0.375em 0; }
-
-.dismiss_zone {
-  background: rgba(0, 0, 50, 0.2);
-  height: 100vh;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100vw;
-  z-index: 3; }
 
 .profile {
   display: flex;

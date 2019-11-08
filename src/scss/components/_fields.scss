@@ -47,11 +47,23 @@ form {
 		padding: 0.375em 0;
 		font-weight: bold;
 	}
-	input:not([type="submit"]) {
+	input:not([type="submit"]), textarea {
 		border: 0;
 		border-radius: .5em;
 		outline: 0;
 		padding: 1em;
+		&:not([type="checkbox"]),
+		&:not([type="radio"]) {
+			background: $offwhite;
+			border: 2px solid $shadow;
+			&:active, &:focus, &:hover {
+				border-color: $teal;
+			}
+			&.dark {
+				background: $dimmed_lights;
+
+			}
+		}
 		&[type="text"],
 		&[type="email"],
 		&[type="date"],
@@ -63,19 +75,15 @@ form {
 			margin: .5em .5em .5em 0;
 			width: 1em;
 		}
+		
 		&[type="file"],
 		&[type="files"] {
 			font-family: "Quicksand", sans-serif;
 		}
 	}
 	textarea {
-		border: 0;
-		border-radius: .5em;
-		min-height: 8em;
-		outline: 0;
-		padding: 1em;
+		min-height: 12em;
 	}
-
 	.cta.sml {
 	//	width: auto;
 	}

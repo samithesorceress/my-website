@@ -14,14 +14,6 @@
 	* + & {
 		margin-top: 1em;
 	}
-	input, textarea {
-		&:not([type="submit"]),
-		&:not([type="checkbox"]),
-		&:not([type="radio"]) { 
-			background: $offwhite;
-			border: 1px solid $shadow!important;
-		}
-	}
 	h2 {
 		font-size: 2em;
 		&:first-child {

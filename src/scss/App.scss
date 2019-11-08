@@ -442,15 +442,6 @@ h1 {
 
 .cta, input[type="submit"] {
 	background: $teal;
-	&[type="submit"] {
-		background: $pink;
-	}
-	&.danger {
-		background: $red;
-	}
-	&.buy {
-		background: $pink;
-	}
 	border: 0;
 	color: $white;
 	cursor: pointer;
@@ -462,25 +453,29 @@ h1 {
 	text-align: center;
 	transition-property: none;
 	width: auto;
-		.icon {
-			fill: $white;
-			height: 1.5em;
-			width: auto;
-		}
-
-	&:not(:last-child) {
-		margin: 0 1em 1em 0;
-	}
 	&:hover, &:focus, &:active {
 		background: $active_teal;
-		&[type="submit"] {
+	}
+	&[type="submit"], &.buy, &.pink {
+		background: $pink;
+		&:hover, &:focus, &:active {
 			background: $active_pink;
 		}
-		&.danger {
+	}
+	.icon {
+		fill: $white;
+		height: 1.5em;
+		width: auto;
+	}
+	&.danger {
+		background: $red;
+		&:hover, &:focus, &:active {
 			background: $active_red;
 		}
 	}
-
+	&:not(:last-child) {
+		margin: 0 1em 1em 0;
+	}
 	&.fab {
 		max-height: 4em;
 		max-width: 4em;
@@ -493,13 +488,7 @@ h1 {
 			max-width: 2em;
 			padding: .25em;
 		}
-		.icon {
-			fill: $white;
-			height: 1.5em;
-			width: auto;
-		}
 	}
-
 	&:not(.fab) {
 		&.sml{
 			min-height: 3em;
@@ -507,9 +496,7 @@ h1 {
 			padding: .5em 1em;
 		}
 		.icon {
-			height: 1.5em;
 			margin: .25em .5em .25em 0;
-			width: auto;
 		}
 		span {
 			height: 2em;
@@ -530,15 +517,7 @@ h1 {
 }
 
 
-.dismiss_zone {
-	background: rgba(0,0,50,.2);
-	height: 100vh;
-	left: 0;
-	position: fixed;
-	top: 0;
-	width: 100vw;
-	z-index: 3;
-}
+
 
 .profile {
 	display: flex;

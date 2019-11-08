@@ -108,18 +108,18 @@ if ($type) {
 						}
 						$output["pagination"]["prev"] = $prev;
 					}
-					if (count($rows) == $num_rows) {
-						$sql = "SELECT COUNT(*) FROM `" . $table . "`";
-						$total = false;
-						$result = $conn->query($sql);
-						if ($result->num_rows > 0) {
-							while($row = $result->fetch_assoc()) {
-								$total = $row["COUNT(*)"];
-							}
+					// find totals and next values
+					$sql = "SELECT COUNT(*) FROM `" . $table . "`";
+					$total = false;
+					$result = $conn->query($sql);
+					if ($result->num_rows > 0) {
+						while($row = $result->fetch_assoc()) {
+							$total = $row["COUNT(*)"];
 						}
-						if ($total && $total > $pagination_end) {
-							$output["pagination"]["next"] = $pagination_end;
-						}
+						$output["total"] = $total;
+					}
+					if ($total && $total > $pagination_end) {
+						$output["pagination"]["next"] = $pagination_end;
 					}
 				}
 			}
