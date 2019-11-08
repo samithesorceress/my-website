@@ -72,10 +72,10 @@ if ($type) {
 				$num_rows = $pagination_end;
 				if (valExists("rows", $data)) {
 					$num_rows = ((int)$data["rows"] * 3);
-					$pagination_end = (string)$pagination_start + $num_rows;
+					$pagination_end = $pagination_start + $num_rows;
 				}
 				$sql_limit["start"] = $pagination_start;
-				$sql_limit["end"] = $pagination_end;
+				$sql_limit["end"] = $num_rows;
 				$sql = prepareSQL("select", $table, false, $sql_where, $sql_order, $sql_limit);
 			}
 		} else {

@@ -107,7 +107,11 @@ var selectItems = {
 				type = list.dataset.type;
 			api_endpoint  = "list/" + type;
 			api_params = [];
-			api_params["rows"] = 5;
+			if (type == "media") {
+				api_params["rows"] = 8;
+			} else {
+				api_params["rows"] = 5;
+			}
 			api_params["order_by"] = "id";
 			api_params["order_dir"] = "DESC";
 			api_params["offset"] = offset;
@@ -123,7 +127,11 @@ var selectItems = {
 				type = list.dataset.type;
 			api_endpoint  = "list/" + type;
 			api_params = [];
-			api_params["rows"] = 5;
+			if (type == "media") {
+				api_params["rows"] = 8;
+			} else {
+				api_params["rows"] = 5;
+			}
 			api_params["order_by"] = "id";
 			api_params["order_dir"] = "DESC";
 			api_params["offset"] = offset;
@@ -151,7 +159,7 @@ var selectItems = {
 					//}
 					for (var i = 0; i < items.length; i += 1) {
 						var item = items[i];
-						html += "<li id='list_item_" + item["id"] + "' class='view_all_list_item grid_item " + shape + "_grid_item' data-key='" + item["id"] + "'><button type='button' class='btn cta fab sml list_item_fab_btn'>" + util.icon("checkbox_checked") + util.icon("checkbox_unchecked") + "</button><a href='" + "http://127.0.0.1/sami-the-sorceress/admin/edit/" + type + "/" + list_item["id"] + "'>";
+						html += "<li id='list_item_" + item["id"] + "' class='view_all_list_item grid_item " + shape + "_grid_item' data-key='" + item["id"] + "'><button type='button' class='btn cta fab sml list_item_fab_btn'>" + util.icon("checkbox_checked") + util.icon("checkbox_unchecked") + "</button><a href='" + "http://127.0.0.1/sami-the-sorceress/admin/edit/" + type + "/" + item["id"] + "'>";
 						if (type == "media") {
 							html += util.mediaContainer(item, shape);
 						} else {
@@ -165,9 +173,17 @@ var selectItems = {
 					list.innerHTML = html;
 					setTimeout(function (){
 						var list = document.getElementById("view_all_list"),
-							list_items = list.children;
+							list_items = list.children,
+							fabs = document.getElementsByClassName("list_item_fab_btn");
+
 						for(var i = 0; i < list_items.length; i += 1) {
 							list_items[i].classList.add("visible");
+						}
+						if (fabs) {
+							for (var i = 0; i < fabs.length; i += 1) {
+								var fab = fabs[i];
+								fab.addEventListener("click", selectItems.toggle);
+							}
 						}
 					}, 10);
 

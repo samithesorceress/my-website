@@ -14,6 +14,7 @@ function viewAll($type) {
 		case "media_item":
 		case "media-item":
 			$api_endpoint .= "media";
+			$api_params["rows"] = 8;
 			break;
 		case "store":
 		case "store_item":
@@ -29,7 +30,7 @@ function viewAll($type) {
 	$pagination = false;
 	if (valExists("success", $api_res)) {
 		$list_items = $api_res["data"];
-		$pagination = $api_res["pagination"];
+		//$pagination = $api_res["pagination"];
 		if ($list_items) {
 			$html .= "<ul id='view_all_list' class='grid_contents' data-type='" . $type . "'>";
 			if (valExists("id", $list_items)) {
@@ -62,23 +63,11 @@ function viewAll($type) {
 		$html .= "<p>No Results</p>";
 	}
 	$html .= "</div><footer><div class='ctas'>";
-		$html .= "<button id='prev_page_btn' class='cta btn sml";
-		if ($pagination) {
-			if ($pagination["prev"] === false) {
-				$html .= " disabled";
-			}
-		$html .= "' data-offset='" . $pagination["prev"];
+		$html .= "<button id='prev_page_btn' class='cta btn sml disabled' data-offset='0'>" . icon("arrow_left") . "<span>Prev Page</span></button><button id='next_page_btn' class='cta btn sml";
+		if ($api_res["total"] > $api_params["rows"]) {
+			$html .= "' data-offset='" . ($api_params["rows"] * 3);
 		} else {
-			$html .= " disabled";
-		}
-		$html .= "'>" . icon("arrow_left") . "<span>Prev Page</span></button><button id='next_page_btn' class='cta btn sml";
-		if ($pagination) {
-			if ($pagination["next"] === false) {
-				$html .= " disabled";
-			}
-		$html .= "' data-offset='" . $pagination["next"];
-		} else {
-			$html .= " disabled";
+			$html .= " disabled' data-offset='0";
 		}
 		$html .= "'><span>Next Page</span>" . icon("arrow_right") . "</button>";
 	$html .= "</div></footer></section>";

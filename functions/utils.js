@@ -478,11 +478,14 @@ var util = {
 			html = "<div id='media_container_" + id + "' class='media_container";
 			if (shape) {
 				switch(shape) {
+					case "square":
+						html += " square_container";
+						break;
 					case "wide":
 						html += " wide_container";
 						break;
 					case "tall":
-						html += " wide_container";
+						html += " tall_container";
 						break;
 					case "round":
 						html += " round_container";
@@ -546,6 +549,9 @@ var util = {
 			ratio = 1;
 			if (shape) {
 				switch(shape) {
+					case "square":
+						ratio = 1;
+						break;
 					case "wide":
 						ratio = 2.16;
 						break;
@@ -554,7 +560,7 @@ var util = {
 						break;
 				}
 			}
-			if (obj["ratio"] < ratio) {
+			if (obj["ratio"] > ratio) {
 				elem.dataset.shape = "wide";
 			} else {
 				elem.dataset.shape = "tall";

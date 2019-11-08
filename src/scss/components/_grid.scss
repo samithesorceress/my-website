@@ -171,9 +171,9 @@
 		transition-property: transform, opacity;
 	}
 	.media_container {
-		border: 0px solid $teal;
+		border: 0 solid $teal;
 		transition-duration: .2s;
-		transition-property: border;
+		transition-property: border, padding;
 	}
 	&:active, &:focus, &:hover {
 		.fab {
@@ -192,6 +192,13 @@
 		}
 		.media_container {
 			border-width: 6px;
+			padding-bottom: calc(100% - 12px);
+			&.wide_container {
+				padding-bottom: calc(50% - 12px);
+			}
+			&.hd_container {
+				padding-bottom: calc(56.25% - 12px);
+			}
 		}
 	}
 	&:not(.selected) {
@@ -204,7 +211,7 @@
 			}
 		}
 		.media_container {
-			border-width: 0px;
+			border-color: $offwhite;
 		}
 	}
 }
