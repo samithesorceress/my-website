@@ -6,7 +6,9 @@ var photosetManager = {
 			links = {},
 			fields = [
 				"cover",
-				"previews",
+				"preview_1",
+				"preview_2",
+				"preview_3",
 				"title",
 				"description",
 				"tags",
@@ -15,12 +17,13 @@ var photosetManager = {
 				"photocount",
 				"url",
 				"public"
-			];
+			],
+			previews = [];
 
 		for (var key in inputs) {
 			var val = inputs[key],
 				id = key.split("_");
-			if (key.includes("publish_date")) {
+			if (key.includes("publish_date") || key.includes("preview")) {
 				id = id[3];
 			} else {
 				id = id[2];
@@ -38,7 +41,23 @@ var photosetManager = {
 				for (var i = 0; i < fields.length; i += 1) {
 					var field = fields[i];
 					if (key.includes(field)) {
-						items[id][field] = val;
+						if (key.includes("preview")) {
+							if (!items[id]["previews"]) {
+								items[id]["previews"] = "[";
+							}
+							if (val) {
+								items[id]["previews"] += val;
+							} else {
+								items[id]["previews"] += false;
+							}
+							if (!key.includes("3")) {
+								items[id]["previews"] += ",";
+							} else {
+								items[id]["previews"] += "]";
+							}
+						} else {
+							items[id][field] = val;
+						}
 					}
 				}
 			}

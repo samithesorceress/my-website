@@ -16,12 +16,12 @@ foreach($ids as $id) {
 	$photoset_res = xhrFetch($api_endpoint, $api_params);
 	if (valExists("success", $photoset_res)) {
 		$photoset = $photoset_res["data"];
-
+		$photoset_previews = json_decode($photoset["previews"], true);
 		echo card(
 			"Files",
 			false,
-			newFormField("photoset_cover_" . $id, "Cover", "media_browser", $photoset["cover"]) . 
-			newFormField("photoset_previews_" . $id, "Preview(s)", "media_browser", $photoset["previews"])
+			newFormField("photoset_cover_" . $id, "Cover", "media_browser", $photoset["cover"]) . "<div class='fields three_col'>" . 
+			newFormField("photoset_preview_1_" . $id, "Preview Img 1", "media_browser", $photoset_previews[0]) . newFormField("photoset_preview_2_" . $id, "Preview Img 2", "media_browser", $photoset_previews[1]) . newFormField("photoset_preview_3_" . $id, "Preview Img 3", "media_browser", $photoset_previews[2]) . "</div>"
 		);
 
 		echo card (

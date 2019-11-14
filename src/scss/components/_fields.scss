@@ -13,6 +13,13 @@ form {
 			width: calc(50% - .5em);
 		}
 	}
+	&.three_col {
+		.field {
+			@media(min-width: 520px) {
+				width: calc(33% - .5em);
+			}
+		}
+	}
 }
 
 .field {

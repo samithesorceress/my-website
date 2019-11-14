@@ -230,6 +230,9 @@ form > * {
   @media (min-width: 520px) {
     .fields .field {
       width: calc(50% - .5em); } }
+  @media (min-width: 520px) {
+    .fields.three_col .field {
+      width: calc(33% - .5em); } }
 
 .field {
   width: 100%;
